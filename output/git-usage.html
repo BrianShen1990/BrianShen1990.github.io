@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Git Usage</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">KNOWN. </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="/category/linux.html">Linux</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/git-usage.html" rel="bookmark"
+           title="Permalink to Git Usage">Git Usage</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-10-13T00:00:00+08:00">
+                Published: Fri 13 October 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/brian-shen.html">Brian Shen</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">Linux</a> <a href="/tag/centos7.html">CentOS7</a> <a href="/tag/fonts.html">fonts</a> </p>
+</footer><!-- /.post-info -->      <div class="contents topic" id="contents">
+<span id="asia-git-usage-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#basic-config-for-self-signed-repo" id="id1">Basic Config for self-signed repo</a><ul>
+<li><a class="reference internal" href="#ignore-ssl" id="id2">ignore ssl</a></li>
+<li><a class="reference internal" href="#force-update-latest" id="id3">Force update latest</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#brand-new-repo" id="id4">Brand new repo</a><ul>
+<li><a class="reference internal" href="#create-a-repo" id="id5">Create a repo</a></li>
+<li><a class="reference internal" href="#files-operation" id="id6">Files Operation</a></li>
+<li><a class="reference internal" href="#branch-operation" id="id7">Branch Operation</a></li>
+<li><a class="reference internal" href="#recent-log" id="id8">Recent Log</a></li>
+<li><a class="reference internal" href="#delete-revert-a-commit" id="id9">Delete/Revert a commit</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#existing-repo" id="id10">Existing  repo</a><ul>
+<li><a class="reference internal" href="#copying-repo" id="id11">Copying repo</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Only for beginners.</p>
+<p>For a long time, though many people say that it is easy to use git commands,
+I always have problems with using git commands.
+I use github desktop for a long time. And now, I want to explore some git commands.</p>
+<p>In this article, I will:</p>
+<blockquote>
+<ul class="simple">
+<li>Use <code>Github Desktop</code> to connect to github.</li>
+<li>Use <code>Git GUI</code> to connect to github.</li>
+<li>Replace them using <code>Git Command</code></li>
+</ul>
+</blockquote>
+<div class="section" id="basic-config-for-self-signed-repo">
+<h2><a class="toc-backref" href="#id1">Basic Config for self-signed repo</a></h2>
+<div class="section" id="ignore-ssl">
+<h3><a class="toc-backref" href="#id2">ignore ssl</a></h3>
+<p><code>git config --global http.sslverify false</code></p>
+</div>
+<div class="section" id="force-update-latest">
+<h3><a class="toc-backref" href="#id3">Force update latest</a></h3>
+<div class="highlight"><pre><span></span>git fetch --all
+git reset --hard origin/For_TDA
+git pull
+</pre></div>
+</div>
+</div>
+<div class="section" id="brand-new-repo">
+<h2><a class="toc-backref" href="#id4">Brand new repo</a></h2>
+<div class="section" id="create-a-repo">
+<h3><a class="toc-backref" href="#id5">Create a repo</a></h3>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Github Desktop</strong></p>
+<p>Crete a repo named <code>Demo_Usage_Of_Github</code></p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_01.png" />
+</div>
+<p>Push it to GitHub</p>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_02.png" />
+</div>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Git</strong></p>
+<p>We cannot create and push directly to Github directly, so first create <code>Demo_Usage_Of_Git</code> in Github Web,</p>
+<p>Crete a repo named <code>Demo_Usage_Of_Git</code></p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_08.png" />
+</div>
+<p>Add a <code>readme.md</code> and click <code>Rescan</code>, <code>Stage Changed</code>, <code>Commit</code></p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_09.png" />
+</div>
+<p>Push it to GitHub</p>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_10.png" />
+</div>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p>First, create a repo in Github name <code>Demo_Usage_Of_GitCmd</code></p>
+<dl class="last docutils">
+<dt>Clone them to local:</dt>
+<dd><code>git clone https://github.com/brianshen1990/Demo_Usage_Of_GitCmd.git</code></dd>
+</dl>
+</div>
+<p>This time, all changes are in branch <code>master</code></p>
+</div>
+<div class="section" id="files-operation">
+<h3><a class="toc-backref" href="#id6">Files Operation</a></h3>
+<ul class="simple">
+<li>Add file</li>
+</ul>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Github Desktop</strong></p>
+<p>Now let's add a file named <code>File_01.txt</code> to branch <code>master</code>, and commit.
+Commit only affects on local repo, if we want to make Github asynchronous, we had to push them to Github.</p>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_03.png" />
+</div>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Git</strong></p>
+<p>Repeat the steps in previous step, just like adding <code>readme.md</code>.</p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_11.png" />
+</div>
+<p>Now in Github, there are two files.</p>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_12.png" />
+</div>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_23.png" />
+</div>
+<p>Add file:</p>
+<div class="highlight"><pre><span></span>git add .<span class="se">\F</span>ile_01.txt
+git add .<span class="se">\R</span>EADME.md
+</pre></div>
+<p>Commit:</p>
+<blockquote>
+<code>git commit -m &quot;Initial Commit&quot;</code></blockquote>
+<p>Push to Git:</p>
+<blockquote class="last">
+<code>git push origin master</code></blockquote>
+</div>
+<ul class="simple">
+<li>Remove file</li>
+</ul>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<div class="last"><div class="highlight"><pre><span></span>git add .<span class="se">\F</span>ile_del.txt
+git add .<span class="se">\F</span>ile_del.txt
+git commit -m <span class="s2">&quot;add file to delete&quot;</span>
+git rm .<span class="se">\F</span>ile_del.txt
+git commit -m <span class="s2">&quot;delete file&quot;</span>
+git push origin master
+</pre></div>
+</div></div>
+<ul class="simple">
+<li>File changes before committing</li>
+</ul>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p>I deleted File_branch_new.txt, added a folder and also put a file in the folder. See the status。</p>
+<div class="highlight"><pre><span></span>git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Changes not staged for commit:</span>
+    <span class="c1">#   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</span>
+    <span class="c1">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+
+    <span class="c1">#         deleted:    File_branch_new.txt</span>
+
+    <span class="c1"># Untracked files:</span>
+    <span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+
+    <span class="c1">#         File_Test_Add_File.txt</span>
+    <span class="c1">#         GIt_test_add_folder/</span>
+</pre></div>
+<p>Add all changes:</p>
+<div class="highlight"><pre><span></span>git add *
+git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Changes to be committed:</span>
+    <span class="c1">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+
+    <span class="c1">#         new file:   File_Test_Add_File.txt</span>
+    <span class="c1">#         deleted:    File_branch_new.txt</span>
+    <span class="c1">#         new file:   GIt_test_add_folder/File_Test_Add_File2.txt</span>
+</pre></div>
+<p>Now modify file <code>File_Test_Add_File.txt</code></p>
+<div class="highlight"><pre><span></span>git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Changes to be committed:</span>
+    <span class="c1">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+
+    <span class="c1">#         new file:   File_Test_Add_File.txt</span>
+    <span class="c1">#         deleted:    File_branch_new.txt</span>
+    <span class="c1">#         new file:   GIt_test_add_folder/File_Test_Add_File2.txt</span>
+
+    <span class="c1"># Changes not staged for commit:</span>
+    <span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span>
+    <span class="c1">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+
+    <span class="c1">#         modified:   GIt_test_add_folder/File_Test_Add_File2.txt</span>
+
+git add *
+git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Changes to be committed:</span>
+    <span class="c1">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+
+    <span class="c1">#         new file:   File_Test_Add_File.txt</span>
+    <span class="c1">#         deleted:    File_branch_new.txt</span>
+    <span class="c1">#         new file:   GIt_test_add_folder/File_Test_Add_File2.txt</span>
+</pre></div>
+<p>Remove one add file:</p>
+<div class="highlight"><pre><span></span>git rm --cache GIt_test_add_folder/File_Test_Add_File2.txt
+git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Changes to be committed:</span>
+    <span class="c1">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+
+    <span class="c1">#         new file:   File_Test_Add_File.txt</span>
+    <span class="c1">#         deleted:    File_branch_new.txt</span>
+
+    <span class="c1"># Untracked files:</span>
+    <span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+
+    <span class="c1">#         GIt_test_add_folder/</span>
+</pre></div>
+<p>I want to give up the delete file action, so</p>
+<div class="highlight"><pre><span></span>git reset HEAD File_branch_new.txt
+git checkout File_branch_new.txt
+git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Changes to be committed:</span>
+    <span class="c1">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+
+    <span class="c1">#         new file:   File_Test_Add_File.txt</span>
+
+    <span class="c1"># Untracked files:</span>
+    <span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+
+    <span class="c1">#         GIt_test_add_folder/</span>
+</pre></div>
+<p>Ignore some files:</p>
+<blockquote class="last">
+<p>create a file <code>.gitignore</code>, create folder, add file to teh folder.</p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_29.png" />
+</div>
+<p>Now let's see what happened:</p>
+<div class="highlight"><pre><span></span>git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Untracked files:</span>
+    <span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+
+    <span class="c1">#         .gitignore</span>
+
+    <span class="c1"># nothing added to commit but untracked files present (use &quot;git add&quot; to track)</span>
+
+git add *
+git status
+
+    <span class="c1"># On branch master</span>
+    <span class="c1"># Changes to be committed:</span>
+    <span class="c1">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+
+    <span class="c1">#         new file:   .gitignore</span>
+</pre></div>
+<p>All the files defined in ignore file are neglected.</p>
+</blockquote>
+</div>
+</div>
+<div class="section" id="branch-operation">
+<h3><a class="toc-backref" href="#id7">Branch Operation</a></h3>
+<p>Why we need branch, branch are used during development. From my point of view, there are two main ideas:</p>
+<blockquote>
+<p>1. We don't want our changes influence the main product code. At the meantime, we also want to use make changes.
+In this situation, we could make branch and hold our modifications in this branch.</p>
+<p>2. We want to customize product for some customer, like logos, brands.
+The changes are aimed at one customer, so it's better to have an individual branch.</p>
+</blockquote>
+<ul>
+<li><p class="first">Add branch</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Github Desktop</strong></p>
+<p>Add a branch  <code>branch_new</code> (Actually, when you create it, it is based on master if you use <code>Github Desktop</code>):</p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_04.png" />
+</div>
+<p>Add files to the branch and commit and push.
+(Notice that the <code>Current Branch</code> tag indicates which branch you are dealing with.):</p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_05.png" />
+</div>
+<p class="last">After this action, in branch <code>master</code>, we only have one file, while in branch <code>branch_new</code>, we have two files.</p>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Git</strong></p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_13.png" />
+</div>
+<p>Add files:</p>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_14.png" />
+</div>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<div class="highlight"><pre><span></span>git checkout -b branch_new                      <span class="c1"># create a new branch</span>
+git add .<span class="se">\F</span>ile_branch_new.txt                   <span class="c1"># add file</span>
+git commit -m <span class="s2">&quot;Add new file to branch—new&quot;</span>     <span class="c1"># commit</span>
+git push origin branch_new                      <span class="c1"># push to remote</span>
+</pre></div>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_24.png" />
+</div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Merge Branch</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Github Desktop</strong></p>
+<p>Now, lets' merge <code>branch_new</code> to <code>master</code></p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_06.png" />
+</div>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_07.png" />
+</div>
+<p class="last">Also, don't forget to merge. This time,branch <code>master</code> also have two files.</p>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Git</strong></p>
+<p>Use this menu to switch to branch <code>master</code>.</p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_15.png" />
+</div>
+<p>Then merge:</p>
+<blockquote>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_16.png" />
+</div>
+</blockquote>
+<p class="last">Remember to push to Github.</p>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<div class="highlight"><pre><span></span>git checkout master     <span class="c1"># switch to master</span>
+git merge branch_new    <span class="c1"># merge branch_new to master</span>
+git push origin master  <span class="c1"># push to remote</span>
+</pre></div>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_25.png" />
+</div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Delete a branch</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<div class="highlight"><pre><span></span>git checkout -b branch_del              <span class="c1"># create local a new branch with code of master</span>
+git push origin branch_del              <span class="c1"># push it to remote</span>
+git checkout master                     <span class="c1"># switch to master</span>
+git branch -d branch_del                <span class="c1"># delete local</span>
+git push origin --delete branch_del     <span class="c1"># delete remote</span>
+</pre></div>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_26.png" />
+</div>
+</div>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="recent-log">
+<h3><a class="toc-backref" href="#id8">Recent Log</a></h3>
+<ul>
+<li><p class="first">Recent changes:</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p><code>git log</code></p>
+<div class="last"><div class="highlight"><pre><span></span><span class="c1"># commit 239c3411ec9b61fa1c448513df8600bcecca8c92 (HEAD -&gt; master, origin/master, origin/branch_new, branch_new)</span>
+<span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+<span class="c1"># Date:   Sat Oct 14 22:47:06 2017 +0800</span>
+
+<span class="c1">#     Add new file to branch&lt;E2&gt;&lt;80&gt;&lt;94&gt;&lt;E2&gt;&lt;80&gt;&lt;94&gt;new</span>
+
+<span class="c1"># commit ed892f452b69b5776645c88d1f6d5cabca3dcd45</span>
+<span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+<span class="c1"># Date:   Sat Oct 14 22:03:52 2017 +0800</span>
+
+<span class="c1">#     Initial commit</span>
+</pre></div>
+</div></div>
+</blockquote>
+</li>
+<li><p class="first">Change Files:</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p><code>git log -n 1 --stat</code></p>
+<div class="last"><div class="highlight"><pre><span></span><span class="c1"># commit 239c3411ec9b61fa1c448513df8600bcecca8c92 (HEAD -&gt; master, origin/master, origin/branch_new, branch_new)</span>
+<span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+<span class="c1"># Date:   Sat Oct 14 22:47:06 2017 +0800</span>
+
+<span class="c1">#     Add new file to branch&lt;E2&gt;&lt;80&gt;&lt;94&gt;&lt;E2&gt;&lt;80&gt;&lt;94&gt;new</span>
+
+<span class="c1"># File_branch_new.txt | 1 +</span>
+<span class="c1"># 1 file changed, 1 insertion(+)</span>
+</pre></div>
+</div></div>
+</blockquote>
+</li>
+<li><p class="first">Change Details:</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p class="last"><code>git log -n 1 -p</code></p>
+<!-- code-block::bash
+
+# commit 239c3411ec9b61fa1c448513df8600bcecca8c92 (HEAD -> master, origin/master, origin/branch_new, branch_new)
+# Author: brianshen1990 <brian_shen@TSG.AISE.com>
+# Date:   Sat Oct 14 22:47:06 2017 +0800
+
+#     Add new file to branch<E2><80><94><E2><80><94>new
+
+# diff - -git a/File_branch_new.txt b/File_branch_new.txt
+# new file mode 100644
+# index 0000000..ca2a9d2
+# - - - /dev/null
+# +++ b/File_branch_new.txt
+# @@ -0,0 +1 @@
+# +File_branch_new.txt
+# \ No newline at end of file -->
+</div>
+</blockquote>
+</li>
+<li><p class="first">Commits which are not push to remote:</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p><code>git log master ^origin/master</code></p>
+<div class="last"><div class="highlight"><pre><span></span>git add .<span class="se">\F</span>ile_commit_but_bot_push.txt  <span class="c1"># Add a file</span>
+git commit -m <span class="s2">&quot;commit but not push&quot;</span>     <span class="c1"># commit</span>
+git log master ^origin/master           <span class="c1"># see difference</span>
+
+    <span class="c1"># commit 4c9afd991a295b573bc2d749bf7986bc8f881030 (HEAD -&gt; master)</span>
+    <span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+    <span class="c1"># Date:   Sat Oct 14 23:16:12 2017 +0800</span>
+
+    <span class="c1">#     commit but not push</span>
+
+git add .<span class="se">\F</span>ile_commit_but_bot_push_2.txt    <span class="c1"># Add another file</span>
+git commit -m <span class="s2">&quot;commit but not push 2&quot;</span>       <span class="c1"># commit</span>
+git log master ^origin/master               <span class="c1"># see difference</span>
+
+    <span class="c1"># commit bb5a48f2f3a323b9f7fe140e95ccbc14017929e3 (HEAD -&gt; master)</span>
+    <span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+    <span class="c1"># Date:   Sat Oct 14 23:19:15 2017 +0800</span>
+
+    <span class="c1">#    commit but not push 2</span>
+
+    <span class="c1"># commit 4c9afd991a295b573bc2d749bf7986bc8f881030</span>
+    <span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+    <span class="c1"># Date:   Sat Oct 14 23:16:12 2017 +0800</span>
+
+    <span class="c1">#     commit but not push</span>
+</pre></div>
+</div></div>
+</blockquote>
+</li>
+<li><p class="first">Online Commits:</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p><code>git log --oneline</code></p>
+<div class="last"><div class="highlight"><pre><span></span><span class="c1"># bb5a48f (HEAD -&gt; master, origin/master) commit but not push 2</span>
+<span class="c1"># 4c9afd9 commit but not push</span>
+<span class="c1"># 239c341 (origin/branch_new, branch_new) Add new file to branch&lt;E2&gt;&lt;80&gt;&lt;94&gt;&lt;E2&gt;&lt;80&gt;&lt;94&gt;new</span>
+<span class="c1"># ed892f4 Initial commit</span>
+</pre></div>
+</div></div>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="delete-revert-a-commit">
+<h3><a class="toc-backref" href="#id9">Delete/Revert a commit</a></h3>
+<ul>
+<li><p class="first">Delete a commit:</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<p><a class="reference external" href="http://jpuyy.com/2015/01/git-delete-commit.html">http://jpuyy.com/2015/01/git-delete-commit.html</a></p>
+<div class="last"><div class="highlight"><pre><span></span>git add .<span class="se">\F</span>ile_commit_wrong.txt
+git commit -m <span class="s2">&quot;commit wrong&quot;</span>
+git log master ^origin/master
+
+    <span class="c1"># commit 133ebed85fad45c4cc4dd7e7eee1384cfa6f65b8 (HEAD -&gt; master)</span>
+    <span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+    <span class="c1"># Date:   Sat Oct 14 23:33:39 2017 +0800</span>
+
+    <span class="c1">#     commit wrong</span>
+
+git reset --hard HEAD~1
+git log master ^origin/master
+
+    <span class="c1"># Empty output</span>
+</pre></div>
+</div></div>
+</blockquote>
+</li>
+<li><p class="first">Revert a commit</p>
+<blockquote>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>CMD</strong></p>
+<div class="last"><div class="highlight"><pre><span></span>git log --oneline
+
+    <span class="c1"># bb5a48f (HEAD -&gt; master, origin/master) commit but not push 2</span>
+    <span class="c1"># 4c9afd9 commit but not push</span>
+    <span class="c1"># 239c341 (origin/branch_new, branch_new) Add new file to branch&lt;E2&gt;&lt;80&gt;&lt;94&gt;&lt;E2&gt;&lt;80&gt;&lt;94&gt;new</span>
+    <span class="c1"># ed892f4 Initial commit</span>
+
+git revert <span class="s2">&quot;bb5a48f&quot;</span>
+
+    <span class="c1"># [master 59ea129] Revert &quot;commit but not push 2&quot;</span>
+    <span class="c1">#  Committer: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+    <span class="c1"># Your name and email address were configured automatically based</span>
+    <span class="c1"># on your username and hostname. Please check that they are accurate.</span>
+    <span class="c1"># You can suppress this message by setting them explicitly:</span>
+
+    <span class="c1">#     git config --global user.name &quot;Your Name&quot;</span>
+    <span class="c1">#     git config --global user.email you@example.com</span>
+
+    <span class="c1"># After doing this, you may fix the identity used for this commit with:</span>
+
+    <span class="c1">#     git commit --amend --reset-author</span>
+
+    <span class="c1"># 1 file changed, 1 deletion(-)</span>
+    <span class="c1">#  delete mode 100644 File_commit_but_bot_push_2.txt</span>
+
+git log master ^origin/master
+
+    <span class="c1"># commit 59ea12904067708c25b8ba0054465f6db83acd9f (HEAD -&gt; master)</span>
+    <span class="c1"># Author: brianshen1990 &lt;brian_shen@TSG.AISE.com&gt;</span>
+    <span class="c1"># Date:   Sat Oct 14 23:45:25 2017 +0800</span>
+
+    <span class="c1">#     Revert &quot;commit but not push 2&quot;</span>
+
+    <span class="c1">#     This reverts commit bb5a48f2f3a323b9f7fe140e95ccbc14017929e3.</span>
+
+git push origin master
+
+    <span class="c1"># 59ea129 (HEAD -&gt; master, origin/master) Revert &quot;commit but not push 2&quot;</span>
+    <span class="c1"># bb5a48f commit but not push 2</span>
+    <span class="c1"># 4c9afd9 commit but not push</span>
+    <span class="c1"># 239c341 (origin/branch_new, branch_new) Add new file to branch&lt;E2&gt;&lt;80&gt;&lt;94&gt;&lt;E2&gt;&lt;80&gt;&lt;94&gt;new</span>
+    <span class="c1"># ed892f4 Initial commit</span>
+</pre></div>
+</div></div>
+</blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="existing-repo">
+<h2><a class="toc-backref" href="#id10">Existing  repo</a></h2>
+<p>In most cases, we have to use codes fro existing repos.  Here are samples.</p>
+<div class="section" id="copying-repo">
+<h3><a class="toc-backref" href="#id11">Copying repo</a></h3>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Github Desktop</strong></p>
+<p><code>Github Desktop</code> can integrate with Github perfectly.</p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_17.png" />
+</div>
+<p>Notice that all the branches are here.</p>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_18.png" />
+</div>
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Git</strong></p>
+<div class="figure">
+<img alt="" src="/_static/image/tools/git/git_20.png" />
+</div>
+<p>Notice that all the branches are here.</p>
+<div class="last figure">
+<img alt="" src="/_static/image/tools/git/git_21.png" />
+</div>
+</div>
+<p>Reference:
+- <a class="reference external" href="https://m.runoob.com/manual/git-guide/">https://m.runoob.com/manual/git-guide/</a>
+- <a class="reference external" href="http://blog.csdn.net/robertzhouxh/article/details/8491739">http://blog.csdn.net/robertzhouxh/article/details/8491739</a></p>
+</div>
+</div>
+
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
