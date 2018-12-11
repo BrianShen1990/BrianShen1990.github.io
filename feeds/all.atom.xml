@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN.</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-11-24T00:00:00+08:00</updated><entry><title>Mount disk to VG / 磁盘挂载到虚拟分区</title><link href="/Tools_mount_disk_to_vg.html" rel="alternate"></link><published>2018-11-24T00:00:00+08:00</published><updated>2018-11-24T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-24:/Tools_mount_disk_to_vg.html</id><summary type="html">&lt;p class="first last"&gt;Tools - Mount Disk to VG&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="mount-disk-to-vg-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mount-a-new-disk" id="id1"&gt;Mount A New Disk / 挂载新的磁盘&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#env" id="id2"&gt;Env / 环境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#add-a-disk" id="id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#creating-linux-partitions-in-new-added-disk-linux" id="id4"&gt;Creating Linux Partitions in new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#creating-a-file-system" id="id5"&gt;Creating a File System / 创建文件系统&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mount-it-to-linux-virtual-system-lvs-linux" id="id6"&gt;Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference" id="id7"&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mount-a-new-disk"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id1"&gt;Mount A New Disk / 挂载新的磁盘&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="env"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id2"&gt;Env / 环境&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Current, we have 100G Disk. / 当前我们有 100G 磁盘。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
+
+    NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As we can see, all disks are assigned to root directory. / 所有的磁盘指定给了 根目录。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="add-a-disk"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/_static/image/tools/disk/mount_disk_01.png" /&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
+    /dev/sda  /dev/sda1  /dev/sda2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Since we haven't restart, OS isn't able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。&lt;/p&gt;
+&lt;p&gt;To force rescan disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# echo &amp;#39;- - -&amp;#39; &amp;gt; /sys/class/scsi_host/host0/scan&lt;/span&gt;
+&lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
+    /dev/sda  /dev/sda1  /dev/sda2  /dev/sdb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's see what happened: / 看看发生了什么。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
+    NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sdb                             8:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creating-linux-partitions-in-new-added-disk-linux"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id4"&gt;Creating Linux Partitions in new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;All lines started with &lt;code&gt;#&lt;/code&gt; should be input. / 所有 &lt;code&gt;#&lt;/code&gt; 前缀的都是 输入的部分。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# fdisk /dev/sdb&lt;/span&gt;
+    Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.23.2&lt;span class="o"&gt;)&lt;/span&gt;.
+
+    Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
+    Be careful before using the write command.
+
+    Device does not contain a recognized partition table
+    Building a new DOS disklabel with disk identifier 0x111936e6.
+
+&lt;span class="c1"&gt;# Command (m for help): c&lt;/span&gt;
+    DOS Compatibility flag is &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;DEPRECATED!&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Command (m for help): u&lt;/span&gt;
+    Changing display/entry units to cylinders &lt;span class="o"&gt;(&lt;/span&gt;DEPRECATED!&lt;span class="o"&gt;)&lt;/span&gt;.
+
+&lt;span class="c1"&gt;# Command (m for help): p&lt;/span&gt;
+
+    Disk /dev/sdb: 17.2 GB, &lt;span class="m"&gt;17179869184&lt;/span&gt; bytes, &lt;span class="m"&gt;33554432&lt;/span&gt; sectors
+    &lt;span class="m"&gt;255&lt;/span&gt; heads, &lt;span class="m"&gt;63&lt;/span&gt; sectors/track, &lt;span class="m"&gt;2088&lt;/span&gt; cylinders
+    &lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; cylinders of &lt;span class="m"&gt;16065&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;8225280&lt;/span&gt; bytes
+    Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+    I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+    Disk label type: dos
+    Disk identifier: 0x111936e6
+
+    Device Boot      Start         End      Blocks   Id  System
+
+&lt;span class="c1"&gt;# Command (m for help): n&lt;/span&gt;
+    Partition type:
+    p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;4&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
+    e   extended
+&lt;span class="c1"&gt;# Select (default p): p&lt;/span&gt;
+    Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
+    First cylinder &lt;span class="o"&gt;(&lt;/span&gt;1-2088, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
+    Using default value 1
+    Last cylinder, +cylinders or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;1-2088, default 2088&lt;span class="o"&gt;)&lt;/span&gt;:
+    Using default value 2088
+    Partition &lt;span class="m"&gt;1&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; Linux and of size &lt;span class="m"&gt;16&lt;/span&gt; GiB is &lt;span class="nb"&gt;set&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Command (m for help): w&lt;/span&gt;
+    The partition table has been altered!
+
+    Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
+    Syncing disks.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creating-a-file-system"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id5"&gt;Creating a File System / 创建文件系统&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Let's see what happened:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
+    NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sdb                             8:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    └─sdb1                          8:17   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; part
+    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And now , we should format the partition. / 现在我们格式化这个分区&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# /sbin/mkfs.ext4 /dev/sdb1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mount-it-to-linux-virtual-system-lvs-linux"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id6"&gt;Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Let's check LVS. / 查看当前的 Linux 虚拟分区。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvs&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    LV   VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+    home centos -wi-ao----  5.00g
+    root centos -wi-ao---- 92.50g
+    swap centos -wi-ao----  2.00g
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Remember the value of column &lt;code&gt;VG&lt;/code&gt; ( &lt;code&gt;centos&lt;/code&gt; ). / 记住 &lt;code&gt;VG&lt;/code&gt; 的值 ( &lt;code&gt;centos&lt;/code&gt; )。&lt;/p&gt;
+&lt;p&gt;Now we create a new physical volume. / 现在我们创建一块物理盘。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# pvcreate /dev/sdb1&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+&lt;span class="c1"&gt;# WARNING: ext4 signature detected on /dev/sdb1 at offset 1080. Wipe it? [y/n]: y&lt;/span&gt;
+    Wiping ext4 signature on /dev/sdb1.
+    Physical volume &lt;span class="s2"&gt;&amp;quot;/dev/sdb1&amp;quot;&lt;/span&gt; successfully created.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And extend it to &lt;code&gt;VG&lt;/code&gt;  &lt;code&gt;centos&lt;/code&gt; . / 并且将它拓展到 &lt;code&gt;VG&lt;/code&gt;  &lt;code&gt;centos&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# vgextend centos /dev/sdb1&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    Volume group &lt;span class="s2"&gt;&amp;quot;centos&amp;quot;&lt;/span&gt; successfully extended
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check whether it has been extended correctly: / 检查是否正确的被扩展了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# vgdisplay&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    --- Volume group ---
+    VG Name               centos
+    System ID
+    Format                lvm2
+    Metadata Areas        2
+    Metadata Sequence No  6
+    VG Access             read/write
+    VG Status             resizable
+    MAX LV                0
+    Cur LV                3
+    Open LV               3
+    Max PV                0
+    Cur PV                2
+    Act PV                2
+    VG Size               &amp;lt;115.50 GiB
+    PE Size               4.00 MiB
+    Total PE              29567
+    Alloc PE / Size       &lt;span class="m"&gt;25472&lt;/span&gt; / 99.50 GiB
+    Free  PE / Size       &lt;span class="m"&gt;4095&lt;/span&gt; / &amp;lt;16.00 GiB
+    VG UUID               RVnCi9-U8gt-DbgA-lu11-pdeO-6o0o-cEfQkC
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice that there is a Free PE with 8G. So let's extend it logically. / 可以看到存在没有被用到的 PE 16GiB ， 所以是成功的。&lt;/p&gt;
+&lt;p&gt;Now let's added the free PE to root. / 现在我们可以将这些空余的PE 指定给根目录。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvextend -L +15.9G /dev/centos/root /dev/sdb1&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    Rounding size to boundary between physical extents: 15.90 GiB.
+    Size of logical volume centos/root changed from 92.50 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;23680&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt; to 108.40 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;27751&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt;.
+    Logical volume centos/root successfully resized.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;OK. Only 15.9 Can be added. / 请注意留 0.1G 的空余。&lt;/p&gt;
+&lt;p&gt;Now the last step: tell OS  that the file system has been extended. / 最后一步就是告诉系统，文件系统被扩展了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# xfs_growfs /dev/centos/root&lt;/span&gt;
+    meta-data&lt;span class="o"&gt;=&lt;/span&gt;/dev/mapper/centos-root &lt;span class="nv"&gt;isize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;    &lt;span class="nv"&gt;agcount&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4, &lt;span class="nv"&gt;agsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;6062080&lt;/span&gt; &lt;span class="nv"&gt;blks&lt;/span&gt;
+            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;attr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;projid32bit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;
+            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;crc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="nv"&gt;finobt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;spinodes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    &lt;span class="nv"&gt;data&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;24248320, &lt;span class="nv"&gt;imaxpct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;25&lt;/span&gt;
+            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="nv"&gt;swidth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks
+    &lt;span class="nv"&gt;naming&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt;version &lt;span class="m"&gt;2&lt;/span&gt;              &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   ascii-ci&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;ftype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    &lt;span class="nv"&gt;log&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt;internal               &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;11840, &lt;span class="nv"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;2&lt;/span&gt;
+            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks, lazy-count&lt;span class="o"&gt;=&lt;/span&gt;1
+    &lt;span class="nv"&gt;realtime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;none                   &lt;span class="nv"&gt;extsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0, &lt;span class="nv"&gt;rtextents&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    data blocks changed from &lt;span class="m"&gt;24248320&lt;/span&gt; to 28417024
+
+&lt;span class="c1"&gt;#### Default installed, if not , type this:  yum install -y xfsprogs.x86_64&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And have a check: / 现在我们看下系统信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# df -hl&lt;/span&gt;
+    Filesystem               Size  Used Avail Use% Mounted on
+    /dev/mapper/centos-root  109G   17G   92G  16% /
+    devtmpfs                 910M     &lt;span class="m"&gt;0&lt;/span&gt;  910M   0% /dev
+    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   0% /dev/shm
+    tmpfs                    921M   17M  904M   2% /run
+    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   0% /sys/fs/cgroup
+    /dev/mapper/centos-home  5.0G   33M  5.0G   1% /home
+    /dev/sda1                497M  125M  373M  26% /boot
+    tmpfs                    185M  4.0K  185M   1% /run/user/0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It succeeds! / 完成了！&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id7"&gt;Reference&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;CentOS6调整LVM SWAP分区大小 &lt;a class="reference external" href="https://www.haiyun.me/archives/centos6-change-lvm-swap.html"&gt;https://www.haiyun.me/archives/centos6-change-lvm-swap.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;resize2fs: Bad magic number in super-block while trying to open  &lt;a class="reference external" href="https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open"&gt;https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;centos7 lvm管理 把/home空间转移给/ &lt;a class="reference external" href="https://www.2cto.com/os/201708/668992.html"&gt;https://www.2cto.com/os/201708/668992.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;实战：CentOS不重启，在线添加硬盘  &lt;a class="reference external" href="http://blog.51cto.com/skypegnu1/1429375"&gt;http://blog.51cto.com/skypegnu1/1429375&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://blog.csdn.net/rainbow702/article/details/50761380"&gt;http://blog.csdn.net/rainbow702/article/details/50761380&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS7"></category><category term="LVM"></category><category term="Disk"></category></entry><entry><title>Node Task Queue Research / Node 任务队列学习</title><link href="/Node_Task_Queue_Research.html" rel="alternate"></link><published>2018-11-01T00:00:00+08:00</published><updated>2018-11-01T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-01:/Node_Task_Queue_Research.html</id><summary type="html">&lt;p class="first last"&gt;Node Task Queue Research&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="node-task-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#queue-based-on-node-node" id="id1"&gt;Queue based on Node / 基于 Node 的队列&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#comparison" id="id2"&gt;Comparison / 对比&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#my-opinion" id="id3"&gt;My opinion / 个人观点&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#other-queues" id="id4"&gt;Other Queues / 其他可选的队列&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#rabbitmq" id="id5"&gt;RabbitMQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#saas-aws-simple-queue-service-saas-aws" id="id6"&gt;Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#saas-azure-service-bus" id="id7"&gt;Saas - Azure Service Bus&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#queues-i-have-encountered" id="id8"&gt;Queues I have encountered  / 我遇到的队列&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="queue-based-on-node-node"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id1"&gt;Queue based on Node / 基于 Node 的队列&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="comparison"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id2"&gt;Comparison / 对比&lt;/a&gt;&lt;/h3&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="20%" /&gt;
+&lt;col width="20%" /&gt;
+&lt;col width="20%" /&gt;
+&lt;col width="20%" /&gt;
+&lt;col width="20%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Feature  / 功能&lt;/th&gt;
+&lt;th class="head"&gt;Bull ☆3885&lt;/th&gt;
+&lt;th class="head"&gt;Kue  ☆8007&lt;/th&gt;
+&lt;th class="head"&gt;Bee  ☆1141&lt;/th&gt;
+&lt;th class="head"&gt;Agenda ☆4637&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Backend / 后台支持&lt;/td&gt;
+&lt;td&gt;redis&lt;/td&gt;
+&lt;td&gt;redis&lt;/td&gt;
+&lt;td&gt;redis&lt;/td&gt;
+&lt;td&gt;mongo&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Priorities / 优先级支持&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Concurrency / 并行&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Delayed jobs / 延迟任务&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Global events / 全局事件&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Rate Limiter / 速度控制&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Pause/Resume / 停止/恢复&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Sandboxed worker / 沙箱工作节点&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Repeatable jobs / 重复任务&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Atomic ops / 原子性操作&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Persistence / 持久性&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;UI&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;REST API&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;✓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Optimized for / 优化&lt;/td&gt;
+&lt;td&gt;Jobs / Messages&lt;/td&gt;
+&lt;td&gt;Jobs&lt;/td&gt;
+&lt;td&gt;Messages&lt;/td&gt;
+&lt;td&gt;Jobs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class="section" id="my-opinion"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id3"&gt;My opinion / 个人观点&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;After I've reviewed their documents, I listed my own opinion.&lt;/p&gt;
+&lt;p&gt;在查看过介绍 和 使用文档后，有一些自己的心得:&lt;/p&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="20%" /&gt;
+&lt;col width="80%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Products  / 产品&lt;/th&gt;
+&lt;th class="head"&gt;Descriptions / 描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Bull&lt;/td&gt;
+&lt;td&gt;&lt;div class="first last line-block"&gt;
+&lt;div class="line"&gt;Job and Queue:&lt;/div&gt;
+&lt;div class="line"&gt;One queue can contain one kind of job.&lt;/div&gt;
+&lt;div class="line"&gt;每一个队列包含一种任务&lt;/div&gt;
+&lt;div class="line"&gt;Every queue has its own Redis connection except for more configuration.&lt;/div&gt;
+&lt;div class="line"&gt;每个队列需要一个Redis连接， 需要额外的配置才可以共享&lt;/div&gt;
+&lt;div class="line"&gt;&lt;br /&gt;&lt;/div&gt;
+&lt;div class="line"&gt;Advantages:  / 好处&lt;/div&gt;
+&lt;div class="line"&gt;Quicker and full functional.&lt;/div&gt;
+&lt;div class="line"&gt;队列任务消除 相对较快，功能全面&lt;/div&gt;
+&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Kue&lt;/td&gt;
+&lt;td&gt;&lt;div class="first last line-block"&gt;
+&lt;div class="line"&gt;Job and Queue:&lt;/div&gt;
+&lt;div class="line"&gt;One queue can contain multiple kinds of jobs.&lt;/div&gt;
+&lt;div class="line"&gt;一个队列 包含多种类型的任务&lt;/div&gt;
+&lt;div class="line"&gt;So one queue is enough and only 1 redis connection is needed.&lt;/div&gt;
+&lt;div class="line"&gt;&lt;br /&gt;&lt;/div&gt;
+&lt;div class="line"&gt;Speed: But the speed of time-consuming is not that fast from the benchmark test from Bee.&lt;/div&gt;
+&lt;div class="line"&gt;队列任务消除缓慢， 而且维护较少&lt;/div&gt;
+&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Bee&lt;/td&gt;
+&lt;td&gt;&lt;div class="first last line-block"&gt;
+&lt;div class="line"&gt;Job and Queue:&lt;/div&gt;
+&lt;div class="line"&gt;One queue can contain multiple kinds of jobs.&lt;/div&gt;
+&lt;div class="line"&gt;每一个队列包含一种任务&lt;/div&gt;
+&lt;div class="line"&gt;Every queue has its own Redis connection.&lt;/div&gt;
+&lt;div class="line"&gt;&lt;br /&gt;&lt;/div&gt;
+&lt;div class="line"&gt;Quicker and lighter. / 更快 也更轻量级&lt;/div&gt;
+&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Agenda&lt;/td&gt;
+&lt;td&gt;&lt;div class="first last line-block"&gt;
+&lt;div class="line"&gt;Advantages:&lt;/div&gt;
+&lt;div class="line"&gt;Designed for Scheduler and Repeat Jobs.&lt;/div&gt;
+&lt;div class="line"&gt;更偏向于 定期/周期任务&lt;/div&gt;
+&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Recommendation: &lt;code&gt;Bull&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;推荐使用 &lt;code&gt;Bull&lt;/code&gt; .&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="other-queues"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id4"&gt;Other Queues / 其他可选的队列&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;However, queues based on Node can satisfy us if the volume is OK.&lt;/p&gt;
+&lt;p&gt;But if the number soars, we should seek help for other real messages queues.&lt;/p&gt;
+&lt;p&gt;如果我们的任务量比较小，整个架构也不复杂的话，基于 Node 的队列基本可以满足要求。&lt;/p&gt;
+&lt;p&gt;但是如果任务量大，构架复杂， 我们需要依赖于一些专业的标准化的队列服务。&lt;/p&gt;
+&lt;div class="section" id="rabbitmq"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id5"&gt;RabbitMQ&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Implementation of AMQP (Advanced Message Queuing Protocol),&lt;/p&gt;
+&lt;p&gt;an open standard application layer protocol for message-oriented middleware.&lt;/p&gt;
+&lt;p&gt;是 AMQP 的一种实现。&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Standard Protocol / 标准协议&lt;/li&gt;
+&lt;li&gt;No Language Limitation / 不是基于某种语言&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="saas-aws-simple-queue-service-saas-aws"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id6"&gt;Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="https://aws.amazon.com/sqs/"&gt;https://aws.amazon.com/sqs/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The fee of first 1 million messages per mon is free.
+每个月首个一百万条消息是免费的...&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Standard Queues / 标准队列&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Unlimited Throughput&lt;/li&gt;
+&lt;li&gt;At-Least-Once Delivery&lt;/li&gt;
+&lt;li&gt;Best-Effort Ordering&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;FIFO Queues / 先进先出队列&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;High Throughput&lt;/li&gt;
+&lt;li&gt;Exactly-Once Processing&lt;/li&gt;
+&lt;li&gt;First-In-First-Out Delivery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="saas-azure-service-bus"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id7"&gt;Saas - Azure Service Bus&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions"&gt;https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The fee of first 1000 brokered connections (744,000 messages) /per mon is free . (&lt;a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing"&gt;https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;每个月首个 74 万消息是免费的。&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Queues: One to one&lt;/li&gt;
+&lt;li&gt;Topics and subscriptions: One to many&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="queues-i-have-encountered"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id8"&gt;Queues I have encountered  / 我遇到的队列&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;In Trend Micro, I used to be a member of CAS (Cloud Application Security) .&lt;/p&gt;
+&lt;p&gt;We use two kind types of queues:&lt;/p&gt;
+&lt;p&gt;在趋势CAS 团队(Saas 产品), 我们使用了两种类型的队列:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Azure Message Queue: Quite expensive&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;Azure 的Service Bus，Hook Email 之后会将Email事件存放在Queue 中，顺序处理， 也可以作为监控指标&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Queue designed by ourselves: / 自行设计的 Queue&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;MS SQL backed, and every task are record. And micro services will get and handle them periodically.&lt;/p&gt;
+&lt;p class="last"&gt;基于 MS SQL，周期性任务会存在在 MSSQL 中 每一步会去更新状态， 直到最终完成。&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Celery + RabbitMQ + Python&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;Python Web Service 有一些长期的异步任务需要实现，使用的是 Celery (&lt;a class="reference external" href="http://www.celeryproject.org/"&gt;http://www.celeryproject.org/&lt;/a&gt;) , 基于 RabbitMQ。&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Node"></category></entry></feed>

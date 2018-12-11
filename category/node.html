@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>KNOWN. - Node</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="KNOWN. Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">KNOWN. </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="/category/node.html">Node</a></li>
+                    <li><a href="/category/tools.html">Tools</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/Node_Task_Queue_Research.html">Node Task Queue Research / Node 任务队列学习</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2018-11-01T00:00:00+08:00">
+                Published: Thu 01 November 2018
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/brian-shen.html">Brian Shen</a>
+        </address>
+<p>In <a href="/category/node.html">Node</a>.</p>
+<p>tags: <a href="/tag/node.html">Node</a> </p>
+</footer><!-- /.post-info --><div class="contents topic" id="contents">
+<span id="node-task-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#queue-based-on-node-node" id="id1">Queue based on Node / 基于 Node 的队列</a><ul>
+<li><a class="reference internal" href="#comparison" id="id2">Comparison / 对比</a></li>
+<li><a class="reference internal" href="#my-opinion" id="id3">My opinion / 个人观点</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-queues" id="id4">Other Queues / 其他可选的队列</a><ul>
+<li><a class="reference internal" href="#rabbitmq" id="id5">RabbitMQ</a></li>
+<li><a class="reference internal" href="#saas-aws-simple-queue-service-saas-aws" id="id6">Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务</a></li>
+<li><a class="reference internal" href="#saas-azure-service-bus" id="id7">Saas - Azure Service Bus</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#queues-i-have-encountered" id="id8">Queues I have encountered  / 我遇到的队列</a></li>
+</ul>
+</div>
+<div class="section" id="queue-based-on-node-node">
+<h2><a class="toc-backref" href="#id1">Queue based on Node / 基于 Node 的队列</a></h2>
+<div class="section" id="comparison">
+<h3><a class="toc-backref" href="#id2">Comparison / 对比</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Feature  / 功能</th>
+<th class="head">Bull ☆3885</th>
+<th class="head">Kue  ☆8007</th>
+<th class="head">Bee  ☆1141</th>
+<th class="head">Agenda ☆4637</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Backend / 后台支持</td>
+<td>redis</td>
+<td>redis</td>
+<td>redis</td>
+<td>mongo</td>
+</tr>
+<tr><td>Priorities / 优先级支持</td>
+<td>✓</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>✓</td>
+</tr>
+<tr><td>Concurrency / 并行</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr><td>Delayed jobs / 延迟任务</td>
+<td>✓</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>✓</td>
+</tr>
+<tr><td>Global events / 全局事件</td>
+<td>✓</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>Rate Limiter / 速度控制</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>Pause/Resume / 停止/恢复</td>
+<td>✓</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>Sandboxed worker / 沙箱工作节点</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>Repeatable jobs / 重复任务</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>✓</td>
+</tr>
+<tr><td>Atomic ops / 原子性操作</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>✓</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>Persistence / 持久性</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr><td>UI</td>
+<td>✓</td>
+<td>✓</td>
+<td>&nbsp;</td>
+<td>✓</td>
+</tr>
+<tr><td>REST API</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>✓</td>
+</tr>
+<tr><td>Optimized for / 优化</td>
+<td>Jobs / Messages</td>
+<td>Jobs</td>
+<td>Messages</td>
+<td>Jobs</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="my-opinion">
+<h3><a class="toc-backref" href="#id3">My opinion / 个人观点</a></h3>
+<p>After I've reviewed their documents, I listed my own opinion.</p>
+<p>在查看过介绍 和 使用文档后，有一些自己的心得:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Products  / 产品</th>
+<th class="head">Descriptions / 描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Bull</td>
+<td><div class="first last line-block">
+<div class="line">Job and Queue:</div>
+<div class="line">One queue can contain one kind of job.</div>
+<div class="line">每一个队列包含一种任务</div>
+<div class="line">Every queue has its own Redis connection except for more configuration.</div>
+<div class="line">每个队列需要一个Redis连接， 需要额外的配置才可以共享</div>
+<div class="line"><br /></div>
+<div class="line">Advantages:  / 好处</div>
+<div class="line">Quicker and full functional.</div>
+<div class="line">队列任务消除 相对较快，功能全面</div>
+</div>
+</td>
+</tr>
+<tr><td>Kue</td>
+<td><div class="first last line-block">
+<div class="line">Job and Queue:</div>
+<div class="line">One queue can contain multiple kinds of jobs.</div>
+<div class="line">一个队列 包含多种类型的任务</div>
+<div class="line">So one queue is enough and only 1 redis connection is needed.</div>
+<div class="line"><br /></div>
+<div class="line">Speed: But the speed of time-consuming is not that fast from the benchmark test from Bee.</div>
+<div class="line">队列任务消除缓慢， 而且维护较少</div>
+</div>
+</td>
+</tr>
+<tr><td>Bee</td>
+<td><div class="first last line-block">
+<div class="line">Job and Queue:</div>
+<div class="line">One queue can contain multiple kinds of jobs.</div>
+<div class="line">每一个队列包含一种任务</div>
+<div class="line">Every queue has its own Redis connection.</div>
+<div class="line"><br /></div>
+<div class="line">Quicker and lighter. / 更快 也更轻量级</div>
+</div>
+</td>
+</tr>
+<tr><td>Agenda</td>
+<td><div class="first last line-block">
+<div class="line">Advantages:</div>
+<div class="line">Designed for Scheduler and Repeat Jobs.</div>
+<div class="line">更偏向于 定期/周期任务</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Recommendation: <code>Bull</code> .</p>
+<p>推荐使用 <code>Bull</code> .</p>
+</div>
+</div>
+<div class="section" id="other-queues">
+<h2><a class="toc-backref" href="#id4">Other Queues / 其他可选的队列</a></h2>
+<p>However, queues based on Node can satisfy us if the volume is OK.</p>
+<p>But if the number soars, we should seek help for other real messages queues.</p>
+<p>如果我们的任务量比较小，整个架构也不复杂的话，基于 Node 的队列基本可以满足要求。</p>
+<p>但是如果任务量大，构架复杂， 我们需要依赖于一些专业的标准化的队列服务。</p>
+<div class="section" id="rabbitmq">
+<h3><a class="toc-backref" href="#id5">RabbitMQ</a></h3>
+<p>Implementation of AMQP (Advanced Message Queuing Protocol),</p>
+<p>an open standard application layer protocol for message-oriented middleware.</p>
+<p>是 AMQP 的一种实现。</p>
+<ul class="simple">
+<li>Standard Protocol / 标准协议</li>
+<li>No Language Limitation / 不是基于某种语言</li>
+</ul>
+</div>
+<div class="section" id="saas-aws-simple-queue-service-saas-aws">
+<h3><a class="toc-backref" href="#id6">Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务</a></h3>
+<p>Reference: <a class="reference external" href="https://aws.amazon.com/sqs/">https://aws.amazon.com/sqs/</a></p>
+<p>The fee of first 1 million messages per mon is free.
+每个月首个一百万条消息是免费的...</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Standard Queues / 标准队列</dt>
+<dd><ul class="first last simple">
+<li>Unlimited Throughput</li>
+<li>At-Least-Once Delivery</li>
+<li>Best-Effort Ordering</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>FIFO Queues / 先进先出队列</dt>
+<dd><ul class="first last simple">
+<li>High Throughput</li>
+<li>Exactly-Once Processing</li>
+<li>First-In-First-Out Delivery</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="saas-azure-service-bus">
+<h3><a class="toc-backref" href="#id7">Saas - Azure Service Bus</a></h3>
+<p>Reference: <a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions">https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions</a></p>
+<p>The fee of first 1000 brokered connections (744,000 messages) /per mon is free . (<a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing">https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing</a>).</p>
+<p>每个月首个 74 万消息是免费的。</p>
+<ul class="simple">
+<li>Queues: One to one</li>
+<li>Topics and subscriptions: One to many</li>
+</ul>
+</div>
+</div>
+<div class="section" id="queues-i-have-encountered">
+<h2><a class="toc-backref" href="#id8">Queues I have encountered  / 我遇到的队列</a></h2>
+<p>In Trend Micro, I used to be a member of CAS (Cloud Application Security) .</p>
+<p>We use two kind types of queues:</p>
+<p>在趋势CAS 团队(Saas 产品), 我们使用了两种类型的队列:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Azure Message Queue: Quite expensive</dt>
+<dd><p class="first last">Azure 的Service Bus，Hook Email 之后会将Email事件存放在Queue 中，顺序处理， 也可以作为监控指标</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Queue designed by ourselves: / 自行设计的 Queue</dt>
+<dd><p class="first">MS SQL backed, and every task are record. And micro services will get and handle them periodically.</p>
+<p class="last">基于 MS SQL，周期性任务会存在在 MSSQL 中 每一步会去更新状态， 直到最终完成。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Celery + RabbitMQ + Python</dt>
+<dd><p class="first last">Python Web Service 有一些长期的异步任务需要实现，使用的是 Celery (<a class="reference external" href="http://www.celeryproject.org/">http://www.celeryproject.org/</a>) , 基于 RabbitMQ。</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
