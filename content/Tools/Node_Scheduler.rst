@@ -20,7 +20,7 @@ Comparison / 对比
 *****************
 
 .. list-table:: 
-   :widths: 20 20 20 20 20
+   :widths: 28 18 18 18 18
    :header-rows: 1
 
    * - Feature  / 功能
@@ -207,11 +207,9 @@ The fee of first 1000 brokered connections (744,000 messages) /per mon is free .
 Queues I have encountered  / 我遇到的队列
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In Trend Micro, I used to be a member of CAS (Cloud Application Security) .
+In TM, I used to be a member of CAS, we use two kind types of queues:
 
-We use two kind types of queues:
-
-在趋势CAS 团队(Saas 产品), 我们使用了两种类型的队列:
+在 TM CAS 团队(Saas 产品), 我们使用了两种类型的队列:
 
 - Azure Message Queue: Quite expensive 
     Azure 的Service Bus，Hook Email 之后会将Email事件存放在Queue 中，顺序处理， 也可以作为监控指标

@@ -46,4 +46,4 @@ GOOGLE_ANALYTICS = 'UA-107750695-1'
 DISQUS_SITENAME = "brianshen1990"
 
 PLUGIN_PATHS = ['./pelican-plugins']
-PLUGINS = ['section_number']
+PLUGINS = ['section_number', 'fit_image']

@@ -473,3 +473,79 @@ p.paginator{
 	padding-left: 10px;
 	margin-left: 0.3em;
 }
+
+table.docutils {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    margin-bottom: 24px
+}
+
+table.docutils caption {
+    color: #000;
+    font: italic 85%/1 arial,sans-serif;
+    padding: 1em 0;
+    text-align: center
+}
+
+table.docutils td, table.docutils th {
+    font-size: 90%;
+    margin: 0;
+    overflow: visible;
+    padding: 8px 16px
+}
+
+table.docutils td:first-child, table.docutils th:first-child {
+    border-left-width: 0
+}
+
+table.docutils thead {
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+    white-space: nowrap
+}
+
+table.docutils thead th {
+    font-weight: bold;
+	border-bottom: solid 2px #e1e4e5;
+	border-left: 1px solid #e1e4e5
+}
+
+.docutils td {
+    background-color: transparent;
+    vertical-align: middle
+}
+
+table.docutils td {
+    line-height: 18px
+}
+
+table.docutils td p:last-child{
+    margin-bottom: 0
+}
+
+
+table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+    background-color: #f3f6f6
+}
+
+.wy-table-backed {
+    background-color: #f3f6f6
+}
+
+table.docutils {
+    border: 1px solid #e1e4e5
+}
+
+table.docutils td {
+    border-bottom: 1px solid #e1e4e5;
+    border-left: 1px solid #e1e4e5
+}
+
+table.docutils tbody>tr:last-child td {
+    border-bottom-width: 0
+}
+
+
+
