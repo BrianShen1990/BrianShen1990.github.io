@@ -51,9 +51,9 @@
 </ul>
 </div>
 <div class="section" id="queue-based-on-node-node">
-<h2><a class="toc-backref" href="#id1">Queue based on Node / 基于 Node 的队列</a></h2>
+<h2>1. <a class="toc-backref" href="#id1">Queue based on Node / 基于 Node 的队列</a></h2>
 <div class="section" id="comparison">
-<h3><a class="toc-backref" href="#id2">Comparison / 对比</a></h3>
+<h3>1.1. <a class="toc-backref" href="#id2">Comparison / 对比</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="20%" />
@@ -159,7 +159,7 @@
 </table>
 </div>
 <div class="section" id="my-opinion">
-<h3><a class="toc-backref" href="#id3">My opinion / 个人观点</a></h3>
+<h3>1.2. <a class="toc-backref" href="#id3">My opinion / 个人观点</a></h3>
 <p>After I've reviewed their documents, I listed my own opinion.</p>
 <p>在查看过介绍 和 使用文档后，有一些自己的心得:</p>
 <table border="1" class="docutils">
@@ -225,13 +225,13 @@
 </div>
 </div>
 <div class="section" id="other-queues">
-<h2><a class="toc-backref" href="#id4">Other Queues / 其他可选的队列</a></h2>
+<h2>2. <a class="toc-backref" href="#id4">Other Queues / 其他可选的队列</a></h2>
 <p>However, queues based on Node can satisfy us if the volume is OK.</p>
 <p>But if the number soars, we should seek help for other real messages queues.</p>
 <p>如果我们的任务量比较小，整个架构也不复杂的话，基于 Node 的队列基本可以满足要求。</p>
 <p>但是如果任务量大，构架复杂， 我们需要依赖于一些专业的标准化的队列服务。</p>
 <div class="section" id="rabbitmq">
-<h3><a class="toc-backref" href="#id5">RabbitMQ</a></h3>
+<h3>2.1. <a class="toc-backref" href="#id5">RabbitMQ</a></h3>
 <p>Implementation of AMQP (Advanced Message Queuing Protocol),</p>
 <p>an open standard application layer protocol for message-oriented middleware.</p>
 <p>是 AMQP 的一种实现。</p>
@@ -241,7 +241,7 @@
 </ul>
 </div>
 <div class="section" id="saas-aws-simple-queue-service-saas-aws">
-<h3><a class="toc-backref" href="#id6">Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务</a></h3>
+<h3>2.2. <a class="toc-backref" href="#id6">Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务</a></h3>
 <p>Reference: <a class="reference external" href="https://aws.amazon.com/sqs/">https://aws.amazon.com/sqs/</a></p>
 <p>The fee of first 1 million messages per mon is free.
 每个月首个一百万条消息是免费的...</p>
@@ -269,7 +269,7 @@
 </ul>
 </div>
 <div class="section" id="saas-azure-service-bus">
-<h3><a class="toc-backref" href="#id7">Saas - Azure Service Bus</a></h3>
+<h3>2.3. <a class="toc-backref" href="#id7">Saas - Azure Service Bus</a></h3>
 <p>Reference: <a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions">https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions</a></p>
 <p>The fee of first 1000 brokered connections (744,000 messages) /per mon is free . (<a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing">https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing</a>).</p>
 <p>每个月首个 74 万消息是免费的。</p>
@@ -280,7 +280,7 @@
 </div>
 </div>
 <div class="section" id="queues-i-have-encountered">
-<h2><a class="toc-backref" href="#id8">Queues I have encountered  / 我遇到的队列</a></h2>
+<h2>3. <a class="toc-backref" href="#id8">Queues I have encountered  / 我遇到的队列</a></h2>
 <p>In Trend Micro, I used to be a member of CAS (Cloud Application Security) .</p>
 <p>We use two kind types of queues:</p>
 <p>在趋势CAS 团队(Saas 产品), 我们使用了两种类型的队列:</p>
@@ -324,5 +324,23 @@
                 <p>Powered by <a href="http://getpelican.com/">Pelican</a>. The theme is adopted from <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
 
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'brianshen1990';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
 </body>
 </html>

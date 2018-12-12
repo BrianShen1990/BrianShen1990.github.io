@@ -13,6 +13,9 @@ Mount disk to VG / 磁盘挂载到虚拟分区
 
 .. contents::
 
+
+All lines started with :code:`#` should be input. / 所有 :code:`#` 前缀的都是 输入的部分。
+
 Mount A New Disk / 挂载新的磁盘
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -46,14 +49,15 @@ Add a Disk / 添加一块磁盘
 
 .. figure::  /_static/image/tools/disk/mount_disk_01.png
 
+
 .. code-block:: bash
     
     # ls /dev/sd*
         /dev/sda  /dev/sda1  /dev/sda2
 
-Since we haven't restart, OS isn't able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。
+Since we didn't restart the PC, OS wouldn't be able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。
 
-To force rescan disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令
+To force OS reloading disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令
 
 .. code-block:: bash
 
@@ -80,11 +84,10 @@ Let's see what happened: / 看看发生了什么。
         loop1                           7:1    0    2G  0 loop 
         └─docker-253:0-134516294-pool 253:3    0  100G  0 dm    
 
+Now we can see a new disk named :code:`sdb` in the disk information.
 
-Creating Linux Partitions in new added disk / 在新加硬盘上创建 Linux 分区
-****************************************************************************
-
-All lines started with :code:`#` should be input. / 所有 :code:`#` 前缀的都是 输入的部分。
+Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区
+*******************************************************************************
 
 .. code-block:: bash
 
@@ -156,7 +159,7 @@ Let's see what happened:
         loop1                           7:1    0    2G  0 loop 
         └─docker-253:0-134516294-pool 253:3    0  100G  0 dm
 
-And now , we should format the partition. / 现在我们格式化这个分区 
+And now, we should format the partition. / 现在我们格式化这个分区。
 
 .. code-block:: bash
 
@@ -226,7 +229,7 @@ Check whether it has been extended correctly: / 检查是否正确的被扩展�
 
 Notice that there is a Free PE with 8G. So let's extend it logically. / 可以看到存在没有被用到的 PE 16GiB ， 所以是成功的。
 
-Now let's added the free PE to root. / 现在我们可以将这些空余的PE 指定给根目录。 
+Now let's add the free PE to root. / 现在我们可以将这些空余的 PE 指定给根目录。 
 
 .. code-block:: bash
 
@@ -244,14 +247,14 @@ Now the last step: tell OS  that the file system has been extended. / 最后一�
 
     # xfs_growfs /dev/centos/root
         meta-data=/dev/mapper/centos-root isize=256    agcount=4, agsize=6062080 blks
-                =                       sectsz=512   attr=2, projid32bit=1
-                =                       crc=0        finobt=0 spinodes=0
-        data     =                       bsize=4096   blocks=24248320, imaxpct=25
-                =                       sunit=0      swidth=0 blks
-        naming   =version 2              bsize=4096   ascii-ci=0 ftype=0
-        log      =internal               bsize=4096   blocks=11840, version=2
-                =                       sectsz=512   sunit=0 blks, lazy-count=1
-        realtime =none                   extsz=4096   blocks=0, rtextents=0
+                 =                        sectsz=512   attr=2, projid32bit=1
+                 =                        crc=0        finobt=0 spinodes=0
+        data     =                        bsize=4096   blocks=24248320, imaxpct=25
+                 =                        sunit=0      swidth=0 blks
+        naming   =version 2               bsize=4096   ascii-ci=0 ftype=0
+        log      =internal                bsize=4096   blocks=11840, version=2
+                 =                        sectsz=512   sunit=0 blks, lazy-count=1
+        realtime =none                    extsz=4096   blocks=0, rtextents=0
         data blocks changed from 24248320 to 28417024
 
     #### Default installed, if not , type this:  yum install -y xfsprogs.x86_64 
@@ -276,7 +279,6 @@ It succeeds! / 完成了！
 
 Reference
 **********
-
 
     - CentOS6调整LVM SWAP分区大小 https://www.haiyun.me/archives/centos6-change-lvm-swap.html
     - resize2fs: Bad magic number in super-block while trying to open  https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open

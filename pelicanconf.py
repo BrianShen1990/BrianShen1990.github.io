@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'BrianShen1990'
 SITENAME = u'KNOWN.'
+# SITEURL = 'https://brianshen1990.github.io/'
 SITEURL = ''
 
 PATH = 'content'
@@ -37,3 +38,12 @@ DEFAULT_PAGINATION = 10
 STATIC_PATHS = ['_static']
 
 LOAD_CONTENT_CACHE = False
+
+THEME='./notmyideaBrian'
+
+GOOGLE_ANALYTICS = 'UA-107750695-1'
+
+DISQUS_SITENAME = "brianshen1990"
+
+PLUGIN_PATHS = ['./pelican-plugins']
+PLUGINS = ['section_number']
