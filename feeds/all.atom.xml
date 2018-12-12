@@ -6,7 +6,7 @@
 &lt;li&gt;&lt;a class="reference internal" href="#mount-a-new-disk" id="id1"&gt;Mount A New Disk / 挂载新的磁盘&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class="reference internal" href="#env" id="id2"&gt;Env / 环境&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference internal" href="#add-a-disk" id="id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#creating-linux-partitions-in-new-added-disk-linux" id="id4"&gt;Creating Linux Partitions in new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#creating-linux-partitions-in-the-new-added-disk-linux" id="id4"&gt;Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference internal" href="#creating-a-file-system" id="id5"&gt;Creating a File System / 创建文件系统&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference internal" href="#mount-it-to-linux-virtual-system-lvs-linux" id="id6"&gt;Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference internal" href="#reference" id="id7"&gt;Reference&lt;/a&gt;&lt;/li&gt;
@@ -14,10 +14,11 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
+&lt;p&gt;All lines started with &lt;code&gt;#&lt;/code&gt; should be input. / 所有 &lt;code&gt;#&lt;/code&gt; 前缀的都是 输入的部分。&lt;/p&gt;
 &lt;div class="section" id="mount-a-new-disk"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id1"&gt;Mount A New Disk / 挂载新的磁盘&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Mount A New Disk / 挂载新的磁盘&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="env"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id2"&gt;Env / 环境&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;1.1. &lt;a class="toc-backref" href="#id2"&gt;Env / 环境&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Current, we have 100G Disk. / 当前我们有 100G 磁盘。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
 
@@ -37,15 +38,15 @@
 &lt;p&gt;As we can see, all disks are assigned to root directory. / 所有的磁盘指定给了 根目录。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="add-a-disk"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="" src="/_static/image/tools/disk/mount_disk_01.png" /&gt;
+&lt;img style="max-width:96%;margin:5px 2% 5px 2%" alt="" src="/_static/image/tools/disk/mount_disk_01.png" /&gt;
 &lt;/div&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
     /dev/sda  /dev/sda1  /dev/sda2
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Since we haven't restart, OS isn't able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。&lt;/p&gt;
-&lt;p&gt;To force rescan disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令&lt;/p&gt;
+&lt;p&gt;Since we didn't restart the PC, OS wouldn't be able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。&lt;/p&gt;
+&lt;p&gt;To force OS reloading disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# echo &amp;#39;- - -&amp;#39; &amp;gt; /sys/class/scsi_host/host0/scan&lt;/span&gt;
 &lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
     /dev/sda  /dev/sda1  /dev/sda2  /dev/sdb
@@ -66,10 +67,10 @@
     loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
     └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
 &lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now we can see a new disk named &lt;code&gt;sdb&lt;/code&gt; in the disk information.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="creating-linux-partitions-in-new-added-disk-linux"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id4"&gt;Creating Linux Partitions in new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;All lines started with &lt;code&gt;#&lt;/code&gt; should be input. / 所有 &lt;code&gt;#&lt;/code&gt; 前缀的都是 输入的部分。&lt;/p&gt;
+&lt;div class="section" id="creating-linux-partitions-in-the-new-added-disk-linux"&gt;
+&lt;h3&gt;1.3. &lt;a class="toc-backref" href="#id4"&gt;Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# fdisk /dev/sdb&lt;/span&gt;
     Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.23.2&lt;span class="o"&gt;)&lt;/span&gt;.
 
@@ -117,7 +118,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="creating-a-file-system"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id5"&gt;Creating a File System / 创建文件系统&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;1.4. &lt;a class="toc-backref" href="#id5"&gt;Creating a File System / 创建文件系统&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Let's see what happened:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
     NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
@@ -135,12 +136,12 @@
     loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
     └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And now , we should format the partition. / 现在我们格式化这个分区&lt;/p&gt;
+&lt;p&gt;And now, we should format the partition. / 现在我们格式化这个分区。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# /sbin/mkfs.ext4 /dev/sdb1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mount-it-to-linux-virtual-system-lvs-linux"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id6"&gt;Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;1.5. &lt;a class="toc-backref" href="#id6"&gt;Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Let's check LVS. / 查看当前的 Linux 虚拟分区。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvs&lt;/span&gt;
     WARNING: Not using lvmetad with older version.
@@ -187,7 +188,7 @@
     VG UUID               RVnCi9-U8gt-DbgA-lu11-pdeO-6o0o-cEfQkC
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Notice that there is a Free PE with 8G. So let's extend it logically. / 可以看到存在没有被用到的 PE 16GiB ， 所以是成功的。&lt;/p&gt;
-&lt;p&gt;Now let's added the free PE to root. / 现在我们可以将这些空余的PE 指定给根目录。&lt;/p&gt;
+&lt;p&gt;Now let's add the free PE to root. / 现在我们可以将这些空余的 PE 指定给根目录。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvextend -L +15.9G /dev/centos/root /dev/sdb1&lt;/span&gt;
     WARNING: Not using lvmetad with older version.
     Rounding size to boundary between physical extents: 15.90 GiB.
@@ -198,14 +199,14 @@
 &lt;p&gt;Now the last step: tell OS  that the file system has been extended. / 最后一步就是告诉系统，文件系统被扩展了&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# xfs_growfs /dev/centos/root&lt;/span&gt;
     meta-data&lt;span class="o"&gt;=&lt;/span&gt;/dev/mapper/centos-root &lt;span class="nv"&gt;isize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;    &lt;span class="nv"&gt;agcount&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4, &lt;span class="nv"&gt;agsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;6062080&lt;/span&gt; &lt;span class="nv"&gt;blks&lt;/span&gt;
-            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;attr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;projid32bit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;
-            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;crc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="nv"&gt;finobt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;spinodes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
-    &lt;span class="nv"&gt;data&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;24248320, &lt;span class="nv"&gt;imaxpct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;25&lt;/span&gt;
-            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="nv"&gt;swidth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks
-    &lt;span class="nv"&gt;naming&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt;version &lt;span class="m"&gt;2&lt;/span&gt;              &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   ascii-ci&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;ftype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
-    &lt;span class="nv"&gt;log&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt;internal               &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;11840, &lt;span class="nv"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;2&lt;/span&gt;
-            &lt;span class="o"&gt;=&lt;/span&gt;                       &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks, lazy-count&lt;span class="o"&gt;=&lt;/span&gt;1
-    &lt;span class="nv"&gt;realtime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;none                   &lt;span class="nv"&gt;extsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0, &lt;span class="nv"&gt;rtextents&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;attr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;projid32bit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;crc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="nv"&gt;finobt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;spinodes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    &lt;span class="nv"&gt;data&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;24248320, &lt;span class="nv"&gt;imaxpct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;25&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="nv"&gt;swidth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks
+    &lt;span class="nv"&gt;naming&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt;version &lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   ascii-ci&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;ftype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    &lt;span class="nv"&gt;log&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt;internal                &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;11840, &lt;span class="nv"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;2&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks, lazy-count&lt;span class="o"&gt;=&lt;/span&gt;1
+    &lt;span class="nv"&gt;realtime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;none                    &lt;span class="nv"&gt;extsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0, &lt;span class="nv"&gt;rtextents&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
     data blocks changed from &lt;span class="m"&gt;24248320&lt;/span&gt; to 28417024
 
 &lt;span class="c1"&gt;#### Default installed, if not , type this:  yum install -y xfsprogs.x86_64&lt;/span&gt;
@@ -225,7 +226,7 @@
 &lt;p&gt;It succeeds! / 完成了！&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="reference"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id7"&gt;Reference&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;1.6. &lt;a class="toc-backref" href="#id7"&gt;Reference&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;CentOS6调整LVM SWAP分区大小 &lt;a class="reference external" href="https://www.haiyun.me/archives/centos6-change-lvm-swap.html"&gt;https://www.haiyun.me/archives/centos6-change-lvm-swap.html&lt;/a&gt;&lt;/li&gt;
@@ -256,16 +257,16 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="queue-based-on-node-node"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id1"&gt;Queue based on Node / 基于 Node 的队列&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Queue based on Node / 基于 Node 的队列&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="comparison"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id2"&gt;Comparison / 对比&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;1.1. &lt;a class="toc-backref" href="#id2"&gt;Comparison / 对比&lt;/a&gt;&lt;/h3&gt;
 &lt;table border="1" class="docutils"&gt;
 &lt;colgroup&gt;
-&lt;col width="20%" /&gt;
-&lt;col width="20%" /&gt;
-&lt;col width="20%" /&gt;
-&lt;col width="20%" /&gt;
-&lt;col width="20%" /&gt;
+&lt;col width="28%" /&gt;
+&lt;col width="18%" /&gt;
+&lt;col width="18%" /&gt;
+&lt;col width="18%" /&gt;
+&lt;col width="18%" /&gt;
 &lt;/colgroup&gt;
 &lt;thead valign="bottom"&gt;
 &lt;tr&gt;&lt;th class="head"&gt;Feature  / 功能&lt;/th&gt;
@@ -364,7 +365,7 @@
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;div class="section" id="my-opinion"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id3"&gt;My opinion / 个人观点&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;My opinion / 个人观点&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;After I've reviewed their documents, I listed my own opinion.&lt;/p&gt;
 &lt;p&gt;在查看过介绍 和 使用文档后，有一些自己的心得:&lt;/p&gt;
 &lt;table border="1" class="docutils"&gt;
@@ -430,13 +431,13 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="other-queues"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id4"&gt;Other Queues / 其他可选的队列&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id4"&gt;Other Queues / 其他可选的队列&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;However, queues based on Node can satisfy us if the volume is OK.&lt;/p&gt;
 &lt;p&gt;But if the number soars, we should seek help for other real messages queues.&lt;/p&gt;
 &lt;p&gt;如果我们的任务量比较小，整个架构也不复杂的话，基于 Node 的队列基本可以满足要求。&lt;/p&gt;
 &lt;p&gt;但是如果任务量大，构架复杂， 我们需要依赖于一些专业的标准化的队列服务。&lt;/p&gt;
 &lt;div class="section" id="rabbitmq"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id5"&gt;RabbitMQ&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;2.1. &lt;a class="toc-backref" href="#id5"&gt;RabbitMQ&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Implementation of AMQP (Advanced Message Queuing Protocol),&lt;/p&gt;
 &lt;p&gt;an open standard application layer protocol for message-oriented middleware.&lt;/p&gt;
 &lt;p&gt;是 AMQP 的一种实现。&lt;/p&gt;
@@ -446,7 +447,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="saas-aws-simple-queue-service-saas-aws"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id6"&gt;Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;2.2. &lt;a class="toc-backref" href="#id6"&gt;Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Reference: &lt;a class="reference external" href="https://aws.amazon.com/sqs/"&gt;https://aws.amazon.com/sqs/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The fee of first 1 million messages per mon is free.
 每个月首个一百万条消息是免费的...&lt;/p&gt;
@@ -474,7 +475,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="saas-azure-service-bus"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id7"&gt;Saas - Azure Service Bus&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;2.3. &lt;a class="toc-backref" href="#id7"&gt;Saas - Azure Service Bus&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Reference: &lt;a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions"&gt;https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The fee of first 1000 brokered connections (744,000 messages) /per mon is free . (&lt;a class="reference external" href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing"&gt;https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-pricing-billing&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;每个月首个 74 万消息是免费的。&lt;/p&gt;
@@ -485,10 +486,9 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="queues-i-have-encountered"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id8"&gt;Queues I have encountered  / 我遇到的队列&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;In Trend Micro, I used to be a member of CAS (Cloud Application Security) .&lt;/p&gt;
-&lt;p&gt;We use two kind types of queues:&lt;/p&gt;
-&lt;p&gt;在趋势CAS 团队(Saas 产品), 我们使用了两种类型的队列:&lt;/p&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id8"&gt;Queues I have encountered  / 我遇到的队列&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;In TM, I used to be a member of CAS, we use two kind types of queues:&lt;/p&gt;
+&lt;p&gt;在 TM CAS 团队(Saas 产品), 我们使用了两种类型的队列:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Azure Message Queue: Quite expensive&lt;/dt&gt;

@@ -40,7 +40,7 @@
 <li><a class="reference internal" href="#mount-a-new-disk" id="id1">Mount A New Disk / 挂载新的磁盘</a><ul>
 <li><a class="reference internal" href="#env" id="id2">Env / 环境</a></li>
 <li><a class="reference internal" href="#add-a-disk" id="id3">Add a Disk / 添加一块磁盘</a></li>
-<li><a class="reference internal" href="#creating-linux-partitions-in-new-added-disk-linux" id="id4">Creating Linux Partitions in new added disk / 在新加硬盘上创建 Linux 分区</a></li>
+<li><a class="reference internal" href="#creating-linux-partitions-in-the-new-added-disk-linux" id="id4">Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区</a></li>
 <li><a class="reference internal" href="#creating-a-file-system" id="id5">Creating a File System / 创建文件系统</a></li>
 <li><a class="reference internal" href="#mount-it-to-linux-virtual-system-lvs-linux" id="id6">Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区</a></li>
 <li><a class="reference internal" href="#reference" id="id7">Reference</a></li>
@@ -48,10 +48,11 @@
 </li>
 </ul>
 </div>
+<p>All lines started with <code>#</code> should be input. / 所有 <code>#</code> 前缀的都是 输入的部分。</p>
 <div class="section" id="mount-a-new-disk">
-<h2><a class="toc-backref" href="#id1">Mount A New Disk / 挂载新的磁盘</a></h2>
+<h2>1. <a class="toc-backref" href="#id1">Mount A New Disk / 挂载新的磁盘</a></h2>
 <div class="section" id="env">
-<h3><a class="toc-backref" href="#id2">Env / 环境</a></h3>
+<h3>1.1. <a class="toc-backref" href="#id2">Env / 环境</a></h3>
 <p>Current, we have 100G Disk. / 当前我们有 100G 磁盘。</p>
 <div class="highlight"><pre><span></span><span class="c1"># lsblk</span>
 
@@ -71,15 +72,15 @@
 <p>As we can see, all disks are assigned to root directory. / 所有的磁盘指定给了 根目录。</p>
 </div>
 <div class="section" id="add-a-disk">
-<h3><a class="toc-backref" href="#id3">Add a Disk / 添加一块磁盘</a></h3>
+<h3>1.2. <a class="toc-backref" href="#id3">Add a Disk / 添加一块磁盘</a></h3>
 <div class="figure">
-<img alt="" src="/_static/image/tools/disk/mount_disk_01.png" />
+<img style="max-width:96%;margin:5px 2% 5px 2%" alt="" src="/_static/image/tools/disk/mount_disk_01.png" />
 </div>
 <div class="highlight"><pre><span></span><span class="c1"># ls /dev/sd*</span>
     /dev/sda  /dev/sda1  /dev/sda2
 </pre></div>
-<p>Since we haven't restart, OS isn't able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。</p>
-<p>To force rescan disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令</p>
+<p>Since we didn't restart the PC, OS wouldn't be able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。</p>
+<p>To force OS reloading disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令</p>
 <div class="highlight"><pre><span></span><span class="c1"># echo &#39;- - -&#39; &gt; /sys/class/scsi_host/host0/scan</span>
 <span class="c1"># ls /dev/sd*</span>
     /dev/sda  /dev/sda1  /dev/sda2  /dev/sdb
@@ -100,10 +101,10 @@
     loop1                           7:1    <span class="m">0</span>    2G  <span class="m">0</span> loop
     └─docker-253:0-134516294-pool 253:3    <span class="m">0</span>  100G  <span class="m">0</span> dm
 </pre></div>
+<p>Now we can see a new disk named <code>sdb</code> in the disk information.</p>
 </div>
-<div class="section" id="creating-linux-partitions-in-new-added-disk-linux">
-<h3><a class="toc-backref" href="#id4">Creating Linux Partitions in new added disk / 在新加硬盘上创建 Linux 分区</a></h3>
-<p>All lines started with <code>#</code> should be input. / 所有 <code>#</code> 前缀的都是 输入的部分。</p>
+<div class="section" id="creating-linux-partitions-in-the-new-added-disk-linux">
+<h3>1.3. <a class="toc-backref" href="#id4">Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区</a></h3>
 <div class="highlight"><pre><span></span><span class="c1"># fdisk /dev/sdb</span>
     Welcome to fdisk <span class="o">(</span>util-linux 2.23.2<span class="o">)</span>.
 
@@ -151,7 +152,7 @@
 </pre></div>
 </div>
 <div class="section" id="creating-a-file-system">
-<h3><a class="toc-backref" href="#id5">Creating a File System / 创建文件系统</a></h3>
+<h3>1.4. <a class="toc-backref" href="#id5">Creating a File System / 创建文件系统</a></h3>
 <p>Let's see what happened:</p>
 <div class="highlight"><pre><span></span><span class="c1"># lsblk</span>
     NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
@@ -169,12 +170,12 @@
     loop1                           7:1    <span class="m">0</span>    2G  <span class="m">0</span> loop
     └─docker-253:0-134516294-pool 253:3    <span class="m">0</span>  100G  <span class="m">0</span> dm
 </pre></div>
-<p>And now , we should format the partition. / 现在我们格式化这个分区</p>
+<p>And now, we should format the partition. / 现在我们格式化这个分区。</p>
 <div class="highlight"><pre><span></span><span class="c1"># /sbin/mkfs.ext4 /dev/sdb1</span>
 </pre></div>
 </div>
 <div class="section" id="mount-it-to-linux-virtual-system-lvs-linux">
-<h3><a class="toc-backref" href="#id6">Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区</a></h3>
+<h3>1.5. <a class="toc-backref" href="#id6">Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区</a></h3>
 <p>Let's check LVS. / 查看当前的 Linux 虚拟分区。</p>
 <div class="highlight"><pre><span></span><span class="c1"># lvs</span>
     WARNING: Not using lvmetad with older version.
@@ -221,7 +222,7 @@
     VG UUID               RVnCi9-U8gt-DbgA-lu11-pdeO-6o0o-cEfQkC
 </pre></div>
 <p>Notice that there is a Free PE with 8G. So let's extend it logically. / 可以看到存在没有被用到的 PE 16GiB ， 所以是成功的。</p>
-<p>Now let's added the free PE to root. / 现在我们可以将这些空余的PE 指定给根目录。</p>
+<p>Now let's add the free PE to root. / 现在我们可以将这些空余的 PE 指定给根目录。</p>
 <div class="highlight"><pre><span></span><span class="c1"># lvextend -L +15.9G /dev/centos/root /dev/sdb1</span>
     WARNING: Not using lvmetad with older version.
     Rounding size to boundary between physical extents: 15.90 GiB.
@@ -232,14 +233,14 @@
 <p>Now the last step: tell OS  that the file system has been extended. / 最后一步就是告诉系统，文件系统被扩展了</p>
 <div class="highlight"><pre><span></span><span class="c1"># xfs_growfs /dev/centos/root</span>
     meta-data<span class="o">=</span>/dev/mapper/centos-root <span class="nv">isize</span><span class="o">=</span><span class="m">256</span>    <span class="nv">agcount</span><span class="o">=</span>4, <span class="nv">agsize</span><span class="o">=</span><span class="m">6062080</span> <span class="nv">blks</span>
-            <span class="o">=</span>                       <span class="nv">sectsz</span><span class="o">=</span><span class="m">512</span>   <span class="nv">attr</span><span class="o">=</span>2, <span class="nv">projid32bit</span><span class="o">=</span><span class="nv">1</span>
-            <span class="o">=</span>                       <span class="nv">crc</span><span class="o">=</span><span class="m">0</span>        <span class="nv">finobt</span><span class="o">=</span><span class="m">0</span> <span class="nv">spinodes</span><span class="o">=</span>0
-    <span class="nv">data</span>     <span class="o">=</span>                       <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span>24248320, <span class="nv">imaxpct</span><span class="o">=</span><span class="nv">25</span>
-            <span class="o">=</span>                       <span class="nv">sunit</span><span class="o">=</span><span class="m">0</span>      <span class="nv">swidth</span><span class="o">=</span><span class="m">0</span> blks
-    <span class="nv">naming</span>   <span class="o">=</span>version <span class="m">2</span>              <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   ascii-ci<span class="o">=</span><span class="m">0</span> <span class="nv">ftype</span><span class="o">=</span>0
-    <span class="nv">log</span>      <span class="o">=</span>internal               <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span>11840, <span class="nv">version</span><span class="o">=</span><span class="nv">2</span>
-            <span class="o">=</span>                       <span class="nv">sectsz</span><span class="o">=</span><span class="m">512</span>   <span class="nv">sunit</span><span class="o">=</span><span class="m">0</span> blks, lazy-count<span class="o">=</span>1
-    <span class="nv">realtime</span> <span class="o">=</span>none                   <span class="nv">extsz</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span>0, <span class="nv">rtextents</span><span class="o">=</span>0
+             <span class="o">=</span>                        <span class="nv">sectsz</span><span class="o">=</span><span class="m">512</span>   <span class="nv">attr</span><span class="o">=</span>2, <span class="nv">projid32bit</span><span class="o">=</span><span class="nv">1</span>
+             <span class="o">=</span>                        <span class="nv">crc</span><span class="o">=</span><span class="m">0</span>        <span class="nv">finobt</span><span class="o">=</span><span class="m">0</span> <span class="nv">spinodes</span><span class="o">=</span>0
+    <span class="nv">data</span>     <span class="o">=</span>                        <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span>24248320, <span class="nv">imaxpct</span><span class="o">=</span><span class="nv">25</span>
+             <span class="o">=</span>                        <span class="nv">sunit</span><span class="o">=</span><span class="m">0</span>      <span class="nv">swidth</span><span class="o">=</span><span class="m">0</span> blks
+    <span class="nv">naming</span>   <span class="o">=</span>version <span class="m">2</span>               <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   ascii-ci<span class="o">=</span><span class="m">0</span> <span class="nv">ftype</span><span class="o">=</span>0
+    <span class="nv">log</span>      <span class="o">=</span>internal                <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span>11840, <span class="nv">version</span><span class="o">=</span><span class="nv">2</span>
+             <span class="o">=</span>                        <span class="nv">sectsz</span><span class="o">=</span><span class="m">512</span>   <span class="nv">sunit</span><span class="o">=</span><span class="m">0</span> blks, lazy-count<span class="o">=</span>1
+    <span class="nv">realtime</span> <span class="o">=</span>none                    <span class="nv">extsz</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span>0, <span class="nv">rtextents</span><span class="o">=</span>0
     data blocks changed from <span class="m">24248320</span> to 28417024
 
 <span class="c1">#### Default installed, if not , type this:  yum install -y xfsprogs.x86_64</span>
@@ -259,7 +260,7 @@
 <p>It succeeds! / 完成了！</p>
 </div>
 <div class="section" id="reference">
-<h3><a class="toc-backref" href="#id7">Reference</a></h3>
+<h3>1.6. <a class="toc-backref" href="#id7">Reference</a></h3>
 <blockquote>
 <ul class="simple">
 <li>CentOS6调整LVM SWAP分区大小 <a class="reference external" href="https://www.haiyun.me/archives/centos6-change-lvm-swap.html">https://www.haiyun.me/archives/centos6-change-lvm-swap.html</a></li>
