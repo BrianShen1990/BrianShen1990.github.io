@@ -40,7 +40,7 @@
 &lt;div class="section" id="add-a-disk"&gt;
 &lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="" src="/_static/image/tools/disk/mount_disk_01.png" /&gt;
+&lt;img alt="" src="/_static/mount_disk_01.png" /&gt;
 &lt;/div&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
     /dev/sda  /dev/sda1  /dev/sda2
