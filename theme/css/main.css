@@ -547,5 +547,7 @@ table.docutils tbody>tr:last-child td {
     border-bottom-width: 0
 }
 
-
-
+img {
+	max-width: 96%;
+	margin: 5px 2% 5px 2%;
+}

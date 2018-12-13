@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN.</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-11-24T00:00:00+08:00</updated><entry><title>Mount disk to VG / 磁盘挂载到虚拟分区</title><link href="/Tools_mount_disk_to_vg.html" rel="alternate"></link><published>2018-11-24T00:00:00+08:00</published><updated>2018-11-24T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-24:/Tools_mount_disk_to_vg.html</id><summary type="html">&lt;p class="first last"&gt;Tools - Mount Disk to VG&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-11-24T00:00:00+08:00</updated><entry><title>Mount disk to VG / 磁盘挂载到虚拟分区</title><link href="/Tools_mount_disk_to_vg.html" rel="alternate"></link><published>2018-11-24T00:00:00+08:00</published><updated>2018-11-24T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-24:/Tools_mount_disk_to_vg.html</id><summary type="html">&lt;p class="first last"&gt;Tools - Mount Disk to VG&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="mount-disk-to-vg-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -23,24 +23,24 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
 
     NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
-    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
-    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
-        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
-        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
-        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
-    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
-    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
-    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
-    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
-    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    sda                             &lt;span class="m"&gt;8&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          &lt;span class="m"&gt;8&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          &lt;span class="m"&gt;8&lt;/span&gt;:2    &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;99&lt;/span&gt;.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               &lt;span class="m"&gt;253&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;92&lt;/span&gt;.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               &lt;span class="m"&gt;253&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               &lt;span class="m"&gt;253&lt;/span&gt;:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sr0                            &lt;span class="m"&gt;11&lt;/span&gt;:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           &lt;span class="m"&gt;7&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool &lt;span class="m"&gt;253&lt;/span&gt;:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           &lt;span class="m"&gt;7&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool &lt;span class="m"&gt;253&lt;/span&gt;:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;As we can see, all disks are assigned to root directory. / 所有的磁盘指定给了 根目录。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="add-a-disk"&gt;
 &lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="figure"&gt;
-&lt;img style="max-width:96%;margin:5px 2% 5px 2%" alt="" src="/_static/image/tools/disk/mount_disk_01.png" /&gt;
+&lt;img alt="" src="/_static/image/tools/disk/mount_disk_01.png" /&gt;
 &lt;/div&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
     /dev/sda  /dev/sda1  /dev/sda2
@@ -54,25 +54,25 @@
 &lt;p&gt;Let's see what happened: / 看看发生了什么。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
     NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
-    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
-    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
-        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
-        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
-        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
-    sdb                             8:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
-    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
-    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
-    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
-    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
-    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    sda                             &lt;span class="m"&gt;8&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          &lt;span class="m"&gt;8&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          &lt;span class="m"&gt;8&lt;/span&gt;:2    &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;99&lt;/span&gt;.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               &lt;span class="m"&gt;253&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;92&lt;/span&gt;.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               &lt;span class="m"&gt;253&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               &lt;span class="m"&gt;253&lt;/span&gt;:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sdb                             &lt;span class="m"&gt;8&lt;/span&gt;:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    sr0                            &lt;span class="m"&gt;11&lt;/span&gt;:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           &lt;span class="m"&gt;7&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool &lt;span class="m"&gt;253&lt;/span&gt;:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           &lt;span class="m"&gt;7&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool &lt;span class="m"&gt;253&lt;/span&gt;:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now we can see a new disk named &lt;code&gt;sdb&lt;/code&gt; in the disk information.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="creating-linux-partitions-in-the-new-added-disk-linux"&gt;
 &lt;h3&gt;1.3. &lt;a class="toc-backref" href="#id4"&gt;Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# fdisk /dev/sdb&lt;/span&gt;
-    Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.23.2&lt;span class="o"&gt;)&lt;/span&gt;.
+    Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux &lt;span class="m"&gt;2&lt;/span&gt;.23.2&lt;span class="o"&gt;)&lt;/span&gt;.
 
     Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
     Be careful before using the write command.
@@ -88,7 +88,7 @@
 
 &lt;span class="c1"&gt;# Command (m for help): p&lt;/span&gt;
 
-    Disk /dev/sdb: 17.2 GB, &lt;span class="m"&gt;17179869184&lt;/span&gt; bytes, &lt;span class="m"&gt;33554432&lt;/span&gt; sectors
+    Disk /dev/sdb: &lt;span class="m"&gt;17&lt;/span&gt;.2 GB, &lt;span class="m"&gt;17179869184&lt;/span&gt; bytes, &lt;span class="m"&gt;33554432&lt;/span&gt; sectors
     &lt;span class="m"&gt;255&lt;/span&gt; heads, &lt;span class="m"&gt;63&lt;/span&gt; sectors/track, &lt;span class="m"&gt;2088&lt;/span&gt; cylinders
     &lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; cylinders of &lt;span class="m"&gt;16065&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;8225280&lt;/span&gt; bytes
     Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
@@ -103,11 +103,11 @@
     p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;4&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
     e   extended
 &lt;span class="c1"&gt;# Select (default p): p&lt;/span&gt;
-    Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
-    First cylinder &lt;span class="o"&gt;(&lt;/span&gt;1-2088, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
-    Using default value 1
-    Last cylinder, +cylinders or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;1-2088, default 2088&lt;span class="o"&gt;)&lt;/span&gt;:
-    Using default value 2088
+    Partition number &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;-4, default &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;:
+    First cylinder &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;-2088, default &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;:
+    Using default value &lt;span class="m"&gt;1&lt;/span&gt;
+    Last cylinder, +cylinders or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;-2088, default &lt;span class="m"&gt;2088&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;:
+    Using default value &lt;span class="m"&gt;2088&lt;/span&gt;
     Partition &lt;span class="m"&gt;1&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; Linux and of size &lt;span class="m"&gt;16&lt;/span&gt; GiB is &lt;span class="nb"&gt;set&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Command (m for help): w&lt;/span&gt;
@@ -122,19 +122,19 @@
 &lt;p&gt;Let's see what happened:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
     NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
-    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
-    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
-        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
-        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
-        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
-    sdb                             8:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
-    └─sdb1                          8:17   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; part
-    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
-    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
-    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
-    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
-    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    sda                             &lt;span class="m"&gt;8&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          &lt;span class="m"&gt;8&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          &lt;span class="m"&gt;8&lt;/span&gt;:2    &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;99&lt;/span&gt;.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               &lt;span class="m"&gt;253&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;92&lt;/span&gt;.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               &lt;span class="m"&gt;253&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               &lt;span class="m"&gt;253&lt;/span&gt;:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sdb                             &lt;span class="m"&gt;8&lt;/span&gt;:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    └─sdb1                          &lt;span class="m"&gt;8&lt;/span&gt;:17   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; part
+    sr0                            &lt;span class="m"&gt;11&lt;/span&gt;:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           &lt;span class="m"&gt;7&lt;/span&gt;:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool &lt;span class="m"&gt;253&lt;/span&gt;:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           &lt;span class="m"&gt;7&lt;/span&gt;:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool &lt;span class="m"&gt;253&lt;/span&gt;:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And now, we should format the partition. / 现在我们格式化这个分区。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# /sbin/mkfs.ext4 /dev/sdb1&lt;/span&gt;
@@ -146,9 +146,9 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvs&lt;/span&gt;
     WARNING: Not using lvmetad with older version.
     LV   VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
-    home centos -wi-ao----  5.00g
-    root centos -wi-ao---- 92.50g
-    swap centos -wi-ao----  2.00g
+    home centos -wi-ao----  &lt;span class="m"&gt;5&lt;/span&gt;.00g
+    root centos -wi-ao---- &lt;span class="m"&gt;92&lt;/span&gt;.50g
+    swap centos -wi-ao----  &lt;span class="m"&gt;2&lt;/span&gt;.00g
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Remember the value of column &lt;code&gt;VG&lt;/code&gt; ( &lt;code&gt;centos&lt;/code&gt; ). / 记住 &lt;code&gt;VG&lt;/code&gt; 的值 ( &lt;code&gt;centos&lt;/code&gt; )。&lt;/p&gt;
 &lt;p&gt;Now we create a new physical volume. / 现在我们创建一块物理盘。&lt;/p&gt;
@@ -170,58 +170,58 @@
     VG Name               centos
     System ID
     Format                lvm2
-    Metadata Areas        2
-    Metadata Sequence No  6
+    Metadata Areas        &lt;span class="m"&gt;2&lt;/span&gt;
+    Metadata Sequence No  &lt;span class="m"&gt;6&lt;/span&gt;
     VG Access             read/write
     VG Status             resizable
-    MAX LV                0
-    Cur LV                3
-    Open LV               3
-    Max PV                0
-    Cur PV                2
-    Act PV                2
-    VG Size               &amp;lt;115.50 GiB
-    PE Size               4.00 MiB
-    Total PE              29567
-    Alloc PE / Size       &lt;span class="m"&gt;25472&lt;/span&gt; / 99.50 GiB
-    Free  PE / Size       &lt;span class="m"&gt;4095&lt;/span&gt; / &amp;lt;16.00 GiB
+    MAX LV                &lt;span class="m"&gt;0&lt;/span&gt;
+    Cur LV                &lt;span class="m"&gt;3&lt;/span&gt;
+    Open LV               &lt;span class="m"&gt;3&lt;/span&gt;
+    Max PV                &lt;span class="m"&gt;0&lt;/span&gt;
+    Cur PV                &lt;span class="m"&gt;2&lt;/span&gt;
+    Act PV                &lt;span class="m"&gt;2&lt;/span&gt;
+    VG Size               &amp;lt;&lt;span class="m"&gt;115&lt;/span&gt;.50 GiB
+    PE Size               &lt;span class="m"&gt;4&lt;/span&gt;.00 MiB
+    Total PE              &lt;span class="m"&gt;29567&lt;/span&gt;
+    Alloc PE / Size       &lt;span class="m"&gt;25472&lt;/span&gt; / &lt;span class="m"&gt;99&lt;/span&gt;.50 GiB
+    Free  PE / Size       &lt;span class="m"&gt;4095&lt;/span&gt; / &amp;lt;&lt;span class="m"&gt;16&lt;/span&gt;.00 GiB
     VG UUID               RVnCi9-U8gt-DbgA-lu11-pdeO-6o0o-cEfQkC
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Notice that there is a Free PE with 8G. So let's extend it logically. / 可以看到存在没有被用到的 PE 16GiB ， 所以是成功的。&lt;/p&gt;
 &lt;p&gt;Now let's add the free PE to root. / 现在我们可以将这些空余的 PE 指定给根目录。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvextend -L +15.9G /dev/centos/root /dev/sdb1&lt;/span&gt;
     WARNING: Not using lvmetad with older version.
-    Rounding size to boundary between physical extents: 15.90 GiB.
-    Size of logical volume centos/root changed from 92.50 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;23680&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt; to 108.40 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;27751&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt;.
+    Rounding size to boundary between physical extents: &lt;span class="m"&gt;15&lt;/span&gt;.90 GiB.
+    Size of logical volume centos/root changed from &lt;span class="m"&gt;92&lt;/span&gt;.50 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;23680&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt; to &lt;span class="m"&gt;108&lt;/span&gt;.40 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;27751&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt;.
     Logical volume centos/root successfully resized.
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;OK. Only 15.9 Can be added. / 请注意留 0.1G 的空余。&lt;/p&gt;
 &lt;p&gt;Now the last step: tell OS  that the file system has been extended. / 最后一步就是告诉系统，文件系统被扩展了&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# xfs_growfs /dev/centos/root&lt;/span&gt;
-    meta-data&lt;span class="o"&gt;=&lt;/span&gt;/dev/mapper/centos-root &lt;span class="nv"&gt;isize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;    &lt;span class="nv"&gt;agcount&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4, &lt;span class="nv"&gt;agsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;6062080&lt;/span&gt; &lt;span class="nv"&gt;blks&lt;/span&gt;
-             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;attr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;projid32bit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;
-             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;crc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="nv"&gt;finobt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;spinodes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
-    &lt;span class="nv"&gt;data&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;24248320, &lt;span class="nv"&gt;imaxpct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;25&lt;/span&gt;
+    meta-data&lt;span class="o"&gt;=&lt;/span&gt;/dev/mapper/centos-root &lt;span class="nv"&gt;isize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;    &lt;span class="nv"&gt;agcount&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="nv"&gt;agsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;6062080&lt;/span&gt; &lt;span class="nv"&gt;blks&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;attr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="nv"&gt;projid32bit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;crc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="nv"&gt;finobt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;spinodes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+    &lt;span class="nv"&gt;data&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;24248320&lt;/span&gt;, &lt;span class="nv"&gt;imaxpct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;25&lt;/span&gt;
              &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="nv"&gt;swidth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks
-    &lt;span class="nv"&gt;naming&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt;version &lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   ascii-ci&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;ftype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
-    &lt;span class="nv"&gt;log&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt;internal                &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;11840, &lt;span class="nv"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;2&lt;/span&gt;
-             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks, lazy-count&lt;span class="o"&gt;=&lt;/span&gt;1
-    &lt;span class="nv"&gt;realtime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;none                    &lt;span class="nv"&gt;extsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0, &lt;span class="nv"&gt;rtextents&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
-    data blocks changed from &lt;span class="m"&gt;24248320&lt;/span&gt; to 28417024
+    &lt;span class="nv"&gt;naming&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt;version &lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   ascii-ci&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;ftype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+    &lt;span class="nv"&gt;log&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt;internal                &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;11840&lt;/span&gt;, &lt;span class="nv"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;2&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks, lazy-count&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+    &lt;span class="nv"&gt;realtime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;none                    &lt;span class="nv"&gt;extsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="nv"&gt;rtextents&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+    data blocks changed from &lt;span class="m"&gt;24248320&lt;/span&gt; to &lt;span class="m"&gt;28417024&lt;/span&gt;
 
 &lt;span class="c1"&gt;#### Default installed, if not , type this:  yum install -y xfsprogs.x86_64&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And have a check: / 现在我们看下系统信息：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# df -hl&lt;/span&gt;
     Filesystem               Size  Used Avail Use% Mounted on
-    /dev/mapper/centos-root  109G   17G   92G  16% /
-    devtmpfs                 910M     &lt;span class="m"&gt;0&lt;/span&gt;  910M   0% /dev
-    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   0% /dev/shm
-    tmpfs                    921M   17M  904M   2% /run
-    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   0% /sys/fs/cgroup
-    /dev/mapper/centos-home  5.0G   33M  5.0G   1% /home
-    /dev/sda1                497M  125M  373M  26% /boot
-    tmpfs                    185M  4.0K  185M   1% /run/user/0
+    /dev/mapper/centos-root  109G   17G   92G  &lt;span class="m"&gt;16&lt;/span&gt;% /
+    devtmpfs                 910M     &lt;span class="m"&gt;0&lt;/span&gt;  910M   &lt;span class="m"&gt;0&lt;/span&gt;% /dev
+    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   &lt;span class="m"&gt;0&lt;/span&gt;% /dev/shm
+    tmpfs                    921M   17M  904M   &lt;span class="m"&gt;2&lt;/span&gt;% /run
+    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   &lt;span class="m"&gt;0&lt;/span&gt;% /sys/fs/cgroup
+    /dev/mapper/centos-home  &lt;span class="m"&gt;5&lt;/span&gt;.0G   33M  &lt;span class="m"&gt;5&lt;/span&gt;.0G   &lt;span class="m"&gt;1&lt;/span&gt;% /home
+    /dev/sda1                497M  125M  373M  &lt;span class="m"&gt;26&lt;/span&gt;% /boot
+    tmpfs                    185M  &lt;span class="m"&gt;4&lt;/span&gt;.0K  185M   &lt;span class="m"&gt;1&lt;/span&gt;% /run/user/0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It succeeds! / 完成了！&lt;/p&gt;
 &lt;/div&gt;
@@ -260,7 +260,7 @@
 &lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Queue based on Node / 基于 Node 的队列&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="comparison"&gt;
 &lt;h3&gt;1.1. &lt;a class="toc-backref" href="#id2"&gt;Comparison / 对比&lt;/a&gt;&lt;/h3&gt;
-&lt;table border="1" class="docutils"&gt;
+&lt;table border="1" class="colwidths-given docutils"&gt;
 &lt;colgroup&gt;
 &lt;col width="28%" /&gt;
 &lt;col width="18%" /&gt;
@@ -368,7 +368,7 @@
 &lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;My opinion / 个人观点&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;After I've reviewed their documents, I listed my own opinion.&lt;/p&gt;
 &lt;p&gt;在查看过介绍 和 使用文档后，有一些自己的心得:&lt;/p&gt;
-&lt;table border="1" class="docutils"&gt;
+&lt;table border="1" class="colwidths-given docutils"&gt;
 &lt;colgroup&gt;
 &lt;col width="20%" /&gt;
 &lt;col width="80%" /&gt;
@@ -451,10 +451,10 @@
 &lt;p&gt;Reference: &lt;a class="reference external" href="https://aws.amazon.com/sqs/"&gt;https://aws.amazon.com/sqs/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The fee of first 1 million messages per mon is free.
 每个月首个一百万条消息是免费的...&lt;/p&gt;
-&lt;ul&gt;
+&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Standard Queues / 标准队列&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;Unlimited Throughput&lt;/li&gt;
 &lt;li&gt;At-Least-Once Delivery&lt;/li&gt;
 &lt;li&gt;Best-Effort Ordering&lt;/li&gt;
@@ -464,7 +464,7 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;FIFO Queues / 先进先出队列&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;High Throughput&lt;/li&gt;
 &lt;li&gt;Exactly-Once Processing&lt;/li&gt;
 &lt;li&gt;First-In-First-Out Delivery&lt;/li&gt;

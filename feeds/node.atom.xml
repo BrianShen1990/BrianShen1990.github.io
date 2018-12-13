@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN. - Node</title><link href="/" rel="alternate"></link><link href="/feeds/node.atom.xml" rel="self"></link><id>/</id><updated>2018-11-01T00:00:00+08:00</updated><entry><title>Node Task Queue Research / Node 任务队列学习</title><link href="/Node_Task_Queue_Research.html" rel="alternate"></link><published>2018-11-01T00:00:00+08:00</published><updated>2018-11-01T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-01:/Node_Task_Queue_Research.html</id><summary type="html">&lt;p class="first last"&gt;Node Task Queue Research&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Node</title><link href="/" rel="alternate"></link><link href="/feeds/node.atom.xml" rel="self"></link><id>/</id><updated>2018-11-01T00:00:00+08:00</updated><entry><title>Node Task Queue Research / Node 任务队列学习</title><link href="/Node_Task_Queue_Research.html" rel="alternate"></link><published>2018-11-01T00:00:00+08:00</published><updated>2018-11-01T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-01:/Node_Task_Queue_Research.html</id><summary type="html">&lt;p class="first last"&gt;Node Task Queue Research&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="node-task-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -21,7 +21,7 @@
 &lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Queue based on Node / 基于 Node 的队列&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="comparison"&gt;
 &lt;h3&gt;1.1. &lt;a class="toc-backref" href="#id2"&gt;Comparison / 对比&lt;/a&gt;&lt;/h3&gt;
-&lt;table border="1" class="docutils"&gt;
+&lt;table border="1" class="colwidths-given docutils"&gt;
 &lt;colgroup&gt;
 &lt;col width="28%" /&gt;
 &lt;col width="18%" /&gt;
@@ -129,7 +129,7 @@
 &lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;My opinion / 个人观点&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;After I've reviewed their documents, I listed my own opinion.&lt;/p&gt;
 &lt;p&gt;在查看过介绍 和 使用文档后，有一些自己的心得:&lt;/p&gt;
-&lt;table border="1" class="docutils"&gt;
+&lt;table border="1" class="colwidths-given docutils"&gt;
 &lt;colgroup&gt;
 &lt;col width="20%" /&gt;
 &lt;col width="80%" /&gt;
@@ -212,10 +212,10 @@
 &lt;p&gt;Reference: &lt;a class="reference external" href="https://aws.amazon.com/sqs/"&gt;https://aws.amazon.com/sqs/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The fee of first 1 million messages per mon is free.
 每个月首个一百万条消息是免费的...&lt;/p&gt;
-&lt;ul&gt;
+&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Standard Queues / 标准队列&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;Unlimited Throughput&lt;/li&gt;
 &lt;li&gt;At-Least-Once Delivery&lt;/li&gt;
 &lt;li&gt;Best-Effort Ordering&lt;/li&gt;
@@ -225,7 +225,7 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;FIFO Queues / 先进先出队列&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;High Throughput&lt;/li&gt;
 &lt;li&gt;Exactly-Once Processing&lt;/li&gt;
 &lt;li&gt;First-In-First-Out Delivery&lt;/li&gt;
