@@ -354,4 +354,130 @@ apt-get -y install abiword
 &lt;p&gt;The output document only include basic text. Still give it up.&lt;/p&gt;
 &lt;p&gt;pandoc 导出的文件也是没有格式的。&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Linux"></category><category term="Docker"></category><category term="LibreOffice"></category><category term="PDF"></category></entry></feed>
+</content><category term="Linux"></category><category term="Docker"></category><category term="LibreOffice"></category><category term="PDF"></category></entry><entry><title>Local Yum Repo (CentOS 7) / 本地Yum源</title><link href="/local_yum_repo.html" rel="alternate"></link><published>2017-11-14T00:00:00+08:00</published><updated>2017-11-14T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2017-11-14:/local_yum_repo.html</id><summary type="html">&lt;p class="first last"&gt;Local Yum Repo&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="local-yum-repo-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro" id="id1"&gt;Intro 简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#prepare-the-packages" id="id2"&gt;Prepare the packages / 准备安装包&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#use-your-own-repo-yum" id="id3"&gt;Use your own REPO / 使用这个Yum源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#installation" id="id4"&gt;Installation / 安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference" id="id5"&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Intro 简介&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This article is sampled by installing Java.&lt;/p&gt;
+&lt;p&gt;基于JAVA介绍如何使用本地Yum源。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-the-packages"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;Prepare the packages / 准备安装包&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Find a clean CentOS with network available.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;找一个干净的 CentOS 环境，并且接通网络。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Download Software Packages 下载软件包&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To download software and their dependencies, you can just use native &lt;code&gt;yum&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;只需要使用 &lt;code&gt;yum&lt;/code&gt; 就可以下载并且解析依赖包。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Create a folder / 创建文件夹&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir ais_repo
+&lt;span class="nb"&gt;cd&lt;/span&gt; ais_repo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Download OpenJDK / 下载 OpenJDK&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum install --downloadonly --downloaddir ./ java-1.8.0-openjdk-headless.x86_64
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/local_repo_01.png" /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Make Local Repo / 制作本地 Yum 库&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It seems quite hard to create your own repo, since there are lots of package information to create and add.
+But actually it is quite simple, and you can just make repo with simple commands.&lt;/p&gt;
+&lt;p&gt;看起来很是复杂，因为有很多的依赖关系，但实际上，只需要很简单的命令就可以。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Install &lt;code&gt;createrepo&lt;/code&gt; / 安装 &lt;code&gt;createrepo&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;sudo yum install createrepo&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;create a directory to put packages and then make repo in that folder&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;创建一个目录来保存这些安装包。并且，制作安装包的元文件信息。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkdir /usr/share/ais_repo
+sudo mv ./* /usr/share/ais_repo
+sudo createrepo -v /usr/share/ais_repo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's see what happened: / 看看发生了什么&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/local_repo_02.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;As you can notice, there is an extra folder &lt;code&gt;repodata&lt;/code&gt; . Now, this is a local repo.&lt;/p&gt;
+&lt;p&gt;可以看出来，文件夹中多了一个 &lt;code&gt;repodata&lt;/code&gt; 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="use-your-own-repo-yum"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id3"&gt;Use your own REPO / 使用这个Yum源&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Backup all the repo files. / 备份已经存在的 Yum 源配置文件&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/yum.repos.d/
+sudo mkdir bak
+sudo mv *.repo ./bak
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Create local repo source file &lt;code&gt;/etc/yum.repos.d/local.repo&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为本地的Yum源添加配置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#name&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;local_server&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="c1"&gt;#description&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Thisis a &lt;span class="nb"&gt;local&lt;/span&gt; repo
+&lt;span class="c1"&gt;#yum source&lt;/span&gt;
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;file:///usr/share/ais_repo
+&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="c1"&gt;#check GPG-KEY&lt;/span&gt;
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Make local yum source, clear cache and start cache. 清除缓存，开始使用本地Yum源。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum clean all
+sudo yum makecache
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id4"&gt;Installation / 安装&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/share/ais_repo/
+sudo yum install java-1.8.0-openjdk-headless-1.8.0.144-0.b01.el7_4.x86_64.rpm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id5"&gt;Reference&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://yq.aliyun.com/ziliao/97558/"&gt;https://yq.aliyun.com/ziliao/97558/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS"></category></entry></feed>
