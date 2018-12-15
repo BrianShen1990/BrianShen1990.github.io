@@ -480,4 +480,381 @@ sudo yum install java-1.8.0-openjdk-headless-1.8.0.144-0.b01.el7_4.x86_64.rpm
 &lt;li&gt;&lt;a class="reference external" href="https://yq.aliyun.com/ziliao/97558/"&gt;https://yq.aliyun.com/ziliao/97558/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</content><category term="Linux"></category><category term="CentOS"></category></entry></feed>
+</content><category term="Linux"></category><category term="CentOS"></category></entry><entry><title>Sphinx And RST</title><link href="/Sphinx_And_RST.html" rel="alternate"></link><published>2017-11-08T00:00:00+08:00</published><updated>2017-11-08T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2017-11-08:/Sphinx_And_RST.html</id><summary type="html">&lt;p class="first last"&gt;Sphinx And RST&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-is-sphinx-sphinx" id="id3"&gt;What is &lt;code&gt;Sphinx&lt;/code&gt; / 什么是 &lt;code&gt;Sphinx&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-install-sphinx" id="id4"&gt;How to install &lt;code&gt;Sphinx&lt;/code&gt; / 怎么安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#best-practice" id="id5"&gt;Best Practice / 最佳实践&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#rst-language-rst" id="id6"&gt;RST Language / RST 语言简介&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section" id="id7"&gt;Section / 章节&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#words-style" id="id8"&gt;Words Style / 样式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#list" id="id9"&gt;List / 清单&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference-link" id="id10"&gt;Reference Link / 参考链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#codes" id="id11"&gt;Codes / 代码段&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#pictures" id="id12"&gt;Pictures / 图片&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#tables" id="id13"&gt;Tables / 表格&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-is-sphinx-sphinx"&gt;
+&lt;span id="id1"&gt;&lt;/span&gt;&lt;h2&gt;1. &lt;a class="toc-backref" href="#id3"&gt;What is &lt;code&gt;Sphinx&lt;/code&gt; / 什么是 &lt;code&gt;Sphinx&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Reference : &lt;a class="reference external" href="http://www.sphinx-doc.org/en/stable/"&gt;Official Page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.&lt;/p&gt;
+&lt;p&gt;Sphinx 可以让你轻松地创建只能而漂亮的文档。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-install-sphinx"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id4"&gt;How to install &lt;code&gt;Sphinx&lt;/code&gt; / 怎么安装&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Prerequisite / 前提:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Pip&lt;/li&gt;
+&lt;/ul&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Open cmd and execute:  / 打开命令行执行：&lt;/dt&gt;
+&lt;dd&gt;&lt;code&gt;pip install sphinx&lt;/code&gt;&lt;/dd&gt;
+&lt;dt&gt;Usually, most people use a theme named &lt;code&gt;rtd&lt;/code&gt; , so install this theme: / 我们通常看到的主题的名字叫 &lt;code&gt;rtd&lt;/code&gt; ，可以这样安装：&lt;/dt&gt;
+&lt;dd&gt;&lt;code&gt;pip install sphinx_rtd_theme&lt;/code&gt;&lt;/dd&gt;
+&lt;dt&gt;Create a folder, then run command: / 新建文件夹 并且运行命令：&lt;/dt&gt;
+&lt;dd&gt;&lt;code&gt;sphinx-quickstart&lt;/code&gt; 。&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;After input some essential information, &lt;code&gt;sphinx&lt;/code&gt; has created some files.&lt;/p&gt;
+&lt;p&gt;再输入一些必要的信息之后， &lt;code&gt;sphinx&lt;/code&gt; 以及自动的为你创建了一些文件。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_02.png" /&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sphinx
+├── _build          &lt;span class="c1"&gt;# output&lt;/span&gt;
+├── _static         &lt;span class="c1"&gt;# resource, like pictures and files&lt;/span&gt;
+├── _templates      &lt;span class="c1"&gt;# ignore&lt;/span&gt;
+├── conf.py         &lt;span class="c1"&gt;# Sphinx configuration file&lt;/span&gt;
+├── index.rst       &lt;span class="c1"&gt;# entry&lt;/span&gt;
+├── make.bat        &lt;span class="c1"&gt;# Window make file&lt;/span&gt;
+├── Makefile        &lt;span class="c1"&gt;# Linux make file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;index.rst&lt;/code&gt; is the entry file, &lt;code&gt;sphinx&lt;/code&gt; will use this file and include other files mentioned in it.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;index.rst&lt;/code&gt; 是主入口文件，&lt;code&gt;sphinx&lt;/code&gt; 创建的 文档会包含其中的所有的其他链接文件。&lt;/p&gt;
+&lt;p&gt;Modify the configuration file &lt;code&gt;conf.py&lt;/code&gt; / 修改配置文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# sys.path.insert(0, os.path.abspath(&amp;#39;.&amp;#39;))&lt;/span&gt;
+import sphinx_rtd_theme
+
+&lt;span class="c1"&gt;# html_theme = &amp;#39;alabaster&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;html_theme&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sphinx_rtd_theme&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now run &lt;code&gt;.\make.bat html&lt;/code&gt; , it will automatically turn &lt;code&gt;rst&lt;/code&gt; into &lt;code&gt;html&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;现在，可以运行 &lt;code&gt;.\make.bat html&lt;/code&gt; ，这将会自动的将 &lt;code&gt;rst&lt;/code&gt; 转换为 &lt;code&gt;html&lt;/code&gt; 文件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sphinx
+├── _build
+│   ├── html
+│   │    ├── index.html &lt;span class="o"&gt;(&lt;/span&gt;Open this&lt;span class="o"&gt;)&lt;/span&gt;
+├── _static
+├── _templates
+├── conf.py
+├── index.rst
+├── make.bat
+├── Makefile
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_03.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="best-practice"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id5"&gt;Best Practice / 最佳实践&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;No matter we use &lt;code&gt;Sphinx&lt;/code&gt; for personal documents or for team projects documents, there will be a lot of documents. So, how to organize them?&lt;/p&gt;
+&lt;p&gt;无论是用 &lt;code&gt;Sphinx&lt;/code&gt; 来记录个人文档 还是 团队文档，毫无疑问都会慢慢积累大量的文档，所以，如何去组织他们呢？&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Create a folder named &lt;code&gt;_content&lt;/code&gt; for original documents, and include them in the main entry file &lt;code&gt;index.rst&lt;/code&gt; .&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;创建一个文件夹，叫 &lt;code&gt;_content&lt;/code&gt; 来存放原始的 rst 文件，并且 将需要的文档包括进 &lt;code&gt;index.rst&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;The content of &lt;code&gt;index.rst&lt;/code&gt; .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Welcome to my documentation!
+&lt;span class="o"&gt;==============================&lt;/span&gt;
+
+.. toctree::
+:maxdepth: &lt;span class="m"&gt;2&lt;/span&gt;
+       :caption: Contents:
+
+       ./_content/content_one.rst
+       ./_content/content_two.rst
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The content of &lt;code&gt;content_one.rst&lt;/code&gt; / &lt;code&gt;content_one.rst&lt;/code&gt; 的内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sphinx Content one
+&lt;span class="c1"&gt;##################&lt;/span&gt;
+
+RST Language one
+^^^^^^^^^^^^^^^^
+
+Header Sample One
+*****************
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compile and open in chrome: / 编译并且在 浏览器中打开：&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_04.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;If we need numbers, add &lt;code&gt;:numbered:&lt;/code&gt; in &lt;code&gt;index.rst&lt;/code&gt; .
+如果我们需要序号的话，可以加上 &lt;code&gt;:numbered:&lt;/code&gt;  标志。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. toctree::
+   :maxdepth: &lt;span class="m"&gt;2&lt;/span&gt;
+   :numbered:
+   :caption: Contents:
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compile and open in chrome。 / 编译再次在浏览器中打开即可。&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Multi Projects / 多个工程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we have two or projects, then how to organize?&lt;/p&gt;
+&lt;p&gt;如果我们有多个工程的话，那么怎么组织文件结构呢？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;index.rst
+content/
+├── Node
+│   ├── NodeIndex.rst
+│   └── Node_Scheduler.rst
+├── Tools
+│   ├── ToolIndex.rst
+│   ├── Tools_DiskMount.rst
+│   ├── Tools_LocalYumRepo.rst
+│   └── Tools_PDFToWord.rst
+└── images
+    └── tools
+        ├── local_repo_01.png
+        ├── local_repo_02.png
+        ├── mount_disk_01.png
+        └── pdf_to_word_01.png
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The content of &lt;code&gt;index.rst&lt;/code&gt; .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Welcome to my documentation!
+&lt;span class="o"&gt;==============================&lt;/span&gt;
+
+.. toctree::
+:maxdepth: &lt;span class="m"&gt;2&lt;/span&gt;
+       :caption: Contents:
+
+       ./_content/Tools/ToolsIndex.rst
+       ./_content/Node/NodeIndex.rst
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The content of &lt;code&gt;ToolsIndex.rst&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Project &lt;span class="nv"&gt;Tools&lt;/span&gt;
+&lt;span class="o"&gt;==============&lt;/span&gt;
+
+.. toctree::
+:maxdepth: &lt;span class="m"&gt;2&lt;/span&gt;
+       :caption: Contents:
+
+       ./Tools_DiskMount.rst
+       ./Tools_LocalYumRepo.rst
+       ./Tools_PDFToWord.rst
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this way, every folder can become a project and the main entry &lt;code&gt;index.rst&lt;/code&gt; doesn't need to care about the structure of sub directory..&lt;/p&gt;
+&lt;p&gt;这样的结构， 每一个文件夹就是一个工程，并且 顶层 不需要关心 子目录的结构。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rst-language-rst"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id6"&gt;RST Language / RST 语言简介&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Reference : &lt;a class="reference external" href="http://www.sphinx-doc.org/en/stable/rest.html#internal-links"&gt;RST reference&lt;/a&gt;&lt;/p&gt;
+&lt;div class="section" id="section"&gt;
+&lt;h3&gt;4.1. &lt;a class="toc-backref" href="#id7"&gt;Section / 章节&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Header&lt;/span&gt;
+Sphinx Introduction
+&lt;span class="c1"&gt;###################&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Sub Header&lt;/span&gt;
+RST Language
+^^^^^^^^^^^^
+
+&lt;span class="c1"&gt;# Small Header&lt;/span&gt;
+Header Sample
+*************
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Although official suggestion is the following, but use the previous one, it is compatible with many platforms.&lt;/p&gt;
+&lt;p&gt;虽然官方推荐是以下的标志，但是还是推荐上面的格式，因为兼容性更好。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# with overline, for parts&lt;/span&gt;
+* with overline, &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;chapters&lt;/span&gt;
+&lt;span class="o"&gt;=&lt;/span&gt;, &lt;span class="k"&gt;for&lt;/span&gt; sections
+-, &lt;span class="k"&gt;for&lt;/span&gt; subsections
+^, &lt;span class="k"&gt;for&lt;/span&gt; subsubsections
+&lt;span class="s2"&gt;&amp;quot;, for paragraphs&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="words-style"&gt;
+&lt;h3&gt;4.2. &lt;a class="toc-backref" href="#id8"&gt;Words Style / 样式&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;emphasis – alternate spelling for &lt;em&gt;emphasis&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;strong – alternate spelling for &lt;strong&gt;strong&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;literal – alternate spelling for &lt;tt class="docutils literal"&gt;literal&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;subscript – subscript text&lt;/li&gt;
+&lt;li&gt;superscript – superscript text&lt;/li&gt;
+&lt;li&gt;title-reference – for titles of books, periodicals, and other materials&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;*emphasis* , **strong**,  &lt;span class="sb"&gt;``&lt;/span&gt;literal&lt;span class="sb"&gt;``&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例 :&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;em&gt;emphasis&lt;/em&gt; , &lt;strong&gt;strong&lt;/strong&gt;,  &lt;tt class="docutils literal"&gt;literal&lt;/tt&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="list"&gt;
+&lt;h3&gt;4.3. &lt;a class="toc-backref" href="#id9"&gt;List / 清单&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* This is a bulleted list.
+* It has two items, the second
+  item uses two lines.
+
+&lt;span class="m"&gt;1&lt;/span&gt;. This is a numbered list.
+&lt;span class="m"&gt;2&lt;/span&gt;. It has two items too.
+
+&lt;span class="c1"&gt;#. This is a numbered list.&lt;/span&gt;
+&lt;span class="c1"&gt;#. It has two items too.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;This is a bulleted list.&lt;/li&gt;
+&lt;li&gt;It has two items, the second
+item uses two lines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;This is a numbered list.&lt;/li&gt;
+&lt;li&gt;It has two items too.&lt;/li&gt;
+&lt;li&gt;This is a numbered list.&lt;/li&gt;
+&lt;li&gt;It has two items too.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference-link"&gt;
+&lt;h3&gt;4.4. &lt;a class="toc-backref" href="#id10"&gt;Reference Link / 参考链接&lt;/a&gt;&lt;/h3&gt;
+&lt;ul id="sphinx-external"&gt;
+&lt;li&gt;&lt;p class="first"&gt;External Link / 外部链接&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;Official Page &amp;lt;http://www.sphinx-doc.org/en/stable/&amp;gt;&lt;span class="sb"&gt;`&lt;/span&gt;_
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 样例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.sphinx-doc.org/en/stable/"&gt;Official Page&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Internal Link / 内部链接&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add a link flag in document. / 在文档中添加一个连接标志&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. _sphinx-external:
+
+- External Link
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To use this link: / 使用它：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:ref:&lt;span class="sb"&gt;`&lt;/span&gt;Go to External &amp;lt;sphinx-external&amp;gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例(Fail in pelican)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="codes"&gt;
+&lt;h3&gt;4.5. &lt;a class="toc-backref" href="#id11"&gt;Codes / 代码段&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Simple Code / 示例代码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;This is an introduction to :code:&lt;span class="sb"&gt;`&lt;/span&gt;Sphinx&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Sample / 示例:&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;This is an introduction to &lt;code&gt;Sphinx&lt;/code&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Doc tree / 文档树&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. code-block:: bash
+
+    storage_env
+    ├── config
+    ├── storage
+    │   ├── provision  &lt;span class="o"&gt;(&lt;/span&gt;provision core codes&lt;span class="o"&gt;)&lt;/span&gt;
+    │   │    ├── salesforce_provision.py
+    │   │    ├── salesforce_sandbox_provision.py
+    │   │    ├── salesforce_production_provision.py
+    │   │    └── salesforce_utils
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;storage_env
+├── config
+├── storage
+│   ├── provision  &lt;span class="o"&gt;(&lt;/span&gt;provision core codes&lt;span class="o"&gt;)&lt;/span&gt;
+│   │    ├── salesforce_provision.py
+│   │    ├── salesforce_sandbox_provision.py
+│   │    ├── salesforce_production_provision.py
+│   │    └── salesforce_utils
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Javascript / JS 代码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. code-block:: javascript
+
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Sphinx&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Sphinx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pictures"&gt;
+&lt;h3&gt;4.6. &lt;a class="toc-backref" href="#id12"&gt;Pictures / 图片&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. figure::  /images/tools/sphinx_01.png
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_01.png" /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tables"&gt;
+&lt;h3&gt;4.7. &lt;a class="toc-backref" href="#id13"&gt;Tables / 表格&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. list-table::
+    :widths: &lt;span class="m"&gt;25&lt;/span&gt; &lt;span class="m"&gt;25&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;
+    :header-rows: &lt;span class="m"&gt;1&lt;/span&gt;
+
+    * - Heading row &lt;span class="m"&gt;1&lt;/span&gt;, column &lt;span class="m"&gt;1&lt;/span&gt;
+      - Heading row &lt;span class="m"&gt;1&lt;/span&gt;, column &lt;span class="m"&gt;2&lt;/span&gt;
+      - Heading row &lt;span class="m"&gt;1&lt;/span&gt;, column &lt;span class="m"&gt;3&lt;/span&gt;
+    * - Row &lt;span class="m"&gt;1&lt;/span&gt;, column &lt;span class="m"&gt;1&lt;/span&gt;
+      -
+      - Row &lt;span class="m"&gt;1&lt;/span&gt;, column &lt;span class="m"&gt;3&lt;/span&gt;
+    * - Row &lt;span class="m"&gt;2&lt;/span&gt;, column &lt;span class="m"&gt;1&lt;/span&gt;
+      - Row &lt;span class="m"&gt;2&lt;/span&gt;, column &lt;span class="m"&gt;2&lt;/span&gt;
+      - Row &lt;span class="m"&gt;2&lt;/span&gt;, column &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Sample / 示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table border="1" class="colwidths-given docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="25%" /&gt;
+&lt;col width="25%" /&gt;
+&lt;col width="50%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Heading row 1, column 1&lt;/th&gt;
+&lt;th class="head"&gt;Heading row 1, column 2&lt;/th&gt;
+&lt;th class="head"&gt;Heading row 1, column 3&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Row 1, column 1&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;Row 1, column 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Row 2, column 1&lt;/td&gt;
+&lt;td&gt;Row 2, column 2&lt;/td&gt;
+&lt;td&gt;Row 2, column 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Enjoy!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Sphinx"></category><category term="RST"></category></entry></feed>
