@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Build RPM / 构建 RPM</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="KNOWN Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">KNOWN </a></h1>
+                <nav><ul>
+                    <li><a href="/category/node.html">Node</a></li>
+                    <li class="active"><a href="/category/tools.html">Tools</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/Build_RPM.html" rel="bookmark"
+           title="Permalink to Build RPM / 构建 RPM">Build RPM / 构建 RPM</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-07-16T00:00:00+08:00">
+                Published: Mon 16 July 2018
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/brian-shen.html">Brian Shen</a>
+        </address>
+<p>In <a href="/category/tools.html">Tools</a>.</p>
+<p>tags: <a href="/tag/linux.html">Linux</a> <a href="/tag/centos7.html">CentOS7</a> <a href="/tag/rpm.html">RPM</a> </p>
+</footer><!-- /.post-info -->      <div class="contents topic" id="contents">
+<span id="build-rpm-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#why-i-need-rpm-packages-rpm" id="id1">Why I need RPM packages? / 为什么需要RPM包</a></li>
+<li><a class="reference internal" href="#how-to-set-env" id="id2">How to set Env / 搭建环境</a><ul>
+<li><a class="reference internal" href="#preparations" id="id3">Preparations / 准备</a></li>
+<li><a class="reference internal" href="#needed-dev-and-build-environments" id="id4">Needed dev and build environments / 需要的开发环境</a></li>
+<li><a class="reference internal" href="#make-essential-directories" id="id5">Make Essential Directories / 创建必要的目录</a></li>
+<li><a class="reference internal" href="#prepare-a-sample-file" id="id6">Prepare a sample file / 准备一个示例文件</a></li>
+<li><a class="reference internal" href="#define-a-spec-file-to-list-steps-spec" id="id7">Define a SPEC file to list steps / 定义SPEC文件</a></li>
+<li><a class="reference internal" href="#when-we-want-to-ignore-some-steps" id="id8">When we want to ignore some steps / 如果我们想忽略一些步骤的话</a></li>
+<li><a class="reference internal" href="#continue-with-our-sample" id="id9">Continue with our sample / 继续</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#concerns" id="id10">Concerns / 一些考量</a></li>
+<li><a class="reference internal" href="#other-tips" id="id11">Other tips / 其他的技巧</a></li>
+<li><a class="reference internal" href="#reference" id="id12">Reference:</a></li>
+</ul>
+</div>
+<div class="section" id="why-i-need-rpm-packages-rpm">
+<h2>1. <a class="toc-backref" href="#id1">Why I need RPM packages? / 为什么需要RPM包</a></h2>
+<p>Here is the thing, I have to delivery my softwares to my customers. I developed it , deployed it and configured it. Everything works just perfect fine. But how should my customers use them, I cannot just gave it to them all the jar, js and shell packages. They need a packed executable binary and it would be more welcome if little configuration is needed.</p>
+<p>我需要向客户提交最终的安装软件。所有的事情在本地都是OK的，开发，部署 以及 配置。但是，客户们应该怎么使用他们？ 我不能将所有的开发编译文件直接发给客户，复杂的配置 会让客户失去耐心。他们需要的只是一个安装包，如果开箱即用 或者 根本不用配置的话，那么将会非常棒。</p>
+<p>Based on the situation, it is necessarily to give customers what they want, a RPM package.
+However, it is either easy or difficult, but I have to say I spend a whole day in successfully building one.</p>
+<p>在这种情况下，最好是给出一个rpm安装包。 这项工作其实不简单 也 不困难，但是我实实在在用了一整天。</p>
+</div>
+<div class="section" id="how-to-set-env">
+<h2>2. <a class="toc-backref" href="#id2">How to set Env / 搭建环境</a></h2>
+<div class="section" id="preparations">
+<h3>2.1. <a class="toc-backref" href="#id3">Preparations / 准备</a></h3>
+<ul class="simple">
+<li>CentOS 7 1511</li>
+<li>Minimal installation  / 最小化安装</li>
+<li>Network configured / 配置好网络</li>
+</ul>
+</div>
+<div class="section" id="needed-dev-and-build-environments">
+<h3>2.2. <a class="toc-backref" href="#id4">Needed dev and build environments / 需要的开发环境</a></h3>
+<blockquote>
+<code>sudo yum install rpmdevtools rpmlint -y</code></blockquote>
+</div>
+<div class="section" id="make-essential-directories">
+<h3>2.3. <a class="toc-backref" href="#id5">Make Essential Directories / 创建必要的目录</a></h3>
+<blockquote>
+<p>Now go to home directory and make essential sub directories.</p>
+<p>去往 用户目录 并且创建他们。</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ~
+rpmdev-setuptree
+</pre></div>
+<p>Let's see what happened. ( <code>tree</code> ) / 看看发生了什么。</p>
+<div class="highlight"><pre><span></span>rpmbuild/
+├── BUILD     : All files will be put here during rpm building
+├── RPMS      : Built packages will finally be in RPMS and SRPMS
+├── SOURCES   : Source files you want to include or use in RPM
+├── SPECS     : Instruction of how to build RPM
+└── SRPMS     : Built packages will finally be in RPMS and SRPMS
+</pre></div>
+</blockquote>
+</div>
+<div class="section" id="prepare-a-sample-file">
+<h3>2.4. <a class="toc-backref" href="#id6">Prepare a sample file / 准备一个示例文件</a></h3>
+<p>To avoid any complexities, we only build a rpm package including a bash command.</p>
+<p>为了避免复杂，我们开发一个只包含一个bash命令的rpm包。</p>
+<div class="highlight"><pre><span></span>mkdir briansample-1.0
+<span class="nb">cd</span> briansample-1.0/
+vi briansample.sh
+</pre></div>
+<p>In the shell file, the content is <code>echo &quot;Brian Sample&quot;</code> .</p>
+<p>shell文件的内容是： <code>echo &quot;Brian Sample&quot;</code> 。</p>
+<p>And we compress them into a tar file. <code>tar -cf briansample.tar briansample-1.0/</code> .
+Remember the folder name <code>briansample-1.0</code> (name-version) because it will usually be used in somewhere else.</p>
+<p>将这个文件放入tar包。
+记住，这个文件夹的名字是 <code>briansample-1.0</code> ， 也就是 是 名字 + 版本号。 这会在其他地方用到。 而且名字版本号的匹配至关重要。</p>
+<p>Copy the tar file to <code>SOURCE</code> directory.
+将这个源文件 tar 包 拷贝到 <code>SOURCE</code> 目录下。</p>
+</div>
+<div class="section" id="define-a-spec-file-to-list-steps-spec">
+<h3>2.5. <a class="toc-backref" href="#id7">Define a SPEC file to list steps / 定义SPEC文件</a></h3>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> rpmbuild/SPECS/
+rpmdev-newspec
+</pre></div>
+<p>This command will create a SPEC file under the directory. ( <code>tree</code> )</p>
+<p>上一条命令将会创建一个 SPEC 规范文件。</p>
+<div class="highlight"><pre><span></span>.
+└── newpackage.spec
+</pre></div>
+<p>See what it contains ( <code>cat newpackage.spec</code> ) :</p>
+<p>看看里面的内容。</p>
+<div class="highlight"><pre><span></span>Name:
+Version:
+Release:        <span class="m">1</span>%<span class="o">{</span>?dist<span class="o">}</span>
+Summary:
+
+License:
+URL:
+Source0:
+
+BuildRequires:
+Requires:
+
+%description
+
+
+%prep
+%setup -q
+
+
+%build
+%configure
+make %<span class="o">{</span>?_smp_mflags<span class="o">}</span>
+
+
+%install
+rm -rf <span class="nv">$RPM_BUILD_ROOT</span>
+%make_install
+
+
+%files
+%doc
+
+
+
+%changelog
+</pre></div>
+<p>It is very clear that it consists of two many parts:</p>
+<p>非常直观，其实包括两个部分：</p>
+<blockquote>
+<ul class="simple">
+<li>Basic descriptions / 基本描述</li>
+<li>RPM steps / RPM 编译步骤</li>
+</ul>
+</blockquote>
+<ul>
+<li><p class="first">Definitions / 一些定义:</p>
+<blockquote>
+<ul>
+<li><p class="first"><code>%description</code></p>
+<blockquote>
+<p>A full description of the software packaged in the RPM. This description can span multiple lines and can be broken into paragraphs.</p>
+</blockquote>
+</li>
+<li><p class="first"><code>%prep</code></p>
+<blockquote>
+<p>Command or series of commands to prepare the software to be built, for example, unpacking the archive in Source0. This directive can contain a shell script.</p>
+</blockquote>
+</li>
+<li><p class="first"><code>%build</code></p>
+<blockquote>
+<p>Command or series of commands for actually building the software into machine code (for compiled languages) or byte code (for some interpreted languages).</p>
+</blockquote>
+</li>
+<li><p class="first"><code>%install</code></p>
+<blockquote>
+<p>Command or series of commands for copying the desired build artifacts from the %builddir (where the build happens) to the %buildroot directory (which contains the directory structure with the files to be packaged). This usually means copying files from ~/rpmbuild/BUILD to ~/rpmbuild/BUILDROOT and creating the necessary directories in ~/rpmbuild/BUILDROOT. This is only run when creating a package, not when the end-user installs the package. See Working with SPEC files for details.</p>
+</blockquote>
+</li>
+<li><p class="first"><code>%check</code></p>
+<blockquote>
+<p>Command or series of commands to test the software. This normally includes things such as unit tests.</p>
+</blockquote>
+</li>
+<li><p class="first"><code>%files</code></p>
+<blockquote>
+<p>The list of files that will be installed in the end user’s system.</p>
+</blockquote>
+</li>
+<li><p class="first"><code>%changelog</code></p>
+<blockquote>
+<p>A record of changes that have happened to the package between different Version or Release builds.</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="when-we-want-to-ignore-some-steps">
+<h3>2.6. <a class="toc-backref" href="#id8">When we want to ignore some steps / 如果我们想忽略一些步骤的话</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>When I wanted to ignore some steps, I like to comment out them. For example, NodeJS and Python programs do not need build step.</p>
+<p>当我想要忽略这些步骤的时候，本能的反映是 注释掉他们。 比方说 NodeJS 或者Python 程序，就不需要 build 步骤。</p>
+<div class="highlight"><pre><span></span>%build
+with
+<span class="c1">#%build</span>
+</pre></div>
+<p>But !!!!!!! This doesn't actually comment it out. and it will still run.
+So deleting <code>%build</code> and <code>%configure</code> makes things work as expected.</p>
+<p class="last">但是！！！ 这并不会阻止这些程序继续运行。需要去删除这些步骤 才能工作正常。</p>
+</div>
+</div>
+<div class="section" id="continue-with-our-sample">
+<h3>2.7. <a class="toc-backref" href="#id9">Continue with our sample / 继续</a></h3>
+<p>Copy our project tar files to <code>rpmbuild/SOURCES/</code> by code:</p>
+<p>将整个工程拷贝至 <code>rpmbuild/SOURCES/</code> 。</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ~
+cp briansample.tar rpmbuild/SOURCES/
+</pre></div>
+<p>Now edit our SPEC file: / 现在我们来更改SPEC 文件：</p>
+<div class="highlight"><pre><span></span>Name:           briansample  <span class="c1">#####watch the name  注意名称</span>
+Version:        <span class="m">1</span>.0          <span class="c1">#####watch the version 注意版本</span>
+Release:        <span class="m">1</span>%<span class="o">{</span>?dist<span class="o">}</span>
+Summary:        sample
+
+License:        GPL
+Source0:        briansample.tar
+
+
+%description
+
+%prep
+<span class="nb">echo</span> <span class="s2">&quot;BrianSample Prepare&quot;</span>
+<span class="c1"># this Step will unpack the tar file briansample.tar</span>
+%setup -q
+
+%install
+<span class="nb">echo</span> <span class="s2">&quot;BrianSample Install&quot;</span>
+<span class="c1"># this Step will enter ./briansample-1.0 , just like the name and Version</span>
+<span class="c1"># And then you can execute commands here</span>
+<span class="c1"># So we copy file (ths bash file) to virtual directory %{buildroot}/usr/briansample</span>
+mkdir -p %<span class="o">{</span>buildroot<span class="o">}</span>/usr/briansample
+<span class="nb">pwd</span>
+cp -rf ./* %<span class="o">{</span>buildroot<span class="o">}</span>/usr/briansample
+
+%post
+<span class="c1"># execute when installed in the real machine</span>
+
+%files
+%doc
+<span class="c1"># files will in teh virtual directory will be copied here in teh real machine</span>
+/usr/briansample/*
+
+%changelog
+</pre></div>
+<p>And we can now build our RPM package. / 现在我们可以去编译 RPM 包了。</p>
+<blockquote>
+<code>rpmbuild -ba newpackage.spec</code></blockquote>
+<div class="highlight"><pre><span></span>rpmbuild -ba newpackage.spec
+    Executing<span class="o">(</span>%prep<span class="o">)</span>: /bin/sh -e /var/tmp/rpm-tmp.h7l5eo
+    + <span class="nb">umask</span> <span class="m">022</span>
+    + <span class="nb">cd</span> /home/admin/rpmbuild/BUILD
+    + <span class="nb">echo</span> <span class="s1">&#39;BrianSample Prepare&#39;</span>
+    BrianSample Prepare
+    + <span class="nb">cd</span> /home/admin/rpmbuild/BUILD
+    + rm -rf briansample-1.0
+    + /usr/bin/tar -xf /home/admin/rpmbuild/SOURCES/briansample.tar
+    + <span class="nb">cd</span> briansample-1.0
+    + /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
+    + <span class="nb">exit</span> <span class="m">0</span>
+    Executing<span class="o">(</span>%install<span class="o">)</span>: /bin/sh -e /var/tmp/rpm-tmp.HEqZg2
+    + <span class="nb">umask</span> <span class="m">022</span>
+    + <span class="nb">cd</span> /home/admin/rpmbuild/BUILD
+    + <span class="s1">&#39;[&#39;</span> /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64 <span class="s1">&#39;!=&#39;</span> / <span class="s1">&#39;]&#39;</span>
+    + rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    ++ dirname /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + mkdir -p /home/admin/rpmbuild/BUILDROOT
+    + mkdir /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + <span class="nb">cd</span> briansample-1.0
+    + <span class="nb">echo</span> <span class="s1">&#39;BrianSample Install&#39;</span>
+    BrianSample Install
+    + mkdir -p /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64/usr/briansample
+    + <span class="nb">pwd</span>
+    /home/admin/rpmbuild/BUILD/briansample-1.0
+    + cp -rf ./briansample.sh ./briansample.tar /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64/usr/briansample
+    + <span class="s1">&#39;[&#39;</span> <span class="s1">&#39;%{buildarch}&#39;</span> <span class="o">=</span> noarch <span class="s1">&#39;]&#39;</span>
+    + <span class="nv">QA_CHECK_RPATHS</span><span class="o">=</span><span class="m">1</span>
+    + <span class="k">case</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">QA_CHECK_RPATHS</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span> in
+    + /usr/lib/rpm/check-rpaths
+    + /usr/lib/rpm/check-buildroot
+    + /usr/lib/rpm/redhat/brp-compress
+    + /usr/lib/rpm/redhat/brp-strip /usr/bin/strip
+    + /usr/lib/rpm/redhat/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
+    + /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
+    + /usr/lib/rpm/brp-python-bytecompile /usr/bin/python <span class="m">1</span>
+    + /usr/lib/rpm/redhat/brp-python-hardlink
+    + /usr/lib/rpm/redhat/brp-java-repack-jars
+    Processing files: briansample-1.0-1.el7.centos.x86_64
+    Provides: <span class="nv">briansample</span> <span class="o">=</span> <span class="m">1</span>.0-1.el7.centos briansample<span class="o">(</span>x86-64<span class="o">)</span> <span class="o">=</span> <span class="m">1</span>.0-1.el7.centos
+    Requires<span class="o">(</span>interp<span class="o">)</span>: /bin/sh
+    Requires<span class="o">(</span>rpmlib<span class="o">)</span>: rpmlib<span class="o">(</span>CompressedFileNames<span class="o">)</span> &lt;<span class="o">=</span> <span class="m">3</span>.0.4-1 rpmlib<span class="o">(</span>FileDigests<span class="o">)</span> &lt;<span class="o">=</span> <span class="m">4</span>.6.0-1 rpmlib<span class="o">(</span>PayloadFilesHavePrefix<span class="o">)</span> &lt;<span class="o">=</span> <span class="m">4</span>.0-1
+    Requires<span class="o">(</span>post<span class="o">)</span>: /bin/sh
+    Checking <span class="k">for</span> unpackaged file<span class="o">(</span>s<span class="o">)</span>: /usr/lib/rpm/check-files /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    Wrote: /home/admin/rpmbuild/SRPMS/briansample-1.0-1.el7.centos.src.rpm
+    Wrote: /home/admin/rpmbuild/RPMS/x86_64/briansample-1.0-1.el7.centos.x86_64.rpm
+    Executing<span class="o">(</span>%clean<span class="o">)</span>: /bin/sh -e /var/tmp/rpm-tmp.UhdYZ0
+    + <span class="nb">umask</span> <span class="m">022</span>
+    + <span class="nb">cd</span> /home/admin/rpmbuild/BUILD
+    + <span class="nb">cd</span> briansample-1.0
+    + /usr/bin/rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + <span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+<p>Now let's see what had been generated :code:` tree /home/admin/rpmbuild/`
+现在看看生成了什么！</p>
+<div class="highlight"><pre><span></span>/home/admin/rpmbuild/
+├── BUILD
+│   └── briansample-1.0
+│       ├── briansample.sh
+│       └── briansample.tar
+├── BUILDROOT
+├── RPMS
+│   └── x86_64
+│       └── briansample-1.0-1.el7.centos.x86_64.rpm
+├── SOURCES
+│   └── briansample.tar
+├── SPECS
+│   └── newpackage.spec
+└── SRPMS
+    └── briansample-1.0-1.el7.centos.src.rpm
+</pre></div>
+<p>And we can just install the package:
+我们可以去安装这个 RPM 包。</p>
+<p><code>sudo yum install ./briansample-1.0-1.el7.centos.x86_64.rpm</code></p>
+<p>And after installation, let's see what happened. Do all files copied to the destination?
+安装完毕后，看看是否执行正确。</p>
+<div class="highlight"><pre><span></span>tree /usr/briansample/
+/usr/briansample/
+├── briansample.sh
+└── briansample.tar
+</pre></div>
+<p>Yes, now our work is done.
+是的，工作完成</p>
+</div>
+</div>
+<div class="section" id="concerns">
+<h2>3. <a class="toc-backref" href="#id10">Concerns / 一些考量</a></h2>
+<ul>
+<li><p class="first">How can I install other packages during the installation.</p>
+<blockquote>
+<p>如果我有一些 依赖的 rpm 包应该怎么办？</p>
+<p>For example, I also want to install some helper tools like <code>vim</code> and I have the rpm packages. But we cannot do this, because yum will lock DB during installation, you will get DB locked error in the <code>%post</code> section.</p>
+<p>比方说，我需要安装一些辅助的工具，比如 <code>vim</code> ， 并且我能下载这些rpm包。其实很难做到这一点。因为 yum 在安装过程中会将 DB 锁住。 如果我们在 <code>%post</code>  安装其他rpm 包的时候，会得到一个 DB 锁无法获取的错误。</p>
+<p>One solution is to  remove the lock <code>rm -rf /var/lib/rpm/.rpm.lock</code> . However, this is not recommended.</p>
+<p>有一个解决方法是 ， 移除这个锁，但是并不推荐。</p>
+</blockquote>
+</li>
+<li><p class="first">What about un-installation?</p>
+</li>
+<li><p class="first">What about patch?</p>
+</li>
+</ul>
+</div>
+<div class="section" id="other-tips">
+<h2>4. <a class="toc-backref" href="#id11">Other tips / 其他的技巧</a></h2>
+<ul>
+<li><p class="first">Unpack the rpm file / 如何解压一个 rpm 包</p>
+<blockquote>
+<p>In Windows, you can use 7z software todo this.
+Windows 下可以使用 7z 这样的软件。</p>
+<p>In Linux: <code>rpm2cpio ./packagecloud-test-1.1-1.x86_64.rpm | cpio -idmv</code>
+Linux 下使用这个命令工具； rpm2cpio 。</p>
+</blockquote>
+</li>
+<li><p class="first">How to force to install packages / 如何强制安装软件包</p>
+<blockquote>
+<p>If your rpm database is destroyed, it is much difficult to restore it.
+The only way that I found is to download in the same machine and install it then.</p>
+<p>如果 rpm 元数据库被损坏的话，非常难去恢复。
+一个办法就是 去同样环境的机器上 下载，强制安装软件。</p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>rpm -Uvh /usr/uap/repo/*rpm --nodeps --scripts --force
+-i install packages
+-v provide more details
+-h print <span class="nb">hash</span> marks to show progress
+--nodepes:  don<span class="err">&#39;</span>t verify package dependencies
+--scripts: list install/erase scriptlets from package<span class="o">(</span>s<span class="o">)</span>
+--force:
+    --replacefiles                   ignore file conflicts between packages
+    --replacepkgs                    reinstall <span class="k">if</span> the package is already present
+
+rpm -ivh ./*rpm --justdb --nodeps --scripts --force
+</pre></div>
+</div>
+<div class="section" id="reference">
+<h2>5. <a class="toc-backref" href="#id12">Reference:</a></h2>
+<blockquote>
+<ul class="simple">
+<li>Set Up an RPM Build Environment under CentOS : <a class="reference external" href="https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment">https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment</a></li>
+<li>Rpmbuild Tutorial <a class="reference external" href="https://rpmbuildtut.wordpress.com/">https://rpmbuildtut.wordpress.com/</a></li>
+<li>RPM Packaging Guide <a class="reference external" href="https://rpm-packaging-guide.github.io/">https://rpm-packaging-guide.github.io/</a></li>
+</ul>
+</blockquote>
+</div>
+
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <!--
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                        </ul>
+                </div>
+        </section>  --> <!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <p>Powered by <a href="http://getpelican.com/">Pelican</a>. The theme is adopted from <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'brianshen1990';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

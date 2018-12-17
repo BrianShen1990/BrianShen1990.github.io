@@ -564,14 +564,84 @@ div[class^='highlight'] pre {
     color: #404040
 }
 
-
 code {
-    white-space: nowrap;
+  white-space: nowrap;
 	max-width: 100%;
-    background: #fff;
-    border: solid 1px #e1e4e5;
-    padding: 0 5px;
-    font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
-    color: #E74C3C;
-    overflow-x: auto
+	background: #fff;
+	font-size: 75%;
+  border: solid 1px #e1e4e5;
+  font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
+  color: #E74C3C;
+  overflow-x: auto
+}
+
+.error,
+.warning,
+.tip {
+	margin-top: 10px;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+}
+.error > p,
+.warning > p,
+.tip > p,
+.error > div,
+.warning > div,
+.tip > div{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+p.admonition-title {
+	margin-top: 0px;
+	margin-bottom: 2px;
+	color: white;
+	font-size: bold;
+	padding: 5px 10px 5px 10px;
+}
+.error {
+	background: #fdf3f2
+}
+.error .admonition-title{
+	background: #f29f97
+}
+.warning {
+	background: #ffedcc
+}
+.warning .admonition-title{
+	background: #f0b37e
+}
+.tip {
+	background: #dbfaf4
+}
+.tip .admonition-title {
+	background: #1abc9c
+}
+
+.entry-content {
+	font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+	font-size: 16px;
+}
+
+.entry-content p {
+	line-height: 24px;
+	margin: 0;
+	font-size: 16px;
+	margin-bottom: 24px
+}
+
+.entry-content h1 {
+	font-size: 150%
+}
+
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+	font-weight: 700;
+	font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }

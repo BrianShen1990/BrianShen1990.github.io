@@ -627,7 +627,393 @@ apt-get -y install abiword
 &lt;p&gt;The output document only include basic text. Still give it up.&lt;/p&gt;
 &lt;p&gt;pandoc 导出的文件也是没有格式的。&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Linux"></category><category term="Docker"></category><category term="LibreOffice"></category><category term="PDF"></category></entry><entry><title>Local Yum Repo (CentOS 7) / 本地Yum源</title><link href="/local_yum_repo.html" rel="alternate"></link><published>2017-11-14T00:00:00+08:00</published><updated>2017-11-14T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2017-11-14:/local_yum_repo.html</id><summary type="html">&lt;p class="first last"&gt;Local Yum Repo&lt;/p&gt;
+</content><category term="Linux"></category><category term="Docker"></category><category term="LibreOffice"></category><category term="PDF"></category></entry><entry><title>Build RPM / 构建 RPM</title><link href="/Build_RPM.html" rel="alternate"></link><published>2018-07-16T00:00:00+08:00</published><updated>2018-07-16T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-07-16:/Build_RPM.html</id><summary type="html">&lt;p class="first last"&gt;Build RPM&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="build-rpm-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-i-need-rpm-packages-rpm" id="id1"&gt;Why I need RPM packages? / 为什么需要RPM包&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-set-env" id="id2"&gt;How to set Env / 搭建环境&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#preparations" id="id3"&gt;Preparations / 准备&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#needed-dev-and-build-environments" id="id4"&gt;Needed dev and build environments / 需要的开发环境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#make-essential-directories" id="id5"&gt;Make Essential Directories / 创建必要的目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#prepare-a-sample-file" id="id6"&gt;Prepare a sample file / 准备一个示例文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#define-a-spec-file-to-list-steps-spec" id="id7"&gt;Define a SPEC file to list steps / 定义SPEC文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#when-we-want-to-ignore-some-steps" id="id8"&gt;When we want to ignore some steps / 如果我们想忽略一些步骤的话&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#continue-with-our-sample" id="id9"&gt;Continue with our sample / 继续&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#concerns" id="id10"&gt;Concerns / 一些考量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#other-tips" id="id11"&gt;Other tips / 其他的技巧&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference" id="id12"&gt;Reference:&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-i-need-rpm-packages-rpm"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Why I need RPM packages? / 为什么需要RPM包&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Here is the thing, I have to delivery my softwares to my customers. I developed it , deployed it and configured it. Everything works just perfect fine. But how should my customers use them, I cannot just gave it to them all the jar, js and shell packages. They need a packed executable binary and it would be more welcome if little configuration is needed.&lt;/p&gt;
+&lt;p&gt;我需要向客户提交最终的安装软件。所有的事情在本地都是OK的，开发，部署 以及 配置。但是，客户们应该怎么使用他们？ 我不能将所有的开发编译文件直接发给客户，复杂的配置 会让客户失去耐心。他们需要的只是一个安装包，如果开箱即用 或者 根本不用配置的话，那么将会非常棒。&lt;/p&gt;
+&lt;p&gt;Based on the situation, it is necessarily to give customers what they want, a RPM package.
+However, it is either easy or difficult, but I have to say I spend a whole day in successfully building one.&lt;/p&gt;
+&lt;p&gt;在这种情况下，最好是给出一个rpm安装包。 这项工作其实不简单 也 不困难，但是我实实在在用了一整天。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-set-env"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;How to set Env / 搭建环境&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="preparations"&gt;
+&lt;h3&gt;2.1. &lt;a class="toc-backref" href="#id3"&gt;Preparations / 准备&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;CentOS 7 1511&lt;/li&gt;
+&lt;li&gt;Minimal installation  / 最小化安装&lt;/li&gt;
+&lt;li&gt;Network configured / 配置好网络&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="needed-dev-and-build-environments"&gt;
+&lt;h3&gt;2.2. &lt;a class="toc-backref" href="#id4"&gt;Needed dev and build environments / 需要的开发环境&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;code&gt;sudo yum install rpmdevtools rpmlint -y&lt;/code&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="make-essential-directories"&gt;
+&lt;h3&gt;2.3. &lt;a class="toc-backref" href="#id5"&gt;Make Essential Directories / 创建必要的目录&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now go to home directory and make essential sub directories.&lt;/p&gt;
+&lt;p&gt;去往 用户目录 并且创建他们。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
+rpmdev-setuptree
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's see what happened. ( &lt;code&gt;tree&lt;/code&gt; ) / 看看发生了什么。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpmbuild/
+├── BUILD     : All files will be put here during rpm building
+├── RPMS      : Built packages will finally be in RPMS and SRPMS
+├── SOURCES   : Source files you want to include or use in RPM
+├── SPECS     : Instruction of how to build RPM
+└── SRPMS     : Built packages will finally be in RPMS and SRPMS
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-a-sample-file"&gt;
+&lt;h3&gt;2.4. &lt;a class="toc-backref" href="#id6"&gt;Prepare a sample file / 准备一个示例文件&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;To avoid any complexities, we only build a rpm package including a bash command.&lt;/p&gt;
+&lt;p&gt;为了避免复杂，我们开发一个只包含一个bash命令的rpm包。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir briansample-1.0
+&lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0/
+vi briansample.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the shell file, the content is &lt;code&gt;echo &amp;quot;Brian Sample&amp;quot;&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;shell文件的内容是： &lt;code&gt;echo &amp;quot;Brian Sample&amp;quot;&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;And we compress them into a tar file. &lt;code&gt;tar -cf briansample.tar briansample-1.0/&lt;/code&gt; .
+Remember the folder name &lt;code&gt;briansample-1.0&lt;/code&gt; (name-version) because it will usually be used in somewhere else.&lt;/p&gt;
+&lt;p&gt;将这个文件放入tar包。
+记住，这个文件夹的名字是 &lt;code&gt;briansample-1.0&lt;/code&gt; ， 也就是 是 名字 + 版本号。 这会在其他地方用到。 而且名字版本号的匹配至关重要。&lt;/p&gt;
+&lt;p&gt;Copy the tar file to &lt;code&gt;SOURCE&lt;/code&gt; directory.
+将这个源文件 tar 包 拷贝到 &lt;code&gt;SOURCE&lt;/code&gt; 目录下。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="define-a-spec-file-to-list-steps-spec"&gt;
+&lt;h3&gt;2.5. &lt;a class="toc-backref" href="#id7"&gt;Define a SPEC file to list steps / 定义SPEC文件&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; rpmbuild/SPECS/
+rpmdev-newspec
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command will create a SPEC file under the directory. ( &lt;code&gt;tree&lt;/code&gt; )&lt;/p&gt;
+&lt;p&gt;上一条命令将会创建一个 SPEC 规范文件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.
+└── newpackage.spec
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See what it contains ( &lt;code&gt;cat newpackage.spec&lt;/code&gt; ) :&lt;/p&gt;
+&lt;p&gt;看看里面的内容。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Name:
+Version:
+Release:        &lt;span class="m"&gt;1&lt;/span&gt;%&lt;span class="o"&gt;{&lt;/span&gt;?dist&lt;span class="o"&gt;}&lt;/span&gt;
+Summary:
+
+License:
+URL:
+Source0:
+
+BuildRequires:
+Requires:
+
+%description
+
+
+%prep
+%setup -q
+
+
+%build
+%configure
+make %&lt;span class="o"&gt;{&lt;/span&gt;?_smp_mflags&lt;span class="o"&gt;}&lt;/span&gt;
+
+
+%install
+rm -rf &lt;span class="nv"&gt;$RPM_BUILD_ROOT&lt;/span&gt;
+%make_install
+
+
+%files
+%doc
+
+
+
+%changelog
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is very clear that it consists of two many parts:&lt;/p&gt;
+&lt;p&gt;非常直观，其实包括两个部分：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Basic descriptions / 基本描述&lt;/li&gt;
+&lt;li&gt;RPM steps / RPM 编译步骤&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Definitions / 一些定义:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%description&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A full description of the software packaged in the RPM. This description can span multiple lines and can be broken into paragraphs.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%prep&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands to prepare the software to be built, for example, unpacking the archive in Source0. This directive can contain a shell script.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%build&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands for actually building the software into machine code (for compiled languages) or byte code (for some interpreted languages).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%install&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands for copying the desired build artifacts from the %builddir (where the build happens) to the %buildroot directory (which contains the directory structure with the files to be packaged). This usually means copying files from ~/rpmbuild/BUILD to ~/rpmbuild/BUILDROOT and creating the necessary directories in ~/rpmbuild/BUILDROOT. This is only run when creating a package, not when the end-user installs the package. See Working with SPEC files for details.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%check&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands to test the software. This normally includes things such as unit tests.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%files&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The list of files that will be installed in the end user’s system.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%changelog&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A record of changes that have happened to the package between different Version or Release builds.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="when-we-want-to-ignore-some-steps"&gt;
+&lt;h3&gt;2.6. &lt;a class="toc-backref" href="#id8"&gt;When we want to ignore some steps / 如果我们想忽略一些步骤的话&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="admonition warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;p&gt;When I wanted to ignore some steps, I like to comment out them. For example, NodeJS and Python programs do not need build step.&lt;/p&gt;
+&lt;p&gt;当我想要忽略这些步骤的时候，本能的反映是 注释掉他们。 比方说 NodeJS 或者Python 程序，就不需要 build 步骤。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%build
+with
+&lt;span class="c1"&gt;#%build&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But !!!!!!! This doesn't actually comment it out. and it will still run.
+So deleting &lt;code&gt;%build&lt;/code&gt; and &lt;code&gt;%configure&lt;/code&gt; makes things work as expected.&lt;/p&gt;
+&lt;p class="last"&gt;但是！！！ 这并不会阻止这些程序继续运行。需要去删除这些步骤 才能工作正常。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="continue-with-our-sample"&gt;
+&lt;h3&gt;2.7. &lt;a class="toc-backref" href="#id9"&gt;Continue with our sample / 继续&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Copy our project tar files to &lt;code&gt;rpmbuild/SOURCES/&lt;/code&gt; by code:&lt;/p&gt;
+&lt;p&gt;将整个工程拷贝至 &lt;code&gt;rpmbuild/SOURCES/&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
+cp briansample.tar rpmbuild/SOURCES/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now edit our SPEC file: / 现在我们来更改SPEC 文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Name:           briansample  &lt;span class="c1"&gt;#####watch the name  注意名称&lt;/span&gt;
+Version:        &lt;span class="m"&gt;1&lt;/span&gt;.0          &lt;span class="c1"&gt;#####watch the version 注意版本&lt;/span&gt;
+Release:        &lt;span class="m"&gt;1&lt;/span&gt;%&lt;span class="o"&gt;{&lt;/span&gt;?dist&lt;span class="o"&gt;}&lt;/span&gt;
+Summary:        sample
+
+License:        GPL
+Source0:        briansample.tar
+
+
+%description
+
+%prep
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;BrianSample Prepare&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# this Step will unpack the tar file briansample.tar&lt;/span&gt;
+%setup -q
+
+%install
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;BrianSample Install&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# this Step will enter ./briansample-1.0 , just like the name and Version&lt;/span&gt;
+&lt;span class="c1"&gt;# And then you can execute commands here&lt;/span&gt;
+&lt;span class="c1"&gt;# So we copy file (ths bash file) to virtual directory %{buildroot}/usr/briansample&lt;/span&gt;
+mkdir -p %&lt;span class="o"&gt;{&lt;/span&gt;buildroot&lt;span class="o"&gt;}&lt;/span&gt;/usr/briansample
+&lt;span class="nb"&gt;pwd&lt;/span&gt;
+cp -rf ./* %&lt;span class="o"&gt;{&lt;/span&gt;buildroot&lt;span class="o"&gt;}&lt;/span&gt;/usr/briansample
+
+%post
+&lt;span class="c1"&gt;# execute when installed in the real machine&lt;/span&gt;
+
+%files
+%doc
+&lt;span class="c1"&gt;# files will in teh virtual directory will be copied here in teh real machine&lt;/span&gt;
+/usr/briansample/*
+
+%changelog
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can now build our RPM package. / 现在我们可以去编译 RPM 包了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;code&gt;rpmbuild -ba newpackage.spec&lt;/code&gt;&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpmbuild -ba newpackage.spec
+    Executing&lt;span class="o"&gt;(&lt;/span&gt;%prep&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh -e /var/tmp/rpm-tmp.h7l5eo
+    + &lt;span class="nb"&gt;umask&lt;/span&gt; &lt;span class="m"&gt;022&lt;/span&gt;
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;BrianSample Prepare&amp;#39;&lt;/span&gt;
+    BrianSample Prepare
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + rm -rf briansample-1.0
+    + /usr/bin/tar -xf /home/admin/rpmbuild/SOURCES/briansample.tar
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0
+    + /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
+    + &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+    Executing&lt;span class="o"&gt;(&lt;/span&gt;%install&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh -e /var/tmp/rpm-tmp.HEqZg2
+    + &lt;span class="nb"&gt;umask&lt;/span&gt; &lt;span class="m"&gt;022&lt;/span&gt;
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + &lt;span class="s1"&gt;&amp;#39;[&amp;#39;&lt;/span&gt; /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64 &lt;span class="s1"&gt;&amp;#39;!=&amp;#39;&lt;/span&gt; / &lt;span class="s1"&gt;&amp;#39;]&amp;#39;&lt;/span&gt;
+    + rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    ++ dirname /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + mkdir -p /home/admin/rpmbuild/BUILDROOT
+    + mkdir /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0
+    + &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;BrianSample Install&amp;#39;&lt;/span&gt;
+    BrianSample Install
+    + mkdir -p /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64/usr/briansample
+    + &lt;span class="nb"&gt;pwd&lt;/span&gt;
+    /home/admin/rpmbuild/BUILD/briansample-1.0
+    + cp -rf ./briansample.sh ./briansample.tar /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64/usr/briansample
+    + &lt;span class="s1"&gt;&amp;#39;[&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%{buildarch}&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; noarch &lt;span class="s1"&gt;&amp;#39;]&amp;#39;&lt;/span&gt;
+    + &lt;span class="nv"&gt;QA_CHECK_RPATHS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+    + &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;QA_CHECK_RPATHS&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; in
+    + /usr/lib/rpm/check-rpaths
+    + /usr/lib/rpm/check-buildroot
+    + /usr/lib/rpm/redhat/brp-compress
+    + /usr/lib/rpm/redhat/brp-strip /usr/bin/strip
+    + /usr/lib/rpm/redhat/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
+    + /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
+    + /usr/lib/rpm/brp-python-bytecompile /usr/bin/python &lt;span class="m"&gt;1&lt;/span&gt;
+    + /usr/lib/rpm/redhat/brp-python-hardlink
+    + /usr/lib/rpm/redhat/brp-java-repack-jars
+    Processing files: briansample-1.0-1.el7.centos.x86_64
+    Provides: &lt;span class="nv"&gt;briansample&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;.0-1.el7.centos briansample&lt;span class="o"&gt;(&lt;/span&gt;x86-64&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;.0-1.el7.centos
+    Requires&lt;span class="o"&gt;(&lt;/span&gt;interp&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh
+    Requires&lt;span class="o"&gt;(&lt;/span&gt;rpmlib&lt;span class="o"&gt;)&lt;/span&gt;: rpmlib&lt;span class="o"&gt;(&lt;/span&gt;CompressedFileNames&lt;span class="o"&gt;)&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.0.4-1 rpmlib&lt;span class="o"&gt;(&lt;/span&gt;FileDigests&lt;span class="o"&gt;)&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;.6.0-1 rpmlib&lt;span class="o"&gt;(&lt;/span&gt;PayloadFilesHavePrefix&lt;span class="o"&gt;)&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;.0-1
+    Requires&lt;span class="o"&gt;(&lt;/span&gt;post&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh
+    Checking &lt;span class="k"&gt;for&lt;/span&gt; unpackaged file&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;: /usr/lib/rpm/check-files /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    Wrote: /home/admin/rpmbuild/SRPMS/briansample-1.0-1.el7.centos.src.rpm
+    Wrote: /home/admin/rpmbuild/RPMS/x86_64/briansample-1.0-1.el7.centos.x86_64.rpm
+    Executing&lt;span class="o"&gt;(&lt;/span&gt;%clean&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh -e /var/tmp/rpm-tmp.UhdYZ0
+    + &lt;span class="nb"&gt;umask&lt;/span&gt; &lt;span class="m"&gt;022&lt;/span&gt;
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0
+    + /usr/bin/rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let's see what had been generated :code:` tree /home/admin/rpmbuild/`
+现在看看生成了什么！&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/home/admin/rpmbuild/
+├── BUILD
+│   └── briansample-1.0
+│       ├── briansample.sh
+│       └── briansample.tar
+├── BUILDROOT
+├── RPMS
+│   └── x86_64
+│       └── briansample-1.0-1.el7.centos.x86_64.rpm
+├── SOURCES
+│   └── briansample.tar
+├── SPECS
+│   └── newpackage.spec
+└── SRPMS
+    └── briansample-1.0-1.el7.centos.src.rpm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can just install the package:
+我们可以去安装这个 RPM 包。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo yum install ./briansample-1.0-1.el7.centos.x86_64.rpm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And after installation, let's see what happened. Do all files copied to the destination?
+安装完毕后，看看是否执行正确。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tree /usr/briansample/
+/usr/briansample/
+├── briansample.sh
+└── briansample.tar
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Yes, now our work is done.
+是的，工作完成&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="concerns"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id10"&gt;Concerns / 一些考量&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;How can I install other packages during the installation.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果我有一些 依赖的 rpm 包应该怎么办？&lt;/p&gt;
+&lt;p&gt;For example, I also want to install some helper tools like &lt;code&gt;vim&lt;/code&gt; and I have the rpm packages. But we cannot do this, because yum will lock DB during installation, you will get DB locked error in the &lt;code&gt;%post&lt;/code&gt; section.&lt;/p&gt;
+&lt;p&gt;比方说，我需要安装一些辅助的工具，比如 &lt;code&gt;vim&lt;/code&gt; ， 并且我能下载这些rpm包。其实很难做到这一点。因为 yum 在安装过程中会将 DB 锁住。 如果我们在 &lt;code&gt;%post&lt;/code&gt;  安装其他rpm 包的时候，会得到一个 DB 锁无法获取的错误。&lt;/p&gt;
+&lt;p&gt;One solution is to  remove the lock &lt;code&gt;rm -rf /var/lib/rpm/.rpm.lock&lt;/code&gt; . However, this is not recommended.&lt;/p&gt;
+&lt;p&gt;有一个解决方法是 ， 移除这个锁，但是并不推荐。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;What about un-installation?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;What about patch?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="other-tips"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id11"&gt;Other tips / 其他的技巧&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Unpack the rpm file / 如何解压一个 rpm 包&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In Windows, you can use 7z software todo this.
+Windows 下可以使用 7z 这样的软件。&lt;/p&gt;
+&lt;p&gt;In Linux: &lt;code&gt;rpm2cpio ./packagecloud-test-1.1-1.x86_64.rpm | cpio -idmv&lt;/code&gt;
+Linux 下使用这个命令工具； rpm2cpio 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;How to force to install packages / 如何强制安装软件包&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If your rpm database is destroyed, it is much difficult to restore it.
+The only way that I found is to download in the same machine and install it then.&lt;/p&gt;
+&lt;p&gt;如果 rpm 元数据库被损坏的话，非常难去恢复。
+一个办法就是 去同样环境的机器上 下载，强制安装软件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpm -Uvh /usr/uap/repo/*rpm --nodeps --scripts --force
+-i install packages
+-v provide more details
+-h print &lt;span class="nb"&gt;hash&lt;/span&gt; marks to show progress
+--nodepes:  don&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t verify package dependencies
+--scripts: list install/erase scriptlets from package&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;
+--force:
+    --replacefiles                   ignore file conflicts between packages
+    --replacepkgs                    reinstall &lt;span class="k"&gt;if&lt;/span&gt; the package is already present
+
+rpm -ivh ./*rpm --justdb --nodeps --scripts --force
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id12"&gt;Reference:&lt;/a&gt;&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Set Up an RPM Build Environment under CentOS : &lt;a class="reference external" href="https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment"&gt;https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Rpmbuild Tutorial &lt;a class="reference external" href="https://rpmbuildtut.wordpress.com/"&gt;https://rpmbuildtut.wordpress.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RPM Packaging Guide &lt;a class="reference external" href="https://rpm-packaging-guide.github.io/"&gt;https://rpm-packaging-guide.github.io/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS7"></category><category term="RPM"></category></entry><entry><title>Local Yum Repo (CentOS 7) / 本地Yum源</title><link href="/local_yum_repo.html" rel="alternate"></link><published>2017-11-14T00:00:00+08:00</published><updated>2017-11-14T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2017-11-14:/local_yum_repo.html</id><summary type="html">&lt;p class="first last"&gt;Local Yum Repo&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="local-yum-repo-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
