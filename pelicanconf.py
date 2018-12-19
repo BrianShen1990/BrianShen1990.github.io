@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
+
 from __future__ import unicode_literals
 
-AUTHOR = u'BrianShen1990'
-SITENAME = u'KNOWN.'
-# SITEURL = 'https://brianshen1990.github.io/'
+AUTHOR = 'Brian'
+SITENAME = 'KNOWN'
 SITEURL = ''
 
 PATH = 'content'
 
 TIMEZONE = 'Asia/Shanghai'
 
-DEFAULT_LANG = u'en'
+DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -32,10 +32,7 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 DEFAULT_PAGINATION = 10
 
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
-
-STATIC_PATHS = ['_static']
+STATIC_PATHS = ['images']
 
 LOAD_CONTENT_CACHE = False
 
@@ -46,4 +43,11 @@ GOOGLE_ANALYTICS = 'UA-107750695-1'
 DISQUS_SITENAME = "brianshen1990"
 
 PLUGIN_PATHS = ['./pelican-plugins']
-PLUGINS = ['section_number', 'fit_image']
+PLUGINS = ['section_number']
+
+# Uncomment following line if you want document-relative URLs when developing
+#RELATIVE_URLS = True
+
+# source venv/bin/activate
+# make html && make serve
+# make github

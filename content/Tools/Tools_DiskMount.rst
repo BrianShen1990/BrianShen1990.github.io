@@ -47,7 +47,7 @@ As we can see, all disks are assigned to root directory. / 所有的磁盘指定
 Add a Disk / 添加一块磁盘
 ****************************
 
-.. figure::  /_static/image/tools/disk/mount_disk_01.png
+.. figure:: /images/tools/mount_disk_01.png
 
 
 .. code-block:: bash
