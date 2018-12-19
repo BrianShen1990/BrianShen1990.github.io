@@ -1,5 +1,456 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-11-24T00:00:00+08:00</updated><entry><title>Mount disk to VG / 磁盘挂载到虚拟分区</title><link href="/Tools_mount_disk_to_vg.html" rel="alternate"></link><published>2018-11-24T00:00:00+08:00</published><updated>2018-11-24T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-24:/Tools_mount_disk_to_vg.html</id><summary type="html">&lt;p class="first last"&gt;Tools - Mount Disk to VG&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-12-18T00:00:00+08:00</updated><entry><title>Node Webpack</title><link href="/Node_Webpack.html" rel="alternate"></link><published>2018-12-18T00:00:00+08:00</published><updated>2018-12-18T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-12-18:/Node_Webpack.html</id><summary type="html">&lt;p class="first last"&gt;Node Webpack&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="node-webpack-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#asset-management" id="id1"&gt;Asset Management 资产管理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#output-management" id="id2"&gt;Output Management / 输出管理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#development" id="id3"&gt;Development / 友好开发&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#hot-module-replacement" id="id4"&gt;Hot Module Replacement / 热模块加载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#tree-shaking" id="id5"&gt;Tree Shaking&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#production" id="id6"&gt;Production / 生产环境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#code-splitting" id="id7"&gt;Code Splitting / 代码分割&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#lazy-loading" id="id8"&gt;Lazy Loading / 懒加载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#caching" id="id9"&gt;Caching / 缓存&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#authoring-libraries" id="id10"&gt;Authoring Libraries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#shimming" id="id11"&gt;Shimming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#progressive-web-application-web" id="id12"&gt;Progressive Web Application / 渐进式Web应用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#type-script" id="id13"&gt;Type Script&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#sample" id="id14"&gt;Sample / 示例&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#webpack-common-js" id="id15"&gt;webpack.common.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#webpack-dev-js" id="id16"&gt;webpack.dev.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#webpack-prod-js" id="id17"&gt;webpack.prod.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#package-json" id="id18"&gt;package.json&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#tsconfig-json" id="id19"&gt;tsconfig.json&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;Basic Usage of Webpack.  / Webpack 的简单使用。&lt;/p&gt;
+&lt;div class="section" id="asset-management"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Asset Management 资产管理&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Mainly how to manipulate rules to support them.&lt;/p&gt;
+&lt;p&gt;主要是如何通过配置规则 来 支持各种文件资产类型。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;module: &lt;span class="o"&gt;{&lt;/span&gt;
+  rules: &lt;span class="o"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;{&lt;/span&gt;
+      test: /&lt;span class="se"&gt;\.&lt;/span&gt;css$/,
+      use: &lt;span class="o"&gt;[&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;style-loader&amp;#39;&lt;/span&gt;,
+        &lt;span class="s1"&gt;&amp;#39;css-loader&amp;#39;&lt;/span&gt;,
+      &lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;{&lt;/span&gt;
+      test: /&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;png&lt;span class="p"&gt;|&lt;/span&gt;svg&lt;span class="p"&gt;|&lt;/span&gt;jpg&lt;span class="p"&gt;|&lt;/span&gt;gif&lt;span class="o"&gt;)&lt;/span&gt;$/,
+      use: &lt;span class="o"&gt;[&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;file-loader&amp;#39;&lt;/span&gt;,
+      &lt;span class="o"&gt;]&lt;/span&gt;,
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+  &lt;span class="o"&gt;]&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="output-management"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;Output Management / 输出管理&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Mainly &lt;code&gt;Entry&lt;/code&gt; and &lt;code&gt;Output&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;主要是 入口点 和 输出。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;entry: &lt;span class="o"&gt;{&lt;/span&gt;
+  index: &lt;span class="s1"&gt;&amp;#39;./src/index.js&amp;#39;&lt;/span&gt;,
+&lt;span class="o"&gt;}&lt;/span&gt;,
+output: &lt;span class="o"&gt;{&lt;/span&gt;
+  filename: &lt;span class="s1"&gt;&amp;#39;[name].[hash].js&amp;#39;&lt;/span&gt;,
+  chunkFilename: &lt;span class="s1"&gt;&amp;#39;[name].[hash].js&amp;#39;&lt;/span&gt;,
+  path: path.resolve&lt;span class="o"&gt;(&lt;/span&gt;__dirname, &lt;span class="s1"&gt;&amp;#39;dist&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And clear dist by &lt;code&gt;CleanWebpackPlugin&lt;/code&gt; :
+如果想要清除目标文件夹中的文件，使用插件 &lt;code&gt;CleanWebpackPlugin&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;CleanWebpackPlugin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;clean-webpack-plugin&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+plugins: &lt;span class="o"&gt;[&lt;/span&gt;
+  new CleanWebpackPlugin&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dist&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;])&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And generate html &lt;code&gt;index.html&lt;/code&gt; automatically。&lt;/p&gt;
+&lt;p&gt;如果想要自动的产生 &lt;code&gt;index.html&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;CleanWebpackPlugin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;clean-webpack-plugin&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+new HtmlWebpackPlugin&lt;span class="o"&gt;({&lt;/span&gt;
+  title: &lt;span class="s1"&gt;&amp;#39;Output01&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="development"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id3"&gt;Development / 友好开发&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Add source map to debug in UI:
+在 UI 中加入 source map 以便调试。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;devtool: &lt;span class="s1"&gt;&amp;#39;inline-source-map&amp;#39;&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And &lt;code&gt;webpack-dev-server&lt;/code&gt; :
+开发是也可以使用 &lt;code&gt;webpack-dev-server&lt;/code&gt; 来启动本地服务器。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;devServer: &lt;span class="o"&gt;{&lt;/span&gt;
+  contentBase: &lt;span class="s1"&gt;&amp;#39;./dist&amp;#39;&lt;/span&gt;,
+  hot: true,
+&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hot-module-replacement"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id4"&gt;Hot Module Replacement / 热模块加载&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Advanced Feature.
+Haven't used it yet.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tree-shaking"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id5"&gt;Tree Shaking&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Remove unnecessary modules of code for ES2015&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Add &lt;code&gt;sideEffects&lt;/code&gt; to indicate which files are pure ES2015 MODULES.&lt;/p&gt;
+&lt;p&gt;主要是用来移除不必要的模块。
+将那些单纯的ES2015的代码，整理到 &lt;code&gt;sideEffects&lt;/code&gt; tag 下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Minify the Output (Uglify)&lt;/p&gt;
+&lt;p&gt;最小化代码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mode: &lt;span class="s1"&gt;&amp;#39;production&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="production"&gt;
+&lt;h2&gt;6. &lt;a class="toc-backref" href="#id6"&gt;Production / 生产环境&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Use &lt;code&gt;webpack-merge&lt;/code&gt; and&lt;/p&gt;
+&lt;p&gt;使用   &lt;code&gt;webpack-merge&lt;/code&gt; 模块，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;webpack.common.js
+webpack.dev.js
+webpack.prod.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;so that we can have different configurations in different environment.
+Also meed to update npm scripts as well.&lt;/p&gt;
+&lt;p&gt;这样的话，开发 和 部署环境会有不同的配置。 当然我们也需要在 npm 代码中进行相应的修改。&lt;/p&gt;
+&lt;p&gt;source mapping in production: &lt;code&gt;devtool: 'source-map'&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;source mapping 永远是被推荐的，即使是在生产环境中。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="code-splitting"&gt;
+&lt;h2&gt;7. &lt;a class="toc-backref" href="#id7"&gt;Code Splitting / 代码分割&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Multi Entries / 多入口点&lt;/p&gt;
+&lt;p&gt;Multi Entries will split code but will also cause Duplication.&lt;/p&gt;
+&lt;p&gt;即使定义了多个入口点，编译出来的单独的文件 是互相隔离的，会导致重复代码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Prevent Duplication / 避免重复代码。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;optimization: &lt;span class="o"&gt;{&lt;/span&gt;
+  splitChunks: &lt;span class="o"&gt;{&lt;/span&gt;
+    chunks: &lt;span class="s1"&gt;&amp;#39;all&amp;#39;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Dynamic Imports / 动态加载&lt;/p&gt;
+&lt;p&gt;Instead of using optimization, we use&lt;/p&gt;
+&lt;p&gt;与 优化不同，这边会将所有的依赖打包成单个文件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;output: &lt;span class="o"&gt;{&lt;/span&gt;
+  filename: &lt;span class="s1"&gt;&amp;#39;[name].bundle.js&amp;#39;&lt;/span&gt;,
+  chunkFilename: &lt;span class="s1"&gt;&amp;#39;[name].bundle.js&amp;#39;&lt;/span&gt;,
+  path: path.resolve&lt;span class="o"&gt;(&lt;/span&gt;__dirname, &lt;span class="s1"&gt;&amp;#39;dist&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and use dynamic imports. A little unfriendly for developers.&lt;/p&gt;
+&lt;p&gt;并且动态的加载。 对开发还是有些不利的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="o"&gt;{&lt;/span&gt; default: _ &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; await import&lt;span class="o"&gt;(&lt;/span&gt;/* webpackChunkName: &lt;span class="s2"&gt;&amp;quot;lodash&amp;quot;&lt;/span&gt; */ &lt;span class="s1"&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+element.innerHTML &lt;span class="o"&gt;=&lt;/span&gt; _.join&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Hello&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;webpack&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Prefetching/Preloading modules&lt;/p&gt;
+&lt;p&gt;预先加载代码的话，直接使用 import 就可以了。&lt;/p&gt;
+&lt;p&gt;Using import.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="lazy-loading"&gt;
+&lt;h2&gt;8. &lt;a class="toc-backref" href="#id8"&gt;Lazy Loading / 懒加载&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;More complex and is very unfriend to developers.&lt;/p&gt;
+&lt;p&gt;更加的复杂， 对开发也不是很友好。&lt;/p&gt;
+&lt;p&gt;Dynamic load during events like click.&lt;/p&gt;
+&lt;p&gt;懒加载 就是， 直到某个事件发生了， 要去使用一个资源，我们再去动态的加载。&lt;/p&gt;
+&lt;p&gt;However, there are some frameworks: / 针对不同前端库，其实有自己的一些框架。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="https://reacttraining.com/react-router/web/guides/code-splitting"&gt;https://reacttraining.com/react-router/web/guides/code-splitting&lt;/a&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="caching"&gt;
+&lt;h2&gt;9. &lt;a class="toc-backref" href="#id9"&gt;Caching / 缓存&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Add hash to name so that whenever a file updates, the name will change as well.&lt;/p&gt;
+&lt;p&gt;在文件名中加上 hash 值，这样的话 文件只要有变动，名字也会跟着改变。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;output: &lt;span class="o"&gt;{&lt;/span&gt;
+  filename: &lt;span class="s1"&gt;&amp;#39;[name].[hash].js&amp;#39;&lt;/span&gt;,
+  chunkFilename: &lt;span class="s1"&gt;&amp;#39;[name].[hash].js&amp;#39;&lt;/span&gt;,
+  path: path.resolve&lt;span class="o"&gt;(&lt;/span&gt;__dirname, &lt;span class="s1"&gt;&amp;#39;dist&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Combine vendors in node_modules.
+可以将 node_modules 文件夹中不变的内容 都让在一个 文件里面， 因为他们是不变动的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;optimization: &lt;span class="o"&gt;{&lt;/span&gt;
+  usedExports: true,
+  runtimeChunk: &lt;span class="s1"&gt;&amp;#39;single&amp;#39;&lt;/span&gt;,
+  splitChunks: &lt;span class="o"&gt;{&lt;/span&gt;
+    cacheGroups: &lt;span class="o"&gt;{&lt;/span&gt;
+      vendor: &lt;span class="o"&gt;{&lt;/span&gt;
+        test: /&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;/&lt;span class="o"&gt;]&lt;/span&gt;node_modules&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;/&lt;span class="o"&gt;]&lt;/span&gt;/,
+        name: &lt;span class="s1"&gt;&amp;#39;vendors&amp;#39;&lt;/span&gt;,
+        chunks: &lt;span class="s1"&gt;&amp;#39;all&amp;#39;&lt;/span&gt;,
+      &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;However, we need to use plugins as each &lt;code&gt;module.id&lt;/code&gt;  is incremented based on resolving order by default.&lt;/p&gt;
+&lt;p&gt;当然，我们需要记住 一个插件，否则 每一次  &lt;code&gt;module.id&lt;/code&gt; 都会改变。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plugins: &lt;span class="o"&gt;[&lt;/span&gt;
+  new webpack.HashedModuleIdsPlugin&lt;span class="o"&gt;()&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="authoring-libraries"&gt;
+&lt;h2&gt;10. &lt;a class="toc-backref" href="#id10"&gt;Authoring Libraries&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;创建一个 库。&lt;/p&gt;
+&lt;p&gt;use library and library and externals.&lt;/p&gt;
+&lt;p&gt;需要借助 library 和 externals 标签。&lt;/p&gt;
+&lt;p&gt;TODO&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="shimming"&gt;
+&lt;h2&gt;11. &lt;a class="toc-backref" href="#id11"&gt;Shimming&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Not recommended!  / 不推荐&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Shimming Globals / 全局变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plugins: &lt;span class="o"&gt;[&lt;/span&gt;
+  new webpack.ProvidePlugin&lt;span class="o"&gt;({&lt;/span&gt;
+  _: &lt;span class="s1"&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Global Exports / 全局导出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Very useful for dated libs.&lt;/p&gt;
+&lt;p&gt;当我们使用 一个过时的库时，会很实用。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;src/globals.js
+
+var &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;blah.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+var &lt;span class="nv"&gt;helpers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  test: &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test something&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;,
+  parse: &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;parse something&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What can we do about that?&lt;/p&gt;
+&lt;p&gt;我们如何去使用这个库？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;module: &lt;span class="o"&gt;{&lt;/span&gt;
+  rules: &lt;span class="o"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;{&lt;/span&gt;
+      test: require.resolve&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;index.js&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,
+      use: &lt;span class="s1"&gt;&amp;#39;imports-loader?this=&amp;gt;window&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;{&lt;/span&gt;
+      test: require.resolve&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;globals.js&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,
+      use: &lt;span class="s1"&gt;&amp;#39;exports-loader?file,parse=helpers.parse&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And now we can use &lt;code&gt;import { file, parse } from './globals.js';&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;现在我们可以使用  &lt;code&gt;import { file, parse } from './globals.js';&lt;/code&gt;  。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="progressive-web-application-web"&gt;
+&lt;h2&gt;12. &lt;a class="toc-backref" href="#id12"&gt;Progressive Web Application / 渐进式Web应用&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;A Service Worker ran at background, quite amazing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="type-script"&gt;
+&lt;h2&gt;13. &lt;a class="toc-backref" href="#id13"&gt;Type Script&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Need a &lt;code&gt;tsconfig.json&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;需要额外的 配置文件 &lt;code&gt;tsconfig.json&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s2"&gt;&amp;quot;compilerOptions&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;outDir&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;./dist/&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;sourceMap&amp;quot;&lt;/span&gt;: true,
+    &lt;span class="s2"&gt;&amp;quot;noImplicitAny&amp;quot;&lt;/span&gt;: true,
+    &lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;es6&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;target&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;es5&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;jsx&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;react&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;allowJs&amp;quot;&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And add this / 并且添加上 规则:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;module: &lt;span class="o"&gt;{&lt;/span&gt;
+  rules: &lt;span class="o"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;{&lt;/span&gt;
+      test: /&lt;span class="se"&gt;\.&lt;/span&gt;tsx?$/,
+      use: &lt;span class="s1"&gt;&amp;#39;ts-loader&amp;#39;&lt;/span&gt;,
+      exclude: /node_modules/
+    &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;,
+resolve: &lt;span class="o"&gt;{&lt;/span&gt;
+  extensions: &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.tsx&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;.ts&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;.js&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sample"&gt;
+&lt;h2&gt;14. &lt;a class="toc-backref" href="#id14"&gt;Sample / 示例&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="webpack-common-js"&gt;
+&lt;h3&gt;14.1. &lt;a class="toc-backref" href="#id15"&gt;webpack.common.js&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;HtmlWebpackPlugin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;html-webpack-plugin&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;CleanWebpackPlugin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;clean-webpack-plugin&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;webpack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;webpack&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+module.exports &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  entry: &lt;span class="o"&gt;{&lt;/span&gt;
+    index: &lt;span class="s1"&gt;&amp;#39;./src/index.js&amp;#39;&lt;/span&gt;,
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+  plugins: &lt;span class="o"&gt;[&lt;/span&gt;
+    new CleanWebpackPlugin&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dist&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;])&lt;/span&gt;,
+    new HtmlWebpackPlugin&lt;span class="o"&gt;({&lt;/span&gt;
+      title: &lt;span class="s1"&gt;&amp;#39;Output01&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;,
+    new webpack.HashedModuleIdsPlugin&lt;span class="o"&gt;()&lt;/span&gt;,
+    new webpack.HotModuleReplacementPlugin&lt;span class="o"&gt;()&lt;/span&gt;,
+    new webpack.ProvidePlugin&lt;span class="o"&gt;({&lt;/span&gt;
+      _: &lt;span class="s1"&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;,
+  &lt;span class="o"&gt;]&lt;/span&gt;,
+  output: &lt;span class="o"&gt;{&lt;/span&gt;
+    filename: &lt;span class="s1"&gt;&amp;#39;[name].[hash].js&amp;#39;&lt;/span&gt;,
+    chunkFilename: &lt;span class="s1"&gt;&amp;#39;[name].[hash].js&amp;#39;&lt;/span&gt;,
+    path: path.resolve&lt;span class="o"&gt;(&lt;/span&gt;__dirname, &lt;span class="s1"&gt;&amp;#39;dist&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+  module: &lt;span class="o"&gt;{&lt;/span&gt;
+    rules: &lt;span class="o"&gt;[&lt;/span&gt;
+      &lt;span class="o"&gt;{&lt;/span&gt;
+        test: /&lt;span class="se"&gt;\.&lt;/span&gt;tsx?$/,
+        use: &lt;span class="s1"&gt;&amp;#39;ts-loader&amp;#39;&lt;/span&gt;,
+        exclude: /node_modules/
+      &lt;span class="o"&gt;}&lt;/span&gt;,
+      &lt;span class="o"&gt;{&lt;/span&gt;
+        test: /&lt;span class="se"&gt;\.&lt;/span&gt;css$/,
+        use: &lt;span class="o"&gt;[&lt;/span&gt;
+          &lt;span class="s1"&gt;&amp;#39;style-loader&amp;#39;&lt;/span&gt;,
+          &lt;span class="s1"&gt;&amp;#39;css-loader&amp;#39;&lt;/span&gt;,
+        &lt;span class="o"&gt;]&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt;,
+      &lt;span class="o"&gt;{&lt;/span&gt;
+        test: /&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;png&lt;span class="p"&gt;|&lt;/span&gt;svg&lt;span class="p"&gt;|&lt;/span&gt;jpg&lt;span class="p"&gt;|&lt;/span&gt;gif&lt;span class="o"&gt;)&lt;/span&gt;$/,
+        use: &lt;span class="o"&gt;[&lt;/span&gt;
+          &lt;span class="s1"&gt;&amp;#39;file-loader&amp;#39;&lt;/span&gt;,
+        &lt;span class="o"&gt;]&lt;/span&gt;,
+      &lt;span class="o"&gt;}&lt;/span&gt;,
+      &lt;span class="o"&gt;{&lt;/span&gt;
+        test: /&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;woff&lt;span class="p"&gt;|&lt;/span&gt;woff2&lt;span class="p"&gt;|&lt;/span&gt;eot&lt;span class="p"&gt;|&lt;/span&gt;ttf&lt;span class="p"&gt;|&lt;/span&gt;otf&lt;span class="o"&gt;)&lt;/span&gt;$/,
+        use: &lt;span class="o"&gt;[&lt;/span&gt;
+          &lt;span class="s1"&gt;&amp;#39;file-loader&amp;#39;&lt;/span&gt;
+        &lt;span class="o"&gt;]&lt;/span&gt;,
+      &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;]&lt;/span&gt;,
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+  resolve: &lt;span class="o"&gt;{&lt;/span&gt;
+    extensions: &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.tsx&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;.ts&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;.js&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="webpack-dev-js"&gt;
+&lt;h3&gt;14.2. &lt;a class="toc-backref" href="#id16"&gt;webpack.dev.js&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;webpack-merge&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;common&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./webpack.common.js&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+module.exports &lt;span class="o"&gt;=&lt;/span&gt; merge&lt;span class="o"&gt;(&lt;/span&gt;common, &lt;span class="o"&gt;{&lt;/span&gt;
+  // mode: &lt;span class="s1"&gt;&amp;#39;production&amp;#39;&lt;/span&gt;,
+  mode: &lt;span class="s1"&gt;&amp;#39;development&amp;#39;&lt;/span&gt;,
+  devtool: &lt;span class="s1"&gt;&amp;#39;inline-source-map&amp;#39;&lt;/span&gt;,
+  devServer: &lt;span class="o"&gt;{&lt;/span&gt;
+    contentBase: &lt;span class="s1"&gt;&amp;#39;./dist&amp;#39;&lt;/span&gt;,
+    hot: true,
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="webpack-prod-js"&gt;
+&lt;h3&gt;14.3. &lt;a class="toc-backref" href="#id17"&gt;webpack.prod.js&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;webpack-merge&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;common&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./webpack.common.js&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+module.exports &lt;span class="o"&gt;=&lt;/span&gt; merge&lt;span class="o"&gt;(&lt;/span&gt;common, &lt;span class="o"&gt;{&lt;/span&gt;
+  mode: &lt;span class="s1"&gt;&amp;#39;production&amp;#39;&lt;/span&gt;,
+  devtool: &lt;span class="s1"&gt;&amp;#39;source-map&amp;#39;&lt;/span&gt;,
+  optimization: &lt;span class="o"&gt;{&lt;/span&gt;
+    usedExports: true,
+    runtimeChunk: &lt;span class="s1"&gt;&amp;#39;single&amp;#39;&lt;/span&gt;,
+    splitChunks: &lt;span class="o"&gt;{&lt;/span&gt;
+      cacheGroups: &lt;span class="o"&gt;{&lt;/span&gt;
+        vendor: &lt;span class="o"&gt;{&lt;/span&gt;
+          test: /&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;/&lt;span class="o"&gt;]&lt;/span&gt;node_modules&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;/&lt;span class="o"&gt;]&lt;/span&gt;/,
+          name: &lt;span class="s1"&gt;&amp;#39;vendors&amp;#39;&lt;/span&gt;,
+          chunks: &lt;span class="s1"&gt;&amp;#39;all&amp;#39;&lt;/span&gt;,
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+      &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="package-json"&gt;
+&lt;h3&gt;14.4. &lt;a class="toc-backref" href="#id18"&gt;package.json&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;webpack-demo&amp;quot;&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;version&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;1.0.0&amp;quot;&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;description&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;private&amp;quot;&lt;/span&gt;: true,
+  &lt;span class="s2"&gt;&amp;quot;scripts&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;test&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;echo \&amp;quot;Error: no test specified\&amp;quot; &amp;amp;&amp;amp; exit 1&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;build&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;webpack --config webpack.prod.js&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;watch&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;webpack --watch&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;startHttp&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;http-server dist&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;start&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;webpack-dev-server --open --config webpack.dev.js&amp;quot;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;keywords&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;[]&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;author&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;ISC&amp;quot;&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;devDependencies&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;clean-webpack-plugin&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^1.0.0&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;css-loader&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^2.0.1&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;express&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^4.16.4&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;file-loader&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^2.0.0&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;html-webpack-plugin&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^3.2.0&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;http-server&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^0.11.1&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;style-loader&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^0.23.1&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;ts-loader&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^5.3.1&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;typescript&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^3.2.2&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;webpack&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^4.27.1&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;webpack-cli&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^3.1.2&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;webpack-dev-middleware&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^3.4.0&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;webpack-dev-server&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^3.1.10&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;webpack-merge&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^4.1.5&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;workbox-webpack-plugin&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^3.6.3&amp;quot;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;dependencies&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;lodash&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^4.17.11&amp;quot;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+  &lt;span class="s2"&gt;&amp;quot;sideEffects&amp;quot;&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tsconfig-json"&gt;
+&lt;h3&gt;14.5. &lt;a class="toc-backref" href="#id19"&gt;tsconfig.json&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s2"&gt;&amp;quot;compilerOptions&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;outDir&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;./dist/&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;sourceMap&amp;quot;&lt;/span&gt;: true,
+    &lt;span class="s2"&gt;&amp;quot;noImplicitAny&amp;quot;&lt;/span&gt;: true,
+    &lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;es6&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;target&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;es5&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;jsx&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;react&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;allowJs&amp;quot;&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Node"></category></entry><entry><title>Mount disk to VG / 磁盘挂载到虚拟分区</title><link href="/Tools_mount_disk_to_vg.html" rel="alternate"></link><published>2018-11-24T00:00:00+08:00</published><updated>2018-11-24T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-24:/Tools_mount_disk_to_vg.html</id><summary type="html">&lt;p class="first last"&gt;Tools - Mount Disk to VG&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="mount-disk-to-vg-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;

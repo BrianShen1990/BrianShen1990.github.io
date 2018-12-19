@@ -255,7 +255,7 @@ img.left, figure.left {float: left; margin: 0 2em 2em 0;}
 	Body
 *****************/
 #content {
-	background: #fff;
+	background: #fcfcfc;
 	margin-bottom: 2em;
 	overflow: hidden;
 	padding: 20px 20px;
@@ -264,6 +264,15 @@ img.left, figure.left {float: left; margin: 0 2em 2em 0;}
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+
+
+	font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+	font-weight: normal;
+	color: #404040;
+	min-height: 100%;
+	font-size: 16px;
+	overflow-x: hidden;
+
 }
 
 /*
@@ -561,18 +570,21 @@ div[class^='highlight'] pre {
     line-height: 1.5;
     display: block;
     overflow: auto;
-    color: #404040
+		color: #404040;
+		background-color:white;
+		border: 1px solid #e1e4e5;
 }
 
 code {
-  white-space: nowrap;
+	white-space: nowrap;
 	max-width: 100%;
 	background: #fff;
+	border: solid 1px #e1e4e5;
 	font-size: 75%;
-  border: solid 1px #e1e4e5;
-  font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
-  color: #E74C3C;
-  overflow-x: auto
+	padding: 0 5px;
+	font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
+	color: #E74C3C;
+	overflow-x: auto;
 }
 
 .error,
@@ -618,17 +630,14 @@ p.admonition-title {
 	background: #1abc9c
 }
 
-.entry-content {
-	font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
-	font-size: 16px;
-}
+/*
 
 .entry-content p {
 	line-height: 24px;
 	margin: 0;
 	font-size: 16px;
 	margin-bottom: 24px
-}
+} */
 
 .entry-content h1 {
 	font-size: 150%
@@ -644,4 +653,12 @@ p.admonition-title {
 	font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
 	margin-bottom: 10px;
 	margin-top: 10px;
+}
+
+ul li li {
+	list-style: circle;
+}
+
+ul li li li {
+	list-style: square;
 }
