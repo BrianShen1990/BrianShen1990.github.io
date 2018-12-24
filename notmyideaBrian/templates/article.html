@@ -23,8 +23,12 @@
       {% include 'article_infos.html' %}
       {{ article.content }}
     </div><!-- /.entry-content -->
-    {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+
+    {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}    
     <div class="comments">
+      <br />
+      <br />
+      <hr />
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
