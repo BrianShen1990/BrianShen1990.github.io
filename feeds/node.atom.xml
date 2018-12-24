@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Node</title><link href="/" rel="alternate"></link><link href="/feeds/node.atom.xml" rel="self"></link><id>/</id><updated>2018-12-18T00:00:00+08:00</updated><entry><title>Node Webpack</title><link href="/Node_Webpack.html" rel="alternate"></link><published>2018-12-18T00:00:00+08:00</published><updated>2018-12-18T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-12-18:/Node_Webpack.html</id><summary type="html">&lt;p class="first last"&gt;Node Webpack&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Node</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/node.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2018-12-18T00:00:00+08:00</updated><entry><title>Node Webpack</title><link href="https://brianshen1990.github.io/Node_Webpack.html" rel="alternate"></link><published>2018-12-18T00:00:00+08:00</published><updated>2018-12-18T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-12-18:/Node_Webpack.html</id><summary type="html">&lt;p class="first last"&gt;Node Webpack&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="node-webpack-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -450,7 +450,7 @@ module.exports &lt;span class="o"&gt;=&lt;/span&gt; merge&lt;span class="o"&gt;(
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="Node"></category></entry><entry><title>Node Task Queue Research / Node 任务队列学习</title><link href="/Node_Task_Queue_Research.html" rel="alternate"></link><published>2018-11-01T00:00:00+08:00</published><updated>2018-11-01T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:None,2018-11-01:/Node_Task_Queue_Research.html</id><summary type="html">&lt;p class="first last"&gt;Node Task Queue Research&lt;/p&gt;
+</content><category term="Node"></category></entry><entry><title>Node Task Queue Research / Node 任务队列学习</title><link href="https://brianshen1990.github.io/Node_Task_Queue_Research.html" rel="alternate"></link><published>2018-11-01T00:00:00+08:00</published><updated>2018-11-01T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-11-01:/Node_Task_Queue_Research.html</id><summary type="html">&lt;p class="first last"&gt;Node Task Queue Research&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="node-task-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
