@@ -1,5 +1,1552 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Node</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/node.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2018-12-18T00:00:00+08:00</updated><entry><title>Node Webpack</title><link href="https://brianshen1990.github.io/Node_Webpack.html" rel="alternate"></link><published>2018-12-18T00:00:00+08:00</published><updated>2018-12-18T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-12-18:/Node_Webpack.html</id><summary type="html">&lt;p class="first last"&gt;Node Webpack&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Node</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/node.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2018-12-21T00:00:00+08:00</updated><entry><title>ES6 Reference</title><link href="https://brianshen1990.github.io/ES6_Reference.html" rel="alternate"></link><published>2018-12-21T00:00:00+08:00</published><updated>2018-12-21T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-12-21:/ES6_Reference.html</id><summary type="html">&lt;p class="first last"&gt;ES6 Reference&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="es6-reference-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#let-const" id="id6"&gt;let &amp;amp; const&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#destructuring" id="id7"&gt;destructuring&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#usage" id="id8"&gt;Usage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#string" id="id9"&gt;String&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unicode" id="id10"&gt;Unicode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#codepointat" id="id11"&gt;codePointAt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#fromcodepoint" id="id12"&gt;fromCodePoint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#iteration" id="id13"&gt;iteration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#normalize" id="id14"&gt;normalize&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#newapis" id="id15"&gt;newAPIs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#string-template" id="id16"&gt;String Template&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#regex" id="id17"&gt;Regex&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unicode-support-u" id="id18"&gt;Unicode support &lt;code&gt;u&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#stick-y" id="id19"&gt;Stick &lt;code&gt;y&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#dotall-s" id="id20"&gt;dotAll &lt;code&gt;s&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#number" id="id21"&gt;Number&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#apis" id="id22"&gt;APIS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#function" id="id23"&gt;Function&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#rest-parameters" id="id24"&gt;Rest parameters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#strict-mode" id="id25"&gt;strict mode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#array-function" id="id26"&gt;Array Function&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#array" id="id27"&gt;Array&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#spread-operator" id="id28"&gt;spread operator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#object" id="id29"&gt;Object&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#syntax" id="id30"&gt;syntax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#attr" id="id31"&gt;ATTR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#operator" id="id32"&gt;Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id1" id="id33"&gt;APIs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#symbol" id="id34"&gt;Symbol&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id35"&gt;Usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id3" id="id36"&gt;Iteration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id4" id="id37"&gt;APIs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#set-and-map" id="id38"&gt;Set and  Map&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#set" id="id39"&gt;Set&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#map" id="id40"&gt;Map&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#proxy" id="id41"&gt;Proxy&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#proxy-actions-supoorted" id="id42"&gt;Proxy Actions Supoorted&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#proxy-revocable" id="id43"&gt;Proxy.revocable&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#this" id="id44"&gt;This&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reflect" id="id45"&gt;Reflect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#promises" id="id46"&gt;Promises&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id5" id="id47"&gt;APIs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#iterator" id="id48"&gt;Iterator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#generator" id="id49"&gt;Generator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#class" id="id50"&gt;Class&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#class-specials" id="id51"&gt;class specials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#warnings" id="id52"&gt;Warnings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#static" id="id53"&gt;Static&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#attrs" id="id54"&gt;attrs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#private-variables-and-attrs" id="id55"&gt;private variables and attrs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#new-target" id="id56"&gt;new.target&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#extends" id="id57"&gt;extends&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#super" id="id58"&gt;super&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#prototype-and-proto" id="id59"&gt;prototype and __proto__&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorator" id="id60"&gt;Decorator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#module" id="id61"&gt;Module&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#export" id="id62"&gt;export&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#import" id="id63"&gt;import&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#export-default" id="id64"&gt;export default&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#browser-load-es6" id="id65"&gt;Browser Load ES6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#es6-vs-commonjs" id="id66"&gt;ES6 VS CommonJS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference" id="id67"&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="let-const"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id6"&gt;let &amp;amp; const&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Just use them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="destructuring"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id7"&gt;destructuring&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h3&gt;2.1. &lt;a class="toc-backref" href="#id8"&gt;Usage&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Exchange value&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;x, y&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;y, x&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Return many values&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; example&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    foo: &lt;span class="m"&gt;1&lt;/span&gt;,
+    bar: &lt;span class="m"&gt;2&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; foo, bar &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; example&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Function definition&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; f&lt;span class="o"&gt;([&lt;/span&gt;x, y, z&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ... &lt;span class="o"&gt;}&lt;/span&gt;
+f&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;])&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;function&lt;/span&gt; f&lt;span class="o"&gt;({&lt;/span&gt;x, y, z&lt;span class="o"&gt;})&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ... &lt;span class="o"&gt;}&lt;/span&gt;
+f&lt;span class="o"&gt;({&lt;/span&gt;z: &lt;span class="m"&gt;3&lt;/span&gt;, y: &lt;span class="m"&gt;2&lt;/span&gt;, x: &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;JSON extraction&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;jsonData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  id: &lt;span class="m"&gt;42&lt;/span&gt;,
+  status: &lt;span class="s2"&gt;&amp;quot;OK&amp;quot;&lt;/span&gt;,
+  data: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;867&lt;/span&gt;, &lt;span class="m"&gt;5309&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; id, status, data: number &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; jsonData&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Default function parameter&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;jQuery.ajax &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;url, &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nv"&gt;async&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; true,
+  &lt;span class="nv"&gt;beforeSend&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;,
+  &lt;span class="nv"&gt;cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; true,
+  &lt;span class="nb"&gt;complete&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;,
+  &lt;span class="nv"&gt;crossDomain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; false,
+  &lt;span class="nv"&gt;global&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; true,
+  // ... more config
+&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{})&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  // ... &lt;span class="k"&gt;do&lt;/span&gt; stuff
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Map iteration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;key, value&lt;span class="o"&gt;]&lt;/span&gt; of map&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;key + &lt;span class="s2"&gt;&amp;quot; is &amp;quot;&lt;/span&gt; + value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Module import&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="o"&gt;{&lt;/span&gt; SourceMapConsumer, SourceNode &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;source-map&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="string"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id9"&gt;String&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="unicode"&gt;
+&lt;h3&gt;3.1. &lt;a class="toc-backref" href="#id10"&gt;Unicode&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\z&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;z&amp;#39;&lt;/span&gt;  // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;\172&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;z&amp;#39;&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;\x7A&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;z&amp;#39;&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;\u007A&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;z&amp;#39;&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt; // less than FFFF
+&lt;span class="s1"&gt;&amp;#39;\u{7A}&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;z&amp;#39;&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;  // greater than FFFF &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt; byte&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="codepointat"&gt;
+&lt;h3&gt;3.2. &lt;a class="toc-backref" href="#id11"&gt;codePointAt&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Handle characters taken more than 4 bytes.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;𠮷a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+s.length // &lt;span class="m"&gt;2&lt;/span&gt;
+s.charAt&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+s.charAt&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+s.charCodeAt&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="m"&gt;55362&lt;/span&gt;
+s.charCodeAt&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="m"&gt;57271&lt;/span&gt;
+s.codePointAt&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="m"&gt;134071&lt;/span&gt;
+s.codePointAt&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="m"&gt;57271&lt;/span&gt;
+s.codePointAt&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="m"&gt;97&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fromcodepoint"&gt;
+&lt;h3&gt;3.3. &lt;a class="toc-backref" href="#id12"&gt;fromCodePoint&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Only handle characters taken more than 4 bytes.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;String.fromCodePoint&lt;span class="o"&gt;(&lt;/span&gt;0x20BB7&lt;span class="o"&gt;)&lt;/span&gt;
+// &lt;span class="s2"&gt;&amp;quot;𠮷&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="iteration"&gt;
+&lt;h3&gt;3.4. &lt;a class="toc-backref" href="#id13"&gt;iteration&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;for...of&lt;/code&gt; syntax can handler all kinds of characters.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; String.fromCodePoint&lt;span class="o"&gt;(&lt;/span&gt;0x20BB7&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; i &amp;lt; text.length&lt;span class="p"&gt;;&lt;/span&gt; i++&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;text&lt;span class="o"&gt;[&lt;/span&gt;i&lt;span class="o"&gt;])&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;
+// &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; i of text&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;i&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// &lt;span class="s2"&gt;&amp;quot;𠮷&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="normalize"&gt;
+&lt;h3&gt;3.5. &lt;a class="toc-backref" href="#id14"&gt;normalize&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Handle European Characters.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="newapis"&gt;
+&lt;h3&gt;3.6. &lt;a class="toc-backref" href="#id15"&gt;newAPIs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;includes&lt;span class="o"&gt;()&lt;/span&gt;
+startsWith&lt;span class="o"&gt;()&lt;/span&gt;
+endsWith&lt;span class="o"&gt;()&lt;/span&gt;
+endsWith&lt;span class="o"&gt;()&lt;/span&gt;
+padStart&lt;span class="o"&gt;()&lt;/span&gt;
+padEnd&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="string-template"&gt;
+&lt;h3&gt;3.7. &lt;a class="toc-backref" href="#id16"&gt;String Template&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sb"&gt;`&lt;/span&gt;There are &amp;lt;b&amp;gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;basket&lt;/span&gt;&lt;span class="p"&gt;.count&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&amp;lt;/b&amp;gt; items&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="regex"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id17"&gt;Regex&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="unicode-support-u"&gt;
+&lt;h3&gt;4.1. &lt;a class="toc-backref" href="#id18"&gt;Unicode support &lt;code&gt;u&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;𠮷&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+/^.$/.test&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+/^.$/u.test&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+
+/&lt;span class="se"&gt;\u&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="m"&gt;61&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;/.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+/&lt;span class="se"&gt;\u&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="m"&gt;61&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;/u.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+/&lt;span class="se"&gt;\u&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;20BB7&lt;span class="o"&gt;}&lt;/span&gt;/u.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;𠮷&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+
+/a&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;/.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;aa&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+/a&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;/u.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;aa&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+/𠮷&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;/.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;𠮷𠮷&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+/𠮷&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;/u.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;𠮷𠮷&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="stick-y"&gt;
+&lt;h3&gt;4.2. &lt;a class="toc-backref" href="#id19"&gt;Stick &lt;code&gt;y&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;y&lt;/code&gt; begin after all match while &lt;code&gt;g&lt;/code&gt; begin at next character.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;aaa_aa_a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+var &lt;span class="nv"&gt;r1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /a+/g&lt;span class="p"&gt;;&lt;/span&gt;
+var &lt;span class="nv"&gt;r2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /a+/y&lt;span class="p"&gt;;&lt;/span&gt;
+
+r1.exec&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;aaa&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+r2.exec&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;aaa&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+
+r1.exec&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;aa&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+r2.exec&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; // null
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dotall-s"&gt;
+&lt;h3&gt;4.3. &lt;a class="toc-backref" href="#id20"&gt;dotAll &lt;code&gt;s&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We can support all characters. dot only represents normal characters.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/foo.bar/.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo\nbar&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+// &lt;span class="nb"&gt;false&lt;/span&gt;
+/foo.bar/s.test&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo\nbar&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="number"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id21"&gt;Number&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="apis"&gt;
+&lt;h3&gt;5.1. &lt;a class="toc-backref" href="#id22"&gt;APIS&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;isFinite, isNaN&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;15&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.8&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;NaN&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;Infinity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;-Infinity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;15&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isFinite&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+
+Number.isNaN&lt;span class="o"&gt;(&lt;/span&gt;NaN&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+Number.isNaN&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;15&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isNaN&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;15&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isNaN&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+Number.isNaN&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;9&lt;/span&gt;/NaN&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+Number.isNaN&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;true&amp;#39;&lt;/span&gt; / &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+Number.isNaN&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;true&amp;#39;&lt;/span&gt; / &lt;span class="s1"&gt;&amp;#39;true&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;parseInt&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;parseFloat&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;isInteger&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;isSafeInteger ( -2^53 ~ 2^53 )&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="function"&gt;
+&lt;h2&gt;6. &lt;a class="toc-backref" href="#id23"&gt;Function&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="rest-parameters"&gt;
+&lt;h3&gt;6.1. &lt;a class="toc-backref" href="#id24"&gt;Rest parameters&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;...varaiable&lt;/code&gt; to get all rest parameters. Array.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; add&lt;span class="o"&gt;(&lt;/span&gt;...values&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;var val of values&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="nv"&gt;sum&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; val&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; sum&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+add&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="m"&gt;10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="strict-mode"&gt;
+&lt;h3&gt;6.2. &lt;a class="toc-backref" href="#id25"&gt;strict mode&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Under strict mode, functions won't include &lt;code&gt;func.arguments&lt;/code&gt; and &lt;code&gt;func.caller&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;If we want to use strict mode, then the function itself cannot include
+- default value
+- deconstructing&lt;/p&gt;
+&lt;p&gt;Error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; doSomething&lt;span class="o"&gt;(&lt;/span&gt;a, &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; a&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;use strict&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  // code
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+const &lt;span class="nv"&gt;doSomething&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;({&lt;/span&gt;a, b&lt;span class="o"&gt;})&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;use strict&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  // code
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;doSomething&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;...a&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;use strict&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  // code
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  doSomething&lt;span class="o"&gt;({&lt;/span&gt;a, b&lt;span class="o"&gt;})&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;use strict&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    // code
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How we can avoid this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 1&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;use strict&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; doSomething&lt;span class="o"&gt;(&lt;/span&gt;a, &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; a&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  // code
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 2&lt;/span&gt;
+const &lt;span class="nv"&gt;doSomething&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;use strict&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;42&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; value&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}())&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="array-function"&gt;
+&lt;h3&gt;6.3. &lt;a class="toc-backref" href="#id26"&gt;Array Function&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Watch:
+- there is no &lt;code&gt;this&lt;/code&gt; in function, &lt;code&gt;this&lt;/code&gt; is the outside &lt;code&gt;this&lt;/code&gt; .
+- cannot use as a constructor
+- cannot use arguments object
+- cannot use yield&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="array"&gt;
+&lt;h2&gt;7. &lt;a class="toc-backref" href="#id27"&gt;Array&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="spread-operator"&gt;
+&lt;h3&gt;7.1. &lt;a class="toc-backref" href="#id28"&gt;spread operator&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;console.log&lt;span class="o"&gt;(&lt;/span&gt;...&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;])&lt;/span&gt;
+// &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Usage:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;clone&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;a1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;a2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;...a1&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;combine&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;arr1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;arr2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;...arr1, ...arr2&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;String length&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;x\uD83D\uDE80y&amp;#39;&lt;/span&gt;.length // &lt;span class="m"&gt;4&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="s1"&gt;&amp;#39;x\uD83D\uDE80y&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;.length // &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;generator&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;go&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;*&lt;span class="o"&gt;(){&lt;/span&gt;
+  yield &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt;...go&lt;span class="o"&gt;()]&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;APIs&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Array.from&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;arrayLike&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;,
+    &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,
+    &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;,
+    length: &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;arr2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Array.from&lt;span class="o"&gt;(&lt;/span&gt;arrayLike&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Array.Of&lt;/p&gt;
+&lt;p&gt;Array constructor exists some misunderstanding.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Array.of&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;11&lt;/span&gt;, &lt;span class="m"&gt;8&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;,11,8&lt;span class="o"&gt;]&lt;/span&gt;
+Array.of&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+Array.of&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.length // &lt;span class="m"&gt;1&lt;/span&gt;
+
+Array&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;[]&lt;/span&gt;
+Array&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;, , ,&lt;span class="o"&gt;]&lt;/span&gt;
+Array&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;11&lt;/span&gt;, &lt;span class="m"&gt;8&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;11&lt;/span&gt;, &lt;span class="m"&gt;8&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;find, findIndex&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;fill&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;entries()，keys() and values()&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; index of &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;.keys&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;index&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// &lt;span class="m"&gt;0&lt;/span&gt;
+// &lt;span class="m"&gt;1&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; elem of &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;.values&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;elem&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;
+// &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;index, elem&lt;span class="o"&gt;]&lt;/span&gt; of &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;.entries&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;index, elem&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;
+// &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;letter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;entries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; letter.entries&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+console.log&lt;span class="o"&gt;(&lt;/span&gt;entries.next&lt;span class="o"&gt;()&lt;/span&gt;.value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+console.log&lt;span class="o"&gt;(&lt;/span&gt;entries.next&lt;span class="o"&gt;()&lt;/span&gt;.value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+console.log&lt;span class="o"&gt;(&lt;/span&gt;entries.next&lt;span class="o"&gt;()&lt;/span&gt;.value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;includes&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;flat, flatMap&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;]]&lt;/span&gt;.flat&lt;span class="o"&gt;()&lt;/span&gt;
+// &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+
+
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;.flatMap&lt;span class="o"&gt;((&lt;/span&gt;x&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;[&lt;/span&gt;x, x * &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;])&lt;/span&gt;
+// &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;6&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;8&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="object"&gt;
+&lt;h2&gt;8. &lt;a class="toc-backref" href="#id29"&gt;Object&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="syntax"&gt;
+&lt;h3&gt;8.1. &lt;a class="toc-backref" href="#id30"&gt;syntax&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;baz&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;foo&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+baz // &lt;span class="o"&gt;{&lt;/span&gt;foo: &lt;span class="s2"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;lastWord&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last word&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;first word&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;,
+  &lt;span class="o"&gt;[&lt;/span&gt;lastWord&lt;span class="o"&gt;]&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;world&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+a&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;first word&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
+a&lt;span class="o"&gt;[&lt;/span&gt;lastWord&lt;span class="o"&gt;]&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;
+a&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;last word&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;
+
+!!!! Don&lt;span class="s1"&gt;&amp;#39;t use object as a key.&lt;/span&gt;
+&lt;span class="s1"&gt;const keyA = {a: 1};&lt;/span&gt;
+&lt;span class="s1"&gt;const keyB = {b: 2};&lt;/span&gt;
+&lt;span class="s1"&gt;const myObject = {&lt;/span&gt;
+&lt;span class="s1"&gt;  [keyA]: &amp;#39;&lt;/span&gt;valueA&lt;span class="s1"&gt;&amp;#39;,&lt;/span&gt;
+&lt;span class="s1"&gt;  [keyB]: &amp;#39;&lt;/span&gt;valueB&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+myObject // Object &lt;span class="o"&gt;{[&lt;/span&gt;object Object&lt;span class="o"&gt;]&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;valueB&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="attr"&gt;
+&lt;h3&gt;8.2. &lt;a class="toc-backref" href="#id31"&gt;ATTR&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;name&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  sayName&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;hello!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+person.sayName.name   // &lt;span class="s2"&gt;&amp;quot;sayName&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;super&lt;/code&gt; (Only in function of an object)&lt;/p&gt;
+&lt;p&gt;Point to the prototype.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;proto&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  foo: &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  foo: &lt;span class="s1"&gt;&amp;#39;world&amp;#39;&lt;/span&gt;,
+  find&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; super.foo&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+Object.setPrototypeOf&lt;span class="o"&gt;(&lt;/span&gt;obj, proto&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+obj.find&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="operator"&gt;
+&lt;h3&gt;8.3. &lt;a class="toc-backref" href="#id32"&gt;Operator&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; a: &lt;span class="m"&gt;3&lt;/span&gt;, b: &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ...z &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+n // &lt;span class="o"&gt;{&lt;/span&gt; a: &lt;span class="m"&gt;3&lt;/span&gt;, b: &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ...&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+foo
+// &lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;aClone&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ...a &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+// Same as
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;aClone&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Object.assign&lt;span class="o"&gt;({}&lt;/span&gt;, a&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3&gt;8.4. &lt;a class="toc-backref" href="#id33"&gt;APIs&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;Object.is&lt;/code&gt;  same as &lt;code&gt;===&lt;/code&gt; .&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;Object.assign&lt;/code&gt;
+- Shallow Copy
+- Array handle as object&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Object.assign&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;])&lt;/span&gt;
+// &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;get value and then overwrite&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;Object.getOwnPropertyDescriptor&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;set, get special functions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nb"&gt;source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;set&lt;/span&gt; foo&lt;span class="o"&gt;(&lt;/span&gt;value&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;target2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Object.defineProperties&lt;span class="o"&gt;(&lt;/span&gt;target2, Object.getOwnPropertyDescriptors&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Object.getOwnPropertyDescriptor&lt;span class="o"&gt;(&lt;/span&gt;target2, &lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+// &lt;span class="o"&gt;{&lt;/span&gt; get: undefined,
+//   set: &lt;span class="o"&gt;[&lt;/span&gt;Function: &lt;span class="nb"&gt;set&lt;/span&gt; foo&lt;span class="o"&gt;]&lt;/span&gt;,
+//   enumerable: true,
+//   configurable: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;__proto__ ，Object.setPrototypeOf()，Object.getPrototypeOf()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;Object.keys()，Object.values()，Object.entries()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;Object.fromEntries()&lt;/code&gt; adverse of &lt;code&gt;entries&lt;/code&gt; , from Map to Object.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="symbol"&gt;
+&lt;h2&gt;9. &lt;a class="toc-backref" href="#id34"&gt;Symbol&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h3&gt;9.1. &lt;a class="toc-backref" href="#id35"&gt;Usage&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Object has various attributes which are defined in string. So it is very easy to overwrite them.
+Symbol  is unique and is the 7th type of js.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+typeof s
+// &lt;span class="s2"&gt;&amp;quot;symbol&amp;quot;&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+s1 // Symbol&lt;span class="o"&gt;(&lt;/span&gt;foo&lt;span class="o"&gt;)&lt;/span&gt;
+s2 // Symbol&lt;span class="o"&gt;(&lt;/span&gt;bar&lt;span class="o"&gt;)&lt;/span&gt;
+s1.toString&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;Symbol(foo)&amp;quot;&lt;/span&gt;
+s2.toString&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;Symbol(bar)&amp;quot;&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; s2 // &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; s2 // &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Symbol can turn to strings only in explicit way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3&gt;9.2. &lt;a class="toc-backref" href="#id36"&gt;Iteration&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;When we use Symbol as an attribute, then , it won't appear in iterations.
+- &lt;code&gt;for...in&lt;/code&gt;
+- &lt;code&gt;for...of&lt;/code&gt;
+- &lt;code&gt;Object.keys()&lt;/code&gt;
+- &lt;code&gt;Object.getOwnPropertyNames()&lt;/code&gt;
+- &lt;code&gt;JSON.stringify()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We can get these attributes with &lt;code&gt;Object.getOwnPropertySymbols&lt;/code&gt; .&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;9.3. &lt;a class="toc-backref" href="#id37"&gt;APIs&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Symbol.for (create or get)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol.for&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol.for&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; s2 // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Symbol.keyFor&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol.for&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Symbol.keyFor&lt;span class="o"&gt;(&lt;/span&gt;s1&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Symbol.keyFor&lt;span class="o"&gt;(&lt;/span&gt;s2&lt;span class="o"&gt;)&lt;/span&gt; // undefined
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="set-and-map"&gt;
+&lt;h2&gt;10. &lt;a class="toc-backref" href="#id38"&gt;Set and  Map&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="set"&gt;
+&lt;h3&gt;10.1. &lt;a class="toc-backref" href="#id39"&gt;Set&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Set&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;.forEach&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; s.add&lt;span class="o"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; i of s&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;i&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;
+
+const &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Set&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;])&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;...set&lt;span class="o"&gt;]&lt;/span&gt;
+// &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;size&lt;/li&gt;
+&lt;li&gt;add()&lt;/li&gt;
+&lt;li&gt;delete()&lt;/li&gt;
+&lt;li&gt;has()&lt;/li&gt;
+&lt;li&gt;clear()&lt;/li&gt;
+&lt;li&gt;keys()&lt;/li&gt;
+&lt;li&gt;values()&lt;/li&gt;
+&lt;li&gt;entries()&lt;/li&gt;
+&lt;li&gt;forEach()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="map"&gt;
+&lt;h3&gt;10.2. &lt;a class="toc-backref" href="#id40"&gt;Map&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Hash Key Value.
+But, we can add everything as a key.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Map&lt;span class="o"&gt;([&lt;/span&gt;
+  &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;张三&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;,
+  &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Author&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;])&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+map.size // &lt;span class="m"&gt;2&lt;/span&gt;
+map.has&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+map.get&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;张三&amp;quot;&lt;/span&gt;
+map.has&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="nb"&gt;true&lt;/span&gt;
+map.get&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="s2"&gt;&amp;quot;Author&amp;quot;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;items&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;
+  &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;张三&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;,
+  &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Author&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Map&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+items.forEach&lt;span class="o"&gt;(&lt;/span&gt;
+  &lt;span class="o"&gt;([&lt;/span&gt;key, value&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; map.set&lt;span class="o"&gt;(&lt;/span&gt;key, value&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;size&lt;/li&gt;
+&lt;li&gt;add()&lt;/li&gt;
+&lt;li&gt;delete()&lt;/li&gt;
+&lt;li&gt;has()&lt;/li&gt;
+&lt;li&gt;clear()&lt;/li&gt;
+&lt;li&gt;keys()&lt;/li&gt;
+&lt;li&gt;values()&lt;/li&gt;
+&lt;li&gt;entries()&lt;/li&gt;
+&lt;li&gt;forEach()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="proxy"&gt;
+&lt;h2&gt;11. &lt;a class="toc-backref" href="#id41"&gt;Proxy&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;meta programming, which can change language.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var &lt;span class="nv"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Proxy&lt;span class="o"&gt;({}&lt;/span&gt;, &lt;span class="o"&gt;{&lt;/span&gt;
+  get: &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;target, key, receiver&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;getting &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;!&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; Reflect.get&lt;span class="o"&gt;(&lt;/span&gt;target, key, receiver&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;,
+  set: &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;target, key, value, receiver&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;setting &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;!&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; Reflect.set&lt;span class="o"&gt;(&lt;/span&gt;target, key, value, receiver&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+obj.count &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+//  setting count!
+++obj.count
+//  getting count!
+//  setting count!
+//  &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="proxy-actions-supoorted"&gt;
+&lt;h3&gt;11.1. &lt;a class="toc-backref" href="#id42"&gt;Proxy Actions Supoorted&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;get(target, propKey, receiver)&lt;/li&gt;
+&lt;li&gt;set(target, propKey, value, receiver)&lt;/li&gt;
+&lt;li&gt;has(target, propKey)&lt;/li&gt;
+&lt;li&gt;deleteProperty(target, propKey)&lt;/li&gt;
+&lt;li&gt;ownKeys(target)&lt;/li&gt;
+&lt;li&gt;getOwnPropertyDescriptor(target, propKey)&lt;/li&gt;
+&lt;li&gt;defineProperty(target, propKey, propDesc)&lt;/li&gt;
+&lt;li&gt;preventExtensions(target)&lt;/li&gt;
+&lt;li&gt;getPrototypeOf(target)&lt;/li&gt;
+&lt;li&gt;isExtensible(target)&lt;/li&gt;
+&lt;li&gt;setPrototypeOf(target, proto)&lt;/li&gt;
+&lt;li&gt;apply(target, object, args)&lt;/li&gt;
+&lt;li&gt;construct(target, args)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="proxy-revocable"&gt;
+&lt;h3&gt;11.2. &lt;a class="toc-backref" href="#id43"&gt;Proxy.revocable&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Stop proxy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;proxy, revoke&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Proxy.revocable&lt;span class="o"&gt;(&lt;/span&gt;target, handler&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+proxy.foo &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;123&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+proxy.foo // &lt;span class="m"&gt;123&lt;/span&gt;
+
+revoke&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+proxy.foo // TypeError: Revoked
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="this"&gt;
+&lt;h3&gt;11.3. &lt;a class="toc-backref" href="#id44"&gt;This&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This will point to Proxy itself.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  m: &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;this&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; proxy&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;proxy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Proxy&lt;span class="o"&gt;(&lt;/span&gt;target, handler&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+target.m&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="nb"&gt;false&lt;/span&gt;
+proxy.m&lt;span class="o"&gt;()&lt;/span&gt;  // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reflect"&gt;
+&lt;h2&gt;12. &lt;a class="toc-backref" href="#id45"&gt;Reflect&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Why:
+- Move some Object internal functions to Reflect
+- Refine some APIs that Object provides
+- Make all actions become functions (name in object =&amp;gt; has() )
+- Reflect and Proxy Combination&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Proxy&lt;span class="o"&gt;(&lt;/span&gt;target, &lt;span class="o"&gt;{&lt;/span&gt;
+  set: &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;target, name, value, receiver&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    var &lt;span class="nv"&gt;success&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Reflect.set&lt;span class="o"&gt;(&lt;/span&gt;target,name, value, receiver&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;success&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;property &amp;#39;&lt;/span&gt; + name + &lt;span class="s1"&gt;&amp;#39; on &amp;#39;&lt;/span&gt; + target + &lt;span class="s1"&gt;&amp;#39; set to &amp;#39;&lt;/span&gt; + value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; success&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Methods:
+- Reflect.apply(target, thisArg, args)
+- Reflect.construct(target, args)
+- Reflect.get(target, name, receiver)
+- Reflect.set(target, name, value, receiver)
+- Reflect.defineProperty(target, name, desc)
+- Reflect.deleteProperty(target, name)
+- Reflect.has(target, name)
+- Reflect.ownKeys(target)
+- Reflect.isExtensible(target)
+- Reflect.preventExtensions(target)
+- Reflect.getOwnPropertyDescriptor(target, name)
+- Reflect.getPrototypeOf(target)
+- Reflect.setPrototypeOf(target, prototype)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="promises"&gt;
+&lt;h2&gt;13. &lt;a class="toc-backref" href="#id46"&gt;Promises&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;3 States:
+- pending
+- fulfilled (resolved)
+- rejected&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;promise&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Promise&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;resolve, reject&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  // ... some code
+
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;success&lt;span class="o"&gt;){&lt;/span&gt;
+    resolve&lt;span class="o"&gt;(&lt;/span&gt;value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    reject&lt;span class="o"&gt;(&lt;/span&gt;error&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once created, it will run.
+Resolve and Reject cannot terminate Promise. So, always add return.&lt;/p&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;13.1. &lt;a class="toc-backref" href="#id47"&gt;APIs&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;then&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;getJSON&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/post/1.json&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt;
+  &lt;span class="nv"&gt;post&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; getJSON&lt;span class="o"&gt;(&lt;/span&gt;post.commentURL&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;)&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt;
+  &lt;span class="nv"&gt;comments&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;resolved: &amp;quot;&lt;/span&gt;, comments&lt;span class="o"&gt;)&lt;/span&gt;,
+  &lt;span class="nv"&gt;err&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;rejected: &amp;quot;&lt;/span&gt;, err&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;catch&lt;/p&gt;
+&lt;p&gt;Alias of &lt;code&gt;.then(null, rejection)&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;then can append after catch as catch itself will return a promise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;finally&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;promise
+.then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;···&lt;span class="o"&gt;})&lt;/span&gt;
+.catch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;···&lt;span class="o"&gt;})&lt;/span&gt;
+.finally&lt;span class="o"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;···&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;all&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;promises&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;7&lt;/span&gt;, &lt;span class="m"&gt;11&lt;/span&gt;, &lt;span class="m"&gt;13&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;.map&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;id&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; getJSON&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/post/&amp;#39;&lt;/span&gt; + id + &lt;span class="s2"&gt;&amp;quot;.json&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+Promise.all&lt;span class="o"&gt;(&lt;/span&gt;promises&lt;span class="o"&gt;)&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;posts&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  // ...
+&lt;span class="o"&gt;})&lt;/span&gt;.catch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;reason&lt;span class="o"&gt;){&lt;/span&gt;
+  // ...
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;race&lt;/p&gt;
+&lt;p&gt;Only one promise needs to be finished.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Promise.race&lt;span class="o"&gt;([&lt;/span&gt;
+  fetch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/resource-that-may-take-a-while&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,
+  new Promise&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;resolve, reject&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    setTimeout&lt;span class="o"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; reject&lt;span class="o"&gt;(&lt;/span&gt;new Error&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;request timeout&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;, &lt;span class="m"&gt;5000&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;
+&lt;span class="o"&gt;])&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+p
+.then&lt;span class="o"&gt;(&lt;/span&gt;console.log&lt;span class="o"&gt;)&lt;/span&gt;
+.catch&lt;span class="o"&gt;(&lt;/span&gt;console.error&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;resolve&lt;/p&gt;
+&lt;p&gt;Turn an object to a Promise object&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;jsPromise&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Promise.resolve&lt;span class="o"&gt;(&lt;/span&gt;$.ajax&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/whatever.json&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;reject&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Promise.reject&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;wrong&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+// same
+const &lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Promise&lt;span class="o"&gt;((&lt;/span&gt;resolve, reject&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; reject&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;wrong&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+
+p.then&lt;span class="o"&gt;(&lt;/span&gt;null, &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="iterator"&gt;
+&lt;h2&gt;14. &lt;a class="toc-backref" href="#id48"&gt;Iterator&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;If a data structure has &lt;code&gt;Symbol.iterator&lt;/code&gt; attribute, then it is iterable.
+And we can use &lt;code&gt;for...of&lt;/code&gt; to iterate it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="o"&gt;[&lt;/span&gt;Symbol.iterator&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      next: &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+          value: &lt;span class="m"&gt;1&lt;/span&gt;,
+          &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Native iterable objects:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Array&lt;/li&gt;
+&lt;li&gt;Map&lt;/li&gt;
+&lt;li&gt;Set&lt;/li&gt;
+&lt;li&gt;String&lt;/li&gt;
+&lt;li&gt;TypedArray&lt;/li&gt;
+&lt;li&gt;arguments object in function&lt;/li&gt;
+&lt;li&gt;NodeList&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sample:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;iter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; arr&lt;span class="o"&gt;[&lt;/span&gt;Symbol.iterator&lt;span class="o"&gt;]()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+iter.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iter.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iter.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iter.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: undefined, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we use it?
+- destruct and assign&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Set&lt;span class="o"&gt;()&lt;/span&gt;.add&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.add&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.add&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;x,y&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; set&lt;span class="p"&gt;;&lt;/span&gt;
+// &lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;first, ...rest&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; set&lt;span class="p"&gt;;&lt;/span&gt;
+// &lt;span class="nv"&gt;first&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;rest&lt;/span&gt;&lt;span class="o"&gt;=[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,&lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;expand operator &lt;code&gt;...&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;yield*&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;generator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;* &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  yield &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield* &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;,3,4&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+var &lt;span class="nv"&gt;iterator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; generator&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+iterator.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iterator.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iterator.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iterator.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iterator.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+iterator.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: undefined, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="generator"&gt;
+&lt;h2&gt;15. &lt;a class="toc-backref" href="#id49"&gt;Generator&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;State Machine.
+- A &lt;code&gt;*&lt;/code&gt; between &lt;code&gt;function&lt;/code&gt; and name.
+- use &lt;code&gt;yeild&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;When we call generator, it doesn't run. Instead, it return  a pointer to internal content.&lt;/p&gt;
+&lt;p&gt;We should call &lt;code&gt;next&lt;/code&gt; to get next state.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;* helloWorldGenerator&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  yield &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield &lt;span class="s1"&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ending&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+var &lt;span class="nv"&gt;hw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; helloWorldGenerator&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+hw.next&lt;span class="o"&gt;()&lt;/span&gt;
+// &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+hw.next&lt;span class="o"&gt;()&lt;/span&gt;
+// &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="s1"&gt;&amp;#39;world&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+hw.next&lt;span class="o"&gt;()&lt;/span&gt;
+// &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="s1"&gt;&amp;#39;ending&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+hw.next&lt;span class="o"&gt;()&lt;/span&gt;
+// &lt;span class="o"&gt;{&lt;/span&gt; value: undefined, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Legal syntax:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; * foo&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ··· &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; *foo&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ··· &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt;* foo&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ··· &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt;*foo&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ··· &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A parameter can be added to next function. And this value will be regarded as the previous yeild value.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;* f&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;var &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; true&lt;span class="p"&gt;;&lt;/span&gt; i++&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    var &lt;span class="nv"&gt;reset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; yield i&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;reset&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+var &lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; f&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+g.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+g.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+g.next&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Complex:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;* foo&lt;span class="o"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  var &lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;yield &lt;span class="o"&gt;(&lt;/span&gt;x + &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  var &lt;span class="nv"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; yield &lt;span class="o"&gt;(&lt;/span&gt;y / &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;x + y + z&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+var &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; foo&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+a.next&lt;span class="o"&gt;()&lt;/span&gt; // Object&lt;span class="o"&gt;{&lt;/span&gt;value:6, &lt;span class="k"&gt;done&lt;/span&gt;:false&lt;span class="o"&gt;}&lt;/span&gt;
+a.next&lt;span class="o"&gt;()&lt;/span&gt; // Object&lt;span class="o"&gt;{&lt;/span&gt;value:NaN, &lt;span class="k"&gt;done&lt;/span&gt;:false&lt;span class="o"&gt;}&lt;/span&gt;
+a.next&lt;span class="o"&gt;()&lt;/span&gt; // Object&lt;span class="o"&gt;{&lt;/span&gt;value:NaN, &lt;span class="k"&gt;done&lt;/span&gt;:true&lt;span class="o"&gt;}&lt;/span&gt;
+
+var &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; foo&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+b.next&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value:6, &lt;span class="k"&gt;done&lt;/span&gt;:false &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;
+b.next&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;12&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value:8, &lt;span class="k"&gt;done&lt;/span&gt;:false &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;*12, &lt;span class="nv"&gt;yield&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;24&lt;/span&gt;/3 &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt;
+b.next&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value:42, &lt;span class="k"&gt;done&lt;/span&gt;:true &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;13&lt;/span&gt;, so &lt;span class="m"&gt;5&lt;/span&gt;+ &lt;span class="m"&gt;24&lt;/span&gt; + &lt;span class="nv"&gt;13&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;42&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;* numbers &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  yield &lt;span class="m"&gt;1&lt;/span&gt;
+  yield &lt;span class="m"&gt;2&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;
+  yield &lt;span class="m"&gt;4&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt;...numbers&lt;span class="o"&gt;()]&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+
+Array.from&lt;span class="o"&gt;(&lt;/span&gt;numbers&lt;span class="o"&gt;())&lt;/span&gt; // &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;x, y&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; numbers&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+x // &lt;span class="m"&gt;1&lt;/span&gt;
+y // &lt;span class="m"&gt;2&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; n of numbers&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;n&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// &lt;span class="m"&gt;1&lt;/span&gt;
+// &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;throw&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var &lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;* &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  try &lt;span class="o"&gt;{&lt;/span&gt;
+    yield&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt; catch &lt;span class="o"&gt;(&lt;/span&gt;e&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Internal&amp;#39;&lt;/span&gt;, e&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+var &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; g&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+i.next&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+try &lt;span class="o"&gt;{&lt;/span&gt;
+  i.throw&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  i.throw&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt; catch &lt;span class="o"&gt;(&lt;/span&gt;e&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;External&amp;#39;&lt;/span&gt;, e&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// Internal a
+// External b
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;return&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;terminate iteration.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;* gen&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  yield &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+var &lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gen&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+g.next&lt;span class="o"&gt;()&lt;/span&gt;        // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+g.return&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; // &lt;span class="o"&gt;{&lt;/span&gt; value: &lt;span class="s2"&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+g.next&lt;span class="o"&gt;()&lt;/span&gt;        // &lt;span class="o"&gt;{&lt;/span&gt; value: undefined, &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;code&gt;yield *&lt;/code&gt; : call another generator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;* bar&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  yield &lt;span class="s1"&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield* foo&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  yield &lt;span class="s1"&gt;&amp;#39;y&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;generator function as an object attribution&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  * myGeneratorMethod&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    ···
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  myGeneratorMethod: &lt;span class="k"&gt;function&lt;/span&gt;* &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    // ···
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="class"&gt;
+&lt;h2&gt;16. &lt;a class="toc-backref" href="#id50"&gt;Class&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Old&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; Point&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  this.x &lt;span class="o"&gt;=&lt;/span&gt; x&lt;span class="p"&gt;;&lt;/span&gt;
+  this.y &lt;span class="o"&gt;=&lt;/span&gt; y&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+Point.prototype.toString &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(&amp;#39;&lt;/span&gt; + this.x + &lt;span class="s1"&gt;&amp;#39;, &amp;#39;&lt;/span&gt; + this.y + &lt;span class="s1"&gt;&amp;#39;)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+var &lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Point&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# New&lt;/span&gt;
+class Point &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this.x &lt;span class="o"&gt;=&lt;/span&gt; x&lt;span class="p"&gt;;&lt;/span&gt;
+    this.y &lt;span class="o"&gt;=&lt;/span&gt; y&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  toString&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(&amp;#39;&lt;/span&gt; + this.x + &lt;span class="s1"&gt;&amp;#39;, &amp;#39;&lt;/span&gt; + this.y + &lt;span class="s1"&gt;&amp;#39;)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="class-specials"&gt;
+&lt;h3&gt;16.1. &lt;a class="toc-backref" href="#id51"&gt;class specials&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;constructor&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;getter and setter&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class MyClass &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    // ...
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  get prop&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;getter&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="nb"&gt;set&lt;/span&gt; prop&lt;span class="o"&gt;(&lt;/span&gt;value&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;setter: &amp;#39;&lt;/span&gt;+value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;inst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new MyClass&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+inst.prop &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;123&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+// setter: &lt;span class="m"&gt;123&lt;/span&gt;
+inst.prop
+// &lt;span class="s1"&gt;&amp;#39;getter&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Another form&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;MyClass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; class Me &lt;span class="o"&gt;{&lt;/span&gt;
+  getClassName&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; Me.name&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;inst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new MyClass&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+inst.getClassName&lt;span class="o"&gt;()&lt;/span&gt; // Me
+Me.name // ReferenceError: Me is not defined
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="warnings"&gt;
+&lt;h3&gt;16.2. &lt;a class="toc-backref" href="#id52"&gt;Warnings&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;default use strict&lt;/li&gt;
+&lt;li&gt;class will not hoist, move definition to the top.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="static"&gt;
+&lt;h3&gt;16.3. &lt;a class="toc-backref" href="#id53"&gt;Static&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Foo &lt;span class="o"&gt;{&lt;/span&gt;
+  static classMethod&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+Foo.classMethod&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;
+
+var &lt;span class="nv"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Foo&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+foo.classMethod&lt;span class="o"&gt;()&lt;/span&gt;
+// TypeError: foo.classMethod is not a &lt;span class="k"&gt;function&lt;/span&gt;
+
+
+class Foo &lt;span class="o"&gt;{&lt;/span&gt;
+  static classMethod&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+class Bar extends Foo &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+Bar.classMethod&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;
+
+class Foo &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+Foo.prop &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Foo.prop // &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="attrs"&gt;
+&lt;h3&gt;16.4. &lt;a class="toc-backref" href="#id54"&gt;attrs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class IncreasingCounter &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this._count &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  get value&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Getting the current value!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; this._count&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  increment&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this._count++&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+// same
+class IncreasingCounter &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nv"&gt;_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  get value&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Getting the current value!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; this._count&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  increment&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this._count++&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="private-variables-and-attrs"&gt;
+&lt;h3&gt;16.5. &lt;a class="toc-backref" href="#id55"&gt;private variables and attrs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Widget &lt;span class="o"&gt;{&lt;/span&gt;
+  // public
+  foo &lt;span class="o"&gt;(&lt;/span&gt;baz&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this._bar&lt;span class="o"&gt;(&lt;/span&gt;baz&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  // private
+  _bar&lt;span class="o"&gt;(&lt;/span&gt;baz&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; this.snaf &lt;span class="o"&gt;=&lt;/span&gt; baz&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  // ...
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can use symbol. But it is a little strange.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;bar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;snaf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Symbol&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;snaf&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nb"&gt;export&lt;/span&gt; default class myClass&lt;span class="o"&gt;{&lt;/span&gt;
+  // public
+  foo&lt;span class="o"&gt;(&lt;/span&gt;baz&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this&lt;span class="o"&gt;[&lt;/span&gt;bar&lt;span class="o"&gt;](&lt;/span&gt;baz&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  // private
+  &lt;span class="o"&gt;[&lt;/span&gt;bar&lt;span class="o"&gt;](&lt;/span&gt;baz&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; this&lt;span class="o"&gt;[&lt;/span&gt;snaf&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; baz&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  // ...
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="new-target"&gt;
+&lt;h3&gt;16.6. &lt;a class="toc-backref" href="#id56"&gt;new.target&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Constructor or copy-constructor&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; Person&lt;span class="o"&gt;(&lt;/span&gt;name&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;new.target !&lt;span class="o"&gt;==&lt;/span&gt; undefined&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this.name &lt;span class="o"&gt;=&lt;/span&gt; name&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    throw new Error&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;must use new &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// or
+&lt;span class="k"&gt;function&lt;/span&gt; Person&lt;span class="o"&gt;(&lt;/span&gt;name&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;new.target &lt;span class="o"&gt;===&lt;/span&gt; Person&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this.name &lt;span class="o"&gt;=&lt;/span&gt; name&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    throw new Error&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;must use new &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+var &lt;span class="nv"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Person&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // correct
+var &lt;span class="nv"&gt;notAPerson&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Person.call&lt;span class="o"&gt;(&lt;/span&gt;person, &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  // error
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In a derived class, new.target will return derived class.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="extends"&gt;
+&lt;h3&gt;16.7. &lt;a class="toc-backref" href="#id57"&gt;extends&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;super must be called to initialize parent instance.
+And this can be used after super.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Point &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+class ColorPoint extends Point &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;(&lt;/span&gt;x, y, color&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    super&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // 调用父类的constructor&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt;
+    this.color &lt;span class="o"&gt;=&lt;/span&gt; color&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+
+  toString&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; this.color + &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; + super.toString&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // 调用父类的toString&lt;span class="o"&gt;()&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;if constructor is not defined, then:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class ColorPoint extends Point &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// same
+class ColorPoint extends Point &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;(&lt;/span&gt;...args&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    super&lt;span class="o"&gt;(&lt;/span&gt;...args&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="super"&gt;
+&lt;h3&gt;16.8. &lt;a class="toc-backref" href="#id58"&gt;super&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;when we use super as an object, that means we are using &lt;code&gt;Parent.prototype&lt;/code&gt; .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class A &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this.p &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+class B extends A &lt;span class="o"&gt;{&lt;/span&gt;
+  get m&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; super.p&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new B&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+b.m // undefined
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Child class calls parent class functions, &lt;code&gt;this&lt;/code&gt; represents Child class.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class A &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this.x &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  print&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;this.x&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+class B extends A &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    super&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    this.x &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  m&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    super.print&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new B&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+b.m&lt;span class="o"&gt;()&lt;/span&gt; // &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;In Child, if we assign super a value (&lt;code&gt;super.x = 3;&lt;/code&gt; ), then we are also using child itself.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class A &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    this.x &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+class B extends A &lt;span class="o"&gt;{&lt;/span&gt;
+  constructor&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    super&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    this.x &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    super.x &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;super.x&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // undefined
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;this.x&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="m"&gt;3&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new B&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;in static methods, super means parent.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Parent &lt;span class="o"&gt;{&lt;/span&gt;
+  static myMethod&lt;span class="o"&gt;(&lt;/span&gt;msg&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;, msg&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+
+  myMethod&lt;span class="o"&gt;(&lt;/span&gt;msg&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;instance&amp;#39;&lt;/span&gt;, msg&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+class Child extends Parent &lt;span class="o"&gt;{&lt;/span&gt;
+  static myMethod&lt;span class="o"&gt;(&lt;/span&gt;msg&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    super.myMethod&lt;span class="o"&gt;(&lt;/span&gt;msg&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+
+  myMethod&lt;span class="o"&gt;(&lt;/span&gt;msg&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    super.myMethod&lt;span class="o"&gt;(&lt;/span&gt;msg&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+Child.myMethod&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // static &lt;span class="m"&gt;1&lt;/span&gt;
+
+var &lt;span class="nv"&gt;child&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Child&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+child.myMethod&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // instance &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prototype-and-proto"&gt;
+&lt;h3&gt;16.9. &lt;a class="toc-backref" href="#id59"&gt;prototype and __proto__&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class A &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+class B extends A &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+B.__proto__ &lt;span class="o"&gt;===&lt;/span&gt; A // &lt;span class="nb"&gt;true&lt;/span&gt;
+B.prototype.__proto__ &lt;span class="o"&gt;===&lt;/span&gt; A.prototype // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="decorator"&gt;
+&lt;h2&gt;17. &lt;a class="toc-backref" href="#id60"&gt;Decorator&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Class Decorator&lt;/p&gt;
+&lt;p&gt;Python like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@testable
+class MyTestableClass &lt;span class="o"&gt;{&lt;/span&gt;
+  // ...
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; testable&lt;span class="o"&gt;(&lt;/span&gt;target&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  target.isTestable &lt;span class="o"&gt;=&lt;/span&gt; true&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+MyTestableClass.isTestable // &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Class Function Decorator&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Person &lt;span class="o"&gt;{&lt;/span&gt;
+  @readonly
+  name&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.first&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.last&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Can't apply to pure function
+Because function will hoist.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;var &lt;span class="nv"&gt;readOnly&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some-decorator&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+@readOnly
+&lt;span class="k"&gt;function&lt;/span&gt; foo&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# same&lt;/span&gt;
+
+var readOnly&lt;span class="p"&gt;;&lt;/span&gt;
+@readOnly
+&lt;span class="k"&gt;function&lt;/span&gt; foo&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nv"&gt;readOnly&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some-decorator&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="module"&gt;
+&lt;h2&gt;18. &lt;a class="toc-backref" href="#id61"&gt;Module&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;CommonJS&lt;/code&gt; : backend
+&lt;code&gt;AMD&lt;/code&gt; : UI&lt;/p&gt;
+&lt;p&gt;Both CommonJS and AMD are dynamic.
+But ES6 &lt;code&gt;import&lt;/code&gt; and &lt;code&gt;export&lt;/code&gt; are static.&lt;/p&gt;
+&lt;div class="section" id="export"&gt;
+&lt;h3&gt;18.1. &lt;a class="toc-backref" href="#id62"&gt;export&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; var &lt;span class="nv"&gt;lastName&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Jackson&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; multiply&lt;span class="o"&gt;(&lt;/span&gt;x, y&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; x * y&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;function&lt;/span&gt; v1&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ... &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; v2&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; ... &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  v1 as streamV1,
+  v2 as streamV2,
+  v2 as streamLatestVersion
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="import"&gt;
+&lt;h3&gt;18.2. &lt;a class="toc-backref" href="#id63"&gt;import&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Read only.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import &lt;span class="o"&gt;{&lt;/span&gt;firstName, lastName, year&lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;./profile.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt; lastName as surname &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;./profile.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;import&lt;/code&gt; will be lifetd to the top of a file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="export-default"&gt;
+&lt;h3&gt;18.3. &lt;a class="toc-backref" href="#id64"&gt;export default&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; default &lt;span class="k"&gt;function&lt;/span&gt; crc32&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  // ...
+&lt;span class="o"&gt;}&lt;/span&gt;
+import crc32 from &lt;span class="s1"&gt;&amp;#39;crc32&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; crc32&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  // ...
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+import &lt;span class="o"&gt;{&lt;/span&gt;crc32&lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;crc32&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+import _, &lt;span class="o"&gt;{&lt;/span&gt; each, forEach &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using defualt will make the module in a single package.&lt;/p&gt;
+&lt;p&gt;Constants in different modules:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// constants.js 模块
+&lt;span class="nb"&gt;export&lt;/span&gt; const &lt;span class="nv"&gt;A&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; const &lt;span class="nv"&gt;B&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; const &lt;span class="nv"&gt;C&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+// test1.js 模块
+import * as constants from &lt;span class="s1"&gt;&amp;#39;./constants&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+console.log&lt;span class="o"&gt;(&lt;/span&gt;constants.A&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="m"&gt;1&lt;/span&gt;
+console.log&lt;span class="o"&gt;(&lt;/span&gt;constants.B&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="m"&gt;3&lt;/span&gt;
+
+// test2.js 模块
+import &lt;span class="o"&gt;{&lt;/span&gt;A, B&lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;./constants&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+console.log&lt;span class="o"&gt;(&lt;/span&gt;A&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="m"&gt;1&lt;/span&gt;
+console.log&lt;span class="o"&gt;(&lt;/span&gt;B&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; // &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="browser-load-es6"&gt;
+&lt;h3&gt;18.4. &lt;a class="toc-backref" href="#id65"&gt;Browser Load ES6&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;script &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./foo.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;    // Async
+&amp;lt;script &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./foo.js&amp;quot;&lt;/span&gt; async&amp;gt;&amp;lt;/script&amp;gt;    // Sync
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="es6-vs-commonjs"&gt;
+&lt;h3&gt;18.5. &lt;a class="toc-backref" href="#id66"&gt;ES6 VS CommonJS&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;CommonJS export a copy of Value while ES6 export reference.&lt;/li&gt;
+&lt;li&gt;CommonJS load dynamically while ES6 load statically.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference"&gt;
+&lt;h2&gt;19. &lt;a class="toc-backref" href="#id67"&gt;Reference&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://es6.ruanyifeng.com/"&gt;http://es6.ruanyifeng.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Node"></category></entry><entry><title>Node Webpack</title><link href="https://brianshen1990.github.io/Node_Webpack.html" rel="alternate"></link><published>2018-12-18T00:00:00+08:00</published><updated>2018-12-18T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-12-18:/Node_Webpack.html</id><summary type="html">&lt;p class="first last"&gt;Node Webpack&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="node-webpack-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;

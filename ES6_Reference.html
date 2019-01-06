@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>ES6 Reference</title>
+        <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+        <link href="https://brianshen1990.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="KNOWN Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://brianshen1990.github.io/">KNOWN </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://brianshen1990.github.io/category/node.html">Node</a></li>
+                    <li><a href="https://brianshen1990.github.io/category/tools.html">Tools</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://brianshen1990.github.io/ES6_Reference.html" rel="bookmark"
+           title="Permalink to ES6 Reference">ES6 Reference</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-12-21T00:00:00+08:00">
+                Published: Fri 21 December 2018
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html">Brian Shen</a>
+        </address>
+<p>In <a href="https://brianshen1990.github.io/category/node.html">Node</a>.</p>
+<p>tags: <a href="https://brianshen1990.github.io/tag/node.html">Node</a> </p>
+</footer><!-- /.post-info -->      <div class="contents topic" id="contents">
+<span id="es6-reference-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#let-const" id="id6">let &amp; const</a></li>
+<li><a class="reference internal" href="#destructuring" id="id7">destructuring</a><ul>
+<li><a class="reference internal" href="#usage" id="id8">Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#string" id="id9">String</a><ul>
+<li><a class="reference internal" href="#unicode" id="id10">Unicode</a></li>
+<li><a class="reference internal" href="#codepointat" id="id11">codePointAt</a></li>
+<li><a class="reference internal" href="#fromcodepoint" id="id12">fromCodePoint</a></li>
+<li><a class="reference internal" href="#iteration" id="id13">iteration</a></li>
+<li><a class="reference internal" href="#normalize" id="id14">normalize</a></li>
+<li><a class="reference internal" href="#newapis" id="id15">newAPIs</a></li>
+<li><a class="reference internal" href="#string-template" id="id16">String Template</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#regex" id="id17">Regex</a><ul>
+<li><a class="reference internal" href="#unicode-support-u" id="id18">Unicode support <code>u</code></a></li>
+<li><a class="reference internal" href="#stick-y" id="id19">Stick <code>y</code></a></li>
+<li><a class="reference internal" href="#dotall-s" id="id20">dotAll <code>s</code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#number" id="id21">Number</a><ul>
+<li><a class="reference internal" href="#apis" id="id22">APIS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function" id="id23">Function</a><ul>
+<li><a class="reference internal" href="#rest-parameters" id="id24">Rest parameters</a></li>
+<li><a class="reference internal" href="#strict-mode" id="id25">strict mode</a></li>
+<li><a class="reference internal" href="#array-function" id="id26">Array Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#array" id="id27">Array</a><ul>
+<li><a class="reference internal" href="#spread-operator" id="id28">spread operator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#object" id="id29">Object</a><ul>
+<li><a class="reference internal" href="#syntax" id="id30">syntax</a></li>
+<li><a class="reference internal" href="#attr" id="id31">ATTR</a></li>
+<li><a class="reference internal" href="#operator" id="id32">Operator</a></li>
+<li><a class="reference internal" href="#id1" id="id33">APIs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#symbol" id="id34">Symbol</a><ul>
+<li><a class="reference internal" href="#id2" id="id35">Usage</a></li>
+<li><a class="reference internal" href="#id3" id="id36">Iteration</a></li>
+<li><a class="reference internal" href="#id4" id="id37">APIs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#set-and-map" id="id38">Set and  Map</a><ul>
+<li><a class="reference internal" href="#set" id="id39">Set</a></li>
+<li><a class="reference internal" href="#map" id="id40">Map</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#proxy" id="id41">Proxy</a><ul>
+<li><a class="reference internal" href="#proxy-actions-supoorted" id="id42">Proxy Actions Supoorted</a></li>
+<li><a class="reference internal" href="#proxy-revocable" id="id43">Proxy.revocable</a></li>
+<li><a class="reference internal" href="#this" id="id44">This</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reflect" id="id45">Reflect</a></li>
+<li><a class="reference internal" href="#promises" id="id46">Promises</a><ul>
+<li><a class="reference internal" href="#id5" id="id47">APIs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iterator" id="id48">Iterator</a></li>
+<li><a class="reference internal" href="#generator" id="id49">Generator</a></li>
+<li><a class="reference internal" href="#class" id="id50">Class</a><ul>
+<li><a class="reference internal" href="#class-specials" id="id51">class specials</a></li>
+<li><a class="reference internal" href="#warnings" id="id52">Warnings</a></li>
+<li><a class="reference internal" href="#static" id="id53">Static</a></li>
+<li><a class="reference internal" href="#attrs" id="id54">attrs</a></li>
+<li><a class="reference internal" href="#private-variables-and-attrs" id="id55">private variables and attrs</a></li>
+<li><a class="reference internal" href="#new-target" id="id56">new.target</a></li>
+<li><a class="reference internal" href="#extends" id="id57">extends</a></li>
+<li><a class="reference internal" href="#super" id="id58">super</a></li>
+<li><a class="reference internal" href="#prototype-and-proto" id="id59">prototype and __proto__</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decorator" id="id60">Decorator</a></li>
+<li><a class="reference internal" href="#module" id="id61">Module</a><ul>
+<li><a class="reference internal" href="#export" id="id62">export</a></li>
+<li><a class="reference internal" href="#import" id="id63">import</a></li>
+<li><a class="reference internal" href="#export-default" id="id64">export default</a></li>
+<li><a class="reference internal" href="#browser-load-es6" id="id65">Browser Load ES6</a></li>
+<li><a class="reference internal" href="#es6-vs-commonjs" id="id66">ES6 VS CommonJS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference" id="id67">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="let-const">
+<h2>1. <a class="toc-backref" href="#id6">let &amp; const</a></h2>
+<p>Just use them.</p>
+</div>
+<div class="section" id="destructuring">
+<h2>2. <a class="toc-backref" href="#id7">destructuring</a></h2>
+<div class="section" id="usage">
+<h3>2.1. <a class="toc-backref" href="#id8">Usage</a></h3>
+<ul>
+<li><p class="first">Exchange value</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
+<span class="o">[</span>x, y<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>y, x<span class="o">]</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">Return many values</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> example<span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="o">{</span>
+    foo: <span class="m">1</span>,
+    bar: <span class="m">2</span>
+  <span class="o">}</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="nb">let</span> <span class="o">{</span> foo, bar <span class="o">}</span> <span class="o">=</span> example<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">Function definition</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> f<span class="o">([</span>x, y, z<span class="o">])</span> <span class="o">{</span> ... <span class="o">}</span>
+f<span class="o">([</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">])</span><span class="p">;</span>
+
+<span class="k">function</span> f<span class="o">({</span>x, y, z<span class="o">})</span> <span class="o">{</span> ... <span class="o">}</span>
+f<span class="o">({</span>z: <span class="m">3</span>, y: <span class="m">2</span>, x: <span class="m">1</span><span class="o">})</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">JSON extraction</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">jsonData</span> <span class="o">=</span> <span class="o">{</span>
+  id: <span class="m">42</span>,
+  status: <span class="s2">&quot;OK&quot;</span>,
+  data: <span class="o">[</span><span class="m">867</span>, <span class="m">5309</span><span class="o">]</span>
+<span class="o">}</span><span class="p">;</span>
+<span class="nb">let</span> <span class="o">{</span> id, status, data: number <span class="o">}</span> <span class="o">=</span> jsonData<span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">Default function parameter</p>
+<div class="highlight"><pre><span></span>jQuery.ajax <span class="o">=</span> <span class="k">function</span> <span class="o">(</span>url, <span class="o">{</span>
+  <span class="nv">async</span> <span class="o">=</span> true,
+  <span class="nv">beforeSend</span> <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{}</span>,
+  <span class="nv">cache</span> <span class="o">=</span> true,
+  <span class="nb">complete</span> <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{}</span>,
+  <span class="nv">crossDomain</span> <span class="o">=</span> false,
+  <span class="nv">global</span> <span class="o">=</span> true,
+  // ... more config
+<span class="o">}</span> <span class="o">=</span> <span class="o">{})</span> <span class="o">{</span>
+  // ... <span class="k">do</span> stuff
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">Map iteration</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="o">(</span><span class="nb">let</span> <span class="o">[</span>key, value<span class="o">]</span> of map<span class="o">)</span> <span class="o">{</span>
+  console.log<span class="o">(</span>key + <span class="s2">&quot; is &quot;</span> + value<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</li>
+<li><p class="first">Module import</p>
+<div class="highlight"><pre><span></span>const <span class="o">{</span> SourceMapConsumer, SourceNode <span class="o">}</span> <span class="o">=</span> require<span class="o">(</span><span class="s2">&quot;source-map&quot;</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="string">
+<h2>3. <a class="toc-backref" href="#id9">String</a></h2>
+<div class="section" id="unicode">
+<h3>3.1. <a class="toc-backref" href="#id10">Unicode</a></h3>
+<div class="highlight"><pre><span></span><span class="s1">&#39;\z&#39;</span> <span class="o">===</span> <span class="s1">&#39;z&#39;</span>  // <span class="nb">true</span>
+<span class="s1">&#39;\172&#39;</span> <span class="o">===</span> <span class="s1">&#39;z&#39;</span> // <span class="nb">true</span>
+<span class="s1">&#39;\x7A&#39;</span> <span class="o">===</span> <span class="s1">&#39;z&#39;</span> // <span class="nb">true</span>
+<span class="s1">&#39;\u007A&#39;</span> <span class="o">===</span> <span class="s1">&#39;z&#39;</span> // <span class="nb">true</span> // less than FFFF
+<span class="s1">&#39;\u{7A}&#39;</span> <span class="o">===</span> <span class="s1">&#39;z&#39;</span> // <span class="nb">true</span>  // greater than FFFF <span class="o">(</span><span class="m">4</span> byte<span class="o">)</span>
+</pre></div>
+</div>
+<div class="section" id="codepointat">
+<h3>3.2. <a class="toc-backref" href="#id11">codePointAt</a></h3>
+<p>Handle characters taken more than 4 bytes.</p>
+<div class="highlight"><pre><span></span>var <span class="nv">s</span> <span class="o">=</span> <span class="s2">&quot;𠮷a&quot;</span><span class="p">;</span>
+
+s.length // <span class="m">2</span>
+s.charAt<span class="o">(</span><span class="m">0</span><span class="o">)</span> // <span class="s1">&#39;&#39;</span>
+s.charAt<span class="o">(</span><span class="m">1</span><span class="o">)</span> // <span class="s1">&#39;&#39;</span>
+s.charCodeAt<span class="o">(</span><span class="m">0</span><span class="o">)</span> // <span class="m">55362</span>
+s.charCodeAt<span class="o">(</span><span class="m">1</span><span class="o">)</span> // <span class="m">57271</span>
+s.codePointAt<span class="o">(</span><span class="m">0</span><span class="o">)</span> // <span class="m">134071</span>
+s.codePointAt<span class="o">(</span><span class="m">1</span><span class="o">)</span> // <span class="m">57271</span>
+s.codePointAt<span class="o">(</span><span class="m">2</span><span class="o">)</span> // <span class="m">97</span>
+</pre></div>
+</div>
+<div class="section" id="fromcodepoint">
+<h3>3.3. <a class="toc-backref" href="#id12">fromCodePoint</a></h3>
+<p>Only handle characters taken more than 4 bytes.</p>
+<div class="highlight"><pre><span></span>String.fromCodePoint<span class="o">(</span>0x20BB7<span class="o">)</span>
+// <span class="s2">&quot;𠮷&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="iteration">
+<h3>3.4. <a class="toc-backref" href="#id13">iteration</a></h3>
+<p><code>for...of</code> syntax can handler all kinds of characters.</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">text</span> <span class="o">=</span> String.fromCodePoint<span class="o">(</span>0x20BB7<span class="o">)</span><span class="p">;</span>
+<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> <span class="nv">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> i &lt; text.length<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
+  console.log<span class="o">(</span>text<span class="o">[</span>i<span class="o">])</span><span class="p">;</span>
+<span class="o">}</span>
+// <span class="s2">&quot; &quot;</span>
+// <span class="s2">&quot; &quot;</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> i of text<span class="o">)</span> <span class="o">{</span>
+  console.log<span class="o">(</span>i<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+// <span class="s2">&quot;𠮷&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="normalize">
+<h3>3.5. <a class="toc-backref" href="#id14">normalize</a></h3>
+<p>Handle European Characters.</p>
+</div>
+<div class="section" id="newapis">
+<h3>3.6. <a class="toc-backref" href="#id15">newAPIs</a></h3>
+<div class="highlight"><pre><span></span>includes<span class="o">()</span>
+startsWith<span class="o">()</span>
+endsWith<span class="o">()</span>
+endsWith<span class="o">()</span>
+padStart<span class="o">()</span>
+padEnd<span class="o">()</span>
+</pre></div>
+</div>
+<div class="section" id="string-template">
+<h3>3.7. <a class="toc-backref" href="#id16">String Template</a></h3>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="sb">`</span>There are &lt;b&gt;<span class="si">${</span><span class="nv">basket</span><span class="p">.count</span><span class="si">}</span>&lt;/b&gt; items<span class="sb">`</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="regex">
+<h2>4. <a class="toc-backref" href="#id17">Regex</a></h2>
+<div class="section" id="unicode-support-u">
+<h3>4.1. <a class="toc-backref" href="#id18">Unicode support <code>u</code></a></h3>
+<div class="highlight"><pre><span></span>var <span class="nv">s</span> <span class="o">=</span> <span class="s1">&#39;𠮷&#39;</span><span class="p">;</span>
+
+/^.$/.test<span class="o">(</span>s<span class="o">)</span> // <span class="nb">false</span>
+/^.$/u.test<span class="o">(</span>s<span class="o">)</span> // <span class="nb">true</span>
+
+/<span class="se">\u</span><span class="o">{</span><span class="m">61</span><span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span> // <span class="nb">false</span>
+/<span class="se">\u</span><span class="o">{</span><span class="m">61</span><span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+/<span class="se">\u</span><span class="o">{</span>20BB7<span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;𠮷&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+
+/a<span class="o">{</span><span class="m">2</span><span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;aa&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+/a<span class="o">{</span><span class="m">2</span><span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;aa&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+/𠮷<span class="o">{</span><span class="m">2</span><span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;𠮷𠮷&#39;</span><span class="o">)</span> // <span class="nb">false</span>
+/𠮷<span class="o">{</span><span class="m">2</span><span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;𠮷𠮷&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+</pre></div>
+</div>
+<div class="section" id="stick-y">
+<h3>4.2. <a class="toc-backref" href="#id19">Stick <code>y</code></a></h3>
+<p><code>y</code> begin after all match while <code>g</code> begin at next character.</p>
+<div class="highlight"><pre><span></span>var <span class="nv">s</span> <span class="o">=</span> <span class="s1">&#39;aaa_aa_a&#39;</span><span class="p">;</span>
+var <span class="nv">r1</span> <span class="o">=</span> /a+/g<span class="p">;</span>
+var <span class="nv">r2</span> <span class="o">=</span> /a+/y<span class="p">;</span>
+
+r1.exec<span class="o">(</span>s<span class="o">)</span> // <span class="o">[</span><span class="s2">&quot;aaa&quot;</span><span class="o">]</span>
+r2.exec<span class="o">(</span>s<span class="o">)</span> // <span class="o">[</span><span class="s2">&quot;aaa&quot;</span><span class="o">]</span>
+
+r1.exec<span class="o">(</span>s<span class="o">)</span> // <span class="o">[</span><span class="s2">&quot;aa&quot;</span><span class="o">]</span>
+r2.exec<span class="o">(</span>s<span class="o">)</span> // null
+</pre></div>
+</div>
+<div class="section" id="dotall-s">
+<h3>4.3. <a class="toc-backref" href="#id20">dotAll <code>s</code></a></h3>
+<p>We can support all characters. dot only represents normal characters.</p>
+<div class="highlight"><pre><span></span>/foo.bar/.test<span class="o">(</span><span class="s1">&#39;foo\nbar&#39;</span><span class="o">)</span>
+// <span class="nb">false</span>
+/foo.bar/s.test<span class="o">(</span><span class="s1">&#39;foo\nbar&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="number">
+<h2>5. <a class="toc-backref" href="#id21">Number</a></h2>
+<div class="section" id="apis">
+<h3>5.1. <a class="toc-backref" href="#id22">APIS</a></h3>
+<ul>
+<li><p class="first">isFinite, isNaN</p>
+<div class="highlight"><pre><span></span>Number.isFinite<span class="o">(</span><span class="m">15</span><span class="o">)</span><span class="p">;</span> // <span class="nb">true</span>
+Number.isFinite<span class="o">(</span><span class="m">0</span>.8<span class="o">)</span><span class="p">;</span> // <span class="nb">true</span>
+Number.isFinite<span class="o">(</span>NaN<span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
+Number.isFinite<span class="o">(</span>Infinity<span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
+Number.isFinite<span class="o">(</span>-Infinity<span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
+Number.isFinite<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
+Number.isFinite<span class="o">(</span><span class="s1">&#39;15&#39;</span><span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
+Number.isFinite<span class="o">(</span><span class="nb">true</span><span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
+
+Number.isNaN<span class="o">(</span>NaN<span class="o">)</span> // <span class="nb">true</span>
+Number.isNaN<span class="o">(</span><span class="m">15</span><span class="o">)</span> // <span class="nb">false</span>
+Number.isNaN<span class="o">(</span><span class="s1">&#39;15&#39;</span><span class="o">)</span> // <span class="nb">false</span>
+Number.isNaN<span class="o">(</span><span class="nb">true</span><span class="o">)</span> // <span class="nb">false</span>
+Number.isNaN<span class="o">(</span><span class="m">9</span>/NaN<span class="o">)</span> // <span class="nb">true</span>
+Number.isNaN<span class="o">(</span><span class="s1">&#39;true&#39;</span> / <span class="m">0</span><span class="o">)</span> // <span class="nb">true</span>
+Number.isNaN<span class="o">(</span><span class="s1">&#39;true&#39;</span> / <span class="s1">&#39;true&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+</pre></div>
+</li>
+<li><p class="first">parseInt</p>
+</li>
+<li><p class="first">parseFloat</p>
+</li>
+<li><p class="first">isInteger</p>
+</li>
+<li><p class="first">isSafeInteger ( -2^53 ~ 2^53 )</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="function">
+<h2>6. <a class="toc-backref" href="#id23">Function</a></h2>
+<div class="section" id="rest-parameters">
+<h3>6.1. <a class="toc-backref" href="#id24">Rest parameters</a></h3>
+<p><code>...varaiable</code> to get all rest parameters. Array.</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> add<span class="o">(</span>...values<span class="o">)</span> <span class="o">{</span>
+  <span class="nb">let</span> <span class="nv">sum</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="o">(</span>var val of values<span class="o">)</span> <span class="o">{</span>
+    <span class="nv">sum</span> <span class="o">+=</span> val<span class="p">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> sum<span class="p">;</span>
+<span class="o">}</span>
+add<span class="o">(</span><span class="m">2</span>, <span class="m">5</span>, <span class="m">3</span><span class="o">)</span> // <span class="m">10</span>
+</pre></div>
+</div>
+<div class="section" id="strict-mode">
+<h3>6.2. <a class="toc-backref" href="#id25">strict mode</a></h3>
+<p>Under strict mode, functions won't include <code>func.arguments</code> and <code>func.caller</code> .</p>
+<p>If we want to use strict mode, then the function itself cannot include
+- default value
+- deconstructing</p>
+<p>Error:</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> doSomething<span class="o">(</span>a, <span class="nv">b</span> <span class="o">=</span> a<span class="o">)</span> <span class="o">{</span>
+  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+  // code
+<span class="o">}</span>
+
+const <span class="nv">doSomething</span> <span class="o">=</span> <span class="k">function</span> <span class="o">({</span>a, b<span class="o">})</span> <span class="o">{</span>
+  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+  // code
+<span class="o">}</span><span class="p">;</span>
+
+const <span class="nv">doSomething</span> <span class="o">=</span> <span class="o">(</span>...a<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+  // code
+<span class="o">}</span><span class="p">;</span>
+
+const <span class="nv">obj</span> <span class="o">=</span> <span class="o">{</span>
+  doSomething<span class="o">({</span>a, b<span class="o">})</span> <span class="o">{</span>
+    <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+    // code
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+<p>How we can avoid this:</p>
+<div class="highlight"><pre><span></span><span class="c1"># 1</span>
+<span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+<span class="k">function</span> doSomething<span class="o">(</span>a, <span class="nv">b</span> <span class="o">=</span> a<span class="o">)</span> <span class="o">{</span>
+  // code
+<span class="o">}</span>
+
+<span class="c1"># 2</span>
+const <span class="nv">doSomething</span> <span class="o">=</span> <span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="k">function</span><span class="o">(</span><span class="nv">value</span> <span class="o">=</span> <span class="m">42</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> value<span class="p">;</span>
+  <span class="o">}</span><span class="p">;</span>
+<span class="o">}())</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="array-function">
+<h3>6.3. <a class="toc-backref" href="#id26">Array Function</a></h3>
+<p>Watch:
+- there is no <code>this</code> in function, <code>this</code> is the outside <code>this</code> .
+- cannot use as a constructor
+- cannot use arguments object
+- cannot use yield</p>
+</div>
+</div>
+<div class="section" id="array">
+<h2>7. <a class="toc-backref" href="#id27">Array</a></h2>
+<div class="section" id="spread-operator">
+<h3>7.1. <a class="toc-backref" href="#id28">spread operator</a></h3>
+<div class="highlight"><pre><span></span>console.log<span class="o">(</span>...<span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">])</span>
+// <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+</pre></div>
+<p>Usage:</p>
+<ul>
+<li><p class="first">clone</p>
+<div class="highlight"><pre><span></span>const <span class="nv">a1</span> <span class="o">=</span> <span class="o">[</span><span class="m">1</span>, <span class="m">2</span><span class="o">]</span><span class="p">;</span>
+const <span class="nv">a2</span> <span class="o">=</span> <span class="o">[</span>...a1<span class="o">]</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">combine</p>
+<div class="highlight"><pre><span></span>const <span class="nv">arr1</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span><span class="p">;</span>
+const <span class="nv">arr2</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;c&#39;</span><span class="o">]</span><span class="p">;</span>
+<span class="o">[</span>...arr1, ...arr2<span class="o">]</span>
+</pre></div>
+</li>
+<li><p class="first">String length</p>
+<div class="highlight"><pre><span></span><span class="s1">&#39;x\uD83D\uDE80y&#39;</span>.length // <span class="m">4</span>
+<span class="o">[</span>...<span class="s1">&#39;x\uD83D\uDE80y&#39;</span><span class="o">]</span>.length // <span class="m">3</span>
+</pre></div>
+</li>
+<li><p class="first">generator</p>
+<div class="highlight"><pre><span></span>const <span class="nv">go</span> <span class="o">=</span> <span class="k">function</span>*<span class="o">(){</span>
+  yield <span class="m">1</span><span class="p">;</span>
+  yield <span class="m">2</span><span class="p">;</span>
+  yield <span class="m">3</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+<span class="o">[</span>...go<span class="o">()]</span> // <span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span>
+</pre></div>
+</li>
+</ul>
+<p>APIs</p>
+<ul>
+<li><p class="first">Array.from</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">arrayLike</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="s1">&#39;0&#39;</span>: <span class="s1">&#39;a&#39;</span>,
+    <span class="s1">&#39;1&#39;</span>: <span class="s1">&#39;b&#39;</span>,
+    <span class="s1">&#39;2&#39;</span>: <span class="s1">&#39;c&#39;</span>,
+    length: <span class="m">3</span>
+<span class="o">}</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">arr2</span> <span class="o">=</span> Array.from<span class="o">(</span>arrayLike<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span>
+</pre></div>
+</li>
+<li><p class="first">Array.Of</p>
+<p>Array constructor exists some misunderstanding.</p>
+<div class="highlight"><pre><span></span>Array.of<span class="o">(</span><span class="m">3</span>, <span class="m">11</span>, <span class="m">8</span><span class="o">)</span> // <span class="o">[</span><span class="m">3</span>,11,8<span class="o">]</span>
+Array.of<span class="o">(</span><span class="m">3</span><span class="o">)</span> // <span class="o">[</span><span class="m">3</span><span class="o">]</span>
+Array.of<span class="o">(</span><span class="m">3</span><span class="o">)</span>.length // <span class="m">1</span>
+
+Array<span class="o">()</span> // <span class="o">[]</span>
+Array<span class="o">(</span><span class="m">3</span><span class="o">)</span> // <span class="o">[</span>, , ,<span class="o">]</span>
+Array<span class="o">(</span><span class="m">3</span>, <span class="m">11</span>, <span class="m">8</span><span class="o">)</span> // <span class="o">[</span><span class="m">3</span>, <span class="m">11</span>, <span class="m">8</span><span class="o">]</span>
+</pre></div>
+</li>
+<li><p class="first">find, findIndex</p>
+</li>
+<li><p class="first">fill</p>
+</li>
+<li><p class="first">entries()，keys() and values()</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="o">(</span><span class="nb">let</span> index of <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span>.keys<span class="o">())</span> <span class="o">{</span>
+  console.log<span class="o">(</span>index<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+// <span class="m">0</span>
+// <span class="m">1</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> elem of <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span>.values<span class="o">())</span> <span class="o">{</span>
+  console.log<span class="o">(</span>elem<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+// <span class="s1">&#39;a&#39;</span>
+// <span class="s1">&#39;b&#39;</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> <span class="o">[</span>index, elem<span class="o">]</span> of <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span>.entries<span class="o">())</span> <span class="o">{</span>
+  console.log<span class="o">(</span>index, elem<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+// <span class="m">0</span> <span class="s2">&quot;a&quot;</span>
+// <span class="m">1</span> <span class="s2">&quot;b&quot;</span>
+
+<span class="nb">let</span> <span class="nv">letter</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">entries</span> <span class="o">=</span> letter.entries<span class="o">()</span><span class="p">;</span>
+console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="m">0</span>, <span class="s1">&#39;a&#39;</span><span class="o">]</span>
+console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="m">1</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span>
+console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="m">2</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span>
+</pre></div>
+</li>
+<li><p class="first">includes</p>
+</li>
+<li><p class="first">flat, flatMap</p>
+<div class="highlight"><pre><span></span><span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="o">[</span><span class="m">3</span>, <span class="m">4</span><span class="o">]]</span>.flat<span class="o">()</span>
+// <span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span><span class="o">]</span>
+
+
+<span class="o">[</span><span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span><span class="o">]</span>.flatMap<span class="o">((</span>x<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">[</span>x, x * <span class="m">2</span><span class="o">])</span>
+// <span class="o">[</span><span class="m">2</span>, <span class="m">4</span>, <span class="m">3</span>, <span class="m">6</span>, <span class="m">4</span>, <span class="m">8</span><span class="o">]</span>
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="object">
+<h2>8. <a class="toc-backref" href="#id29">Object</a></h2>
+<div class="section" id="syntax">
+<h3>8.1. <a class="toc-backref" href="#id30">syntax</a></h3>
+<div class="highlight"><pre><span></span>const <span class="nv">foo</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">;</span>
+const <span class="nv">baz</span> <span class="o">=</span> <span class="o">{</span>foo<span class="o">}</span><span class="p">;</span>
+baz // <span class="o">{</span>foo: <span class="s2">&quot;bar&quot;</span><span class="o">}</span>
+
+<span class="nb">let</span> <span class="nv">lastWord</span> <span class="o">=</span> <span class="s1">&#39;last word&#39;</span><span class="p">;</span>
+const <span class="nv">a</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="s1">&#39;first word&#39;</span>: <span class="s1">&#39;hello&#39;</span>,
+  <span class="o">[</span>lastWord<span class="o">]</span>: <span class="s1">&#39;world&#39;</span>
+<span class="o">}</span><span class="p">;</span>
+a<span class="o">[</span><span class="s1">&#39;first word&#39;</span><span class="o">]</span> // <span class="s2">&quot;hello&quot;</span>
+a<span class="o">[</span>lastWord<span class="o">]</span> // <span class="s2">&quot;world&quot;</span>
+a<span class="o">[</span><span class="s1">&#39;last word&#39;</span><span class="o">]</span> // <span class="s2">&quot;world&quot;</span>
+
+!!!! Don<span class="s1">&#39;t use object as a key.</span>
+<span class="s1">const keyA = {a: 1};</span>
+<span class="s1">const keyB = {b: 2};</span>
+<span class="s1">const myObject = {</span>
+<span class="s1">  [keyA]: &#39;</span>valueA<span class="s1">&#39;,</span>
+<span class="s1">  [keyB]: &#39;</span>valueB<span class="err">&#39;</span>
+<span class="o">}</span><span class="p">;</span>
+myObject // Object <span class="o">{[</span>object Object<span class="o">]</span>: <span class="s2">&quot;valueB&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+<div class="section" id="attr">
+<h3>8.2. <a class="toc-backref" href="#id31">ATTR</a></h3>
+<ul>
+<li><p class="first"><code>name</code></p>
+<div class="highlight"><pre><span></span>const <span class="nv">person</span> <span class="o">=</span> <span class="o">{</span>
+  sayName<span class="o">()</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="s1">&#39;hello!&#39;</span><span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>,
+<span class="o">}</span><span class="p">;</span>
+person.sayName.name   // <span class="s2">&quot;sayName&quot;</span>
+</pre></div>
+</li>
+<li><p class="first"><code>super</code> (Only in function of an object)</p>
+<p>Point to the prototype.</p>
+<div class="highlight"><pre><span></span>const <span class="nv">proto</span> <span class="o">=</span> <span class="o">{</span>
+  foo: <span class="s1">&#39;hello&#39;</span>
+<span class="o">}</span><span class="p">;</span>
+
+const <span class="nv">obj</span> <span class="o">=</span> <span class="o">{</span>
+  foo: <span class="s1">&#39;world&#39;</span>,
+  find<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> super.foo<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+
+Object.setPrototypeOf<span class="o">(</span>obj, proto<span class="o">)</span><span class="p">;</span>
+obj.find<span class="o">()</span> // <span class="s2">&quot;hello&quot;</span>
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="operator">
+<h3>8.3. <a class="toc-backref" href="#id32">Operator</a></h3>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="o">{</span> a: <span class="m">3</span>, b: <span class="m">4</span> <span class="o">}</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">n</span> <span class="o">=</span> <span class="o">{</span> ...z <span class="o">}</span><span class="p">;</span>
+n // <span class="o">{</span> a: <span class="m">3</span>, b: <span class="m">4</span> <span class="o">}</span>
+
+<span class="nb">let</span> <span class="nv">foo</span> <span class="o">=</span> <span class="o">{</span> ...<span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span> <span class="o">}</span><span class="p">;</span>
+foo
+// <span class="o">{</span><span class="m">0</span>: <span class="s2">&quot;a&quot;</span>, <span class="m">1</span>: <span class="s2">&quot;b&quot;</span>, <span class="m">2</span>: <span class="s2">&quot;c&quot;</span><span class="o">}</span>
+
+<span class="nb">let</span> <span class="nv">aClone</span> <span class="o">=</span> <span class="o">{</span> ...a <span class="o">}</span><span class="p">;</span>
+// Same as
+<span class="nb">let</span> <span class="nv">aClone</span> <span class="o">=</span> Object.assign<span class="o">({}</span>, a<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h3>8.4. <a class="toc-backref" href="#id33">APIs</a></h3>
+<ul>
+<li><p class="first"><code>Object.is</code>  same as <code>===</code> .</p>
+</li>
+<li><p class="first"><code>Object.assign</code>
+- Shallow Copy
+- Array handle as object</p>
+<blockquote>
+<div class="highlight"><pre><span></span>Object.assign<span class="o">([</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span>, <span class="o">[</span><span class="m">4</span>, <span class="m">5</span><span class="o">])</span>
+// <span class="o">[</span><span class="m">4</span>, <span class="m">5</span>, <span class="m">3</span><span class="o">]</span>
+</pre></div>
+</blockquote>
+<ul class="simple">
+<li>get value and then overwrite</li>
+</ul>
+</li>
+<li><p class="first"><code>Object.getOwnPropertyDescriptor</code></p>
+<p>set, get special functions.</p>
+<div class="highlight"><pre><span></span>const <span class="nb">source</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="nb">set</span> foo<span class="o">(</span>value<span class="o">)</span> <span class="o">{</span>
+    console.log<span class="o">(</span>value<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+
+const <span class="nv">target2</span> <span class="o">=</span> <span class="o">{}</span><span class="p">;</span>
+Object.defineProperties<span class="o">(</span>target2, Object.getOwnPropertyDescriptors<span class="o">(</span><span class="nb">source</span><span class="o">))</span><span class="p">;</span>
+Object.getOwnPropertyDescriptor<span class="o">(</span>target2, <span class="s1">&#39;foo&#39;</span><span class="o">)</span>
+// <span class="o">{</span> get: undefined,
+//   set: <span class="o">[</span>Function: <span class="nb">set</span> foo<span class="o">]</span>,
+//   enumerable: true,
+//   configurable: <span class="nb">true</span> <span class="o">}</span>
+</pre></div>
+</li>
+<li><p class="first"><code>__proto__ ，Object.setPrototypeOf()，Object.getPrototypeOf()</code></p>
+</li>
+<li><p class="first"><code>Object.keys()，Object.values()，Object.entries()</code></p>
+</li>
+<li><p class="first"><code>Object.fromEntries()</code> adverse of <code>entries</code> , from Map to Object.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="symbol">
+<h2>9. <a class="toc-backref" href="#id34">Symbol</a></h2>
+<div class="section" id="id2">
+<h3>9.1. <a class="toc-backref" href="#id35">Usage</a></h3>
+<p>Object has various attributes which are defined in string. So it is very easy to overwrite them.
+Symbol  is unique and is the 7th type of js.</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">s</span> <span class="o">=</span> Symbol<span class="o">()</span><span class="p">;</span>
+typeof s
+// <span class="s2">&quot;symbol&quot;</span>
+
+<span class="nb">let</span> <span class="nv">s1</span> <span class="o">=</span> Symbol<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">s2</span> <span class="o">=</span> Symbol<span class="o">(</span><span class="s1">&#39;bar&#39;</span><span class="o">)</span><span class="p">;</span>
+s1 // Symbol<span class="o">(</span>foo<span class="o">)</span>
+s2 // Symbol<span class="o">(</span>bar<span class="o">)</span>
+s1.toString<span class="o">()</span> // <span class="s2">&quot;Symbol(foo)&quot;</span>
+s2.toString<span class="o">()</span> // <span class="s2">&quot;Symbol(bar)&quot;</span>
+
+<span class="nb">let</span> <span class="nv">s1</span> <span class="o">=</span> Symbol<span class="o">()</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">s2</span> <span class="o">=</span> Symbol<span class="o">()</span><span class="p">;</span>
+<span class="nv">s1</span> <span class="o">===</span> s2 // <span class="nb">false</span>
+<span class="nb">let</span> <span class="nv">s1</span> <span class="o">=</span> Symbol<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">s2</span> <span class="o">=</span> Symbol<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="nv">s1</span> <span class="o">===</span> s2 // <span class="nb">false</span>
+</pre></div>
+<p>Symbol can turn to strings only in explicit way.</p>
+</div>
+<div class="section" id="id3">
+<h3>9.2. <a class="toc-backref" href="#id36">Iteration</a></h3>
+<p>When we use Symbol as an attribute, then , it won't appear in iterations.
+- <code>for...in</code>
+- <code>for...of</code>
+- <code>Object.keys()</code>
+- <code>Object.getOwnPropertyNames()</code>
+- <code>JSON.stringify()</code></p>
+<p>We can get these attributes with <code>Object.getOwnPropertySymbols</code> .</p>
+</div>
+<div class="section" id="id4">
+<h3>9.3. <a class="toc-backref" href="#id37">APIs</a></h3>
+<ul>
+<li><p class="first">Symbol.for (create or get)</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">s1</span> <span class="o">=</span> Symbol.for<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">s2</span> <span class="o">=</span> Symbol.for<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span><span class="p">;</span>
+
+<span class="nv">s1</span> <span class="o">===</span> s2 // <span class="nb">true</span>
+</pre></div>
+</li>
+<li><p class="first">Symbol.keyFor</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">s1</span> <span class="o">=</span> Symbol.for<span class="o">(</span><span class="s2">&quot;foo&quot;</span><span class="o">)</span><span class="p">;</span>
+Symbol.keyFor<span class="o">(</span>s1<span class="o">)</span> // <span class="s2">&quot;foo&quot;</span>
+
+<span class="nb">let</span> <span class="nv">s2</span> <span class="o">=</span> Symbol<span class="o">(</span><span class="s2">&quot;foo&quot;</span><span class="o">)</span><span class="p">;</span>
+Symbol.keyFor<span class="o">(</span>s2<span class="o">)</span> // undefined
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="set-and-map">
+<h2>10. <a class="toc-backref" href="#id38">Set and  Map</a></h2>
+<div class="section" id="set">
+<h3>10.1. <a class="toc-backref" href="#id39">Set</a></h3>
+<div class="highlight"><pre><span></span>const <span class="nv">s</span> <span class="o">=</span> new Set<span class="o">()</span><span class="p">;</span>
+
+<span class="o">[</span><span class="m">2</span>, <span class="m">3</span>, <span class="m">5</span>, <span class="m">4</span>, <span class="m">5</span>, <span class="m">2</span>, <span class="m">2</span><span class="o">]</span>.forEach<span class="o">(</span><span class="nv">x</span> <span class="o">=</span>&gt; s.add<span class="o">(</span>x<span class="o">))</span><span class="p">;</span>
+<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> i of s<span class="o">)</span> <span class="o">{</span>
+  console.log<span class="o">(</span>i<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+// <span class="m">2</span> <span class="m">3</span> <span class="m">5</span> <span class="m">4</span>
+
+const <span class="nb">set</span> <span class="o">=</span> new Set<span class="o">([</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">4</span><span class="o">])</span><span class="p">;</span>
+<span class="o">[</span>...set<span class="o">]</span>
+// <span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span><span class="o">]</span>
+</pre></div>
+<ul class="simple">
+<li>size</li>
+<li>add()</li>
+<li>delete()</li>
+<li>has()</li>
+<li>clear()</li>
+<li>keys()</li>
+<li>values()</li>
+<li>entries()</li>
+<li>forEach()</li>
+</ul>
+</div>
+<div class="section" id="map">
+<h3>10.2. <a class="toc-backref" href="#id40">Map</a></h3>
+<p>Hash Key Value.
+But, we can add everything as a key.</p>
+<div class="highlight"><pre><span></span>const <span class="nv">map</span> <span class="o">=</span> new Map<span class="o">([</span>
+  <span class="o">[</span><span class="s1">&#39;name&#39;</span>, <span class="s1">&#39;张三&#39;</span><span class="o">]</span>,
+  <span class="o">[</span><span class="s1">&#39;title&#39;</span>, <span class="s1">&#39;Author&#39;</span><span class="o">]</span>
+<span class="o">])</span><span class="p">;</span>
+map.size // <span class="m">2</span>
+map.has<span class="o">(</span><span class="s1">&#39;name&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+map.get<span class="o">(</span><span class="s1">&#39;name&#39;</span><span class="o">)</span> // <span class="s2">&quot;张三&quot;</span>
+map.has<span class="o">(</span><span class="s1">&#39;title&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+map.get<span class="o">(</span><span class="s1">&#39;title&#39;</span><span class="o">)</span> // <span class="s2">&quot;Author&quot;</span>
+
+const <span class="nv">items</span> <span class="o">=</span> <span class="o">[</span>
+  <span class="o">[</span><span class="s1">&#39;name&#39;</span>, <span class="s1">&#39;张三&#39;</span><span class="o">]</span>,
+  <span class="o">[</span><span class="s1">&#39;title&#39;</span>, <span class="s1">&#39;Author&#39;</span><span class="o">]</span>
+<span class="o">]</span><span class="p">;</span>
+const <span class="nv">map</span> <span class="o">=</span> new Map<span class="o">()</span><span class="p">;</span>
+items.forEach<span class="o">(</span>
+  <span class="o">([</span>key, value<span class="o">])</span> <span class="o">=</span>&gt; map.set<span class="o">(</span>key, value<span class="o">)</span>
+<span class="o">)</span><span class="p">;</span>
+</pre></div>
+<ul class="simple">
+<li>size</li>
+<li>add()</li>
+<li>delete()</li>
+<li>has()</li>
+<li>clear()</li>
+<li>keys()</li>
+<li>values()</li>
+<li>entries()</li>
+<li>forEach()</li>
+</ul>
+</div>
+</div>
+<div class="section" id="proxy">
+<h2>11. <a class="toc-backref" href="#id41">Proxy</a></h2>
+<p>meta programming, which can change language.</p>
+<div class="highlight"><pre><span></span>var <span class="nv">obj</span> <span class="o">=</span> new Proxy<span class="o">({}</span>, <span class="o">{</span>
+  get: <span class="k">function</span> <span class="o">(</span>target, key, receiver<span class="o">)</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="sb">`</span>getting <span class="si">${</span><span class="nv">key</span><span class="si">}</span>!<span class="sb">`</span><span class="o">)</span><span class="p">;</span>
+    <span class="k">return</span> Reflect.get<span class="o">(</span>target, key, receiver<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>,
+  set: <span class="k">function</span> <span class="o">(</span>target, key, value, receiver<span class="o">)</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="sb">`</span>setting <span class="si">${</span><span class="nv">key</span><span class="si">}</span>!<span class="sb">`</span><span class="o">)</span><span class="p">;</span>
+    <span class="k">return</span> Reflect.set<span class="o">(</span>target, key, value, receiver<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">})</span><span class="p">;</span>
+obj.count <span class="o">=</span> <span class="m">1</span>
+//  setting count!
+++obj.count
+//  getting count!
+//  setting count!
+//  <span class="m">2</span>
+</pre></div>
+<div class="section" id="proxy-actions-supoorted">
+<h3>11.1. <a class="toc-backref" href="#id42">Proxy Actions Supoorted</a></h3>
+<ul class="simple">
+<li>get(target, propKey, receiver)</li>
+<li>set(target, propKey, value, receiver)</li>
+<li>has(target, propKey)</li>
+<li>deleteProperty(target, propKey)</li>
+<li>ownKeys(target)</li>
+<li>getOwnPropertyDescriptor(target, propKey)</li>
+<li>defineProperty(target, propKey, propDesc)</li>
+<li>preventExtensions(target)</li>
+<li>getPrototypeOf(target)</li>
+<li>isExtensible(target)</li>
+<li>setPrototypeOf(target, proto)</li>
+<li>apply(target, object, args)</li>
+<li>construct(target, args)</li>
+</ul>
+</div>
+<div class="section" id="proxy-revocable">
+<h3>11.2. <a class="toc-backref" href="#id43">Proxy.revocable</a></h3>
+<p>Stop proxy.</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">target</span> <span class="o">=</span> <span class="o">{}</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">handler</span> <span class="o">=</span> <span class="o">{}</span><span class="p">;</span>
+
+<span class="nb">let</span> <span class="o">{</span>proxy, revoke<span class="o">}</span> <span class="o">=</span> Proxy.revocable<span class="o">(</span>target, handler<span class="o">)</span><span class="p">;</span>
+
+proxy.foo <span class="o">=</span> <span class="m">123</span><span class="p">;</span>
+proxy.foo // <span class="m">123</span>
+
+revoke<span class="o">()</span><span class="p">;</span>
+proxy.foo // TypeError: Revoked
+</pre></div>
+</div>
+<div class="section" id="this">
+<h3>11.3. <a class="toc-backref" href="#id44">This</a></h3>
+<p>This will point to Proxy itself.</p>
+<div class="highlight"><pre><span></span>const <span class="nv">target</span> <span class="o">=</span> <span class="o">{</span>
+  m: <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="nv">this</span> <span class="o">===</span> proxy<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+const <span class="nv">handler</span> <span class="o">=</span> <span class="o">{}</span><span class="p">;</span>
+
+const <span class="nv">proxy</span> <span class="o">=</span> new Proxy<span class="o">(</span>target, handler<span class="o">)</span><span class="p">;</span>
+
+target.m<span class="o">()</span> // <span class="nb">false</span>
+proxy.m<span class="o">()</span>  // <span class="nb">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reflect">
+<h2>12. <a class="toc-backref" href="#id45">Reflect</a></h2>
+<p>Why:
+- Move some Object internal functions to Reflect
+- Refine some APIs that Object provides
+- Make all actions become functions (name in object =&gt; has() )
+- Reflect and Proxy Combination</p>
+<blockquote>
+<div class="highlight"><pre><span></span>Proxy<span class="o">(</span>target, <span class="o">{</span>
+  set: <span class="k">function</span><span class="o">(</span>target, name, value, receiver<span class="o">)</span> <span class="o">{</span>
+    var <span class="nv">success</span> <span class="o">=</span> Reflect.set<span class="o">(</span>target,name, value, receiver<span class="o">)</span><span class="p">;</span>
+    <span class="k">if</span> <span class="o">(</span>success<span class="o">)</span> <span class="o">{</span>
+      console.log<span class="o">(</span><span class="s1">&#39;property &#39;</span> + name + <span class="s1">&#39; on &#39;</span> + target + <span class="s1">&#39; set to &#39;</span> + value<span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> success<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">})</span><span class="p">;</span>
+</pre></div>
+</blockquote>
+<p>Methods:
+- Reflect.apply(target, thisArg, args)
+- Reflect.construct(target, args)
+- Reflect.get(target, name, receiver)
+- Reflect.set(target, name, value, receiver)
+- Reflect.defineProperty(target, name, desc)
+- Reflect.deleteProperty(target, name)
+- Reflect.has(target, name)
+- Reflect.ownKeys(target)
+- Reflect.isExtensible(target)
+- Reflect.preventExtensions(target)
+- Reflect.getOwnPropertyDescriptor(target, name)
+- Reflect.getPrototypeOf(target)
+- Reflect.setPrototypeOf(target, prototype)</p>
+</div>
+<div class="section" id="promises">
+<h2>13. <a class="toc-backref" href="#id46">Promises</a></h2>
+<p>3 States:
+- pending
+- fulfilled (resolved)
+- rejected</p>
+<div class="highlight"><pre><span></span>const <span class="nv">promise</span> <span class="o">=</span> new Promise<span class="o">(</span><span class="k">function</span><span class="o">(</span>resolve, reject<span class="o">)</span> <span class="o">{</span>
+  // ... some code
+
+  <span class="k">if</span> <span class="o">(</span>success<span class="o">){</span>
+    resolve<span class="o">(</span>value<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    reject<span class="o">(</span>error<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">})</span><span class="p">;</span>
+</pre></div>
+<p>Once created, it will run.
+Resolve and Reject cannot terminate Promise. So, always add return.</p>
+<div class="section" id="id5">
+<h3>13.1. <a class="toc-backref" href="#id47">APIs</a></h3>
+<ul>
+<li><p class="first">then</p>
+<div class="highlight"><pre><span></span>getJSON<span class="o">(</span><span class="s2">&quot;/post/1.json&quot;</span><span class="o">)</span>.then<span class="o">(</span>
+  <span class="nv">post</span> <span class="o">=</span>&gt; getJSON<span class="o">(</span>post.commentURL<span class="o">)</span>
+<span class="o">)</span>.then<span class="o">(</span>
+  <span class="nv">comments</span> <span class="o">=</span>&gt; console.log<span class="o">(</span><span class="s2">&quot;resolved: &quot;</span>, comments<span class="o">)</span>,
+  <span class="nv">err</span> <span class="o">=</span>&gt; console.log<span class="o">(</span><span class="s2">&quot;rejected: &quot;</span>, err<span class="o">)</span>
+<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">catch</p>
+<p>Alias of <code>.then(null, rejection)</code> .</p>
+<p>then can append after catch as catch itself will return a promise.</p>
+</li>
+<li><p class="first">finally</p>
+<div class="highlight"><pre><span></span>promise
+.then<span class="o">(</span><span class="nv">result</span> <span class="o">=</span>&gt; <span class="o">{</span>···<span class="o">})</span>
+.catch<span class="o">(</span><span class="nv">error</span> <span class="o">=</span>&gt; <span class="o">{</span>···<span class="o">})</span>
+.finally<span class="o">(()</span> <span class="o">=</span>&gt; <span class="o">{</span>···<span class="o">})</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">all</p>
+<div class="highlight"><pre><span></span>const <span class="nv">promises</span> <span class="o">=</span> <span class="o">[</span><span class="m">2</span>, <span class="m">3</span>, <span class="m">5</span>, <span class="m">7</span>, <span class="m">11</span>, <span class="m">13</span><span class="o">]</span>.map<span class="o">(</span><span class="k">function</span> <span class="o">(</span>id<span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> getJSON<span class="o">(</span><span class="s1">&#39;/post/&#39;</span> + id + <span class="s2">&quot;.json&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="o">})</span><span class="p">;</span>
+
+Promise.all<span class="o">(</span>promises<span class="o">)</span>.then<span class="o">(</span><span class="k">function</span> <span class="o">(</span>posts<span class="o">)</span> <span class="o">{</span>
+  // ...
+<span class="o">})</span>.catch<span class="o">(</span><span class="k">function</span><span class="o">(</span>reason<span class="o">){</span>
+  // ...
+<span class="o">})</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">race</p>
+<p>Only one promise needs to be finished.</p>
+<div class="highlight"><pre><span></span>const <span class="nv">p</span> <span class="o">=</span> Promise.race<span class="o">([</span>
+  fetch<span class="o">(</span><span class="s1">&#39;/resource-that-may-take-a-while&#39;</span><span class="o">)</span>,
+  new Promise<span class="o">(</span><span class="k">function</span> <span class="o">(</span>resolve, reject<span class="o">)</span> <span class="o">{</span>
+    setTimeout<span class="o">(()</span> <span class="o">=</span>&gt; reject<span class="o">(</span>new Error<span class="o">(</span><span class="s1">&#39;request timeout&#39;</span><span class="o">))</span>, <span class="m">5000</span><span class="o">)</span>
+  <span class="o">})</span>
+<span class="o">])</span><span class="p">;</span>
+
+p
+.then<span class="o">(</span>console.log<span class="o">)</span>
+.catch<span class="o">(</span>console.error<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">resolve</p>
+<p>Turn an object to a Promise object</p>
+<div class="highlight"><pre><span></span>const <span class="nv">jsPromise</span> <span class="o">=</span> Promise.resolve<span class="o">(</span>$.ajax<span class="o">(</span><span class="s1">&#39;/whatever.json&#39;</span><span class="o">))</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">reject</p>
+<div class="highlight"><pre><span></span>const <span class="nv">p</span> <span class="o">=</span> Promise.reject<span class="o">(</span><span class="s1">&#39;wrong&#39;</span><span class="o">)</span><span class="p">;</span>
+// same
+const <span class="nv">p</span> <span class="o">=</span> new Promise<span class="o">((</span>resolve, reject<span class="o">)</span> <span class="o">=</span>&gt; reject<span class="o">(</span><span class="s1">&#39;wrong&#39;</span><span class="o">))</span>
+
+p.then<span class="o">(</span>null, <span class="k">function</span> <span class="o">(</span>s<span class="o">)</span> <span class="o">{</span>
+  console.log<span class="o">(</span>s<span class="o">)</span>
+<span class="o">})</span><span class="p">;</span>
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="iterator">
+<h2>14. <a class="toc-backref" href="#id48">Iterator</a></h2>
+<p>If a data structure has <code>Symbol.iterator</code> attribute, then it is iterable.
+And we can use <code>for...of</code> to iterate it.</p>
+<div class="highlight"><pre><span></span>const <span class="nv">obj</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="o">[</span>Symbol.iterator<span class="o">]</span> : <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">{</span>
+      next: <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">{</span>
+          value: <span class="m">1</span>,
+          <span class="k">done</span>: <span class="nb">true</span>
+        <span class="o">}</span><span class="p">;</span>
+      <span class="o">}</span>
+    <span class="o">}</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+<p>Native iterable objects:</p>
+<ul class="simple">
+<li>Array</li>
+<li>Map</li>
+<li>Set</li>
+<li>String</li>
+<li>TypedArray</li>
+<li>arguments object in function</li>
+<li>NodeList</li>
+</ul>
+<p>Sample:</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">arr</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">iter</span> <span class="o">=</span> arr<span class="o">[</span>Symbol.iterator<span class="o">]()</span><span class="p">;</span>
+
+iter.next<span class="o">()</span> // <span class="o">{</span> value: <span class="s1">&#39;a&#39;</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iter.next<span class="o">()</span> // <span class="o">{</span> value: <span class="s1">&#39;b&#39;</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iter.next<span class="o">()</span> // <span class="o">{</span> value: <span class="s1">&#39;c&#39;</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iter.next<span class="o">()</span> // <span class="o">{</span> value: undefined, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
+</pre></div>
+<p>When we use it?
+- destruct and assign</p>
+<blockquote>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nb">set</span> <span class="o">=</span> new Set<span class="o">()</span>.add<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span>.add<span class="o">(</span><span class="s1">&#39;b&#39;</span><span class="o">)</span>.add<span class="o">(</span><span class="s1">&#39;c&#39;</span><span class="o">)</span><span class="p">;</span>
+
+<span class="nb">let</span> <span class="o">[</span>x,y<span class="o">]</span> <span class="o">=</span> set<span class="p">;</span>
+// <span class="nv">x</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">;</span> <span class="nv">y</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
+
+<span class="nb">let</span> <span class="o">[</span>first, ...rest<span class="o">]</span> <span class="o">=</span> set<span class="p">;</span>
+// <span class="nv">first</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">;</span> <span class="nv">rest</span><span class="o">=[</span><span class="s1">&#39;b&#39;</span>,<span class="s1">&#39;c&#39;</span><span class="o">]</span><span class="p">;</span>
+</pre></div>
+</blockquote>
+<ul>
+<li><p class="first">expand operator <code>...</code></p>
+</li>
+<li><p class="first"><code>yield*</code></p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">generator</span> <span class="o">=</span> <span class="k">function</span>* <span class="o">()</span> <span class="o">{</span>
+  yield <span class="m">1</span><span class="p">;</span>
+  yield* <span class="o">[</span><span class="m">2</span>,3,4<span class="o">]</span><span class="p">;</span>
+  yield <span class="m">5</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+var <span class="nv">iterator</span> <span class="o">=</span> generator<span class="o">()</span><span class="p">;</span>
+
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">1</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">2</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">3</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">4</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">5</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: undefined, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="generator">
+<h2>15. <a class="toc-backref" href="#id49">Generator</a></h2>
+<p>State Machine.
+- A <code>*</code> between <code>function</code> and name.
+- use <code>yeild</code> .</p>
+<p>When we call generator, it doesn't run. Instead, it return  a pointer to internal content.</p>
+<p>We should call <code>next</code> to get next state.</p>
+<div class="highlight"><pre><span></span><span class="k">function</span>* helloWorldGenerator<span class="o">()</span> <span class="o">{</span>
+  yield <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+  yield <span class="s1">&#39;world&#39;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="s1">&#39;ending&#39;</span><span class="p">;</span>
+<span class="o">}</span>
+var <span class="nv">hw</span> <span class="o">=</span> helloWorldGenerator<span class="o">()</span><span class="p">;</span>
+
+hw.next<span class="o">()</span>
+// <span class="o">{</span> value: <span class="s1">&#39;hello&#39;</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+hw.next<span class="o">()</span>
+// <span class="o">{</span> value: <span class="s1">&#39;world&#39;</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+hw.next<span class="o">()</span>
+// <span class="o">{</span> value: <span class="s1">&#39;ending&#39;</span>, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
+hw.next<span class="o">()</span>
+// <span class="o">{</span> value: undefined, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
+</pre></div>
+<p>Legal syntax:</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> * foo<span class="o">(</span>x, y<span class="o">)</span> <span class="o">{</span> ··· <span class="o">}</span>
+<span class="k">function</span> *foo<span class="o">(</span>x, y<span class="o">)</span> <span class="o">{</span> ··· <span class="o">}</span>
+<span class="k">function</span>* foo<span class="o">(</span>x, y<span class="o">)</span> <span class="o">{</span> ··· <span class="o">}</span>
+<span class="k">function</span>*foo<span class="o">(</span>x, y<span class="o">)</span> <span class="o">{</span> ··· <span class="o">}</span>
+</pre></div>
+<p>A parameter can be added to next function. And this value will be regarded as the previous yeild value.</p>
+<div class="highlight"><pre><span></span><span class="k">function</span>* f<span class="o">()</span> <span class="o">{</span>
+  <span class="k">for</span><span class="o">(</span>var <span class="nv">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> true<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
+    var <span class="nv">reset</span> <span class="o">=</span> yield i<span class="p">;</span>
+    <span class="k">if</span><span class="o">(</span>reset<span class="o">)</span> <span class="o">{</span> <span class="nv">i</span> <span class="o">=</span> -1<span class="p">;</span> <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+var <span class="nv">g</span> <span class="o">=</span> f<span class="o">()</span><span class="p">;</span>
+g.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">0</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+g.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">1</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+g.next<span class="o">(</span><span class="nb">true</span><span class="o">)</span> // <span class="o">{</span> value: <span class="m">0</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+</pre></div>
+<p>Complex:</p>
+<div class="highlight"><pre><span></span><span class="k">function</span>* foo<span class="o">(</span>x<span class="o">)</span> <span class="o">{</span>
+  var <span class="nv">y</span> <span class="o">=</span> <span class="m">2</span> * <span class="o">(</span>yield <span class="o">(</span>x + <span class="m">1</span><span class="o">))</span><span class="p">;</span>
+  var <span class="nv">z</span> <span class="o">=</span> yield <span class="o">(</span>y / <span class="m">3</span><span class="o">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="o">(</span>x + y + z<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+var <span class="nv">a</span> <span class="o">=</span> foo<span class="o">(</span><span class="m">5</span><span class="o">)</span><span class="p">;</span>
+a.next<span class="o">()</span> // Object<span class="o">{</span>value:6, <span class="k">done</span>:false<span class="o">}</span>
+a.next<span class="o">()</span> // Object<span class="o">{</span>value:NaN, <span class="k">done</span>:false<span class="o">}</span>
+a.next<span class="o">()</span> // Object<span class="o">{</span>value:NaN, <span class="k">done</span>:true<span class="o">}</span>
+
+var <span class="nv">b</span> <span class="o">=</span> foo<span class="o">(</span><span class="m">5</span><span class="o">)</span><span class="p">;</span>
+b.next<span class="o">()</span> // <span class="o">{</span> value:6, <span class="k">done</span>:false <span class="o">}</span> <span class="nv">x</span> <span class="o">=</span> <span class="m">5</span>
+b.next<span class="o">(</span><span class="m">12</span><span class="o">)</span> // <span class="o">{</span> value:8, <span class="k">done</span>:false <span class="o">}</span> <span class="nv">y</span> <span class="o">=</span> <span class="m">2</span>*12, <span class="nv">yield</span> <span class="o">=</span> <span class="m">24</span>/3 <span class="o">=</span> <span class="m">8</span>
+b.next<span class="o">(</span><span class="m">13</span><span class="o">)</span> // <span class="o">{</span> value:42, <span class="k">done</span>:true <span class="o">}</span> <span class="nv">z</span> <span class="o">=</span> <span class="m">13</span>, so <span class="m">5</span>+ <span class="m">24</span> + <span class="nv">13</span> <span class="o">=</span> <span class="m">42</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="k">function</span>* numbers <span class="o">()</span> <span class="o">{</span>
+  yield <span class="m">1</span>
+  yield <span class="m">2</span>
+  <span class="k">return</span> <span class="m">3</span>
+  yield <span class="m">4</span>
+<span class="o">}</span>
+
+<span class="o">[</span>...numbers<span class="o">()]</span> // <span class="o">[</span><span class="m">1</span>, <span class="m">2</span><span class="o">]</span>
+
+Array.from<span class="o">(</span>numbers<span class="o">())</span> // <span class="o">[</span><span class="m">1</span>, <span class="m">2</span><span class="o">]</span>
+
+<span class="nb">let</span> <span class="o">[</span>x, y<span class="o">]</span> <span class="o">=</span> numbers<span class="o">()</span><span class="p">;</span>
+x // <span class="m">1</span>
+y // <span class="m">2</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> n of numbers<span class="o">())</span> <span class="o">{</span>
+  console.log<span class="o">(</span>n<span class="o">)</span>
+<span class="o">}</span>
+// <span class="m">1</span>
+// <span class="m">2</span>
+</pre></div>
+<ul class="simple">
+<li>throw</li>
+</ul>
+<div class="highlight"><pre><span></span>var <span class="nv">g</span> <span class="o">=</span> <span class="k">function</span>* <span class="o">()</span> <span class="o">{</span>
+  try <span class="o">{</span>
+    yield<span class="p">;</span>
+  <span class="o">}</span> catch <span class="o">(</span>e<span class="o">)</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="s1">&#39;Internal&#39;</span>, e<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+
+var <span class="nv">i</span> <span class="o">=</span> g<span class="o">()</span><span class="p">;</span>
+i.next<span class="o">()</span><span class="p">;</span>
+
+try <span class="o">{</span>
+  i.throw<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span><span class="p">;</span>
+  i.throw<span class="o">(</span><span class="s1">&#39;b&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="o">}</span> catch <span class="o">(</span>e<span class="o">)</span> <span class="o">{</span>
+  console.log<span class="o">(</span><span class="s1">&#39;External&#39;</span>, e<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+// Internal a
+// External b
+</pre></div>
+<ul class="simple">
+<li>return</li>
+</ul>
+<p>terminate iteration.</p>
+<div class="highlight"><pre><span></span><span class="k">function</span>* gen<span class="o">()</span> <span class="o">{</span>
+  yield <span class="m">1</span><span class="p">;</span>
+  yield <span class="m">2</span><span class="p">;</span>
+  yield <span class="m">3</span><span class="p">;</span>
+<span class="o">}</span>
+
+var <span class="nv">g</span> <span class="o">=</span> gen<span class="o">()</span><span class="p">;</span>
+
+g.next<span class="o">()</span>        // <span class="o">{</span> value: <span class="m">1</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+g.return<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span> // <span class="o">{</span> value: <span class="s2">&quot;foo&quot;</span>, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
+g.next<span class="o">()</span>        // <span class="o">{</span> value: undefined, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
+</pre></div>
+<ul class="simple">
+<li><code>yield *</code> : call another generator</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">function</span>* bar<span class="o">()</span> <span class="o">{</span>
+  yield <span class="s1">&#39;x&#39;</span><span class="p">;</span>
+  yield* foo<span class="o">()</span><span class="p">;</span>
+  yield <span class="s1">&#39;y&#39;</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+<ul class="simple">
+<li>generator function as an object attribution</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">obj</span> <span class="o">=</span> <span class="o">{</span>
+  * myGeneratorMethod<span class="o">()</span> <span class="o">{</span>
+    ···
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">obj</span> <span class="o">=</span> <span class="o">{</span>
+  myGeneratorMethod: <span class="k">function</span>* <span class="o">()</span> <span class="o">{</span>
+    // ···
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="class">
+<h2>16. <a class="toc-backref" href="#id50">Class</a></h2>
+<div class="highlight"><pre><span></span><span class="c1"># Old</span>
+<span class="k">function</span> Point<span class="o">(</span>x, y<span class="o">)</span> <span class="o">{</span>
+  this.x <span class="o">=</span> x<span class="p">;</span>
+  this.y <span class="o">=</span> y<span class="p">;</span>
+<span class="o">}</span>
+Point.prototype.toString <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="s1">&#39;(&#39;</span> + this.x + <span class="s1">&#39;, &#39;</span> + this.y + <span class="s1">&#39;)&#39;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+var <span class="nv">p</span> <span class="o">=</span> new Point<span class="o">(</span><span class="m">1</span>, <span class="m">2</span><span class="o">)</span><span class="p">;</span>
+
+<span class="c1"># New</span>
+class Point <span class="o">{</span>
+  constructor<span class="o">(</span>x, y<span class="o">)</span> <span class="o">{</span>
+    this.x <span class="o">=</span> x<span class="p">;</span>
+    this.y <span class="o">=</span> y<span class="p">;</span>
+  <span class="o">}</span>
+  toString<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s1">&#39;(&#39;</span> + this.x + <span class="s1">&#39;, &#39;</span> + this.y + <span class="s1">&#39;)&#39;</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<div class="section" id="class-specials">
+<h3>16.1. <a class="toc-backref" href="#id51">class specials</a></h3>
+<ul>
+<li><p class="first">constructor</p>
+</li>
+<li><p class="first">getter and setter</p>
+<div class="highlight"><pre><span></span>class MyClass <span class="o">{</span>
+  constructor<span class="o">()</span> <span class="o">{</span>
+    // ...
+  <span class="o">}</span>
+  get prop<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s1">&#39;getter&#39;</span><span class="p">;</span>
+  <span class="o">}</span>
+  <span class="nb">set</span> prop<span class="o">(</span>value<span class="o">)</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="s1">&#39;setter: &#39;</span>+value<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="nb">let</span> <span class="nv">inst</span> <span class="o">=</span> new MyClass<span class="o">()</span><span class="p">;</span>
+inst.prop <span class="o">=</span> <span class="m">123</span><span class="p">;</span>
+// setter: <span class="m">123</span>
+inst.prop
+// <span class="s1">&#39;getter&#39;</span>
+</pre></div>
+</li>
+<li><p class="first">Another form</p>
+<div class="highlight"><pre><span></span>const <span class="nv">MyClass</span> <span class="o">=</span> class Me <span class="o">{</span>
+  getClassName<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> Me.name<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">inst</span> <span class="o">=</span> new MyClass<span class="o">()</span><span class="p">;</span>
+inst.getClassName<span class="o">()</span> // Me
+Me.name // ReferenceError: Me is not defined
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="warnings">
+<h3>16.2. <a class="toc-backref" href="#id52">Warnings</a></h3>
+<ul class="simple">
+<li>default use strict</li>
+<li>class will not hoist, move definition to the top.</li>
+</ul>
+</div>
+<div class="section" id="static">
+<h3>16.3. <a class="toc-backref" href="#id53">Static</a></h3>
+<div class="highlight"><pre><span></span>class Foo <span class="o">{</span>
+  static classMethod<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+Foo.classMethod<span class="o">()</span> // <span class="s1">&#39;hello&#39;</span>
+
+var <span class="nv">foo</span> <span class="o">=</span> new Foo<span class="o">()</span><span class="p">;</span>
+foo.classMethod<span class="o">()</span>
+// TypeError: foo.classMethod is not a <span class="k">function</span>
+
+
+class Foo <span class="o">{</span>
+  static classMethod<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+class Bar extends Foo <span class="o">{</span>
+<span class="o">}</span>
+Bar.classMethod<span class="o">()</span> // <span class="s1">&#39;hello&#39;</span>
+
+class Foo <span class="o">{</span>
+<span class="o">}</span>
+
+Foo.prop <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+Foo.prop // <span class="m">1</span>
+</pre></div>
+</div>
+<div class="section" id="attrs">
+<h3>16.4. <a class="toc-backref" href="#id54">attrs</a></h3>
+<div class="highlight"><pre><span></span>class IncreasingCounter <span class="o">{</span>
+  constructor<span class="o">()</span> <span class="o">{</span>
+    this._count <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+  <span class="o">}</span>
+  get value<span class="o">()</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="s1">&#39;Getting the current value!&#39;</span><span class="o">)</span><span class="p">;</span>
+    <span class="k">return</span> this._count<span class="p">;</span>
+  <span class="o">}</span>
+  increment<span class="o">()</span> <span class="o">{</span>
+    this._count++<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+// same
+class IncreasingCounter <span class="o">{</span>
+  <span class="nv">_count</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+  get value<span class="o">()</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="s1">&#39;Getting the current value!&#39;</span><span class="o">)</span><span class="p">;</span>
+    <span class="k">return</span> this._count<span class="p">;</span>
+  <span class="o">}</span>
+  increment<span class="o">()</span> <span class="o">{</span>
+    this._count++<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="section" id="private-variables-and-attrs">
+<h3>16.5. <a class="toc-backref" href="#id55">private variables and attrs</a></h3>
+<div class="highlight"><pre><span></span>class Widget <span class="o">{</span>
+  // public
+  foo <span class="o">(</span>baz<span class="o">)</span> <span class="o">{</span>
+    this._bar<span class="o">(</span>baz<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+  // private
+  _bar<span class="o">(</span>baz<span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> this.snaf <span class="o">=</span> baz<span class="p">;</span>
+  <span class="o">}</span>
+  // ...
+<span class="o">}</span>
+</pre></div>
+<p>And we can use symbol. But it is a little strange.</p>
+<div class="highlight"><pre><span></span>const <span class="nv">bar</span> <span class="o">=</span> Symbol<span class="o">(</span><span class="s1">&#39;bar&#39;</span><span class="o">)</span><span class="p">;</span>
+const <span class="nv">snaf</span> <span class="o">=</span> Symbol<span class="o">(</span><span class="s1">&#39;snaf&#39;</span><span class="o">)</span><span class="p">;</span>
+
+<span class="nb">export</span> default class myClass<span class="o">{</span>
+  // public
+  foo<span class="o">(</span>baz<span class="o">)</span> <span class="o">{</span>
+    this<span class="o">[</span>bar<span class="o">](</span>baz<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+  // private
+  <span class="o">[</span>bar<span class="o">](</span>baz<span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> this<span class="o">[</span>snaf<span class="o">]</span> <span class="o">=</span> baz<span class="p">;</span>
+  <span class="o">}</span>
+  // ...
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="new-target">
+<h3>16.6. <a class="toc-backref" href="#id56">new.target</a></h3>
+<p>Constructor or copy-constructor</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> Person<span class="o">(</span>name<span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span>new.target !<span class="o">==</span> undefined<span class="o">)</span> <span class="o">{</span>
+    this.name <span class="o">=</span> name<span class="p">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    throw new Error<span class="o">(</span><span class="s1">&#39;must use new &#39;</span><span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+// or
+<span class="k">function</span> Person<span class="o">(</span>name<span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span>new.target <span class="o">===</span> Person<span class="o">)</span> <span class="o">{</span>
+    this.name <span class="o">=</span> name<span class="p">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    throw new Error<span class="o">(</span><span class="s1">&#39;must use new &#39;</span><span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+var <span class="nv">person</span> <span class="o">=</span> new Person<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span><span class="p">;</span> // correct
+var <span class="nv">notAPerson</span> <span class="o">=</span> Person.call<span class="o">(</span>person, <span class="s1">&#39;a&#39;</span><span class="o">)</span><span class="p">;</span>  // error
+</pre></div>
+<p>In a derived class, new.target will return derived class.</p>
+</div>
+<div class="section" id="extends">
+<h3>16.7. <a class="toc-backref" href="#id57">extends</a></h3>
+<p>super must be called to initialize parent instance.
+And this can be used after super.</p>
+<div class="highlight"><pre><span></span>class Point <span class="o">{</span>
+<span class="o">}</span>
+class ColorPoint extends Point <span class="o">{</span>
+  constructor<span class="o">(</span>x, y, color<span class="o">)</span> <span class="o">{</span>
+    super<span class="o">(</span>x, y<span class="o">)</span><span class="p">;</span> // 调用父类的constructor<span class="o">(</span>x, y<span class="o">)</span>
+    this.color <span class="o">=</span> color<span class="p">;</span>
+  <span class="o">}</span>
+
+  toString<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> this.color + <span class="s1">&#39; &#39;</span> + super.toString<span class="o">()</span><span class="p">;</span> // 调用父类的toString<span class="o">()</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>if constructor is not defined, then:</p>
+<div class="highlight"><pre><span></span>class ColorPoint extends Point <span class="o">{</span>
+<span class="o">}</span>
+// same
+class ColorPoint extends Point <span class="o">{</span>
+  constructor<span class="o">(</span>...args<span class="o">)</span> <span class="o">{</span>
+    super<span class="o">(</span>...args<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="section" id="super">
+<h3>16.8. <a class="toc-backref" href="#id58">super</a></h3>
+<p>when we use super as an object, that means we are using <code>Parent.prototype</code> .</p>
+<div class="highlight"><pre><span></span>class A <span class="o">{</span>
+  constructor<span class="o">()</span> <span class="o">{</span>
+    this.p <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+class B extends A <span class="o">{</span>
+  get m<span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> super.p<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="nb">let</span> <span class="nv">b</span> <span class="o">=</span> new B<span class="o">()</span><span class="p">;</span>
+b.m // undefined
+</pre></div>
+<ul>
+<li><p class="first">Child class calls parent class functions, <code>this</code> represents Child class.</p>
+<div class="highlight"><pre><span></span>class A <span class="o">{</span>
+  constructor<span class="o">()</span> <span class="o">{</span>
+    this.x <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+  <span class="o">}</span>
+  print<span class="o">()</span> <span class="o">{</span>
+    console.log<span class="o">(</span>this.x<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+class B extends A <span class="o">{</span>
+  constructor<span class="o">()</span> <span class="o">{</span>
+    super<span class="o">()</span><span class="p">;</span>
+    this.x <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
+  <span class="o">}</span>
+  m<span class="o">()</span> <span class="o">{</span>
+    super.print<span class="o">()</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="nb">let</span> <span class="nv">b</span> <span class="o">=</span> new B<span class="o">()</span><span class="p">;</span>
+b.m<span class="o">()</span> // <span class="m">2</span>
+</pre></div>
+</li>
+<li><p class="first">In Child, if we assign super a value (<code>super.x = 3;</code> ), then we are also using child itself.</p>
+<div class="highlight"><pre><span></span>class A <span class="o">{</span>
+  constructor<span class="o">()</span> <span class="o">{</span>
+    this.x <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+class B extends A <span class="o">{</span>
+  constructor<span class="o">()</span> <span class="o">{</span>
+    super<span class="o">()</span><span class="p">;</span>
+    this.x <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
+    super.x <span class="o">=</span> <span class="m">3</span><span class="p">;</span>
+    console.log<span class="o">(</span>super.x<span class="o">)</span><span class="p">;</span> // undefined
+    console.log<span class="o">(</span>this.x<span class="o">)</span><span class="p">;</span> // <span class="m">3</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="nb">let</span> <span class="nv">b</span> <span class="o">=</span> new B<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><p class="first">in static methods, super means parent.</p>
+<div class="highlight"><pre><span></span>class Parent <span class="o">{</span>
+  static myMethod<span class="o">(</span>msg<span class="o">)</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="s1">&#39;static&#39;</span>, msg<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+
+  myMethod<span class="o">(</span>msg<span class="o">)</span> <span class="o">{</span>
+    console.log<span class="o">(</span><span class="s1">&#39;instance&#39;</span>, msg<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+class Child extends Parent <span class="o">{</span>
+  static myMethod<span class="o">(</span>msg<span class="o">)</span> <span class="o">{</span>
+    super.myMethod<span class="o">(</span>msg<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+
+  myMethod<span class="o">(</span>msg<span class="o">)</span> <span class="o">{</span>
+    super.myMethod<span class="o">(</span>msg<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+Child.myMethod<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span> // static <span class="m">1</span>
+
+var <span class="nv">child</span> <span class="o">=</span> new Child<span class="o">()</span><span class="p">;</span>
+child.myMethod<span class="o">(</span><span class="m">2</span><span class="o">)</span><span class="p">;</span> // instance <span class="m">2</span>
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="prototype-and-proto">
+<h3>16.9. <a class="toc-backref" href="#id59">prototype and __proto__</a></h3>
+<div class="highlight"><pre><span></span>class A <span class="o">{</span>
+<span class="o">}</span>
+class B extends A <span class="o">{</span>
+<span class="o">}</span>
+B.__proto__ <span class="o">===</span> A // <span class="nb">true</span>
+B.prototype.__proto__ <span class="o">===</span> A.prototype // <span class="nb">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decorator">
+<h2>17. <a class="toc-backref" href="#id60">Decorator</a></h2>
+<ul>
+<li><p class="first">Class Decorator</p>
+<p>Python like.</p>
+<div class="highlight"><pre><span></span>@testable
+class MyTestableClass <span class="o">{</span>
+  // ...
+<span class="o">}</span>
+<span class="k">function</span> testable<span class="o">(</span>target<span class="o">)</span> <span class="o">{</span>
+  target.isTestable <span class="o">=</span> true<span class="p">;</span>
+<span class="o">}</span>
+MyTestableClass.isTestable // <span class="nb">true</span>
+</pre></div>
+</li>
+<li><p class="first">Class Function Decorator</p>
+<div class="highlight"><pre><span></span>class Person <span class="o">{</span>
+  @readonly
+  name<span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="sb">`</span><span class="si">${</span><span class="nv">this</span><span class="p">.first</span><span class="si">}</span> <span class="si">${</span><span class="nv">this</span><span class="p">.last</span><span class="si">}</span><span class="sb">`</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</li>
+<li><p class="first">Can't apply to pure function
+Because function will hoist.</p>
+<div class="highlight"><pre><span></span>var <span class="nv">readOnly</span> <span class="o">=</span> require<span class="o">(</span><span class="s2">&quot;some-decorator&quot;</span><span class="o">)</span><span class="p">;</span>
+@readOnly
+<span class="k">function</span> foo<span class="o">()</span> <span class="o">{</span>
+<span class="o">}</span>
+
+<span class="c1"># same</span>
+
+var readOnly<span class="p">;</span>
+@readOnly
+<span class="k">function</span> foo<span class="o">()</span> <span class="o">{</span>
+<span class="o">}</span>
+<span class="nv">readOnly</span> <span class="o">=</span> require<span class="o">(</span><span class="s2">&quot;some-decorator&quot;</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="module">
+<h2>18. <a class="toc-backref" href="#id61">Module</a></h2>
+<p><code>CommonJS</code> : backend
+<code>AMD</code> : UI</p>
+<p>Both CommonJS and AMD are dynamic.
+But ES6 <code>import</code> and <code>export</code> are static.</p>
+<div class="section" id="export">
+<h3>18.1. <a class="toc-backref" href="#id62">export</a></h3>
+<div class="highlight"><pre><span></span><span class="nb">export</span> var <span class="nv">lastName</span> <span class="o">=</span> <span class="s1">&#39;Jackson&#39;</span><span class="p">;</span>
+<span class="nb">export</span> <span class="k">function</span> multiply<span class="o">(</span>x, y<span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> x * y<span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+<span class="k">function</span> v1<span class="o">()</span> <span class="o">{</span> ... <span class="o">}</span>
+<span class="k">function</span> v2<span class="o">()</span> <span class="o">{</span> ... <span class="o">}</span>
+<span class="nb">export</span> <span class="o">{</span>
+  v1 as streamV1,
+  v2 as streamV2,
+  v2 as streamLatestVersion
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="import">
+<h3>18.2. <a class="toc-backref" href="#id63">import</a></h3>
+<p>Read only.</p>
+<div class="highlight"><pre><span></span>import <span class="o">{</span>firstName, lastName, year<span class="o">}</span> from <span class="s1">&#39;./profile.js&#39;</span><span class="p">;</span>
+import <span class="o">{</span> lastName as surname <span class="o">}</span> from <span class="s1">&#39;./profile.js&#39;</span><span class="p">;</span>
+</pre></div>
+<p><code>import</code> will be lifetd to the top of a file.</p>
+</div>
+<div class="section" id="export-default">
+<h3>18.3. <a class="toc-backref" href="#id64">export default</a></h3>
+<div class="highlight"><pre><span></span><span class="nb">export</span> default <span class="k">function</span> crc32<span class="o">()</span> <span class="o">{</span>
+  // ...
+<span class="o">}</span>
+import crc32 from <span class="s1">&#39;crc32&#39;</span><span class="p">;</span>
+
+<span class="nb">export</span> <span class="k">function</span> crc32<span class="o">()</span> <span class="o">{</span>
+  // ...
+<span class="o">}</span><span class="p">;</span>
+
+import <span class="o">{</span>crc32<span class="o">}</span> from <span class="s1">&#39;crc32&#39;</span><span class="p">;</span>
+
+import _, <span class="o">{</span> each, forEach <span class="o">}</span> from <span class="s1">&#39;lodash&#39;</span><span class="p">;</span>
+</pre></div>
+<p>Using defualt will make the module in a single package.</p>
+<p>Constants in different modules:</p>
+<div class="highlight"><pre><span></span>// constants.js 模块
+<span class="nb">export</span> const <span class="nv">A</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+<span class="nb">export</span> const <span class="nv">B</span> <span class="o">=</span> <span class="m">3</span><span class="p">;</span>
+<span class="nb">export</span> const <span class="nv">C</span> <span class="o">=</span> <span class="m">4</span><span class="p">;</span>
+
+// test1.js 模块
+import * as constants from <span class="s1">&#39;./constants&#39;</span><span class="p">;</span>
+console.log<span class="o">(</span>constants.A<span class="o">)</span><span class="p">;</span> // <span class="m">1</span>
+console.log<span class="o">(</span>constants.B<span class="o">)</span><span class="p">;</span> // <span class="m">3</span>
+
+// test2.js 模块
+import <span class="o">{</span>A, B<span class="o">}</span> from <span class="s1">&#39;./constants&#39;</span><span class="p">;</span>
+console.log<span class="o">(</span>A<span class="o">)</span><span class="p">;</span> // <span class="m">1</span>
+console.log<span class="o">(</span>B<span class="o">)</span><span class="p">;</span> // <span class="m">3</span>
+</pre></div>
+</div>
+<div class="section" id="browser-load-es6">
+<h3>18.4. <a class="toc-backref" href="#id65">Browser Load ES6</a></h3>
+<div class="highlight"><pre><span></span>&lt;script <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;module&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;./foo.js&quot;</span>&gt;&lt;/script&gt;    // Async
+&lt;script <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;module&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;./foo.js&quot;</span> async&gt;&lt;/script&gt;    // Sync
+</pre></div>
+</div>
+<div class="section" id="es6-vs-commonjs">
+<h3>18.5. <a class="toc-backref" href="#id66">ES6 VS CommonJS</a></h3>
+<ul class="simple">
+<li>CommonJS export a copy of Value while ES6 export reference.</li>
+<li>CommonJS load dynamically while ES6 load statically.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>19. <a class="toc-backref" href="#id67">Reference</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://es6.ruanyifeng.com/">http://es6.ruanyifeng.com/</a></li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'ES6_Reference.html';
+        var disqus_url = 'https://brianshen1990.github.io/ES6_Reference.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+        <!--
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="https://brianshen1990.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                        </ul>
+                </div>
+        </section>  --> <!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <p>Powered by <a href="http://getpelican.com/">Pelican</a>. The theme is adopted from <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'brianshen1990';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
