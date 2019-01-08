@@ -806,20 +806,22 @@ proxy.m&lt;span class="o"&gt;()&lt;/span&gt;  // &lt;span class="nb"&gt;true&lt;
 &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Methods:
-- Reflect.apply(target, thisArg, args)
-- Reflect.construct(target, args)
-- Reflect.get(target, name, receiver)
-- Reflect.set(target, name, value, receiver)
-- Reflect.defineProperty(target, name, desc)
-- Reflect.deleteProperty(target, name)
-- Reflect.has(target, name)
-- Reflect.ownKeys(target)
-- Reflect.isExtensible(target)
-- Reflect.preventExtensions(target)
-- Reflect.getOwnPropertyDescriptor(target, name)
-- Reflect.getPrototypeOf(target)
-- Reflect.setPrototypeOf(target, prototype)&lt;/p&gt;
+&lt;p&gt;Methods:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Reflect.apply(target, thisArg, args)&lt;/li&gt;
+&lt;li&gt;Reflect.construct(target, args)&lt;/li&gt;
+&lt;li&gt;Reflect.get(target, name, receiver)&lt;/li&gt;
+&lt;li&gt;Reflect.set(target, name, value, receiver)&lt;/li&gt;
+&lt;li&gt;Reflect.defineProperty(target, name, desc)&lt;/li&gt;
+&lt;li&gt;Reflect.deleteProperty(target, name)&lt;/li&gt;
+&lt;li&gt;Reflect.has(target, name)&lt;/li&gt;
+&lt;li&gt;Reflect.ownKeys(target)&lt;/li&gt;
+&lt;li&gt;Reflect.isExtensible(target)&lt;/li&gt;
+&lt;li&gt;Reflect.preventExtensions(target)&lt;/li&gt;
+&lt;li&gt;Reflect.getOwnPropertyDescriptor(target, name)&lt;/li&gt;
+&lt;li&gt;Reflect.getPrototypeOf(target)&lt;/li&gt;
+&lt;li&gt;Reflect.setPrototypeOf(target, prototype)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="promises"&gt;
 &lt;h2&gt;13. &lt;a class="toc-backref" href="#id46"&gt;Promises&lt;/a&gt;&lt;/h2&gt;
