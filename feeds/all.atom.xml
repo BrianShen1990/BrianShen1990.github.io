@@ -1,5 +1,367 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/all.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2018-12-21T00:00:00+08:00</updated><entry><title>ES6 Reference</title><link href="https://brianshen1990.github.io/ES6_Reference.html" rel="alternate"></link><published>2018-12-21T00:00:00+08:00</published><updated>2018-12-21T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-12-21:/ES6_Reference.html</id><summary type="html">&lt;p class="first last"&gt;ES6 Reference&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/all.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2019-01-10T00:00:00+08:00</updated><entry><title>HTML To PDF Solutions / HTML 转换 PDF 解决方案</title><link href="https://brianshen1990.github.io/HTML_To_PDF_Solutions.html" rel="alternate"></link><published>2019-01-10T00:00:00+08:00</published><updated>2019-01-10T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-01-10:/HTML_To_PDF_Solutions.html</id><summary type="html">&lt;p class="first last"&gt;HTML To PDF Solutions&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="html-to-pdf-solutions"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro" id="id3"&gt;Intro / 简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#sample-files" id="id4"&gt;Sample Files / 示例文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#phantomjs" id="id5"&gt;&lt;code&gt;phantomjs&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#installation" id="id6"&gt;Installation / 安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#usage-in-js-js" id="id7"&gt;Usage in JS / JS  调用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#wkhtmltopdf" id="id8"&gt;&lt;code&gt;wkhtmltopdf&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id1" id="id9"&gt;Installation / 安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#usage-in-command-line" id="id10"&gt;Usage in Command Line / 命令行使用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id11"&gt;Usage in JS / JS 使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#other-tips" id="id12"&gt;Other Tips / 其他&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#charts-can-be-partial" id="id13"&gt;Charts can be partial / 图表显示不全&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#jquery-3-3-1-is-not-fully-compatible-with-wkhtmltopdf" id="id14"&gt;jQuery 3.3.1 is not fully compatible with wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id3"&gt;Intro / 简介&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;There are many situations that we need to generate reports in PDF. And there are many solutions.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Use libraries to manipulate pdf content. That suffers.&lt;/li&gt;
+&lt;li&gt;Use html and then render it to PDF. That's wonderful.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I think everyone like the last solution since you can always have a preview.&lt;/p&gt;
+&lt;p&gt;And to render html to PDF, there are many solutions.
+But the most popular ones are &lt;code&gt;phantomjs&lt;/code&gt; and &lt;code&gt;wkhtmltopdf&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;I thought &lt;code&gt;phantomjs&lt;/code&gt; would be more popular if it's still under maintenance.
+Unfortunately, it doesn't. So the lack of some necessary features makes &lt;code&gt;wkhtmltopdf&lt;/code&gt; an appearing alternative.&lt;/p&gt;
+&lt;p&gt;In my project, I used to generate PDF using &lt;code&gt;phantomjs&lt;/code&gt; . One day a customer asked for a menu.
+And I found it unable to fulfill.
+And then I began to use &lt;code&gt;wkhtmltopdf&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;However, there are some problems both. And I'll explain.&lt;/p&gt;
+&lt;p&gt;很多情况下， 我们需要产生PDF的报告。 因此也有很多现存的解决方案：&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;可以使用 PDF 库 去操作PDF 的内容， 那会非常的痛苦&lt;/li&gt;
+&lt;li&gt;使用HTML 然后 渲染为PDF， 那会很好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我想每个人都改会喜欢后一种解决方案， 因为你永远可以有一个预览。&lt;/p&gt;
+&lt;p&gt;至于 将 HTML 转换为 PDF， 现在也有很多的解决方案。 最流行的就是 &lt;code&gt;phantomjs&lt;/code&gt; 和 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;我想 &lt;code&gt;phantomjs&lt;/code&gt; 会更加的流行 如果 它还在被维护的话。 可惜的是，他被停止维护了。 一些基础必要功能的缺少使得 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 称为很好的选择。&lt;/p&gt;
+&lt;p&gt;我曾使用 &lt;code&gt;phantomjs&lt;/code&gt; 产生 PDF，但是后来客户需要 一个 目录，&lt;code&gt;phantomjs&lt;/code&gt; 不具备这样的功能。因为我转向了 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sample-files"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id4"&gt;Sample Files / 示例文件&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To compare the render results of the two Scriptable Headless Browser. We will use the following samples.&lt;/p&gt;
+&lt;p&gt;为了对比渲染结果，我们使用以下的示例。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./resources/
+├── DailyReport.js
+├── DailyReport1x.html
+├── DailyReport3x.html
+├── Report.css
+├── echarts.common.min.js
+├── jquery-1.12.4.min.js
+└── jquery-3.3.1.min.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;DailyReport1x.html&lt;/code&gt; (We render a link and a chart / 我们渲染一个 连接 和 图表):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html &lt;span class="nv"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;meta &lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;title&amp;gt;Daily Report&amp;lt;/title&amp;gt;
+&amp;lt;link &lt;span class="nv"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Report.css&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jquery-1.12.4.min.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;echarts.common.min.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;DailyReport.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;div&amp;gt;
+    &amp;lt;h2&amp;gt;Menu&amp;lt;/h2&amp;gt;
+    &amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;chartDiv&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;a &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#chartDiv&amp;quot;&lt;/span&gt;&amp;gt;● Test Internal Link&amp;lt;/a&amp;gt;
+        &amp;lt;br /&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;div &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;height:100mm; width:180mm;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;chartDiv&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;DailyReport.js&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; drawPie&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  var &lt;span class="nv"&gt;chartOptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    animation: false,
+    xAxis: &lt;span class="o"&gt;{&lt;/span&gt;
+      type: &lt;span class="s1"&gt;&amp;#39;category&amp;#39;&lt;/span&gt;,
+      data: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Mon&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Tue&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Wed&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Thu&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Fri&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Sat&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Sun&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+    yAxis: &lt;span class="o"&gt;{&lt;/span&gt;
+      type: &lt;span class="s1"&gt;&amp;#39;value&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+    series: &lt;span class="o"&gt;[{&lt;/span&gt;
+      data: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;820&lt;/span&gt;, &lt;span class="m"&gt;932&lt;/span&gt;, &lt;span class="m"&gt;901&lt;/span&gt;, &lt;span class="m"&gt;934&lt;/span&gt;, &lt;span class="m"&gt;1290&lt;/span&gt;, &lt;span class="m"&gt;1330&lt;/span&gt;, &lt;span class="m"&gt;1320&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;,
+      type: &lt;span class="s1"&gt;&amp;#39;line&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}]&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  var &lt;span class="nv"&gt;myChart&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; echarts.init&lt;span class="o"&gt;(&lt;/span&gt;document.getElementById&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;chartDiv&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  myChart.setOption&lt;span class="o"&gt;(&lt;/span&gt;chartOptions&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;$(&lt;/span&gt;document&lt;span class="k"&gt;)&lt;/span&gt;.ready&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  drawPie&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;Report.css&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@page &lt;span class="o"&gt;{&lt;/span&gt;
+  size: A4&lt;span class="p"&gt;;&lt;/span&gt;
+  margin: &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+@media print &lt;span class="o"&gt;{&lt;/span&gt;
+  body &lt;span class="o"&gt;{&lt;/span&gt;
+    background: white&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  .page &lt;span class="o"&gt;{&lt;/span&gt;
+    width: 210mm&lt;span class="p"&gt;;&lt;/span&gt;
+    page-break-after: always&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+html, body &lt;span class="o"&gt;{&lt;/span&gt;
+  background: rgb&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;241&lt;/span&gt;,241,241&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+.page &lt;span class="o"&gt;{&lt;/span&gt;
+  page-break-after: always&lt;span class="p"&gt;;&lt;/span&gt;
+  width: 210mm&lt;span class="p"&gt;;&lt;/span&gt;
+  background: white&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And preview in Chrome / 在Chrome 中预览:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf01.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Print Preview / Chrome 打印预览:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf02.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="phantomjs"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id5"&gt;&lt;code&gt;phantomjs&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h3&gt;3.1. &lt;a class="toc-backref" href="#id6"&gt;Installation / 安装&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Download from its &lt;a class="reference external" href="http://phantomjs.org/download.html"&gt;Phantomjs Official Site&lt;/a&gt; and move it to &lt;code&gt;/usr/bin/&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;The latest and end version is &lt;code&gt;2.1.1&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;从官网去下载，移动到 &lt;code&gt;/usr/bin/&lt;/code&gt;  . 最新也是最后的版本是 &lt;code&gt;2.1.1&lt;/code&gt;  .&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usage-in-js-js"&gt;
+&lt;h3&gt;3.2. &lt;a class="toc-backref" href="#id7"&gt;Usage in JS / JS  调用&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We use &lt;code&gt;html-pdf&lt;/code&gt; because it is simple.&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;html-pdf&lt;/code&gt; ， 因为这样很简单。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm install html-pdf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;fs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;phantomjs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;html-pdf&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;SrcPath1x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;/Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/DailyReport1x.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;BasePath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;OutPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.pdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;genPDFPahntomJS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;srcPath, basePath, outPath&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; new Promise&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;resolve, reject&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    fs.readFile&lt;span class="o"&gt;(&lt;/span&gt;srcPath, &lt;span class="s1"&gt;&amp;#39;UTF8&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;errfs, html&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;errfs&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        reject&lt;span class="o"&gt;(&lt;/span&gt;errfs&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt;
+      const &lt;span class="nv"&gt;genOptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        height: &lt;span class="s1"&gt;&amp;#39;297mm&amp;#39;&lt;/span&gt;,
+        width: &lt;span class="s1"&gt;&amp;#39;210mm&amp;#39;&lt;/span&gt;,
+        base: basePath,
+        type: &lt;span class="s1"&gt;&amp;#39;pdf&amp;#39;&lt;/span&gt;,
+        border: &lt;span class="o"&gt;{&lt;/span&gt;
+          top: &lt;span class="s1"&gt;&amp;#39;12mm&amp;#39;&lt;/span&gt;, // default is &lt;span class="m"&gt;0&lt;/span&gt;, units: mm, cm, in, px
+          right: &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,
+          bottom: &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,
+          left: &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+        paginationOffset: &lt;span class="m"&gt;1&lt;/span&gt;, // Override the initial pagination number
+        footer: &lt;span class="o"&gt;{&lt;/span&gt;
+          height: &lt;span class="s1"&gt;&amp;#39;20mm&amp;#39;&lt;/span&gt;,
+          contents: &lt;span class="o"&gt;{&lt;/span&gt;
+            first: &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;,
+            default:&lt;span class="s1"&gt;&amp;#39;{{page}}/{{pages}}&amp;#39;&lt;/span&gt;,
+          &lt;span class="o"&gt;}&lt;/span&gt;,
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+      &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      phantomjs.create&lt;span class="o"&gt;(&lt;/span&gt;html, genOptions&lt;span class="o"&gt;)&lt;/span&gt;.toFile&lt;span class="o"&gt;(&lt;/span&gt;outPath, &lt;span class="o"&gt;(&lt;/span&gt;err, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+          reject&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        resolve&lt;span class="o"&gt;(&lt;/span&gt;res&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+genPDFPahntomJS&lt;span class="o"&gt;(&lt;/span&gt;SrcPath1x, BasePath, OutPath&lt;span class="o"&gt;)&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Success&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;.catch&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;let's see the result / 看看结果:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf03.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Very strange, isn't it?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;phantomjs 2.1.1&lt;/code&gt; has a very strange bug, that the size of printed page is only 75% as big as the standard page. For example, for A4 with 29.7*21. When we design our html, we can only use (29.7 * 0.75) * (21 * 0.75) .&lt;/p&gt;
+&lt;p&gt;And the fatal fault is that the internal hyperlink in the PDF cannot be clicked!&lt;/p&gt;
+&lt;p&gt;非常的奇怪。 &lt;code&gt;phantomjs 2.1.1&lt;/code&gt; 有一个非常奇怪的bug，大的A4 是平常 A4 的 75% 。 这就意味着你在设计html 的时候要按照75%的比例进行设计.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="wkhtmltopdf"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id8"&gt;&lt;code&gt;wkhtmltopdf&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3&gt;4.1. &lt;a class="toc-backref" href="#id9"&gt;Installation / 安装&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;OK, still download from ` wkhtmltopdf Official Site &amp;lt;&lt;a class="reference external" href="https://wkhtmltopdf.org/downloads.html"&gt;https://wkhtmltopdf.org/downloads.html&lt;/a&gt;&amp;gt;`_  and install.&lt;/p&gt;
+&lt;p&gt;仍然从 官网下载并且安装 .&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usage-in-command-line"&gt;
+&lt;h3&gt;4.2. &lt;a class="toc-backref" href="#id10"&gt;Usage in Command Line / 命令行使用&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Quite simple. I just like it because it is simple and easy to begin and test.&lt;/p&gt;
+&lt;p&gt;非常简单，能让你快速的开始。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# wkhtmltopdf --debug-javascript --print-media-type --page-size A4 ./resources/DailyReport1x.html test.pdf&lt;/span&gt;
+Loading pages &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Counting pages &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Resolving links &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Loading headers and footers &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Printing pages &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Done
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And let's see the result: / 看一看结果。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf04.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Everything works fine!&lt;/p&gt;
+&lt;p&gt;符合预期。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h3&gt;4.3. &lt;a class="toc-backref" href="#id11"&gt;Usage in JS / JS 使用&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I use &lt;code&gt;wkhtmltopdf&lt;/code&gt; as it is very popular.&lt;/p&gt;
+&lt;p&gt;我使用的是 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm install wkhtmltopdf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;wkhtmltopdf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;wkhtmltopdf&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;SrcPath1x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/DailyReport1x.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;OutPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;./test1.pdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;genPDFWkHtmlToPdf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;srcPath, outPath&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; new Promise&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;resolve, reject&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    wkhtmltopdf&lt;span class="o"&gt;(&lt;/span&gt;srcPath, &lt;span class="o"&gt;{&lt;/span&gt;
+      output: outPath,
+      printMediaType: true,
+      footerLeft: &lt;span class="s1"&gt;&amp;#39;[page] / [toPage]&amp;#39;&lt;/span&gt;,
+    &lt;span class="o"&gt;}&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        reject&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt;
+      resolve&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+genPDFWkHtmlToPdf&lt;span class="o"&gt;(&lt;/span&gt;SrcPath1x, OutPath&lt;span class="o"&gt;)&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Success&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;.catch&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The result / 结果:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf05.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;It's as same as we rendered with command line!&lt;/p&gt;
+&lt;p&gt;Besides, the internal hyperlink works!&lt;/p&gt;
+&lt;p&gt;与 命令行中 渲染的结果是一样的。此外，内部的连接是可以使用的。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="other-tips"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id12"&gt;Other Tips / 其他&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="charts-can-be-partial"&gt;
+&lt;h3&gt;5.1. &lt;a class="toc-backref" href="#id13"&gt;Charts can be partial / 图表显示不全&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;ECharts will use animation by default, so disable it.&lt;/p&gt;
+&lt;p&gt;ECharts 会自动的开启 动画效果。会导致延时。关闭即可。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;animation: false,&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="jquery-3-3-1-is-not-fully-compatible-with-wkhtmltopdf"&gt;
+&lt;h3&gt;5.2. &lt;a class="toc-backref" href="#id14"&gt;jQuery 3.3.1 is not fully compatible with wkhtmltopdf&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;jQuery 3.3.1 与 wkhtmltopdf 不兼容。&lt;/p&gt;
+&lt;p&gt;Let's see a sample:&lt;/p&gt;
+&lt;p&gt;看个例子。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html &lt;span class="nv"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;meta &lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&amp;gt;
+  &amp;lt;title&amp;gt;Daily Report&amp;lt;/title&amp;gt;
+  &amp;lt;link &lt;span class="nv"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Report.css&amp;quot;&lt;/span&gt;&amp;gt;
+  &amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jquery-3.3.1.min.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;div&amp;gt;
+      &amp;lt;h2&amp;gt;Menu&amp;lt;/h2&amp;gt;
+      &amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;chartDiv&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;a &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#chartDiv&amp;quot;&lt;/span&gt;&amp;gt;● Test Internal Link&amp;lt;/a&amp;gt;
+        &amp;lt;br /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;
+      &amp;lt;table &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tableDiv&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Test&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Title&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+      &amp;lt;/table&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;script&amp;gt;
+  &lt;span class="k"&gt;$(&lt;/span&gt;document&lt;span class="k"&gt;)&lt;/span&gt;.ready&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#tableDiv&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.append&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Row1&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Row1&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we open it in Chrome:&lt;/p&gt;
+&lt;p&gt;从Chrome 中打开。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf06.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;And render it with &lt;code&gt;wkhtmltopdf&lt;/code&gt; :&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 去渲染。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#wkhtmltopdf --debug-javascript --print-media-type --page-size A4 --footer-left &amp;quot;Page [page] of [toPage]&amp;quot; ./resources/DailyReport3x.html test.pdf&lt;/span&gt;
+Loading pages &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Warning: file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/jquery-3.3.1.min.js:2 jQuery.Deferred exception: &lt;span class="s1"&gt;&amp;#39;undefined&amp;#39;&lt;/span&gt; is not a &lt;span class="k"&gt;function&lt;/span&gt;
+Warning: undefined:0 TypeError: &lt;span class="s1"&gt;&amp;#39;undefined&amp;#39;&lt;/span&gt; is not a &lt;span class="k"&gt;function&lt;/span&gt;
+Counting pages &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Resolving links &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Loading headers and footers &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Printing pages &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;/6&lt;span class="o"&gt;)&lt;/span&gt;
+Done
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It can't work.&lt;/p&gt;
+&lt;p&gt;But when we switch to 1.12.4 and render it, everything works fine.&lt;/p&gt;
+&lt;p&gt;发生了错误。但是我们切换到 1.12.4 的 jQuery， 一切工作正常。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf05.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Sad thing is that jQuery 1.12.4 is not under maintenance anymore.&lt;/p&gt;
+&lt;p&gt;遗憾的是，jQuery 1.12.4 不在维护了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="phantomjs"></category><category term="wkhtmltopdf"></category><category term="PDF"></category><category term="HTML"></category></entry><entry><title>ES6 Reference</title><link href="https://brianshen1990.github.io/ES6_Reference.html" rel="alternate"></link><published>2018-12-21T00:00:00+08:00</published><updated>2018-12-21T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-12-21:/ES6_Reference.html</id><summary type="html">&lt;p class="first last"&gt;ES6 Reference&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="es6-reference-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
