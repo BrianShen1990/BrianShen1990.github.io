@@ -13,7 +13,6 @@ Mount disk to VG / 磁盘挂载到虚拟分区
 
 .. contents::
 
-
 All lines started with :code:`#` should be input. / 所有 :code:`#` 前缀的都是 输入的部分。
 
 Mount A New Disk / 挂载新的磁盘
