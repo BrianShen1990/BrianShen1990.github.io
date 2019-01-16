@@ -225,7 +225,7 @@ genPDFPahntomJS&lt;span class="o"&gt;(&lt;/span&gt;SrcPath1x, BasePath, OutPath&
 &lt;h2&gt;4. &lt;a class="toc-backref" href="#id8"&gt;&lt;code&gt;wkhtmltopdf&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h3&gt;4.1. &lt;a class="toc-backref" href="#id9"&gt;Installation / 安装&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;OK, still download from ` wkhtmltopdf Official Site &amp;lt;&lt;a class="reference external" href="https://wkhtmltopdf.org/downloads.html"&gt;https://wkhtmltopdf.org/downloads.html&lt;/a&gt;&amp;gt;`_  and install.&lt;/p&gt;
+&lt;p&gt;OK, still download from &lt;a class="reference external" href="https://wkhtmltopdf.org/downloads.html"&gt;wkhtmltopdf Official Site&lt;/a&gt;  and install.&lt;/p&gt;
 &lt;p&gt;仍然从 官网下载并且安装 .&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="usage-in-command-line"&gt;

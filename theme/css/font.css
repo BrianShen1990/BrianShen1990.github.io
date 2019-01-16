@@ -1,0 +1,9 @@
+@font-face {
+	font-family: 'Yanone Kaffeesatz';
+	font-style: normal;
+	src:
+		local('Bree Serif Regular'),
+		local('BreeSerif-Regular'),
+		url('../fonts/Bree-Serif-regular.woff') format('woff'),
+		url('../fonts/Bree-Serif-regular.woff2') format('woff2');
+}
