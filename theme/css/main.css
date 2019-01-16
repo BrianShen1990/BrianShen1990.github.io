@@ -219,6 +219,79 @@ h1._article_header a{
 	color: #E74C3C;
 	overflow-x: auto;
 }
+._article table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	margin-bottom: 24px;
+	margin-top:24px;
+}
+
+._article table caption {
+	color: #000;
+	font: italic 85%/1 arial,sans-serif;
+	padding: 1em 0;
+	text-align: center
+}
+
+._article table td, ._article table th {
+	font-size: 90%;
+	margin: 0;
+	overflow: visible;
+	padding: 8px 16px
+}
+
+._article table td:first-child,._article table th:first-child {
+	border-left-width: 0
+}
+
+._article table thead {
+	color: #000;
+	text-align: left;
+	vertical-align: bottom;
+	white-space: nowrap
+}
+
+._article table thead th {
+	font-weight: bold;
+border-bottom: solid 2px #e1e4e5;
+border-left: 1px solid #e1e4e5
+}
+
+._article table td {
+	background-color: transparent;
+	vertical-align: middle
+}
+
+._article table td {
+	line-height: 18px
+}
+
+._article table td p:last-child{
+	margin-bottom: 0
+}
+
+
+._article table:not(.field-list) tr:nth-child(2n-1) td {
+	background-color: #f3f6f6
+}
+
+
+._article table {
+	border: 1px solid #e1e4e5
+}
+
+._article table td {
+	border-bottom: 1px solid #e1e4e5;
+	border-left: 1px solid #e1e4e5
+}
+
+._article table tbody>tr:last-child td {
+	border-bottom-width: 0
+}
+
+
+
 ._articleInfo table tr td:first-child{
 	width:100px;
 	font-weight: bold;
