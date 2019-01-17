@@ -19,6 +19,9 @@ CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
 DELETE_OUTPUT_DIRECTORY = True
 
+THEME='../rtdThemeForPelican'
+# THEME='./notmyideaBrian'
+
 SITEURL = 'https://brianshen1990.github.io/'
 
 # Following items are often useful when publishing

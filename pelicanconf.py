@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*- #
 
 from __future__ import unicode_literals
+from functools import partial
 
 AUTHOR = 'Brian'
 SITENAME = 'KNOWN'
@@ -36,11 +37,11 @@ STATIC_PATHS = ['images']
 
 LOAD_CONTENT_CACHE = False
 
-THEME='./notmyideaBrian'
+THEME='../rtdThemeForPelican'
 
 GOOGLE_ANALYTICS = 'UA-107750695-1'
-
-DISQUS_SITENAME = "brianshen1990"
+DISQUS_SITENAME = 'brianshen1990'
+GITHUB_URL = 'https://github.com/brianshen1990'
 
 PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = ['section_number']
@@ -48,6 +49,11 @@ PLUGINS = ['section_number']
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
+JINJA_FILTERS = {
+    'sort_by_article_count': partial(
+        sorted,
+        key=lambda tags: len(tags[1]),
+        reverse=True)} # reversed for descending order
 # source venv/bin/activate
 # make html && make serve
 # make github

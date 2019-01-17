@@ -254,7 +254,7 @@ And the fatal fault is that the internal hyperlink in the PDF cannot be clicked!
 Installation / 安装
 ********************
 
-OK, still download from ` wkhtmltopdf Official Site <https://wkhtmltopdf.org/downloads.html>`_  and install.
+OK, still download from `wkhtmltopdf Official Site <https://wkhtmltopdf.org/downloads.html>`_  and install.
 
 仍然从 官网下载并且安装 .
 
