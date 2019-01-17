@@ -31,12 +31,15 @@ Prerequisite / 前提:
 - Pip
 
 Open cmd and execute:  / 打开命令行执行： 
-    :code:`pip install sphinx`
+:code:`pip install sphinx`
+
 Usually, most people use a theme named :code:`rtd` , so install this theme: / 我们通常看到的主题的名字叫 :code:`rtd` ，可以这样安装：
-    :code:`pip install sphinx_rtd_theme`
+
+:code:`pip install sphinx_rtd_theme`
 
 Create a folder, then run command: / 新建文件夹 并且运行命令：
-    :code:`sphinx-quickstart` 。
+
+:code:`sphinx-quickstart` 。
 
 After input some essential information, :code:`sphinx` has created some files.
 
@@ -278,8 +281,10 @@ Sample / 示例:
     * It has two items, the second
       item uses two lines.
 
+
     1. This is a numbered list.
     2. It has two items too.
+
 
     #. This is a numbered list.
     #. It has two items too.
