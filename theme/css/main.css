@@ -2,14 +2,18 @@
 @import url("reset.css");
 @import url("fonts.css");
 
+/* global */
 a {	
 	color:#2e81b7; 
 	text-decoration: none;
 }
-
 body {
 	background-color: #FCFCFC;
+	min-height: 100%;
 }
+
+/* _header */
+
 ._header h1 {
 	font-family:BreeSerif-Regular;
 	font-size:26px;
@@ -18,7 +22,6 @@ body {
 	line-height: 66px;
 	font-weight: normal;
 }
-
 ._header {
 	top: 0px;
 	height: 66px;
@@ -37,6 +40,30 @@ body {
 	color: #2e81b7;
 	text-align: right;
 }
+
+/* footer */
+._footer {
+	height: 88px;
+	background-color: #fff;
+	clear: both;
+	margin-top: 24px;
+	font-family: Lato-Regular;
+	font-size: 18px;
+	color: #2e81b7;
+	border-top:1px solid #eeeeee;
+	bottom: 0px;
+}
+._footer > div {
+	width: 960px;
+	margin: auto;
+}
+._footer > div p{
+	float: right;
+	line-height:88px;
+}
+
+
+/* content */
 ._content {
 	clear: both;
 	width: 960px;
@@ -52,27 +79,6 @@ body {
 	width: 285px;
 	float: right
 }
-
-._footer {
-	height: 88px;
-	background-color: #fff;
-	clear: both;
-	margin-top: 24px;
-	font-family: Lato-Regular;
-	font-size: 18px;
-	color: #2e81b7;
-	border-top:1px solid #eeeeee;
-}
-._footer > div {
-	width: 960px;
-	margin: auto;
-	bottom: 0px;
-}
-._footer > div p{
-	float: right;
-	line-height:88px;
-}
-
 ._content ._postArticleList h3 {
 	font-family:Lato-Italic;
 	font-size:22px;
@@ -82,10 +88,9 @@ body {
 }
 ._content ._postArticleList h3 span{
 	color:#000;
-	font-family: Lato;
+	font-family: Lato-Regular;
 	margin-right: 12px;
 }
-
 ._content h2._breif {
 	font-family:BreeSerif-Regular;
 	font-size:24px;
@@ -94,14 +99,15 @@ body {
 	margin-bottom: 24px;
 	font-weight: normal;
 }
-
 p.paginator  {
 	color:#000;
-	font-family: Lato;
+	font-family: Lato-Regular;
 	font-size:18px;
 	margin-top: 12px;
 	margin-bottom: 12px;
 }
+
+/* side bar */
 
 ._sideAboutme img {
 	width:36px;
@@ -114,7 +120,6 @@ p.paginator  {
 	text-align:left;
 	margin-bottom: 12px;
 }
-
 ._sideAboutme > div > img { 
 	float:left;
 }
@@ -137,10 +142,37 @@ p.paginator  {
 	margin-left: 5px;
 }
 
+/* article */
+._article {
+	font-family:Lato-Regular;
+	text-align:left;
+	font-size:16px;
+}
+h1._article_header a{
+	font-family:RobotoSlab-Regular;
+	font-weight: bold;
+	font-size:28px;
+	color:#2e81b7;
+	text-align:left;
+}
+._articleInfo table tr td:first-child{
+	width:100px;
+	font-weight: bold;
+	height: 24px;
+}
+._articleInfo table {
+	font-weight: normal;
+	font-size:14.4px;
+	color:#000000;
+	font-size:14.4px;
+	margin-left: 12px;
+	margin-top: 24px;
+}
 ._article h2, ._article h3, ._article h4 {
-	font-family:RobotoSlab-Bold;
+	font-family:RobotoSlab-Regular;
 	color:#000000;
 	text-align:left;
+	font-weight: bold;
 }
 ._article h2{
 	font-size:24px;
@@ -154,9 +186,8 @@ p.paginator  {
 	font-size:18px;
 	line-height: 38px;
 }
+
 ._article p {
-	font-family:Lato-Regular;
-	font-size:16px;
 	color:#000000;
 	line-height:23px;
 	text-align:left;
@@ -164,15 +195,7 @@ p.paginator  {
 	margin-bottom: 12px;
 }
 
-h1._article_header a{
-	font-family:RobotoSlab-Bold;
-	font-size:28px;
-	color:#2e81b7;
-	text-align:left;
-}
-._article ul {
-	font-family:Lato;
-	font-size:16px;
+._article ul,._article ol {
 	color:#000000;
 	line-height:23px;
 	text-align:left;
@@ -184,15 +207,19 @@ h1._article_header a{
 	list-style: circle;
 	margin-left: 36px;
 }
-
 ._article ul li li li {
 	list-style: square;
 	margin-left: 36px;
+}
+/* fix bug for pelican render*/
+._article li p.first {
+	display: inline-block;
 }
 
 ._article img {
 	max-width: 100%;
 }
+
 ._article pre {
 	white-space: pre;
 	max-width:100%;
@@ -207,7 +234,10 @@ h1._article_header a{
 	background-color:white;
 	border: 1px solid #e1e4e5;
 }
-
+._article .highlight {
+	margin-top:12px;
+	margin-bottom: 12px;
+}
 ._article code {
 	white-space: nowrap;
 	max-width: 100%;
@@ -219,91 +249,54 @@ h1._article_header a{
 	color: #E74C3C;
 	overflow-x: auto;
 }
-._article table {
+
+._article table.docutils {
 	border-collapse: collapse;
 	border-spacing: 0;
 	empty-cells: show;
 	margin-bottom: 24px;
 	margin-top:24px;
+	border: 1px solid #e1e4e5
 }
-
-._article table caption {
+._article table.docutils caption {
 	color: #000;
 	font: italic 85%/1 arial,sans-serif;
 	padding: 1em 0;
 	text-align: center
 }
-
-._article table td, ._article table th {
+._article table.docutils td, ._article table.docutils th {
 	font-size: 90%;
 	margin: 0;
 	overflow: visible;
 	padding: 8px 16px
 }
-
-._article table td:first-child,._article table th:first-child {
+._article table.docutils td:first-child,._article table.docutils th:first-child {
 	border-left-width: 0
 }
-
-._article table thead {
+._article table.docutils thead {
 	color: #000;
 	text-align: left;
 	vertical-align: bottom;
 	white-space: nowrap
 }
-
-._article table thead th {
+._article table.docutils thead th {
 	font-weight: bold;
-border-bottom: solid 2px #e1e4e5;
-border-left: 1px solid #e1e4e5
-}
-
-._article table td {
-	background-color: transparent;
-	vertical-align: middle
-}
-
-._article table td {
-	line-height: 18px
-}
-
-._article table td p:last-child{
-	margin-bottom: 0
-}
-
-
-._article table:not(.field-list) tr:nth-child(2n-1) td {
-	background-color: #f3f6f6
-}
-
-
-._article table {
-	border: 1px solid #e1e4e5
-}
-
-._article table td {
-	border-bottom: 1px solid #e1e4e5;
+	border-bottom: solid 2px #e1e4e5;
 	border-left: 1px solid #e1e4e5
 }
-
-._article table tbody>tr:last-child td {
+._article table.docutils td {
+	background-color: transparent;
+	vertical-align: middle;
+	border-bottom: 1px solid #e1e4e5;
+	border-left: 1px solid #e1e4e5;
+	line-height: 18px;
+}
+._article table.docutils td p:last-child{
+	margin-bottom: 0
+}
+._article table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+	background-color: #f3f6f6
+}
+._article table.docutils tbody>tr:last-child td {
 	border-bottom-width: 0
-}
-
-
-
-._articleInfo table tr td:first-child{
-	width:100px;
-	font-weight: bold;
-	height: 24px;
-}
-._articleInfo table {
-	font-family:Lato;
-	font-weight: normal;
-	font-size:14.4px;
-	color:#000000;
-	text-align:left;
-	font-size:14.4px;
-	margin-left: 12px;
-	margin-top: 24px;
 }
