@@ -594,6 +594,10 @@ code {
 	overflow-x: auto;
 }
 
+.line-block {
+	margin-left: 24px;
+}
+
 .error,
 .warning,
 .tip {
