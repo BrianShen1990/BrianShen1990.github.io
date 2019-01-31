@@ -1,5 +1,5 @@
 /* Imports */
-@import url("reset.css");
+@import url("rtd.css");
 @import url("fonts.css");
 
 /* global */
@@ -143,11 +143,7 @@ p.paginator  {
 }
 
 /* article */
-._article {
-	font-family:Lato-Regular;
-	text-align:left;
-	font-size:16px;
-}
+
 h1._article_header a{
 	font-family:RobotoSlab-Regular;
 	font-weight: bold;
@@ -167,136 +163,4 @@ h1._article_header a{
 	font-size:14.4px;
 	margin-left: 12px;
 	margin-top: 24px;
-}
-._article h2, ._article h3, ._article h4 {
-	font-family:RobotoSlab-Regular;
-	color:#000000;
-	text-align:left;
-	font-weight: bold;
-}
-._article h2{
-	font-size:24px;
-	line-height: 44px;
-}
-._article h3{
-	font-size:20px;
-	line-height: 40px;
-}
-._article h4{
-	font-size:18px;
-	line-height: 38px;
-}
-
-._article p {
-	color:#000000;
-	line-height:23px;
-	text-align:left;
-	margin-top: 12px;
-	margin-bottom: 12px;
-}
-
-._article ul,._article ol {
-	color:#000000;
-	line-height:23px;
-	text-align:left;
-}
-._article ul li {
-	list-style: inside;
-}
-._article ul li li {
-	list-style: circle;
-	margin-left: 36px;
-}
-._article ul li li li {
-	list-style: square;
-	margin-left: 36px;
-}
-/* fix bug for pelican render*/
-._article li p.first {
-	display: inline-block;
-}
-
-._article img {
-	max-width: 100%;
-}
-
-._article pre {
-	white-space: pre;
-	max-width:100%;
-	margin: -2px;
-	padding: 12px 12px;
-	font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
-	font-size: 12px;
-	line-height: 1.5;
-	display: block;
-	overflow: auto;
-	color: #404040;
-	background-color:white;
-	border: 1px solid #e1e4e5;
-}
-._article .highlight {
-	margin-top:12px;
-	margin-bottom: 12px;
-}
-._article code {
-	white-space: nowrap;
-	max-width: 100%;
-	background: #fff;
-	border: solid 1px #e1e4e5;
-	font-size: 80%;
-	padding: 2px 5px;
-	font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
-	color: #E74C3C;
-	overflow-x: auto;
-}
-
-._article table.docutils {
-	border-collapse: collapse;
-	border-spacing: 0;
-	empty-cells: show;
-	margin-bottom: 24px;
-	margin-top:24px;
-	border: 1px solid #e1e4e5
-}
-._article table.docutils caption {
-	color: #000;
-	font: italic 85%/1 arial,sans-serif;
-	padding: 1em 0;
-	text-align: center
-}
-._article table.docutils td, ._article table.docutils th {
-	font-size: 90%;
-	margin: 0;
-	overflow: visible;
-	padding: 8px 16px
-}
-._article table.docutils td:first-child,._article table.docutils th:first-child {
-	border-left-width: 0
-}
-._article table.docutils thead {
-	color: #000;
-	text-align: left;
-	vertical-align: bottom;
-	white-space: nowrap
-}
-._article table.docutils thead th {
-	font-weight: bold;
-	border-bottom: solid 2px #e1e4e5;
-	border-left: 1px solid #e1e4e5
-}
-._article table.docutils td {
-	background-color: transparent;
-	vertical-align: middle;
-	border-bottom: 1px solid #e1e4e5;
-	border-left: 1px solid #e1e4e5;
-	line-height: 18px;
-}
-._article table.docutils td p:last-child{
-	margin-bottom: 0
-}
-._article table.docutils:not(.field-list) tr:nth-child(2n-1) td {
-	background-color: #f3f6f6
-}
-._article table.docutils tbody>tr:last-child td {
-	border-bottom-width: 0
 }

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>React Sharing / React 框架分享</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/React_Sharing.html" rel="bookmark"
+          title="Permalink to React Sharing / React 框架分享">React Sharing / React 框架分享
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Wed 19 September 2018</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Web</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/react.html">React</a> 
+          <a href="https://brianshen1990.github.io/tag/store.html">Store</a> 
+          <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux</a> 
+          <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
+          <a href="https://brianshen1990.github.io/tag/node.html">node</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#dev-environment-establish" id="id1">Dev Environment Establish / 开发环境搭建</a></li>
+<li><a class="reference internal" href="#start-a-new-app-app" id="id2">Start a new App / 创建新的App</a></li>
+<li><a class="reference internal" href="#basic-components" id="id3">Basic components / 基础组件</a></li>
+<li><a class="reference internal" href="#test" id="id4">Test / 测试</a></li>
+<li><a class="reference internal" href="#l10n" id="id5">L10N / 本地化</a></li>
+<li><a class="reference internal" href="#router-conception-router" id="id6">Router Conception / Router的概念</a></li>
+<li><a class="reference internal" href="#route-implement" id="id7">Route implement / 路由使用实现</a></li>
+<li><a class="reference internal" href="#deploy-and-debug" id="id8">Deploy and Debug 部署和调试</a></li>
+</ul>
+</div>
+<div class="section" id="dev-environment-establish">
+<span id="react-sharing-rst"></span><h2>1. <a class="toc-backref" href="#id1">Dev Environment Establish / 开发环境搭建</a></h2>
+<p>Download Node from <a class="reference external" href="https://nodejs.org/en/">https://nodejs.org/en/</a> and install.</p>
+<p>下载 Node 并且安装。</p>
+</div>
+<div class="section" id="start-a-new-app-app">
+<h2>2. <a class="toc-backref" href="#id2">Start a new App / 创建新的App</a></h2>
+<p><code>create-react-app</code> is a helper program developed by React.</p>
+<p><code>create-react-app</code> 是 React 自家开发的脚手架程序。</p>
+<div class="highlight"><pre><span></span>npx create-react-app esample
+</pre></div>
+<p>Let's have a look at the directory.</p>
+<p>可以看一看这个脚手架程序创建的目录。</p>
+<div class="highlight"><pre><span></span>esample
+├── README.md
+├── node_modules  <span class="o">(</span>Lib/库<span class="o">)</span>
+├── package-lock.json
+├── package.json  <span class="o">(</span>dependencies and scripts/依赖和脚本<span class="o">)</span>
+├── public   <span class="o">(</span>static files/静态文件<span class="o">)</span>
+└── src  <span class="o">(</span>code/代码<span class="o">)</span>
+</pre></div>
+<p>Now run <code>npm start</code> to start the app.</p>
+<p>现在可以运行 <code>npm start</code> 来启动App.</p>
+<p>However, the recommendation:
+虽然默认的目录是这样的，但是在 <code>src</code> 文件夹中，面对大型的构架，我们希望的是这样的目录结构：</p>
+<div class="highlight"><pre><span></span>esample
+├─ node_modules <span class="o">(</span>Lib/库<span class="o">)</span>
+├─ public <span class="o">(</span>static files/静态文件<span class="o">)</span>
+├─ package.json <span class="o">(</span>dependencies and scripts/依赖和脚本<span class="o">)</span>
+└─ src <span class="o">(</span>code/代码<span class="o">)</span>
+    ├─ actions <span class="o">(</span>Reflux action/Reflux 的action<span class="o">)</span>
+    ├─ stores  <span class="o">(</span>Reflux store/Reflux 的存储<span class="o">)</span>
+    ├─ injection  <span class="o">(</span>Reflux inject / Reflux 注入<span class="o">)</span>
+    ├─ util  <span class="o">(</span>helpers / 帮助函数<span class="o">)</span>
+    └─ public <span class="o">(</span>static files/静态文件<span class="o">)</span>
+        ├─ images
+        └─ css
+    ├─ routing  <span class="o">(</span>router/路由设置<span class="o">)</span>
+    ├─ pages  <span class="o">(</span>main pages/页面<span class="o">)</span>
+    └─ components  <span class="o">(</span>react components/组件<span class="o">)</span>
+        ├─ common
+        └─ Each pages
+    └─ index.jsx <span class="o">(</span>Main entry/主进入点<span class="o">)</span>
+</pre></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Problems of Absolute path: 相对路径问题</p>
+<p>Ref: <a class="reference external" href="https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/">https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/</a></p>
+<div class="line-block">
+<div class="line">With the new structure, we can safely move our files around without worrying about where we are in the directory stack.</div>
+<div class="line">使用了新的目录结构之后，我们可以减少对于目录结构的关注，并且将根路径设置问 src.</div>
+</div>
+<div class="line-block">
+<div class="line">To achieve this, we create a .env file in the root of our directory with NODE_PATH set to src</div>
+<div class="line">为了达到这个目的，需要将设置一些环节变量。</div>
+</div>
+<p class="last"><code>NODE_PATH=src</code></p>
+</div>
+</div>
+<div class="section" id="basic-components">
+<h2>3. <a class="toc-backref" href="#id3">Basic components / 基础组件</a></h2>
+<p>Quite Easy this part because we don't have to care how to create html elements and how to bind events, how to add elements dynamically.
+All we have to do is declare, declare. And the scope is in the components itself, which won't have any effects on others.</p>
+<p>基础组件式 React 最容易的部分，我们不需要了解太多HTML 和 CSS， reactstrap 实际上既可以做很多的事情。 我们可以像写 Python 一样去写UI。
+每个组件都是一个对象。对， 都是对象。</p>
+<p>Let's explore!</p>
+<p><a class="reference external" href="https://reactstrap.github.io/components/tabs/">https://reactstrap.github.io/components/tabs/</a></p>
+<p>PS: Let‘s use the prototype from Elves.</p>
+<p>我们使用 Elves 给我们的雏形。</p>
+<div class="figure">
+<img alt="" src="/images/web/React_LifeCycle.jpeg" />
+</div>
+<p>Most code is copied from <code>Reactstrap</code> .</p>
+<p>大部分的代码我们都从 <code>Reactstrap</code> 拷贝过来的，拿来即用。</p>
+<div class="highlight"><pre><span></span>class SampleComponents extends React.Component <span class="o">{</span>
+    constructor<span class="o">(</span>props<span class="o">)</span> <span class="o">{</span>
+        super<span class="o">(</span>props<span class="o">)</span><span class="p">;</span>
+
+        this.toggleTab <span class="o">=</span> this.toggleTab.bind<span class="o">(</span>this<span class="o">)</span><span class="p">;</span>
+        this.state <span class="o">=</span> <span class="o">{</span>
+            activeTab: <span class="s1">&#39;1&#39;</span>
+        <span class="o">}</span><span class="p">;</span>
+    <span class="o">}</span>
+    toggleTab<span class="o">(</span>tab<span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span>this.state.activeTab !<span class="o">==</span> tab<span class="o">)</span> <span class="o">{</span>
+        this.setState<span class="o">({</span>
+            activeTab: tab
+        <span class="o">})</span><span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    render<span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span>
+        &lt;div <span class="nv">style</span><span class="o">={{</span>marginLeft:<span class="s2">&quot;100px&quot;</span>,marginRight:<span class="s2">&quot;100px&quot;</span>,marginTop:<span class="s2">&quot;50px&quot;</span><span class="o">}}</span>&gt;
+            &lt;Nav tabs&gt;
+                &lt;NavItem&gt;
+                    &lt;BoostNavLink
+                        <span class="nv">className</span><span class="o">={</span>classnames<span class="o">({</span> active: this.state.activeTab <span class="o">===</span> <span class="s1">&#39;1&#39;</span> <span class="o">})}</span>
+                        <span class="nv">onClick</span><span class="o">={()</span> <span class="o">=</span>&gt; <span class="o">{</span> this.toggleTab<span class="o">(</span><span class="s1">&#39;1&#39;</span><span class="o">)</span><span class="p">;</span> <span class="o">}}</span>&gt;
+                        Tab1
+                    &lt;/BoostNavLink&gt;
+                &lt;/NavItem&gt;
+                &lt;NavItem&gt;
+                    &lt;BoostNavLink
+                        <span class="nv">className</span><span class="o">={</span>classnames<span class="o">({</span> active: this.state.activeTab <span class="o">===</span> <span class="s1">&#39;2&#39;</span> <span class="o">})}</span>
+                        <span class="nv">onClick</span><span class="o">={()</span> <span class="o">=</span>&gt; <span class="o">{</span> this.toggleTab<span class="o">(</span><span class="s1">&#39;2&#39;</span><span class="o">)</span><span class="p">;</span> <span class="o">}}</span>&gt;
+                        Tab <span class="m">2</span>
+                    &lt;/BoostNavLink&gt;
+                &lt;/NavItem&gt;
+            &lt;/Nav&gt;
+            &lt;TabContent <span class="nv">activeTab</span><span class="o">={</span>this.state.activeTab<span class="o">}</span>&gt;
+                &lt;TabPane <span class="nv">tabId</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>&gt;
+                    &lt;Row&gt;
+                        &lt;Col <span class="nv">sm</span><span class="o">=</span><span class="s2">&quot;12&quot;</span>&gt;
+                            &lt;h4&gt;Tab <span class="m">1</span> Contents&lt;/h4&gt;
+                        &lt;/Col&gt;
+                    &lt;/Row&gt;
+                &lt;/TabPane&gt;
+                &lt;TabPane <span class="nv">tabId</span><span class="o">=</span><span class="s2">&quot;2&quot;</span>&gt;
+                    &lt;Row&gt;
+                        &lt;Col <span class="nv">sm</span><span class="o">=</span><span class="s2">&quot;12&quot;</span>&gt;
+                            &lt;h4&gt;Tab <span class="m">2</span> Contents&lt;/h4&gt;
+                        &lt;/Col&gt;
+                    &lt;/Row&gt;
+                &lt;/TabPane&gt;
+            &lt;/TabContent&gt;
+        &lt;/div&gt;
+        <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0008.png" />
+</div>
+<div class="highlight"><pre><span></span>class SubAV extends React.Component <span class="o">{</span>
+    constructor<span class="o">(</span>props<span class="o">)</span> <span class="o">{</span>
+        super<span class="o">(</span>props<span class="o">)</span><span class="p">;</span>
+        this.apply <span class="o">=</span> this.apply.bind<span class="o">(</span>this<span class="o">)</span><span class="p">;</span>
+        this.enable <span class="o">=</span> this.enable.bind<span class="o">(</span>this<span class="o">)</span><span class="p">;</span>
+        this.state<span class="o">={</span>
+            enable: <span class="nb">false</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    apply<span class="o">(){</span>
+        alert<span class="o">(</span><span class="s2">&quot;enable:&quot;</span> + <span class="o">(</span>this.state.enable ? <span class="s2">&quot;True&quot;</span> : <span class="s2">&quot;False&quot;</span><span class="o">)</span> <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+    enable<span class="o">(</span>event<span class="o">){</span>
+        debugger<span class="p">;</span>
+        this.setState<span class="o">({</span>enable: event.target.checked <span class="o">})</span><span class="p">;</span>
+    <span class="o">}</span>
+    render<span class="o">(){</span>
+        <span class="k">return</span> <span class="o">(</span>&lt;Row&gt;
+            &lt;Col <span class="nv">sm</span><span class="o">=</span><span class="s2">&quot;12&quot;</span>&gt;
+                &lt;div&gt;防恶意软件安全测试 <span class="p">&amp;</span>nbsp<span class="p">;&amp;</span>nbsp<span class="p">;&amp;</span>nbsp<span class="p">;&amp;</span>nbsp<span class="p">;&amp;</span>nbsp<span class="p">;</span>
+                &lt;Input <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;checkbox&quot;</span> <span class="nv">onChange</span><span class="o">={</span>this.enable<span class="o">}</span> <span class="nv">checked</span><span class="o">={</span>this.state.enable<span class="o">}</span> /&gt;<span class="o">{</span><span class="s1">&#39; &#39;</span><span class="o">}</span>&lt;/div&gt;
+                &lt;Card&gt;
+                    &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerAPT&quot;</span>&gt;高级威胁扫描&lt;/CardHeader&gt;
+                    &lt;UncontrolledCollapse <span class="nv">toggler</span><span class="o">=</span><span class="s2">&quot;#AVTogglerAPT&quot;</span>&gt;
+                        &lt;CardBody&gt;
+                            &lt;Button&gt;Go somewhere&lt;/Button&gt;
+                        &lt;/CardBody&gt;
+                    &lt;/UncontrolledCollapse&gt;
+                &lt;/Card&gt;
+                &lt;Card&gt;
+                    &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerExtension&quot;</span>&gt;文件扩展名&lt;/CardHeader&gt;
+                    &lt;UncontrolledCollapse <span class="nv">toggler</span><span class="o">=</span><span class="s2">&quot;#AVTogglerExtension&quot;</span>&gt;
+                        &lt;CardBody&gt;
+                            &lt;Button&gt;Go somewhere&lt;/Button&gt;
+                        &lt;/CardBody&gt;
+                    &lt;/UncontrolledCollapse&gt;
+                &lt;/Card&gt;
+                &lt;Card&gt;
+                    &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerScan&quot;</span>&gt;扫描优化&lt;/CardHeader&gt;
+                    &lt;UncontrolledCollapse <span class="nv">toggler</span><span class="o">=</span><span class="s2">&quot;#AVTogglerScan&quot;</span>&gt;
+                        &lt;CardBody&gt;
+                            &lt;Button&gt;Go somewhere&lt;/Button&gt;
+                        &lt;/CardBody&gt;
+                    &lt;/UncontrolledCollapse&gt;
+                &lt;/Card&gt;
+                &lt;Card&gt;
+                    &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerEmail&quot;</span>&gt;防恶意邮件设置&lt;/CardHeader&gt;
+                    &lt;UncontrolledCollapse <span class="nv">toggler</span><span class="o">=</span><span class="s2">&quot;#AVTogglerEmail&quot;</span>&gt;
+                        &lt;CardBody&gt;
+                            &lt;Button&gt;Go somewhere&lt;/Button&gt;
+                        &lt;/CardBody&gt;
+                    &lt;/UncontrolledCollapse&gt;
+                &lt;/Card&gt;
+                &lt;Button <span class="nv">onClick</span><span class="o">={</span>this.apply<span class="o">}</span> <span class="nv">color</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span>&gt;应用&lt;/Button&gt; <span class="p">&amp;</span>nbsp<span class="p">;&amp;</span>nbsp<span class="p">;</span>
+                &lt;Button&gt;重置&lt;/Button&gt;
+            &lt;/Col&gt;
+        &lt;/Row&gt;
+        <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0009.png" />
+</div>
+<p>Let's add some CSS / 添加修改 CSS 即可实现基本相似的页面效果.</p>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0010.png" />
+</div>
+</div>
+<div class="section" id="test">
+<h2>4. <a class="toc-backref" href="#id4">Test / 测试</a></h2>
+<p>Recommendation : Airbnb ( <a class="reference external" href="http://airbnb.io/enzyme/">http://airbnb.io/enzyme/</a> )</p>
+<p>React 本身的测试框架并不是很完善， 官方推荐的是 Airbnb 的测试框架  enzyme .</p>
+<ul class="simple">
+<li>Install 安装：</li>
+</ul>
+<div class="highlight"><pre><span></span>npm i --save-dev enzyme enzyme-adapter-react-16 chai sinon jest-fetch-mock
+</pre></div>
+<div class="highlight"><pre><span></span>class SubAV extends React.Component <span class="o">{</span>
+    ...
+    render<span class="o">(){</span>
+        <span class="k">return</span> <span class="o">(</span>&lt;Row <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;subAV&quot;</span> &gt;
+            &lt;Col <span class="nv">sm</span><span class="o">=</span><span class="s2">&quot;12&quot;</span>&gt;
+                &lt;div <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;aisPanel&quot;</span>&gt;
+                    &lt;Card&gt;
+                        &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerAPT&quot;</span>&gt;高级威胁扫描&lt;/CardHeader&gt;
+                    &lt;/Card&gt;
+                    &lt;Card&gt;
+                        &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerExtension&quot;</span>&gt;文件扩展名&lt;/CardHeader&gt;
+                    &lt;/Card&gt;
+                    &lt;Card&gt;
+                        &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerScan&quot;</span>&gt;扫描优化&lt;/CardHeader&gt;
+                    &lt;/Card&gt;
+                    &lt;Card&gt;
+                        &lt;CardHeader <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;AVTogglerEmail&quot;</span>&gt;防恶意邮件设置&lt;/CardHeader&gt;
+                    &lt;/Card&gt;
+                &lt;/div&gt;
+            &lt;/Col&gt;
+        &lt;/Row&gt;
+        <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="nb">export</span> <span class="o">{</span>  SubAV <span class="o">}</span><span class="p">;</span>
+</pre></div>
+<div class="highlight"><pre><span></span>class SampleRest extends Component <span class="o">{</span>
+    constructor<span class="o">(</span>props<span class="o">)</span> <span class="o">{</span>
+        super<span class="o">(</span>props<span class="o">)</span><span class="p">;</span>
+        this.state <span class="o">=</span> <span class="o">{</span>
+        members: <span class="o">[]</span>
+        <span class="o">}</span><span class="p">;</span>
+    <span class="o">}</span>
+    componentDidMount<span class="o">()</span> <span class="o">{</span>
+        fetch<span class="o">(</span><span class="s2">&quot;http://localhost:3001/rest/de_members&quot;</span><span class="o">)</span>
+        .then<span class="o">(</span><span class="nv">response</span> <span class="o">=</span>&gt; response.json<span class="o">())</span>
+        .then<span class="o">(</span><span class="nv">data</span> <span class="o">=</span>&gt; <span class="o">{</span>
+            console.log<span class="o">(</span>data<span class="o">)</span><span class="p">;</span>
+            this.setState<span class="o">({</span>members: data<span class="o">})</span>
+        <span class="o">})</span>
+        .catch<span class="o">(</span><span class="nv">err</span> <span class="o">=</span>&gt; console.log<span class="o">(</span>err<span class="o">))</span><span class="p">;</span>
+    <span class="o">}</span>
+    render<span class="o">(){</span>
+        <span class="k">return</span> &lt;div&gt;
+        &lt;h2&gt;Network1&lt;/h2&gt;
+        &lt;p&gt;Response from localhost:3001 CROS and run in localhost:3000&lt;/p&gt;
+        <span class="o">{</span>this.state.members.map<span class="o">(</span><span class="nv">item</span><span class="o">=</span>&gt;<span class="o">(</span>&lt;span&gt;<span class="o">{</span>item<span class="o">}</span>&lt;br /&gt;&lt;/span&gt;<span class="o">))}</span>
+        &lt;/div&gt;<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<div class="highlight"><pre><span></span>import React from <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+import <span class="o">{</span> expect <span class="o">}</span> from <span class="s1">&#39;chai&#39;</span><span class="p">;</span>
+import <span class="o">{</span> shallow, mount, configure <span class="o">}</span> from <span class="s1">&#39;enzyme&#39;</span><span class="p">;</span>
+import sinon from <span class="s1">&#39;sinon&#39;</span><span class="p">;</span>
+import <span class="o">{</span> SampleRest <span class="o">}</span> from <span class="s1">&#39;components/SampleRest.js&#39;</span>
+import <span class="o">{</span>SubAV<span class="o">}</span> from <span class="s1">&#39;components/SubAV.js&#39;</span>
+global.fetch <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;jest-fetch-mock&#39;</span><span class="o">)</span>
+import <span class="o">{</span>  Row, Card <span class="o">}</span> from <span class="s1">&#39;reactstrap&#39;</span><span class="p">;</span>
+import Adapter from <span class="s1">&#39;enzyme-adapter-react-16&#39;</span><span class="p">;</span>
+configure<span class="o">({</span> adapter: new Adapter<span class="o">()</span> <span class="o">})</span><span class="p">;</span>
+//jest.setTimeout<span class="o">(</span><span class="m">10000</span><span class="o">)</span><span class="p">;</span>
+
+describe<span class="o">(</span><span class="s1">&#39;&lt;SubAV /&gt;&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    it<span class="o">(</span><span class="s1">&#39;renders 1 &lt;Row /&gt; components&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+        const <span class="nv">wrapper</span> <span class="o">=</span> shallow<span class="o">(</span>&lt;SubAV /&gt;<span class="o">)</span><span class="p">;</span>
+        expect<span class="o">(</span>wrapper.find<span class="o">(</span>Row<span class="o">))</span>.to.have.lengthOf<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
+    <span class="o">})</span><span class="p">;</span>
+
+    it<span class="o">(</span><span class="s1">&#39;renders 4 &lt;Card /&gt; components&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+        const <span class="nv">wrapper</span> <span class="o">=</span> shallow<span class="o">(</span>&lt;SubAV /&gt;<span class="o">)</span><span class="p">;</span>
+        expect<span class="o">(</span>wrapper.find<span class="o">(</span>Card<span class="o">))</span>.to.have.lengthOf<span class="o">(</span><span class="m">4</span><span class="o">)</span><span class="p">;</span>
+    <span class="o">})</span><span class="p">;</span>
+
+    it<span class="o">(</span><span class="s1">&#39;calls componentDidMount&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+        expect<span class="o">(</span>SubAV.prototype.componentDidMount<span class="o">)</span>.to.eq<span class="o">(</span>undefined<span class="o">)</span><span class="p">;</span>
+    <span class="o">})</span><span class="p">;</span>
+
+<span class="o">})</span><span class="p">;</span>
+
+describe<span class="o">(</span><span class="s1">&#39;&lt;SampleRest /&gt;&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    beforeEach<span class="o">(()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+        fetch.resetMocks<span class="o">()</span>
+    <span class="o">})</span>
+
+    it<span class="o">(</span><span class="s1">&#39;calls componentDidMount&#39;</span>, <span class="o">(</span><span class="k">done</span><span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+        sinon.spy<span class="o">(</span>SampleRest.prototype, <span class="s1">&#39;componentDidMount&#39;</span><span class="o">)</span><span class="p">;</span>
+        fetch.mockResponseOnce<span class="o">(</span>JSON.stringify<span class="o">([</span><span class="s2">&quot;Fred&quot;</span>, <span class="s2">&quot;Fay&quot;</span><span class="o">]))</span>
+        const <span class="nv">wrapper</span> <span class="o">=</span> mount<span class="o">(</span>&lt;SampleRest /&gt;<span class="o">)</span><span class="p">;</span>
+        expect<span class="o">(</span>SampleRest.prototype.componentDidMount<span class="o">)</span>.to.have.property<span class="o">(</span><span class="s1">&#39;callCount&#39;</span>, <span class="m">1</span><span class="o">)</span><span class="p">;</span>
+        setTimeout<span class="o">(()=</span>&gt;<span class="o">{</span>
+            console.log<span class="o">(</span><span class="s2">&quot;haha&quot;</span><span class="o">)</span><span class="p">;</span>
+            console.log<span class="o">(</span>wrapper.text<span class="o">())</span><span class="p">;</span>
+            wrapper.update<span class="o">()</span><span class="p">;</span>
+            expect<span class="o">(</span>wrapper.contains<span class="o">(</span>&lt;span&gt;Fay&lt;br /&gt;&lt;/span&gt;<span class="o">))</span>.to.equal<span class="o">(</span><span class="nb">true</span><span class="o">)</span><span class="p">;</span>
+            <span class="k">done</span><span class="o">()</span><span class="p">;</span>
+        <span class="o">}</span>, <span class="m">100</span><span class="o">)</span>
+    <span class="o">})</span><span class="p">;</span>
+<span class="o">})</span><span class="p">;</span>
+</pre></div>
+<p>Results / 结果 :</p>
+<div class="highlight"><pre><span></span>PASS  src/pages/App.test.js
+&lt;SubAV /&gt;
+    ✓ renders <span class="m">1</span> &lt;Row /&gt; components <span class="o">(</span>6ms<span class="o">)</span>
+    ✓ renders <span class="m">4</span> &lt;Card /&gt; components <span class="o">(</span>3ms<span class="o">)</span>
+    ✓ calls componentDidMount
+&lt;SampleRest /&gt;
+    ✓ calls componentDidMount <span class="o">(</span>115ms<span class="o">)</span>
+
+Test Suites: <span class="m">1</span> passed, <span class="m">1</span> total
+Tests:       <span class="m">4</span> passed, <span class="m">4</span> total
+Snapshots:   <span class="m">0</span> total
+Time:        <span class="m">1</span>.881s, estimated 2s
+Ran all <span class="nb">test</span> suites related to changed files.
+</pre></div>
+</div>
+<div class="section" id="l10n">
+<h2>5. <a class="toc-backref" href="#id5">L10N / 本地化</a></h2>
+<p>React itself cannot support L10N. We have to rely on other libraries to implement this.
+As one of the most popular library id <code>react-intl</code> (Developed by yahoo 8K).</p>
+<p>React 本身不支持 L10N， 我们需要依赖于其他的模块。 最流行的目前是 yahoo 的 <code>react-intl</code> .</p>
+<dl class="docutils">
+<dt>Other choice: 其他的选择为:</dt>
+<dd><ul class="first last simple">
+<li><code>react-i18next</code>  ( <a class="reference external" href="https://github.com/i18next/react-i18next">https://github.com/i18next/react-i18next</a>  2K)</li>
+<li><code>react-intl-universal</code> ( <a class="reference external" href="https://github.com/alibaba/react-intl-universal">https://github.com/alibaba/react-intl-universal</a> Supported by Alibaba 206)</li>
+</ul>
+</dd>
+</dl>
+<p>Sample with <code>react-intl</code> / 以 <code>react-intl</code>  为例。</p>
+<ul class="simple">
+<li>Install / 安装  <code>npm install react-intl</code></li>
+</ul>
+<p>Code in <code>l10n.zh.json</code></p>
+<div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;common&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;PRODUCT_NAME&quot;</span> : <span class="s2">&quot;亚信安全&amp;trade; AIS Edge&quot;</span>,
+        <span class="s2">&quot;PRODUCT_LONG_NAME&quot;</span> : <span class="s2">&quot;亚信安全&amp;trade; Deep Edge&quot;</span>,
+        <span class="s2">&quot;PRODUCT_FULL_NAME&quot;</span> : <span class="s2">&quot;Deep Edge&quot;</span>,
+        <span class="s2">&quot;PRODUCT_SHORT_NAME&quot;</span> : <span class="s2">&quot;TM-DE&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>Code in <code>l10n.en.json</code></p>
+<div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;common&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;PRODUCT_NAME&quot;</span> : <span class="s2">&quot;Trend Micro&amp;trade; Deep Edge&quot;</span>,
+        <span class="s2">&quot;PRODUCT_LONG_NAME&quot;</span> : <span class="s2">&quot;Trend Micro&amp;trade; Deep Edge&quot;</span>,
+        <span class="s2">&quot;PRODUCT_FULL_NAME&quot;</span> : <span class="s2">&quot;Deep Edge&quot;</span>,
+        <span class="s2">&quot;PRODUCT_SHORT_NAME&quot;</span> : <span class="s2">&quot;TM-DE&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>Load data and init: / 导入数据 并且初始化：</p>
+<div class="highlight"><pre><span></span>const <span class="nv">en</span> <span class="o">=</span> flat<span class="o">(</span> require<span class="o">(</span><span class="s2">&quot;./public/l10n/l10n.en.json&quot;</span><span class="o">)</span> <span class="o">)</span><span class="p">;</span>
+const <span class="nv">zh</span> <span class="o">=</span> flat<span class="o">(</span> require<span class="o">(</span><span class="s2">&quot;./public/l10n/l10n.zh.json&quot;</span><span class="o">)</span> <span class="o">)</span><span class="p">;</span>
+
+ReactDOM.render<span class="o">(</span>
+    &lt;IntlProvider <span class="nv">locale</span><span class="o">=</span><span class="s2">&quot;en&quot;</span> <span class="nv">messages</span><span class="o">={</span>en<span class="o">}</span>&gt;
+        &lt;Router&gt;
+            &lt;App /&gt;
+        &lt;/Router&gt;
+    &lt;/IntlProvider&gt;,
+    document.getElementById<span class="o">(</span><span class="s1">&#39;root&#39;</span><span class="o">))</span><span class="p">;</span>
+registerServiceWorker<span class="o">()</span><span class="p">;</span>
+</pre></div>
+<p>How to use it / 如何使用:</p>
+<div class="highlight"><pre><span></span>class SampleL10N extends Component <span class="o">{</span>
+
+    constructor<span class="o">(</span>props<span class="o">)</span> <span class="o">{</span>
+        super<span class="o">(</span>props<span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+    render<span class="o">(){</span>
+        <span class="k">return</span> &lt;FormattedMessage <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;common.PRODUCT_NAME&quot;</span> /&gt;<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0006.png" />
+</div>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0007.png" />
+</div>
+</div>
+<div class="section" id="router-conception-router">
+<h2>6. <a class="toc-backref" href="#id6">Router Conception / Router的概念</a></h2>
+<p>React has its own compatible router module.</p>
+<p>React的路由是开放的，但是facebook 仍然提供了一个比较官方的路由模块。</p>
+<p>Ref: <a class="reference external" href="https://reacttraining.com/react-router/web/guides/philosophy">https://reacttraining.com/react-router/web/guides/philosophy</a></p>
+<ul>
+<li><p class="first">Routers / 总路由模块</p>
+<blockquote>
+<ul>
+<li><dl class="first docutils">
+<dt>use a &lt;BrowserRouter&gt; if you have a server that responds to requests and</dt>
+<dd><p class="first last">BrowserRouter : 存在server端逻辑</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>use a &lt;HashRouter&gt; if you are using a static file server.</dt>
+<dd><p class="first">HashRouter : server端只需要提供静态文件和其他的 Restful API</p>
+<dl class="last docutils">
+<dt>IE: <a class="reference external" href="https://10.21.137.42/policy/objects">https://10.21.137.42/policy/objects</a></dt>
+<dd><blockquote class="first">
+<dl class="docutils">
+<dt>=&gt; It can be a server API or a Page router</dt>
+<dd><p class="first last">这个URL 在浏览器中输入时，浏览器向后端请求的就是完整的 API， 可能是一个静态页面，也可能是一个Restful API</p>
+</dd>
+</dl>
+</blockquote>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://10.21.137.42/#/policy/objects">https://10.21.137.42/#/policy/objects</a></dt>
+<dd><dl class="first last docutils">
+<dt>=&gt; It will always call  <a class="reference external" href="https://10.21.137.42/">https://10.21.137.42/</a> to get static file and render nextly.</dt>
+<dd><p class="first last">这个URL 则一定是 <a class="reference external" href="https://10.21.137.42/">https://10.21.137.42/</a> 的静态文件，Hash 后面的参数是在后面render的时候使用的。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Route Matching / 路由匹配</p>
+<blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>You can include a &lt;Route&gt; anywhere that you want to render content based on the location.</dt>
+<dd>It will often make sense to list a number of possible &lt;Route&gt;s next to each other.
+路由匹配将 URL 和对应的 组件相关联。</dd>
+</dl>
+</li>
+<li>The &lt;Switch&gt; component is used to group &lt;Route&gt;s together.</li>
+</ul>
+<div class="highlight"><pre><span></span>&lt;Route <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/about&#39;</span> <span class="nv">component</span><span class="o">={</span>About<span class="o">}</span>/&gt; // renders &lt;About/&gt;
+&lt;Route <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/contact&#39;</span> <span class="nv">component</span><span class="o">={</span>Contact<span class="o">}</span>/&gt; // renders null
+&lt;Route <span class="nv">component</span><span class="o">={</span>Always<span class="o">}</span>/&gt; // renders &lt;Always/&gt;
+
+&lt;Switch&gt;
+    &lt;Route exact <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/&#39;</span> <span class="nv">component</span><span class="o">={</span>Home<span class="o">}</span>/&gt;
+    &lt;Route <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/about&#39;</span> <span class="nv">component</span><span class="o">={</span>About<span class="o">}</span>/&gt;
+    &lt;Route <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/contact&#39;</span> <span class="nv">component</span><span class="o">={</span>Contact<span class="o">}</span>/&gt;
+&lt;/Switch&gt;
+</pre></div>
+</blockquote>
+</li>
+<li><p class="first">Route Rendering Props / 路由渲染属性</p>
+<blockquote>
+<p>&lt;Route&gt;: component, render, and children  可以使用这三种方法， 但是推荐的做法是 component 和 children.
+You should not use the component prop with an inline function to pass in-scope variables because you will get undesired component unmounts/remounts.</p>
+<div class="highlight"><pre><span></span><span class="o">{</span>/* <span class="k">do</span> not <span class="k">do</span> this */<span class="o">}</span>
+&lt;Route
+    <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/contact&#39;</span>
+    <span class="nv">component</span><span class="o">={(</span>props<span class="o">)</span> <span class="o">=</span>&gt; &lt;Contact <span class="o">{</span>...props<span class="o">}</span> <span class="nv">extra</span><span class="o">={</span>someVariable<span class="o">}</span> /&gt;<span class="o">}</span>
+/&gt;
+</pre></div>
+</blockquote>
+</li>
+<li><p class="first">Navigation / 导航</p>
+<blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>React Router provides a &lt;Link&gt; component to create links in your application.</dt>
+<dd>Wherever you render a &lt;Link&gt;, an anchor (&lt;a&gt;) will be rendered in your application’s HTML.
+Route 是确定什么样的URL 渲染怎样的组件， 而 Link 和 NavLink 则是 UI 上怎么显示这些锚点 并且相关联。</dd>
+</dl>
+</li>
+<li>The &lt;NavLink&gt; is a special type of &lt;Link&gt; that can style itself as “active” when its to prop matches the current location.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<div class="last line-block">
+<div class="line">NavLink can cause conflict with reactstrap NavLink, when imported, please add alias to escape.</div>
+<div class="line">NavLink 会和 reactstrap NavLink 产生冲突，引入时请指定别名。</div>
+</div>
+</div>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="route-implement">
+<h2>7. <a class="toc-backref" href="#id7">Route implement / 路由使用实现</a></h2>
+<ul>
+<li><p class="first">Install / 安装</p>
+<blockquote>
+<p><code>npm install react-router-dom</code></p>
+<p>(The <code>create-react-app</code> will download it automatically as it is so basic  / 默认是安装好的)</p>
+</blockquote>
+</li>
+<li><p class="first">Bootstrap install (for theme) / 安装 Bootstrap 和 Reactstrap (CSS 样式和默认组件).</p>
+<blockquote>
+<div class="highlight"><pre><span></span><span class="s2">&quot;reactstrap&quot;</span>: <span class="s2">&quot;^6.4.0&quot;</span>,
+<span class="s2">&quot;bootstrap&quot;</span>: <span class="s2">&quot;4.1.1&quot;</span>
+</pre></div>
+</blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Use <code>NavBar</code> in reactstrap to render basic CSS.</dt>
+<dd><p class="first">使用 reactstrap 的 <code>NavBar</code> 就会有基本的CSS 样式。</p>
+<div class="last"><div class="highlight"><pre><span></span>import <span class="o">{</span> NavLink as RouterNavLink, Link,  Route <span class="o">}</span> from <span class="s1">&#39;react-router-dom&#39;</span>
+import <span class="o">{</span>Button, Navbar, Nav, NavItem, NavLink as BoostNavLink, UncontrolledDropdown,
+    DropdownToggle, DropdownMenu, DropdownItem<span class="o">}</span> from <span class="s1">&#39;reactstrap&#39;</span><span class="p">;</span>
+
+const <span class="nv">Dashboard</span> <span class="o">=</span> <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">(</span>
+&lt;div&gt;
+    &lt;h2&gt;Dashboard&lt;/h2&gt;
+&lt;/div&gt;
+<span class="o">)</span><span class="p">;</span>
+
+class App extends Component <span class="o">{</span>
+    constructor<span class="o">(</span>props<span class="o">)</span> <span class="o">{</span>
+        super<span class="o">(</span>props<span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+    render<span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span>
+        &lt;div&gt;
+            &lt;Navbar <span class="nv">color</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span> <span class="nv">expand</span><span class="o">=</span><span class="s2">&quot;md&quot;</span>&gt;
+            &lt;img <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;navLogo&quot;</span> <span class="nv">src</span><span class="o">={</span>toplogo<span class="o">}</span> /&gt;
+            &lt;Nav navbar&gt;
+                &lt;NavItem&gt;
+                &lt;Button <span class="nv">color</span><span class="o">=</span><span class="s2">&quot;link&quot;</span>&gt;
+                    &lt;Link <span class="nv">to</span><span class="o">=</span><span class="s2">&quot;/dashboard&quot;</span>&gt;实时监控&lt;/Link&gt;
+                &lt;/Button&gt;
+                &lt;/NavItem&gt;
+                ...
+            &lt;/Nav&gt;
+            &lt;/Navbar&gt;
+
+        &lt;Route <span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/dashboard&quot;</span> <span class="nv">component</span><span class="o">={</span>Dashboard<span class="o">}</span> /&gt;
+        &lt;Route <span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/network&quot;</span> <span class="nv">component</span><span class="o">={</span>Network<span class="o">}</span> /&gt;
+        &lt;/div&gt;
+        <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div></dd>
+</dl>
+</li>
+</ul>
+<p>And the results / 结果：</p>
+<blockquote>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0001.png" />
+</div>
+</blockquote>
+</div>
+<div class="section" id="deploy-and-debug">
+<h2>8. <a class="toc-backref" href="#id8">Deploy and Debug 部署和调试</a></h2>
+<ul>
+<li><p class="first">Debug / 调试</p>
+<blockquote>
+<p>If we just want to develop a pure web Application, it will be quite easy, we didn't have to do anything as React has done it for us.
+However, everything is not so easy.</p>
+<p>如果我们只是想开发一个单纯的没有后台交互的Web App, 非常简单，我们不需要做任何其他的操作就可以直接调试。 React已经做好了所有的事情。
+但是， 我们的Web不可能只有前台。</p>
+<p>As reference to Graylog, which I'm quite familiar with, I think the best way is to use local Web Resources with remote.</p>
+<p>参考比较大型正规的框架  Graylog，最简单和实用的办法是: 使用本地的UI 资源和远端的Restful API.</p>
+<p>please refer to how to set up a Web Server with Express quickly .</p>
+<p>如何构建一个简单地后台Restful 程序， 请参考：WebSharing (两分钟上手).</p>
+<p>Now lets use web in local and rest API in remote.</p>
+<p>现在我们来验证这种模式.</p>
+<p>Let's modify Network Page.</p>
+<p>首先是更新一下 网络 页面:</p>
+<div class="highlight"><pre><span></span>class Network extends Component <span class="o">{</span>
+    constructor<span class="o">(</span>props<span class="o">)</span> <span class="o">{</span>
+        super<span class="o">(</span>props<span class="o">)</span><span class="p">;</span>
+        this.state <span class="o">=</span> <span class="o">{</span>
+        members: <span class="o">[]</span>
+        <span class="o">}</span><span class="p">;</span>
+    <span class="o">}</span>
+    componentDidMount<span class="o">()</span> <span class="o">{</span>
+        fetch<span class="o">(</span><span class="s2">&quot;http://localhost:3001/rest/de_members&quot;</span><span class="o">)</span>
+        .then<span class="o">(</span><span class="nv">response</span> <span class="o">=</span>&gt; response.json<span class="o">())</span>
+        .then<span class="o">(</span><span class="nv">data</span> <span class="o">=</span>&gt; this.setState<span class="o">({</span>members: data<span class="o">}))</span><span class="p">;</span>
+    <span class="o">}</span>
+    render<span class="o">(){</span>
+        <span class="k">return</span> &lt;div&gt;
+            &lt;h2&gt;Network1&lt;/h2&gt;
+            &lt;p&gt;Response from localhost:3001 CROS and run in localhost:3000&lt;/p&gt;
+            <span class="o">{</span>this.state.members.map<span class="o">(</span><span class="nv">item</span><span class="o">=</span>&gt;<span class="o">(</span>&lt;span&gt;<span class="o">{</span>item<span class="o">}</span>&lt;br /&gt;&lt;/span&gt;<span class="o">))}</span>
+        &lt;/div&gt;<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>We enable CORS on the server so that we can fetch results and apply in another App.</p>
+<p>在后台， 我们需要使能 CORS, 这是个漏洞，但是调试很方便。这样的话我们就能跨域拿到资源。</p>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0003.png" />
+</div>
+<p>All API are provided from backend, so we may have to modify our Backend App to provide  a more friendly API.</p>
+<p>现在我们看到的Restful 都是 后台拿到的， UI 用的是本地的资源。 这样开发的话， DE 的后台可能也需要进项相应的修改已提供更友好的 Restful API.</p>
+</blockquote>
+</li>
+<li><p class="first">Deploy / 部署</p>
+<blockquote>
+<p>Generate static file: <code>npm run build</code> .</p>
+<p>将React 代码编译成 IE9+ 可以接受的语法： <code>npm run build</code></p>
+<p>Let's see what has been generated.</p>
+<p>可以查看下生成了什么:</p>
+<div class="highlight"><pre><span></span>build/
+├── asset-manifest.json
+├── favicon.png
+├── index.css
+├── index.html
+├── manifest.json
+├── service-worker.js
+└── static
+    ├── css
+    │   ├── main.331fc925.css
+    │   └── main.331fc925.css.map
+    └── js
+        ├── main.9f57e139.js
+        └── main.9f57e139.js.map
+</pre></div>
+<p>All js and lib files are combined into 1 file, which is <code>main.9f57e139.js</code> .
+<code>main.9f57e139.js.map</code> is used for debugging.</p>
+<p>所有的库文件 和 我们的代码文件都会被压缩合并到同一个文件中.</p>
+<p>Let's run it in a static file server.</p>
+<p>我们可以将这些静态文件用一个静态服务器运行:</p>
+<div class="highlight"><pre><span></span>npm install -g serve
+serve -s build
+</pre></div>
+<p>Visit / 访问他:</p>
+<div class="figure">
+<img alt="" src="/images/web/react_sharing_0004.png" />
+</div>
+<dl class="docutils">
+<dt>However, usually we will use Webpack and Loadable. / 当然， 通常我们会使用 Webpack 和 Loadable.</dt>
+<dd><ul class="first last simple">
+<li>Webpack: Compress, uglify and minimize files. / 用于压缩 编译 最小化文件</li>
+<li>Loadable: Separate into different files. / 用户将单个 JS 拆分成多个 防止单个文件过大</li>
+</ul>
+</dd>
+</dl>
+</blockquote>
+</li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'React_Sharing.html';
+        var disqus_url = 'https://brianshen1990.github.io/React_Sharing.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>3</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>6</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/phantomjs.html">phantomjs </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/wkhtmltopdf.html">wkhtmltopdf </a><span>1</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
