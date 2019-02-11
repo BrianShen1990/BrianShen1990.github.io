@@ -85,7 +85,7 @@ Let's write a simple UI with state.
         });
     })
 
-.. figure:: /_static/image/react/web_sharing_0002.png
+.. figure:: /images/web/web_sharing_0002.png
 
 When :code:`names` updates, ui won't update unless we manually handle it. 
 In this situation, we only have one global variable, so it seems we can still handle it. 
@@ -147,7 +147,7 @@ Every time we update state, UI will update automatically. We only need to focus 
 
 每一个当我们去更改state的时候， UI 会自动跟着改变。 因此，我们只需要关注数据即可， 数据正确， 渲染，一定也是正确的。UI 一定会保持与数据的一致性。
 
-.. figure:: /_static/image/react/web_sharing_0001.png
+.. figure:: /images/web/web_sharing_0001.png
 
 For DE
 *******
@@ -258,7 +258,7 @@ Web Server with Express / 使用 Express 搭建Web Server
 
 - Run :code:`node server.js`  / 运行服务器
 
-.. figure:: /_static/image/react/React_0002.png
+.. figure:: /images/web/react_sharing_0002.png
 
 Client: Restlet Client 
 
