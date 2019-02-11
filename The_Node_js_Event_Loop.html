@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>The Node.js Event Loop, Timers, and process.nextTick()</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/The_Node_js_Event_Loop.html" rel="bookmark"
+          title="Permalink to The Node.js Event Loop, Timers, and process.nextTick()">The Node.js Event Loop, Timers, and <code>process.nextTick()</code>
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Sun 03 February 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Node</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/node.html">Node</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="the-node-js-event-loop-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#intro" id="id13">Intro</a></li>
+<li><a class="reference internal" href="#id1" id="id14">什么是事件循环？</a></li>
+<li><a class="reference internal" href="#id2" id="id15">事件循环解释</a></li>
+<li><a class="reference internal" href="#id3" id="id16">阶段概览</a></li>
+<li><a class="reference internal" href="#id4" id="id17">阶段详情</a><ul>
+<li><a class="reference internal" href="#id5" id="id18">定时器</a></li>
+<li><a class="reference internal" href="#id6" id="id19">等待的回调</a></li>
+<li><a class="reference internal" href="#id7" id="id20">轮询</a></li>
+<li><a class="reference internal" href="#id8" id="id21">检查</a></li>
+<li><a class="reference internal" href="#id9" id="id22">关闭的回调</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#setimmediate-settimeout" id="id23"><code>setImmediate()</code> 与 <code>setTimeout()</code></a></li>
+<li><a class="reference internal" href="#process-nexttick" id="id24"><code>process.nextTick()</code></a><ul>
+<li><a class="reference internal" href="#id10" id="id25">理解 <code>process.nextTick()</code></a></li>
+<li><a class="reference internal" href="#id11" id="id26">为什么这样被允许？</a></li>
+<li><a class="reference internal" href="#process-nexttick-setimmediate" id="id27"><code>process.nextTick()</code> 与 <code>setImmediate()</code></a></li>
+<li><a class="reference internal" href="#id12" id="id28">为什么我们使用 <code>process.nextTick()</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="intro">
+<h2>1. <a class="toc-backref" href="#id13">Intro</a></h2>
+<p>Reference: <a class="reference external" href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/</a></p>
+</div>
+<div class="section" id="id1">
+<h2>2. <a class="toc-backref" href="#id14">什么是事件循环？</a></h2>
+<p>事件循环能够让 Node.js 处理非阻塞的I/O操作 -- 虽然JavaScript 是单线程的 -- 在可能的时候将这些操作转交给系统内核去处理。</p>
+<p>因为大多数现代内核都是 多线程的，他们能在后台处理多项操作。当某一项操作完成时，内核会通知 Node.js，这样的话对应的回调就会被加入到 轮询队列中，最终会被执行。我们会在晚一些做一个详细的介绍。</p>
+</div>
+<div class="section" id="id2">
+<h2>3. <a class="toc-backref" href="#id15">事件循环解释</a></h2>
+<p>当Node.js 启动时，会初始化事件循环，处理输入的脚本（或者丢给 REPL ，在这个文档中我们不包含），这些脚本可能会会有一步的API 调用， 定时器 或者 调用 <code>process.nextTick()</code> ，然后，开始处理事件循环。</p>
+<p>以下这张图 是 事件循环操作顺序的概览。</p>
+<div class="highlight"><pre><span></span>   ┌───────────────────────────┐
+┌─&gt;│           timers          │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │     pending callbacks     │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │       idle, prepare       │
+│  └─────────────┬─────────────┘      ┌───────────────┐
+│  ┌─────────────┴─────────────┐      │   incoming:   │
+│  │           poll            │&lt;─────┤  connections, │
+│  └─────────────┬─────────────┘      │   data, etc.  │
+│  ┌─────────────┴─────────────┐      └───────────────┘
+│  │           check           │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+└──┤      close callbacks      │
+   └───────────────────────────┘
+</pre></div>
+<p>注意：每一个方框都会被定义成事件循环的一个阶段。</p>
+<p>每个阶段都会有一个先进先出 FIFO 的队列，包含了需要执行的回调。每一个阶段都有自己独特的行为，通常来说，当事件循环到达指定的阶段时，他们会去执行指定给这个阶段的特定操作，然后去执行这个阶段的回调队列，一直到这个队列为空或者达到回调数目限制。此时，事件循环将会进入到下一个阶段，如此。</p>
+<p>因为任何的操作都可能产生更多的操作 和 新的需要在轮询阶段由内核处理的事件，轮询事件能够在 轮询 阶段正在被处理的时候被加入轮询队列。最终的结果是，长期运行的回调能够使得轮询阶段运行的比定时器临界值 还要长。请查看 定时器 和 轮询 小节获得更多细节。</p>
+<p>注意： 在 Windows 和 Unix/Linux上，这个实现会有所不同，但是对这个演示并不重要。最重要的部分在这，实际上有7-8个步骤，但是我们需要关心的，Node.js 实际使用的，就是上面这些阶段。</p>
+</div>
+<div class="section" id="id3">
+<h2>4. <a class="toc-backref" href="#id16">阶段概览</a></h2>
+<ul class="simple">
+<li>定时器：这阶段执行 <code>setTimeout()</code> 以及 <code>setInterval()</code> 的定时任务</li>
+<li>等待的回调：执行 延迟到下一个循环的 I/O 回调</li>
+<li>空，准备：内部使用</li>
+<li>轮询：获取新的I/O事件；执行I/O相关的回调（包含除关闭回调、由定时器或者 <code>setImmediate()</code> 产生的回调 以外的所有的回调）；合适的时候node会在这边被阻塞</li>
+<li>检查：<code>setImmediate()</code> 产生的回调会在这边执行</li>
+<li>关闭的回调：一些关闭的回调会在这边执行，比方说 <code>socket.on('close', ...)</code></li>
+</ul>
+<p>在每一轮事件循环中间，Node.js 会检查是否有异步的I/O 操作或者定时器操作， 如果没有的话，就会自动关闭。</p>
+</div>
+<div class="section" id="id4">
+<h2>5. <a class="toc-backref" href="#id17">阶段详情</a></h2>
+<div class="section" id="id5">
+<h3>5.1. <a class="toc-backref" href="#id18">定时器</a></h3>
+<p>定时器规定了回调被执行的时间间隔的临界值，而不是准确的值。定时器回到会在一定时间过去之后执行，当然，操作系统调度 或者 其他的回调可能会使得他们被延迟。</p>
+<p>注意：技术上来说，轮询阶段控制着 什么时候定时器会被执行。</p>
+<p>举例来说，你安排了一个在100ms以后的定时器，之后你的脚本启动了并且异步的读取一个文件内容，消耗95ms。</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">someAsyncOperation</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Assume this takes 95ms to complete</span>
+  <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">&#39;/path/to/file&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">timeoutScheduled</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">timeoutScheduled</span><span class="p">;</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">delay</span><span class="si">}</span><span class="sb">ms have passed since I was scheduled`</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+
+
+<span class="c1">// do someAsyncOperation which takes 95 ms to complete</span>
+<span class="nx">someAsyncOperation</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">startCallback</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+
+  <span class="c1">// do something that will take 10ms...</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">startCallback</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// do nothing</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+<p>当事件循环进入到轮询 阶段后，有一个空队列（ <code>fs.readFile()</code> 还没完成），所以会等待一段时间直到最近的定时器临界值到达。当它等待了95ms之后。<code>fs.readFile()</code> 结束了读取数据，他的回调需要消耗10ms去完成，这个回调会被添加到 轮询队列并且被执行。完成后，没有更多在队列中的回调了，所以事件循环会去查看最近的定时器，并且重新循环到 定时器 阶段 去执行定时器回调。</p>
+<p>在这个例子中，你可以看到定时器被执行实际上是在 105ms。</p>
+<p>注意：为了阻止轮询阶段一直占用事件循环，<code>libuv</code> 有一个硬编码的最大的值（系统相关），来限定轮询阶段获取更多的事件。</p>
+</div>
+<div class="section" id="id6">
+<h3>5.2. <a class="toc-backref" href="#id19">等待的回调</a></h3>
+<p>这个阶段会去执行一些系统操作相关的回调，比方说 TCP 错误。举例来说， 如果TCP socket 在尝试连接的时候接收到了 <code>ECONNREFUSED</code> ，一些*nix 系统会等待汇报这个错误。他们会在等待的回调阶段 被执行</p>
+</div>
+<div class="section" id="id7">
+<h3>5.3. <a class="toc-backref" href="#id20">轮询</a></h3>
+<p>轮询阶段主要有两个功能：</p>
+<ol class="arabic simple">
+<li>计算他应该阻塞多长时间 并且 轮询 I/O， 然后</li>
+<li>处理在轮询队列中的事件。</li>
+</ol>
+<p>当事件循环进入到 轮询阶段 并且没有定时器时，会发生两件事情：</p>
+<ul class="simple">
+<li>如果 轮询队列不为空，时间循环会一次执行回调队列中的回调 直到队列为空， 或者依赖系统的 硬编码的时间限制。</li>
+<li>如果队列为空，那么会有更多的两件事情发生：<ul>
+<li>如果脚本设定了 <code>setImmediate()</code> ，那么事件循环会结束 轮询阶段 并且进入到 检查阶段 去执行这些设定的脚本</li>
+<li>如果脚本没有安排 <code>setImmediate()</code> ，事件循环会去等待回调被加入到队列中，然后立即去执行。</li>
+</ul>
+</li>
+</ul>
+<p>一旦轮询队列为空，事件循环就会去检查哪些定时器到达了临界值， 如果有一个或者多个定时器准备好了， 那么事件循环就循环回去执行 定时器阶段的回调。</p>
+</div>
+<div class="section" id="id8">
+<h3>5.4. <a class="toc-backref" href="#id21">检查</a></h3>
+<p>这一阶段允许我们在 轮询阶段 结束之后立马执行回调。如果 轮询阶段为空 并且脚本 设定了 <code>setImmediate()</code> ，那么事件循环会继续执行检查阶段 而不是等待。</p>
+<p><code>setImmediate()</code> 实际上是一种运行在事件循环 不同阶段的特殊定时器。它使用 libuv 的API 来设定在 轮询阶段完成后的回调。</p>
+<p>总体来说，当代码运行后，事件循环最终会到达 轮询阶段，这个阶段回去等待接入的连接、请求等等。当然，如果使用 ·<code>setImmediate()</code>  安排了一个回调，并且 轮询阶段为空，那么 轮询阶段就会结束并且进入到检查阶段，而不是在轮询阶段等待。</p>
+</div>
+<div class="section" id="id9">
+<h3>5.5. <a class="toc-backref" href="#id22">关闭的回调</a></h3>
+<p>如果一个socket 或者处理函数 被强制关闭 （比方说 <code>socket.destroy()</code> ）, <code>'close'</code> 事件会在这个阶段被触发。否则的话他们会在 <code>process.nextTick()</code> 阶段触发。</p>
+</div>
+</div>
+<div class="section" id="setimmediate-settimeout">
+<h2>6. <a class="toc-backref" href="#id23"><code>setImmediate()</code> 与 <code>setTimeout()</code></a></h2>
+<p><code>setImmediate()</code> 以及 <code>setTimeout()</code> 很像，但却会根据他们何时被调用 有不同的行为。</p>
+<ul class="simple">
+<li><code>setImmediate()</code> 是为了在 轮询阶段结束运行的脚本</li>
+<li><code>setTimeout()</code> 是为了在一个设定的最小临界值后运行的脚本</li>
+</ul>
+<p>哪一个定时器会被执行 会与他们的上下文环境相关。如果两个函数在同一个 模块中被调用，那么定时器会依赖于这个进程的性能（会被这台机器上其他的程序影响）。</p>
+<p>举例来说，如果我们在非 I/O 循环中（比方说 主模块）运行下面的脚本，哪一个定时器会被先执行是无法确定的，因为与进程的性能相关。</p>
+<div class="highlight"><pre><span></span><span class="c1">// timeout_vs_immediate.js</span>
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="nx">setImmediate</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;immediate&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nx">$</span> <span class="nx">node</span> <span class="nx">timeout_vs_immediate</span><span class="p">.</span><span class="nx">js</span>
+<span class="nx">timeout</span>
+<span class="nx">immediate</span>
+
+<span class="nx">$</span> <span class="nx">node</span> <span class="nx">timeout_vs_immediate</span><span class="p">.</span><span class="nx">js</span>
+<span class="nx">immediate</span>
+<span class="nx">timeout</span>
+</pre></div>
+<p>当然， 如果我们在I/O 循环中 去执行这两个函数，那么 <code>setImmediate()</code> 总是会被优先执行。</p>
+<div class="highlight"><pre><span></span><span class="c1">// timeout_vs_immediate.js</span>
+<span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">__filename</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">);</span>
+  <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="nx">setImmediate</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;immediate&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nx">$</span> <span class="nx">node</span> <span class="nx">timeout_vs_immediate</span><span class="p">.</span><span class="nx">js</span>
+<span class="nx">immediate</span>
+<span class="nx">timeout</span>
+
+<span class="nx">$</span> <span class="nx">node</span> <span class="nx">timeout_vs_immediate</span><span class="p">.</span><span class="nx">js</span>
+<span class="nx">immediate</span>
+<span class="nx">timeout</span>
+</pre></div>
+<p>相比 <code>setTimeout()</code> ， 使用 <code>setImmediate()</code> 的最大好处是 <code>setImmediate()</code> 在 I/O 循环中 总是会被优先执行，无论存在多少定时器。</p>
+</div>
+<div class="section" id="process-nexttick">
+<h2>7. <a class="toc-backref" href="#id24"><code>process.nextTick()</code></a></h2>
+<div class="section" id="id10">
+<h3>7.1. <a class="toc-backref" href="#id25">理解 <code>process.nextTick()</code></a></h3>
+<p>你可能已经注意到了， <code>process.nextTick()</code> 并不在图中， 虽然他是 异步 API 的一部分。这是因为 <code>process.nextTick()</code> 并不是 事件循环中的一部分。 实际上，无论处在那一个事件循环阶段， <code>nextTickQueue</code> 会在当前的操作完成后，立马被执行。</p>
+<p>重新看一下之前的图，任何时候你调用 <code>process.nextTick()</code> ，他都会被立马执行。这会造成一些很坏的情况 因为这样会允许你用循环的 <code>process.nextTick()</code> 去阻塞 I/O 。这意味着 事件循环不会到达轮询阶段。</p>
+</div>
+<div class="section" id="id11">
+<h3>7.2. <a class="toc-backref" href="#id26">为什么这样被允许？</a></h3>
+<p>为什么这样的事情在 Node.js 中会被允许？部分的原因是因为 这样的一种设计思路：API 应当总是被异步执行，即使并不需要。 我们通过下面的代码片段来查看：</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">apiCall</span><span class="p">(</span><span class="nx">arg</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">arg</span> <span class="o">!==</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span>
+                            <span class="k">new</span> <span class="nx">TypeError</span><span class="p">(</span><span class="s1">&#39;argument should be string&#39;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+<p>此处的代码片段会做一个简单的参数检测，如果不对的话，会给回调抛出一个异常。这个 API 最近进行了更新，可以传递参数给 <code>process.nextTick()</code> 来传给回调，这样就不需要函数嵌套了。</p>
+<p>我们所做的就是 传递一个错误 给用户，但是需要在我们允许其他代码被执行的情况下。 利用 <code>process.nextTick()</code> 我们保证了 <code>apiCall()</code> 在其他代码被执行之后、事件循环继续之前 总是会运行回调。为达到这个效果，JS 调用栈 被允许 展开 然后 立马执行 提供的回调，这样就能够递归调用 <code>process.nextTick()</code> 而不会产生 <code>RangeError: Maximum call stack size exceeded from v8</code> 的错误。</p>
+<p>这种哲学可能会产生一些潜在的问题，以下面的代码片段为例：</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">bar</span><span class="p">;</span>
+
+<span class="c1">// this has an asynchronous signature, but calls callback synchronously</span>
+<span class="kd">function</span> <span class="nx">someAsyncApiCall</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="nx">callback</span><span class="p">();</span> <span class="p">}</span>
+
+<span class="c1">// the callback is called before `someAsyncApiCall` completes.</span>
+<span class="nx">someAsyncApiCall</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// since someAsyncApiCall has completed, bar hasn&#39;t been assigned any value</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nx">bar</span><span class="p">);</span> <span class="c1">// undefined</span>
+<span class="p">});</span>
+
+<span class="nx">bar</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+<p>用户定义的 <code>someAsyncApiCall()</code> 包含了一些异步的标志，但实际上是一个同步的操作。当它被调用时，提供的回调 会在同一个事件循环阶段被调用 因为 <code>someAsyncApiCall()</code> 实际上并不是异步操作。结果是，回调读取 <code>bar</code> 的值，然后他并不在当前作用域，因为脚本还没有完成。</p>
+<p>在回调中 加入 <code>process.nextTick()</code> ，脚本仍然能被执行完，使得所有的变量 函数 等等 被优先初始化。这样做的另一个好处是，不允许事件循环 继续。 这对某些 需要警告错误的用户来说很有用。 这边是之前的例子 <code>process.nextTick()</code> 。（因为需要完成当前的操作才会切换到 <code>process.nextTick()</code> ）</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">bar</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">someAsyncApiCall</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">someAsyncApiCall</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nx">bar</span><span class="p">);</span> <span class="c1">// 1</span>
+<span class="p">});</span>
+
+<span class="nx">bar</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+<p>这是另一个例子：</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;listening&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{});</span>
+</pre></div>
+<p>只有当一个端口被传递之后，才会立马绑定。 所以 <code>listening</code> 能够被立马调用。 问题是， <code>.on('listening')</code> 回调还没有被设定。</p>
+<p>为了解决这个问题， <code>listening</code> 会被放在 <code>netxTick()</code> 中 以允许当前的代码运行完毕。这使得用户能够随意的设定事件处理函数。</p>
+</div>
+<div class="section" id="process-nexttick-setimmediate">
+<h3>7.3. <a class="toc-backref" href="#id27"><code>process.nextTick()</code> 与 <code>setImmediate()</code></a></h3>
+<p>用户可能会很疑虑，因为我们 有两个调用很相似，但他们的名字却很混乱：</p>
+<ul class="simple">
+<li><code>process.nextTick()</code> 会在相同的阶段 立马被执行</li>
+<li><code>setImmediate()</code> 会在事件循环的下一个阶段 或者 时钟 执行</li>
+</ul>
+<p>实际上，这两个名字应当替换的，因为 <code>process.nextTick()</code> 比起 <code>setImmediate()</code> 会更快的执行，但这是以前的产物，不大可能被改变。 如果要做改变的话 可能会使得大部分的 NPM 包跟着修改。 每天都有更多的新模块被添加，这意味着 每过一天，更多可能的损坏会发生。 所以 即使他们令人困惑，名字本身不会改变。</p>
+<p>我们推荐开发者使用 <code>setImmediate()</code> ， 因为者更容易理解 (这使得代码的兼容性也更好，比方说浏览器 JS)。</p>
+</div>
+<div class="section" id="id12">
+<h3>7.4. <a class="toc-backref" href="#id28">为什么我们使用 <code>process.nextTick()</code></a></h3>
+<p>主要有两个原因：</p>
+<ol class="arabic simple">
+<li>使得用户能够处理错误，清理不需要的资源， 或者 在事件循环继续之前重新的 请求资源。</li>
+<li>有些时候 需要使得回调能够在 事件循环继续之前 在 调用栈上被展开。</li>
+</ol>
+<p>一个例子 就是符合用户的预期。简单的例子：</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">();</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">conn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">});</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;listening&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">});</span>
+</pre></div>
+<p><code>listen()</code> 在事件循环的一开始就被执行了， 但是事件循环的回调被安排在了 <code>setImmediate()</code> 中，除非一个 主机名 被传递，否则端口绑定会立马执行。当 事件循环继续时，最终会到达 轮询阶段，这就意味着，有非0的概率发生这样的情况：已经接收到了连接 但是 连接事件却仍然没有被触发。</p>
+<p>另一个例子就是 运行一个构造函数，继承自 <code>EventEmitter</code> ，他想在构造函数中调用事件。</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">MyEmitter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">EventEmitter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">util</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">MyEmitter</span><span class="p">,</span> <span class="nx">EventEmitter</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">myEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEmitter</span><span class="p">();</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;an event occurred!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+<p>你不能立马在构造函数中发出事件，因为脚本不会到达 用户指定回调事件的点。所以，在一个构造函数内部，你可以使用 <code>process.nextTick()</code> 去设定一个回调函数，并且在构造函数结束时发出事件，这样就能取得期望的结果。</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">MyEmitter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">EventEmitter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+  <span class="c1">// use nextTick to emit the event once a handler is assigned</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">util</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">MyEmitter</span><span class="p">,</span> <span class="nx">EventEmitter</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">myEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEmitter</span><span class="p">();</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;an event occurred!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'The_Node_js_Event_Loop.html';
+        var disqus_url = 'https://brianshen1990.github.io/The_Node_js_Event_Loop.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/phantomjs.html">phantomjs </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/wkhtmltopdf.html">wkhtmltopdf </a><span>1</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
