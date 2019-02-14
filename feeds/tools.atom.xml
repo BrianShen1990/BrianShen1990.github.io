@@ -1,0 +1,1746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Tools</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/tools.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2019-01-10T00:00:00+08:00</updated><entry><title>HTML To PDF Solutions / HTML 转换 PDF 解决方案</title><link href="https://brianshen1990.github.io/HTML_To_PDF_Solutions.html" rel="alternate"></link><published>2019-01-10T00:00:00+08:00</published><updated>2019-01-10T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-01-10:/HTML_To_PDF_Solutions.html</id><summary type="html">&lt;p class="first last"&gt;HTML To PDF Solutions&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="html-to-pdf-solutions"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro" id="id3"&gt;Intro / 简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#sample-files" id="id4"&gt;Sample Files / 示例文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#phantomjs" id="id5"&gt;&lt;code&gt;phantomjs&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#installation" id="id6"&gt;Installation / 安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#usage-in-js-js" id="id7"&gt;Usage in JS / JS  调用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#wkhtmltopdf" id="id8"&gt;&lt;code&gt;wkhtmltopdf&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id1" id="id9"&gt;Installation / 安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#usage-in-command-line" id="id10"&gt;Usage in Command Line / 命令行使用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id11"&gt;Usage in JS / JS 使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#other-tips" id="id12"&gt;Other Tips / 其他&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#charts-can-be-partial" id="id13"&gt;Charts can be partial / 图表显示不全&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#jquery-3-3-1-is-not-fully-compatible-with-wkhtmltopdf" id="id14"&gt;jQuery 3.3.1 is not fully compatible with wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id3"&gt;Intro / 简介&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;There are many situations that we need to generate reports in PDF. And there are many solutions.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Use libraries to manipulate pdf content. That suffers.&lt;/li&gt;
+&lt;li&gt;Use html and then render it to PDF. That's wonderful.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I think everyone like the last solution since you can always have a preview.&lt;/p&gt;
+&lt;p&gt;And to render html to PDF, there are many solutions.
+But the most popular ones are &lt;code&gt;phantomjs&lt;/code&gt; and &lt;code&gt;wkhtmltopdf&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;I thought &lt;code&gt;phantomjs&lt;/code&gt; would be more popular if it's still under maintenance.
+Unfortunately, it doesn't. So the lack of some necessary features makes &lt;code&gt;wkhtmltopdf&lt;/code&gt; an appearing alternative.&lt;/p&gt;
+&lt;p&gt;In my project, I used to generate PDF using &lt;code&gt;phantomjs&lt;/code&gt; . One day a customer asked for a menu.
+And I found it unable to fulfill.
+And then I began to use &lt;code&gt;wkhtmltopdf&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;However, there are some problems both. And I'll explain.&lt;/p&gt;
+&lt;p&gt;很多情况下， 我们需要产生PDF的报告。 因此也有很多现存的解决方案：&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;可以使用 PDF 库 去操作PDF 的内容， 那会非常的痛苦&lt;/li&gt;
+&lt;li&gt;使用HTML 然后 渲染为PDF， 那会很好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我想每个人都改会喜欢后一种解决方案， 因为你永远可以有一个预览。&lt;/p&gt;
+&lt;p&gt;至于 将 HTML 转换为 PDF， 现在也有很多的解决方案。 最流行的就是 &lt;code&gt;phantomjs&lt;/code&gt; 和 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;我想 &lt;code&gt;phantomjs&lt;/code&gt; 会更加的流行 如果 它还在被维护的话。 可惜的是，他被停止维护了。 一些基础必要功能的缺少使得 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 称为很好的选择。&lt;/p&gt;
+&lt;p&gt;我曾使用 &lt;code&gt;phantomjs&lt;/code&gt; 产生 PDF，但是后来客户需要 一个 目录，&lt;code&gt;phantomjs&lt;/code&gt; 不具备这样的功能。因为我转向了 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sample-files"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id4"&gt;Sample Files / 示例文件&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To compare the render results of the two Scriptable Headless Browser. We will use the following samples.&lt;/p&gt;
+&lt;p&gt;为了对比渲染结果，我们使用以下的示例。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./resources/
+├── DailyReport.js
+├── DailyReport1x.html
+├── DailyReport3x.html
+├── Report.css
+├── echarts.common.min.js
+├── jquery-1.12.4.min.js
+└── jquery-3.3.1.min.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;DailyReport1x.html&lt;/code&gt; (We render a link and a chart / 我们渲染一个 连接 和 图表):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html &lt;span class="nv"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;meta &lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;title&amp;gt;Daily Report&amp;lt;/title&amp;gt;
+&amp;lt;link &lt;span class="nv"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Report.css&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jquery-1.12.4.min.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;echarts.common.min.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;DailyReport.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;div&amp;gt;
+    &amp;lt;h2&amp;gt;Menu&amp;lt;/h2&amp;gt;
+    &amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;chartDiv&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;a &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#chartDiv&amp;quot;&lt;/span&gt;&amp;gt;● Test Internal Link&amp;lt;/a&amp;gt;
+        &amp;lt;br /&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;div &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;height:100mm; width:180mm;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;chartDiv&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;DailyReport.js&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; drawPie&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  var &lt;span class="nv"&gt;chartOptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    animation: false,
+    xAxis: &lt;span class="o"&gt;{&lt;/span&gt;
+      type: &lt;span class="s1"&gt;&amp;#39;category&amp;#39;&lt;/span&gt;,
+      data: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Mon&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Tue&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Wed&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Thu&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Fri&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Sat&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Sun&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+    yAxis: &lt;span class="o"&gt;{&lt;/span&gt;
+      type: &lt;span class="s1"&gt;&amp;#39;value&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+    series: &lt;span class="o"&gt;[{&lt;/span&gt;
+      data: &lt;span class="o"&gt;[&lt;/span&gt;820, 932, 901, 934, 1290, 1330, 1320&lt;span class="o"&gt;]&lt;/span&gt;,
+      type: &lt;span class="s1"&gt;&amp;#39;line&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}]&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  var &lt;span class="nv"&gt;myChart&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; echarts.init&lt;span class="o"&gt;(&lt;/span&gt;document.getElementById&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;chartDiv&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  myChart.setOption&lt;span class="o"&gt;(&lt;/span&gt;chartOptions&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;$(&lt;/span&gt;document&lt;span class="k"&gt;)&lt;/span&gt;.ready&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  drawPie&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;Report.css&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@page &lt;span class="o"&gt;{&lt;/span&gt;
+  size: A4&lt;span class="p"&gt;;&lt;/span&gt;
+  margin: 0&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+@media print &lt;span class="o"&gt;{&lt;/span&gt;
+  body &lt;span class="o"&gt;{&lt;/span&gt;
+    background: white&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  .page &lt;span class="o"&gt;{&lt;/span&gt;
+    width: 210mm&lt;span class="p"&gt;;&lt;/span&gt;
+    page-break-after: always&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+html, body &lt;span class="o"&gt;{&lt;/span&gt;
+  background: rgb&lt;span class="o"&gt;(&lt;/span&gt;241,241,241&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+.page &lt;span class="o"&gt;{&lt;/span&gt;
+  page-break-after: always&lt;span class="p"&gt;;&lt;/span&gt;
+  width: 210mm&lt;span class="p"&gt;;&lt;/span&gt;
+  background: white&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And preview in Chrome / 在Chrome 中预览:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf01.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Print Preview / Chrome 打印预览:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf02.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="phantomjs"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id5"&gt;&lt;code&gt;phantomjs&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h3&gt;3.1. &lt;a class="toc-backref" href="#id6"&gt;Installation / 安装&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Download from its &lt;a class="reference external" href="http://phantomjs.org/download.html"&gt;Phantomjs Official Site&lt;/a&gt; and move it to &lt;code&gt;/usr/bin/&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;The latest and end version is &lt;code&gt;2.1.1&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;从官网去下载，移动到 &lt;code&gt;/usr/bin/&lt;/code&gt;  . 最新也是最后的版本是 &lt;code&gt;2.1.1&lt;/code&gt;  .&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usage-in-js-js"&gt;
+&lt;h3&gt;3.2. &lt;a class="toc-backref" href="#id7"&gt;Usage in JS / JS  调用&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We use &lt;code&gt;html-pdf&lt;/code&gt; because it is simple.&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;html-pdf&lt;/code&gt; ， 因为这样很简单。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm install html-pdf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;fs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;phantomjs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;html-pdf&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;SrcPath1x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;/Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/DailyReport1x.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;BasePath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;OutPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.pdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;genPDFPahntomJS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;srcPath, basePath, outPath&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; new Promise&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;resolve, reject&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    fs.readFile&lt;span class="o"&gt;(&lt;/span&gt;srcPath, &lt;span class="s1"&gt;&amp;#39;UTF8&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;errfs, html&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;errfs&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        reject&lt;span class="o"&gt;(&lt;/span&gt;errfs&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt;
+      const &lt;span class="nv"&gt;genOptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        height: &lt;span class="s1"&gt;&amp;#39;297mm&amp;#39;&lt;/span&gt;,
+        width: &lt;span class="s1"&gt;&amp;#39;210mm&amp;#39;&lt;/span&gt;,
+        base: basePath,
+        type: &lt;span class="s1"&gt;&amp;#39;pdf&amp;#39;&lt;/span&gt;,
+        border: &lt;span class="o"&gt;{&lt;/span&gt;
+          top: &lt;span class="s1"&gt;&amp;#39;12mm&amp;#39;&lt;/span&gt;, // default is 0, units: mm, cm, in, px
+          right: &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,
+          bottom: &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,
+          left: &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+        paginationOffset: 1, // Override the initial pagination number
+        footer: &lt;span class="o"&gt;{&lt;/span&gt;
+          height: &lt;span class="s1"&gt;&amp;#39;20mm&amp;#39;&lt;/span&gt;,
+          contents: &lt;span class="o"&gt;{&lt;/span&gt;
+            first: &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;,
+            default:&lt;span class="s1"&gt;&amp;#39;{{page}}/{{pages}}&amp;#39;&lt;/span&gt;,
+          &lt;span class="o"&gt;}&lt;/span&gt;,
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+      &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      phantomjs.create&lt;span class="o"&gt;(&lt;/span&gt;html, genOptions&lt;span class="o"&gt;)&lt;/span&gt;.toFile&lt;span class="o"&gt;(&lt;/span&gt;outPath, &lt;span class="o"&gt;(&lt;/span&gt;err, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+          reject&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        resolve&lt;span class="o"&gt;(&lt;/span&gt;res&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+genPDFPahntomJS&lt;span class="o"&gt;(&lt;/span&gt;SrcPath1x, BasePath, OutPath&lt;span class="o"&gt;)&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Success&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;.catch&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;let's see the result / 看看结果:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf03.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Very strange, isn't it?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;phantomjs 2.1.1&lt;/code&gt; has a very strange bug, that the size of printed page is only 75% as big as the standard page. For example, for A4 with 29.7*21. When we design our html, we can only use (29.7 * 0.75) * (21 * 0.75) .&lt;/p&gt;
+&lt;p&gt;And the fatal fault is that the internal hyperlink in the PDF cannot be clicked!&lt;/p&gt;
+&lt;p&gt;非常的奇怪。 &lt;code&gt;phantomjs 2.1.1&lt;/code&gt; 有一个非常奇怪的bug，大的A4 是平常 A4 的 75% 。 这就意味着你在设计html 的时候要按照75%的比例进行设计.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="wkhtmltopdf"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id8"&gt;&lt;code&gt;wkhtmltopdf&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3&gt;4.1. &lt;a class="toc-backref" href="#id9"&gt;Installation / 安装&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;OK, still download from &lt;a class="reference external" href="https://wkhtmltopdf.org/downloads.html"&gt;wkhtmltopdf Official Site&lt;/a&gt;  and install.&lt;/p&gt;
+&lt;p&gt;仍然从 官网下载并且安装 .&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usage-in-command-line"&gt;
+&lt;h3&gt;4.2. &lt;a class="toc-backref" href="#id10"&gt;Usage in Command Line / 命令行使用&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Quite simple. I just like it because it is simple and easy to begin and test.&lt;/p&gt;
+&lt;p&gt;非常简单，能让你快速的开始。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# wkhtmltopdf --debug-javascript --print-media-type --page-size A4 ./resources/DailyReport1x.html test.pdf&lt;/span&gt;
+Loading pages &lt;span class="o"&gt;(&lt;/span&gt;1/6&lt;span class="o"&gt;)&lt;/span&gt;
+Counting pages &lt;span class="o"&gt;(&lt;/span&gt;2/6&lt;span class="o"&gt;)&lt;/span&gt;
+Resolving links &lt;span class="o"&gt;(&lt;/span&gt;4/6&lt;span class="o"&gt;)&lt;/span&gt;
+Loading headers and footers &lt;span class="o"&gt;(&lt;/span&gt;5/6&lt;span class="o"&gt;)&lt;/span&gt;
+Printing pages &lt;span class="o"&gt;(&lt;/span&gt;6/6&lt;span class="o"&gt;)&lt;/span&gt;
+Done
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And let's see the result: / 看一看结果。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf04.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Everything works fine!&lt;/p&gt;
+&lt;p&gt;符合预期。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h3&gt;4.3. &lt;a class="toc-backref" href="#id11"&gt;Usage in JS / JS 使用&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I use &lt;code&gt;wkhtmltopdf&lt;/code&gt; as it is very popular.&lt;/p&gt;
+&lt;p&gt;我使用的是 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm install wkhtmltopdf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;wkhtmltopdf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;wkhtmltopdf&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;SrcPath1x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/DailyReport1x.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;OutPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;./test1.pdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;genPDFWkHtmlToPdf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;srcPath, outPath&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; new Promise&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;resolve, reject&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    wkhtmltopdf&lt;span class="o"&gt;(&lt;/span&gt;srcPath, &lt;span class="o"&gt;{&lt;/span&gt;
+      output: outPath,
+      printMediaType: true,
+      footerLeft: &lt;span class="s1"&gt;&amp;#39;[page] / [toPage]&amp;#39;&lt;/span&gt;,
+    &lt;span class="o"&gt;}&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        reject&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt;
+      resolve&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+genPDFWkHtmlToPdf&lt;span class="o"&gt;(&lt;/span&gt;SrcPath1x, OutPath&lt;span class="o"&gt;)&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Success&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;.catch&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The result / 结果:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf05.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;It's as same as we rendered with command line!&lt;/p&gt;
+&lt;p&gt;Besides, the internal hyperlink works!&lt;/p&gt;
+&lt;p&gt;与 命令行中 渲染的结果是一样的。此外，内部的连接是可以使用的。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="other-tips"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id12"&gt;Other Tips / 其他&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="charts-can-be-partial"&gt;
+&lt;h3&gt;5.1. &lt;a class="toc-backref" href="#id13"&gt;Charts can be partial / 图表显示不全&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;ECharts will use animation by default, so disable it.&lt;/p&gt;
+&lt;p&gt;ECharts 会自动的开启 动画效果。会导致延时。关闭即可。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;animation: false,&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="jquery-3-3-1-is-not-fully-compatible-with-wkhtmltopdf"&gt;
+&lt;h3&gt;5.2. &lt;a class="toc-backref" href="#id14"&gt;jQuery 3.3.1 is not fully compatible with wkhtmltopdf&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;jQuery 3.3.1 与 wkhtmltopdf 不兼容。&lt;/p&gt;
+&lt;p&gt;Let's see a sample:&lt;/p&gt;
+&lt;p&gt;看个例子。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html &lt;span class="nv"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;meta &lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&amp;gt;
+  &amp;lt;title&amp;gt;Daily Report&amp;lt;/title&amp;gt;
+  &amp;lt;link &lt;span class="nv"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Report.css&amp;quot;&lt;/span&gt;&amp;gt;
+  &amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jquery-3.3.1.min.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;div&amp;gt;
+      &amp;lt;h2&amp;gt;Menu&amp;lt;/h2&amp;gt;
+      &amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;chartDiv&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;a &lt;span class="nv"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#chartDiv&amp;quot;&lt;/span&gt;&amp;gt;● Test Internal Link&amp;lt;/a&amp;gt;
+        &amp;lt;br /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;
+      &amp;lt;table &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tableDiv&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Test&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Title&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+      &amp;lt;/table&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;script&amp;gt;
+  &lt;span class="k"&gt;$(&lt;/span&gt;document&lt;span class="k"&gt;)&lt;/span&gt;.ready&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#tableDiv&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.append&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Row1&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Row1&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we open it in Chrome:&lt;/p&gt;
+&lt;p&gt;从Chrome 中打开。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf06.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;And render it with &lt;code&gt;wkhtmltopdf&lt;/code&gt; :&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;wkhtmltopdf&lt;/code&gt; 去渲染。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#wkhtmltopdf --debug-javascript --print-media-type --page-size A4 --footer-left &amp;quot;Page [page] of [toPage]&amp;quot; ./resources/DailyReport3x.html test.pdf&lt;/span&gt;
+Loading pages &lt;span class="o"&gt;(&lt;/span&gt;1/6&lt;span class="o"&gt;)&lt;/span&gt;
+Warning: file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/jquery-3.3.1.min.js:2 jQuery.Deferred exception: &lt;span class="s1"&gt;&amp;#39;undefined&amp;#39;&lt;/span&gt; is not a &lt;span class="k"&gt;function&lt;/span&gt;
+Warning: undefined:0 TypeError: &lt;span class="s1"&gt;&amp;#39;undefined&amp;#39;&lt;/span&gt; is not a &lt;span class="k"&gt;function&lt;/span&gt;
+Counting pages &lt;span class="o"&gt;(&lt;/span&gt;2/6&lt;span class="o"&gt;)&lt;/span&gt;
+Resolving links &lt;span class="o"&gt;(&lt;/span&gt;4/6&lt;span class="o"&gt;)&lt;/span&gt;
+Loading headers and footers &lt;span class="o"&gt;(&lt;/span&gt;5/6&lt;span class="o"&gt;)&lt;/span&gt;
+Printing pages &lt;span class="o"&gt;(&lt;/span&gt;6/6&lt;span class="o"&gt;)&lt;/span&gt;
+Done
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It can't work.&lt;/p&gt;
+&lt;p&gt;But when we switch to 1.12.4 and render it, everything works fine.&lt;/p&gt;
+&lt;p&gt;发生了错误。但是我们切换到 1.12.4 的 jQuery， 一切工作正常。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/htmltopdf05.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Sad thing is that jQuery 1.12.4 is not under maintenance anymore.&lt;/p&gt;
+&lt;p&gt;遗憾的是，jQuery 1.12.4 不在维护了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="phantomjs"></category><category term="wkhtmltopdf"></category><category term="PDF"></category><category term="HTML"></category></entry><entry><title>Mount disk to VG / 磁盘挂载到虚拟分区</title><link href="https://brianshen1990.github.io/Tools_mount_disk_to_vg.html" rel="alternate"></link><published>2018-11-24T00:00:00+08:00</published><updated>2018-11-24T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-11-24:/Tools_mount_disk_to_vg.html</id><summary type="html">&lt;p class="first last"&gt;Tools - Mount Disk to VG&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="mount-disk-to-vg-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mount-a-new-disk" id="id1"&gt;Mount A New Disk / 挂载新的磁盘&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#env" id="id2"&gt;Env / 环境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#add-a-disk" id="id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#creating-linux-partitions-in-the-new-added-disk-linux" id="id4"&gt;Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#creating-a-file-system" id="id5"&gt;Creating a File System / 创建文件系统&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mount-it-to-linux-virtual-system-lvs-linux" id="id6"&gt;Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference" id="id7"&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;All lines started with &lt;code&gt;#&lt;/code&gt; should be input. / 所有 &lt;code&gt;#&lt;/code&gt; 前缀的都是 输入的部分。&lt;/p&gt;
+&lt;div class="section" id="mount-a-new-disk"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Mount A New Disk / 挂载新的磁盘&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="env"&gt;
+&lt;h3&gt;1.1. &lt;a class="toc-backref" href="#id2"&gt;Env / 环境&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Current, we have 100G Disk. / 当前我们有 100G 磁盘。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
+
+    NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As we can see, all disks are assigned to root directory. / 所有的磁盘指定给了 根目录。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="add-a-disk"&gt;
+&lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;Add a Disk / 添加一块磁盘&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/mount_disk_01.png" /&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
+    /dev/sda  /dev/sda1  /dev/sda2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Since we didn't restart the PC, OS wouldn't be able to detect the new disk. / 因为我们没有重启， 所有系统发现不了这个新的磁盘。&lt;/p&gt;
+&lt;p&gt;To force OS reloading disk information, we can execute this: / 为了强制刷新磁盘信息， 我们可以执行以下命令&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# echo &amp;#39;- - -&amp;#39; &amp;gt; /sys/class/scsi_host/host0/scan&lt;/span&gt;
+&lt;span class="c1"&gt;# ls /dev/sd*&lt;/span&gt;
+    /dev/sda  /dev/sda1  /dev/sda2  /dev/sdb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's see what happened: / 看看发生了什么。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
+    NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sdb                             8:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now we can see a new disk named &lt;code&gt;sdb&lt;/code&gt; in the disk information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creating-linux-partitions-in-the-new-added-disk-linux"&gt;
+&lt;h3&gt;1.3. &lt;a class="toc-backref" href="#id4"&gt;Creating Linux Partitions in the new added disk / 在新加硬盘上创建 Linux 分区&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# fdisk /dev/sdb&lt;/span&gt;
+    Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.23.2&lt;span class="o"&gt;)&lt;/span&gt;.
+
+    Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
+    Be careful before using the write command.
+
+    Device does not contain a recognized partition table
+    Building a new DOS disklabel with disk identifier 0x111936e6.
+
+&lt;span class="c1"&gt;# Command (m for help): c&lt;/span&gt;
+    DOS Compatibility flag is &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;DEPRECATED!&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Command (m for help): u&lt;/span&gt;
+    Changing display/entry units to cylinders &lt;span class="o"&gt;(&lt;/span&gt;DEPRECATED!&lt;span class="o"&gt;)&lt;/span&gt;.
+
+&lt;span class="c1"&gt;# Command (m for help): p&lt;/span&gt;
+
+    Disk /dev/sdb: 17.2 GB, &lt;span class="m"&gt;17179869184&lt;/span&gt; bytes, &lt;span class="m"&gt;33554432&lt;/span&gt; sectors
+    &lt;span class="m"&gt;255&lt;/span&gt; heads, &lt;span class="m"&gt;63&lt;/span&gt; sectors/track, &lt;span class="m"&gt;2088&lt;/span&gt; cylinders
+    &lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; cylinders of &lt;span class="m"&gt;16065&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;8225280&lt;/span&gt; bytes
+    Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+    I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+    Disk label type: dos
+    Disk identifier: 0x111936e6
+
+    Device Boot      Start         End      Blocks   Id  System
+
+&lt;span class="c1"&gt;# Command (m for help): n&lt;/span&gt;
+    Partition type:
+    p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;4&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
+    e   extended
+&lt;span class="c1"&gt;# Select (default p): p&lt;/span&gt;
+    Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
+    First cylinder &lt;span class="o"&gt;(&lt;/span&gt;1-2088, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
+    Using default value 1
+    Last cylinder, +cylinders or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;1-2088, default 2088&lt;span class="o"&gt;)&lt;/span&gt;:
+    Using default value 2088
+    Partition &lt;span class="m"&gt;1&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; Linux and of size &lt;span class="m"&gt;16&lt;/span&gt; GiB is &lt;span class="nb"&gt;set&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Command (m for help): w&lt;/span&gt;
+    The partition table has been altered!
+
+    Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
+    Syncing disks.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creating-a-file-system"&gt;
+&lt;h3&gt;1.4. &lt;a class="toc-backref" href="#id5"&gt;Creating a File System / 创建文件系统&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Let's see what happened:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lsblk&lt;/span&gt;
+    NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    sda                             8:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    ├─sda1                          8:1    &lt;span class="m"&gt;0&lt;/span&gt;  500M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot
+    └─sda2                          8:2    &lt;span class="m"&gt;0&lt;/span&gt; 99.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+        ├─centos-root               253:0    &lt;span class="m"&gt;0&lt;/span&gt; 92.5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /
+        ├─centos-swap               253:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  &lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+        └─centos-home               253:2    &lt;span class="m"&gt;0&lt;/span&gt;    5G  &lt;span class="m"&gt;0&lt;/span&gt; lvm  /home
+    sdb                             8:16   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+    └─sdb1                          8:17   &lt;span class="m"&gt;0&lt;/span&gt;   16G  &lt;span class="m"&gt;0&lt;/span&gt; part
+    sr0                            11:0    &lt;span class="m"&gt;1&lt;/span&gt; 1024M  &lt;span class="m"&gt;0&lt;/span&gt; rom
+    loop0                           7:0    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+    loop1                           7:1    &lt;span class="m"&gt;0&lt;/span&gt;    2G  &lt;span class="m"&gt;0&lt;/span&gt; loop
+    └─docker-253:0-134516294-pool 253:3    &lt;span class="m"&gt;0&lt;/span&gt;  100G  &lt;span class="m"&gt;0&lt;/span&gt; dm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And now, we should format the partition. / 现在我们格式化这个分区。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# /sbin/mkfs.ext4 /dev/sdb1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mount-it-to-linux-virtual-system-lvs-linux"&gt;
+&lt;h3&gt;1.5. &lt;a class="toc-backref" href="#id6"&gt;Mount it to Linux Virtual System (LVS) / 挂载到 Linux 虚拟分区&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Let's check LVS. / 查看当前的 Linux 虚拟分区。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvs&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    LV   VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+    home centos -wi-ao----  5.00g
+    root centos -wi-ao---- 92.50g
+    swap centos -wi-ao----  2.00g
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Remember the value of column &lt;code&gt;VG&lt;/code&gt; ( &lt;code&gt;centos&lt;/code&gt; ). / 记住 &lt;code&gt;VG&lt;/code&gt; 的值 ( &lt;code&gt;centos&lt;/code&gt; )。&lt;/p&gt;
+&lt;p&gt;Now we create a new physical volume. / 现在我们创建一块物理盘。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# pvcreate /dev/sdb1&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+&lt;span class="c1"&gt;# WARNING: ext4 signature detected on /dev/sdb1 at offset 1080. Wipe it? [y/n]: y&lt;/span&gt;
+    Wiping ext4 signature on /dev/sdb1.
+    Physical volume &lt;span class="s2"&gt;&amp;quot;/dev/sdb1&amp;quot;&lt;/span&gt; successfully created.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And extend it to &lt;code&gt;VG&lt;/code&gt;  &lt;code&gt;centos&lt;/code&gt; . / 并且将它拓展到 &lt;code&gt;VG&lt;/code&gt;  &lt;code&gt;centos&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# vgextend centos /dev/sdb1&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    Volume group &lt;span class="s2"&gt;&amp;quot;centos&amp;quot;&lt;/span&gt; successfully extended
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check whether it has been extended correctly: / 检查是否正确的被扩展了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# vgdisplay&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    --- Volume group ---
+    VG Name               centos
+    System ID
+    Format                lvm2
+    Metadata Areas        2
+    Metadata Sequence No  6
+    VG Access             read/write
+    VG Status             resizable
+    MAX LV                0
+    Cur LV                3
+    Open LV               3
+    Max PV                0
+    Cur PV                2
+    Act PV                2
+    VG Size               &amp;lt;115.50 GiB
+    PE Size               4.00 MiB
+    Total PE              29567
+    Alloc PE / Size       &lt;span class="m"&gt;25472&lt;/span&gt; / 99.50 GiB
+    Free  PE / Size       &lt;span class="m"&gt;4095&lt;/span&gt; / &amp;lt;16.00 GiB
+    VG UUID               RVnCi9-U8gt-DbgA-lu11-pdeO-6o0o-cEfQkC
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice that there is a Free PE with 8G. So let's extend it logically. / 可以看到存在没有被用到的 PE 16GiB ， 所以是成功的。&lt;/p&gt;
+&lt;p&gt;Now let's add the free PE to root. / 现在我们可以将这些空余的 PE 指定给根目录。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvextend -L +15.9G /dev/centos/root /dev/sdb1&lt;/span&gt;
+    WARNING: Not using lvmetad with older version.
+    Rounding size to boundary between physical extents: 15.90 GiB.
+    Size of logical volume centos/root changed from 92.50 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;23680&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt; to 108.40 GiB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;27751&lt;/span&gt; extents&lt;span class="o"&gt;)&lt;/span&gt;.
+    Logical volume centos/root successfully resized.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;OK. Only 15.9 Can be added. / 请注意留 0.1G 的空余。&lt;/p&gt;
+&lt;p&gt;Now the last step: tell OS  that the file system has been extended. / 最后一步就是告诉系统，文件系统被扩展了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# xfs_growfs /dev/centos/root&lt;/span&gt;
+    meta-data&lt;span class="o"&gt;=&lt;/span&gt;/dev/mapper/centos-root &lt;span class="nv"&gt;isize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;    &lt;span class="nv"&gt;agcount&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4, &lt;span class="nv"&gt;agsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;6062080&lt;/span&gt; &lt;span class="nv"&gt;blks&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;attr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;projid32bit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;crc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="nv"&gt;finobt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;spinodes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    &lt;span class="nv"&gt;data&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;24248320, &lt;span class="nv"&gt;imaxpct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;25&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="nv"&gt;swidth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks
+    &lt;span class="nv"&gt;naming&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt;version &lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   ascii-ci&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;ftype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    &lt;span class="nv"&gt;log&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt;internal                &lt;span class="nv"&gt;bsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;11840, &lt;span class="nv"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;2&lt;/span&gt;
+             &lt;span class="o"&gt;=&lt;/span&gt;                        &lt;span class="nv"&gt;sectsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;   &lt;span class="nv"&gt;sunit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; blks, lazy-count&lt;span class="o"&gt;=&lt;/span&gt;1
+    &lt;span class="nv"&gt;realtime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;none                    &lt;span class="nv"&gt;extsz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;   &lt;span class="nv"&gt;blocks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0, &lt;span class="nv"&gt;rtextents&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+    data blocks changed from &lt;span class="m"&gt;24248320&lt;/span&gt; to 28417024
+
+&lt;span class="c1"&gt;#### Default installed, if not , type this:  yum install -y xfsprogs.x86_64&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And have a check: / 现在我们看下系统信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# df -hl&lt;/span&gt;
+    Filesystem               Size  Used Avail Use% Mounted on
+    /dev/mapper/centos-root  109G   17G   92G  16% /
+    devtmpfs                 910M     &lt;span class="m"&gt;0&lt;/span&gt;  910M   0% /dev
+    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   0% /dev/shm
+    tmpfs                    921M   17M  904M   2% /run
+    tmpfs                    921M     &lt;span class="m"&gt;0&lt;/span&gt;  921M   0% /sys/fs/cgroup
+    /dev/mapper/centos-home  5.0G   33M  5.0G   1% /home
+    /dev/sda1                497M  125M  373M  26% /boot
+    tmpfs                    185M  4.0K  185M   1% /run/user/0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It succeeds! / 完成了！&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference"&gt;
+&lt;h3&gt;1.6. &lt;a class="toc-backref" href="#id7"&gt;Reference&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;CentOS6调整LVM SWAP分区大小 &lt;a class="reference external" href="https://www.haiyun.me/archives/centos6-change-lvm-swap.html"&gt;https://www.haiyun.me/archives/centos6-change-lvm-swap.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;resize2fs: Bad magic number in super-block while trying to open  &lt;a class="reference external" href="https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open"&gt;https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;centos7 lvm管理 把/home空间转移给/ &lt;a class="reference external" href="https://www.2cto.com/os/201708/668992.html"&gt;https://www.2cto.com/os/201708/668992.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;实战：CentOS不重启，在线添加硬盘  &lt;a class="reference external" href="http://blog.51cto.com/skypegnu1/1429375"&gt;http://blog.51cto.com/skypegnu1/1429375&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://blog.csdn.net/rainbow702/article/details/50761380"&gt;http://blog.csdn.net/rainbow702/article/details/50761380&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS7"></category><category term="LVM"></category><category term="Disk"></category></entry><entry><title>PDF To Word / PDF转Word格式</title><link href="https://brianshen1990.github.io/pdf_to_word.html" rel="alternate"></link><published>2018-09-13T00:00:00+08:00</published><updated>2018-09-13T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-09-13:/pdf_to_word.html</id><summary type="html">&lt;p class="first last"&gt;PDF To Word&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="pdf-to-word-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro" id="id1"&gt;Intro / 简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#success-libreoffice" id="id2"&gt;Success - LibreOffice&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#failure-attempts" id="id3"&gt;Failure Attempts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#failure-abiword" id="id4"&gt;Failure - abiword&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#failure-pandoc" id="id5"&gt;Failure - pandoc&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Intro / 简介&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Here is the situation. I met some clients and they need reports. A quite normal feature request. I generated report using PhantomJS and sent them PDF reports.&lt;/p&gt;
+&lt;p&gt;一些客户需要产生报告，这是很正常的功能，我们可以通过 PhantomJS 产生PDF的报告。&lt;/p&gt;
+&lt;p&gt;But they were not satisfied because they need other editable formats like MS Word so that they can modify the report and use it.&lt;/p&gt;
+&lt;p&gt;但是客户并不满足与PDF的报告，他们还需要像Word这样的格式。&lt;/p&gt;
+&lt;p&gt;Word Format is not a standard format actually. So I faced lots difficulties. And since I already have HTML and PDF version, I don't want to change code up and down, I wish them controllable. So I searched for solutions how I can convert html or PDF to doc.&lt;/p&gt;
+&lt;p&gt;Word 并不是标准的格式，更不是面向代码的。这种情况下，既然有PDF 文档了，我更希望以最小的改动实现这个功能。&lt;/p&gt;
+&lt;p&gt;PhantomJS cannot do this. There is little solutions. I tried following ones and finally chose the solution using LibreOffice because the basic format can be kept.&lt;/p&gt;
+&lt;p&gt;PhantomJS 不能够完成这项任务。 解决方案很少。最终我是使用了LibreOffice 进行转换， 因为基本的格式都能够被保存下来。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="success-libreoffice"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;Success - LibreOffice&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Documents that generated by LibreOffice keeps most formats, and it looks almost like the PDF content. That's great!&lt;/p&gt;
+&lt;p&gt;通过LibreOffice产生的文档基本保留了全部的格式，并且与PDF 有相同的渲染。非常棒。&lt;/p&gt;
+&lt;p&gt;But I still have some concerns. For example, it costs disk and makes installation more complex. But after compared with other solutions listed behind, I think it is totally acceptable.&lt;/p&gt;
+&lt;p&gt;但这里仍然会有一些疑虑，比方说，LibreOffice会使得安装过程更加的复杂，需要额外的磁盘等等。
+但是比较完搜索到的方案，这些还是可以接受的。&lt;/p&gt;
+&lt;p&gt;While installing LibreOffice in Ubuntu and CentOS is very easy, just remember to install &lt;code&gt;gtk2.0&lt;/code&gt; and so on because they are prerequisites.&lt;/p&gt;
+&lt;p&gt;在 Ubuntu 和 CentOS上安装 LibreOffice是非常方便的，但是一定要记得先安装  &lt;code&gt;gtk2.0&lt;/code&gt; ， 因为这是前提。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get update
+apt-get install gtk2.0
+apt-get install -y software-properties-common
+&lt;span class="nb"&gt;cd&lt;/span&gt; /root/LibreOffice_5.3.6.1_Linux_x86-64_deb/
+dpkg -i *.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And use this &lt;code&gt;/opt/libreoffice5.3/program/soffice&lt;/code&gt; in command line.&lt;/p&gt;
+&lt;p&gt;命令行中使用 &lt;code&gt;/opt/libreoffice5.3/program/soffice&lt;/code&gt;  调用。&lt;/p&gt;
+&lt;p&gt;Convert &lt;code&gt;soffice --infilter=&amp;quot;writer_pdf_import&amp;quot; --convert-to doc file.pdf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;转换使用的命令： &lt;code&gt;soffice --infilter=&amp;quot;writer_pdf_import&amp;quot; --convert-to doc file.pdf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;See what happened:
+转换完之后，我们看下PDF 和 Word的对比。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/pdf_to_word_01.png" /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;But I met obstacles in Docker because docker is not equipped with many dependencies.
+This is my Dockerfile: (I downloaded the 5.3.6 version and copied them to docker.)&lt;/p&gt;
+&lt;p&gt;因为产品环境实在docker中运行的，安装还是有一些问题。
+下面Dockerfile 文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FROM node:6.14.0
+ADD . Libre
+RUN apt-get -y update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get install -y software-properties-common &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get -y install gtk2.0  &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; /Libre/LibreOffice_5.3.6.1_Linux_x86-64_deb/ &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; dpkg -i *.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;when use this docker image and call LibreOffice, there are tips as docker environment has no display.&lt;/p&gt;
+&lt;p&gt;在docker中使用 LibreOffice 时，会调用失败，如果不做特殊的设定的话。 因为docker环境默认是没有显示的。&lt;/p&gt;
+&lt;p&gt;Here is how to solve it:&lt;/p&gt;
+&lt;p&gt;可以 通过这样的方式解决：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xxx:
+  image: xxx
+  container_name: xxx
+  volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix
+  environment:
+    - &lt;span class="nv"&gt;DISPLAY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;unix:0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="failure-attempts"&gt;
+&lt;h3&gt;2.1. &lt;a class="toc-backref" href="#id3"&gt;Failure Attempts&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;From LibreOffice official site (&lt;a class="reference external" href="https://www.libreoffice.org/get-help/system-requirements/"&gt;https://www.libreoffice.org/get-help/system-requirements/&lt;/a&gt;), there are some prerequisites:&lt;/p&gt;
+&lt;p&gt;在 LibreOffice的官网中，提到了一些前提， 要注意选择性的安装，否则会导致安装失败。&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;glibc2 version 2.5 or higher  (check)(ldd --version)&lt;/li&gt;
+&lt;li&gt;apt-get install gtk2.0 (check)(dpkg -l libgtk2.0-0 libgtk-3-0)&lt;/li&gt;
+&lt;li&gt;Gnome 2.16 or higher&lt;/li&gt;
+&lt;li&gt;Instal from ppa&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;RUN awk &lt;span class="s1"&gt;&amp;#39;$1 ~ &amp;quot;^deb&amp;quot; { $3 = $3 &amp;quot;-backports&amp;quot;; print; exit }&amp;#39;&lt;/span&gt; /etc/apt/sources.list &amp;gt; /etc/apt/sources.list.d/backports.list
+apt-get update
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:libreoffice/ppa
+apt-get install -y &lt;span class="nv"&gt;libreoffice&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5.3.6.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Install GNOME&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install task-gnome-desktop --no-install-recommends
+sudo apt-get install ubuntu-gnome-desktop --no-install-recommends
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="failure-abiword"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id4"&gt;Failure - abiword&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get -y update
+apt-get -y install abiword
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The output document keeps nearly no cascading styles. So give up this one.&lt;/p&gt;
+&lt;p&gt;abiword 导出的 Word 文件，基本是没有任何的 样式的。&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Reference:&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://askubuntu.com/questions/37548/pdf-to-word-conversion-software"&gt;https://askubuntu.com/questions/37548/pdf-to-word-conversion-software&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;div class="section" id="failure-pandoc"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id5"&gt;Failure - pandoc&lt;/a&gt;&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;code&gt;yum install pandoc&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;The output document only include basic text. Still give it up.&lt;/p&gt;
+&lt;p&gt;pandoc 导出的文件也是没有格式的。&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="Docker"></category><category term="LibreOffice"></category><category term="PDF"></category></entry><entry><title>Build RPM / 构建 RPM</title><link href="https://brianshen1990.github.io/Build_RPM.html" rel="alternate"></link><published>2018-07-16T00:00:00+08:00</published><updated>2018-07-16T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-07-16:/Build_RPM.html</id><summary type="html">&lt;p class="first last"&gt;Build RPM&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="build-rpm-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-i-need-rpm-packages-rpm" id="id1"&gt;Why I need RPM packages? / 为什么需要RPM包&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-set-env" id="id2"&gt;How to set Env / 搭建环境&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#preparations" id="id3"&gt;Preparations / 准备&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#needed-dev-and-build-environments" id="id4"&gt;Needed dev and build environments / 需要的开发环境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#make-essential-directories" id="id5"&gt;Make Essential Directories / 创建必要的目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#prepare-a-sample-file" id="id6"&gt;Prepare a sample file / 准备一个示例文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#define-a-spec-file-to-list-steps-spec" id="id7"&gt;Define a SPEC file to list steps / 定义SPEC文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#when-we-want-to-ignore-some-steps" id="id8"&gt;When we want to ignore some steps / 如果我们想忽略一些步骤的话&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#continue-with-our-sample" id="id9"&gt;Continue with our sample / 继续&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#concerns" id="id10"&gt;Concerns / 一些考量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#other-tips" id="id11"&gt;Other tips / 其他的技巧&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference" id="id12"&gt;Reference:&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-i-need-rpm-packages-rpm"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Why I need RPM packages? / 为什么需要RPM包&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Here is the thing, I have to delivery my softwares to my customers. I developed it , deployed it and configured it. Everything works just perfect fine. But how should my customers use them, I cannot just gave it to them all the jar, js and shell packages. They need a packed executable binary and it would be more welcome if little configuration is needed.&lt;/p&gt;
+&lt;p&gt;我需要向客户提交最终的安装软件。所有的事情在本地都是OK的，开发，部署 以及 配置。但是，客户们应该怎么使用他们？ 我不能将所有的开发编译文件直接发给客户，复杂的配置 会让客户失去耐心。他们需要的只是一个安装包，如果开箱即用 或者 根本不用配置的话，那么将会非常棒。&lt;/p&gt;
+&lt;p&gt;Based on the situation, it is necessarily to give customers what they want, a RPM package.
+However, it is either easy or difficult, but I have to say I spend a whole day in successfully building one.&lt;/p&gt;
+&lt;p&gt;在这种情况下，最好是给出一个rpm安装包。 这项工作其实不简单 也 不困难，但是我实实在在用了一整天。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-set-env"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;How to set Env / 搭建环境&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="preparations"&gt;
+&lt;h3&gt;2.1. &lt;a class="toc-backref" href="#id3"&gt;Preparations / 准备&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;CentOS 7 1511&lt;/li&gt;
+&lt;li&gt;Minimal installation  / 最小化安装&lt;/li&gt;
+&lt;li&gt;Network configured / 配置好网络&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="needed-dev-and-build-environments"&gt;
+&lt;h3&gt;2.2. &lt;a class="toc-backref" href="#id4"&gt;Needed dev and build environments / 需要的开发环境&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;code&gt;sudo yum install rpmdevtools rpmlint -y&lt;/code&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="make-essential-directories"&gt;
+&lt;h3&gt;2.3. &lt;a class="toc-backref" href="#id5"&gt;Make Essential Directories / 创建必要的目录&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now go to home directory and make essential sub directories.&lt;/p&gt;
+&lt;p&gt;去往 用户目录 并且创建他们。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
+rpmdev-setuptree
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's see what happened. ( &lt;code&gt;tree&lt;/code&gt; ) / 看看发生了什么。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpmbuild/
+├── BUILD     : All files will be put here during rpm building
+├── RPMS      : Built packages will finally be in RPMS and SRPMS
+├── SOURCES   : Source files you want to include or use in RPM
+├── SPECS     : Instruction of how to build RPM
+└── SRPMS     : Built packages will finally be in RPMS and SRPMS
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-a-sample-file"&gt;
+&lt;h3&gt;2.4. &lt;a class="toc-backref" href="#id6"&gt;Prepare a sample file / 准备一个示例文件&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;To avoid any complexities, we only build a rpm package including a bash command.&lt;/p&gt;
+&lt;p&gt;为了避免复杂，我们开发一个只包含一个bash命令的rpm包。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir briansample-1.0
+&lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0/
+vi briansample.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the shell file, the content is &lt;code&gt;echo &amp;quot;Brian Sample&amp;quot;&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;shell文件的内容是： &lt;code&gt;echo &amp;quot;Brian Sample&amp;quot;&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;And we compress them into a tar file. &lt;code&gt;tar -cf briansample.tar briansample-1.0/&lt;/code&gt; .
+Remember the folder name &lt;code&gt;briansample-1.0&lt;/code&gt; (name-version) because it will usually be used in somewhere else.&lt;/p&gt;
+&lt;p&gt;将这个文件放入tar包。
+记住，这个文件夹的名字是 &lt;code&gt;briansample-1.0&lt;/code&gt; ， 也就是 是 名字 + 版本号。 这会在其他地方用到。 而且名字版本号的匹配至关重要。&lt;/p&gt;
+&lt;p&gt;Copy the tar file to &lt;code&gt;SOURCE&lt;/code&gt; directory.
+将这个源文件 tar 包 拷贝到 &lt;code&gt;SOURCE&lt;/code&gt; 目录下。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="define-a-spec-file-to-list-steps-spec"&gt;
+&lt;h3&gt;2.5. &lt;a class="toc-backref" href="#id7"&gt;Define a SPEC file to list steps / 定义SPEC文件&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; rpmbuild/SPECS/
+rpmdev-newspec
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command will create a SPEC file under the directory. ( &lt;code&gt;tree&lt;/code&gt; )&lt;/p&gt;
+&lt;p&gt;上一条命令将会创建一个 SPEC 规范文件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.
+└── newpackage.spec
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See what it contains ( &lt;code&gt;cat newpackage.spec&lt;/code&gt; ) :&lt;/p&gt;
+&lt;p&gt;看看里面的内容。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Name:
+Version:
+Release:        1%&lt;span class="o"&gt;{&lt;/span&gt;?dist&lt;span class="o"&gt;}&lt;/span&gt;
+Summary:
+
+License:
+URL:
+Source0:
+
+BuildRequires:
+Requires:
+
+%description
+
+
+%prep
+%setup -q
+
+
+%build
+%configure
+make %&lt;span class="o"&gt;{&lt;/span&gt;?_smp_mflags&lt;span class="o"&gt;}&lt;/span&gt;
+
+
+%install
+rm -rf &lt;span class="nv"&gt;$RPM_BUILD_ROOT&lt;/span&gt;
+%make_install
+
+
+%files
+%doc
+
+
+
+%changelog
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is very clear that it consists of two many parts:&lt;/p&gt;
+&lt;p&gt;非常直观，其实包括两个部分：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Basic descriptions / 基本描述&lt;/li&gt;
+&lt;li&gt;RPM steps / RPM 编译步骤&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Definitions / 一些定义:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%description&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A full description of the software packaged in the RPM. This description can span multiple lines and can be broken into paragraphs.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%prep&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands to prepare the software to be built, for example, unpacking the archive in Source0. This directive can contain a shell script.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%build&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands for actually building the software into machine code (for compiled languages) or byte code (for some interpreted languages).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%install&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands for copying the desired build artifacts from the %builddir (where the build happens) to the %buildroot directory (which contains the directory structure with the files to be packaged). This usually means copying files from ~/rpmbuild/BUILD to ~/rpmbuild/BUILDROOT and creating the necessary directories in ~/rpmbuild/BUILDROOT. This is only run when creating a package, not when the end-user installs the package. See Working with SPEC files for details.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%check&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Command or series of commands to test the software. This normally includes things such as unit tests.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%files&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The list of files that will be installed in the end user’s system.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;%changelog&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A record of changes that have happened to the package between different Version or Release builds.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="when-we-want-to-ignore-some-steps"&gt;
+&lt;h3&gt;2.6. &lt;a class="toc-backref" href="#id8"&gt;When we want to ignore some steps / 如果我们想忽略一些步骤的话&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;p&gt;When I wanted to ignore some steps, I like to comment out them. For example, NodeJS and Python programs do not need build step.&lt;/p&gt;
+&lt;p&gt;当我想要忽略这些步骤的时候，本能的反映是 注释掉他们。 比方说 NodeJS 或者Python 程序，就不需要 build 步骤。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%build
+with
+&lt;span class="c1"&gt;#%build&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But !!!!!!! This doesn't actually comment it out. and it will still run.
+So deleting &lt;code&gt;%build&lt;/code&gt; and &lt;code&gt;%configure&lt;/code&gt; makes things work as expected.&lt;/p&gt;
+&lt;p class="last"&gt;但是！！！ 这并不会阻止这些程序继续运行。需要去删除这些步骤 才能工作正常。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="continue-with-our-sample"&gt;
+&lt;h3&gt;2.7. &lt;a class="toc-backref" href="#id9"&gt;Continue with our sample / 继续&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Copy our project tar files to &lt;code&gt;rpmbuild/SOURCES/&lt;/code&gt; by code:&lt;/p&gt;
+&lt;p&gt;将整个工程拷贝至 &lt;code&gt;rpmbuild/SOURCES/&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
+cp briansample.tar rpmbuild/SOURCES/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now edit our SPEC file: / 现在我们来更改SPEC 文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Name:           briansample  &lt;span class="c1"&gt;#####watch the name  注意名称&lt;/span&gt;
+Version:        1.0          &lt;span class="c1"&gt;#####watch the version 注意版本&lt;/span&gt;
+Release:        1%&lt;span class="o"&gt;{&lt;/span&gt;?dist&lt;span class="o"&gt;}&lt;/span&gt;
+Summary:        sample
+
+License:        GPL
+Source0:        briansample.tar
+
+
+%description
+
+%prep
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;BrianSample Prepare&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# this Step will unpack the tar file briansample.tar&lt;/span&gt;
+%setup -q
+
+%install
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;BrianSample Install&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# this Step will enter ./briansample-1.0 , just like the name and Version&lt;/span&gt;
+&lt;span class="c1"&gt;# And then you can execute commands here&lt;/span&gt;
+&lt;span class="c1"&gt;# So we copy file (ths bash file) to virtual directory %{buildroot}/usr/briansample&lt;/span&gt;
+mkdir -p %&lt;span class="o"&gt;{&lt;/span&gt;buildroot&lt;span class="o"&gt;}&lt;/span&gt;/usr/briansample
+&lt;span class="nb"&gt;pwd&lt;/span&gt;
+cp -rf ./* %&lt;span class="o"&gt;{&lt;/span&gt;buildroot&lt;span class="o"&gt;}&lt;/span&gt;/usr/briansample
+
+%post
+&lt;span class="c1"&gt;# execute when installed in the real machine&lt;/span&gt;
+
+%files
+%doc
+&lt;span class="c1"&gt;# files will in teh virtual directory will be copied here in teh real machine&lt;/span&gt;
+/usr/briansample/*
+
+%changelog
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can now build our RPM package. / 现在我们可以去编译 RPM 包了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;code&gt;rpmbuild -ba newpackage.spec&lt;/code&gt;&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpmbuild -ba newpackage.spec
+    Executing&lt;span class="o"&gt;(&lt;/span&gt;%prep&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh -e /var/tmp/rpm-tmp.h7l5eo
+    + &lt;span class="nb"&gt;umask&lt;/span&gt; 022
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;BrianSample Prepare&amp;#39;&lt;/span&gt;
+    BrianSample Prepare
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + rm -rf briansample-1.0
+    + /usr/bin/tar -xf /home/admin/rpmbuild/SOURCES/briansample.tar
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0
+    + /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
+    + &lt;span class="nb"&gt;exit&lt;/span&gt; 0
+    Executing&lt;span class="o"&gt;(&lt;/span&gt;%install&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh -e /var/tmp/rpm-tmp.HEqZg2
+    + &lt;span class="nb"&gt;umask&lt;/span&gt; 022
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + &lt;span class="s1"&gt;&amp;#39;[&amp;#39;&lt;/span&gt; /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64 &lt;span class="s1"&gt;&amp;#39;!=&amp;#39;&lt;/span&gt; / &lt;span class="s1"&gt;&amp;#39;]&amp;#39;&lt;/span&gt;
+    + rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    ++ dirname /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + mkdir -p /home/admin/rpmbuild/BUILDROOT
+    + mkdir /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0
+    + &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;BrianSample Install&amp;#39;&lt;/span&gt;
+    BrianSample Install
+    + mkdir -p /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64/usr/briansample
+    + &lt;span class="nb"&gt;pwd&lt;/span&gt;
+    /home/admin/rpmbuild/BUILD/briansample-1.0
+    + cp -rf ./briansample.sh ./briansample.tar /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64/usr/briansample
+    + &lt;span class="s1"&gt;&amp;#39;[&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%{buildarch}&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; noarch &lt;span class="s1"&gt;&amp;#39;]&amp;#39;&lt;/span&gt;
+    + &lt;span class="nv"&gt;QA_CHECK_RPATHS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+    + &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;QA_CHECK_RPATHS&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; in
+    + /usr/lib/rpm/check-rpaths
+    + /usr/lib/rpm/check-buildroot
+    + /usr/lib/rpm/redhat/brp-compress
+    + /usr/lib/rpm/redhat/brp-strip /usr/bin/strip
+    + /usr/lib/rpm/redhat/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
+    + /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
+    + /usr/lib/rpm/brp-python-bytecompile /usr/bin/python 1
+    + /usr/lib/rpm/redhat/brp-python-hardlink
+    + /usr/lib/rpm/redhat/brp-java-repack-jars
+    Processing files: briansample-1.0-1.el7.centos.x86_64
+    Provides: &lt;span class="nv"&gt;briansample&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1.0-1.el7.centos briansample&lt;span class="o"&gt;(&lt;/span&gt;x86-64&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1.0-1.el7.centos
+    Requires&lt;span class="o"&gt;(&lt;/span&gt;interp&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh
+    Requires&lt;span class="o"&gt;(&lt;/span&gt;rpmlib&lt;span class="o"&gt;)&lt;/span&gt;: rpmlib&lt;span class="o"&gt;(&lt;/span&gt;CompressedFileNames&lt;span class="o"&gt;)&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; 3.0.4-1 rpmlib&lt;span class="o"&gt;(&lt;/span&gt;FileDigests&lt;span class="o"&gt;)&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; 4.6.0-1 rpmlib&lt;span class="o"&gt;(&lt;/span&gt;PayloadFilesHavePrefix&lt;span class="o"&gt;)&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; 4.0-1
+    Requires&lt;span class="o"&gt;(&lt;/span&gt;post&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh
+    Checking &lt;span class="k"&gt;for&lt;/span&gt; unpackaged file&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;: /usr/lib/rpm/check-files /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    Wrote: /home/admin/rpmbuild/SRPMS/briansample-1.0-1.el7.centos.src.rpm
+    Wrote: /home/admin/rpmbuild/RPMS/x86_64/briansample-1.0-1.el7.centos.x86_64.rpm
+    Executing&lt;span class="o"&gt;(&lt;/span&gt;%clean&lt;span class="o"&gt;)&lt;/span&gt;: /bin/sh -e /var/tmp/rpm-tmp.UhdYZ0
+    + &lt;span class="nb"&gt;umask&lt;/span&gt; 022
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; /home/admin/rpmbuild/BUILD
+    + &lt;span class="nb"&gt;cd&lt;/span&gt; briansample-1.0
+    + /usr/bin/rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
+    + &lt;span class="nb"&gt;exit&lt;/span&gt; 0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let's see what had been generated :code:` tree /home/admin/rpmbuild/`
+现在看看生成了什么！&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/home/admin/rpmbuild/
+├── BUILD
+│   └── briansample-1.0
+│       ├── briansample.sh
+│       └── briansample.tar
+├── BUILDROOT
+├── RPMS
+│   └── x86_64
+│       └── briansample-1.0-1.el7.centos.x86_64.rpm
+├── SOURCES
+│   └── briansample.tar
+├── SPECS
+│   └── newpackage.spec
+└── SRPMS
+    └── briansample-1.0-1.el7.centos.src.rpm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can just install the package:
+我们可以去安装这个 RPM 包。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo yum install ./briansample-1.0-1.el7.centos.x86_64.rpm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And after installation, let's see what happened. Do all files copied to the destination?
+安装完毕后，看看是否执行正确。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tree /usr/briansample/
+/usr/briansample/
+├── briansample.sh
+└── briansample.tar
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Yes, now our work is done.
+是的，工作完成&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="concerns"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id10"&gt;Concerns / 一些考量&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;How can I install other packages during the installation.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果我有一些 依赖的 rpm 包应该怎么办？&lt;/p&gt;
+&lt;p&gt;For example, I also want to install some helper tools like &lt;code&gt;vim&lt;/code&gt; and I have the rpm packages. But we cannot do this, because yum will lock DB during installation, you will get DB locked error in the &lt;code&gt;%post&lt;/code&gt; section.&lt;/p&gt;
+&lt;p&gt;比方说，我需要安装一些辅助的工具，比如 &lt;code&gt;vim&lt;/code&gt; ， 并且我能下载这些rpm包。其实很难做到这一点。因为 yum 在安装过程中会将 DB 锁住。 如果我们在 &lt;code&gt;%post&lt;/code&gt;  安装其他rpm 包的时候，会得到一个 DB 锁无法获取的错误。&lt;/p&gt;
+&lt;p&gt;One solution is to  remove the lock &lt;code&gt;rm -rf /var/lib/rpm/.rpm.lock&lt;/code&gt; . However, this is not recommended.&lt;/p&gt;
+&lt;p&gt;有一个解决方法是 ， 移除这个锁，但是并不推荐。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;What about un-installation?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;What about patch?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="other-tips"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id11"&gt;Other tips / 其他的技巧&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Unpack the rpm file / 如何解压一个 rpm 包&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In Windows, you can use 7z software todo this.
+Windows 下可以使用 7z 这样的软件。&lt;/p&gt;
+&lt;p&gt;In Linux: &lt;code&gt;rpm2cpio ./packagecloud-test-1.1-1.x86_64.rpm | cpio -idmv&lt;/code&gt;
+Linux 下使用这个命令工具； rpm2cpio 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;How to force to install packages / 如何强制安装软件包&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If your rpm database is destroyed, it is much difficult to restore it.
+The only way that I found is to download in the same machine and install it then.&lt;/p&gt;
+&lt;p&gt;如果 rpm 元数据库被损坏的话，非常难去恢复。
+一个办法就是 去同样环境的机器上 下载，强制安装软件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpm -Uvh /usr/uap/repo/*rpm --nodeps --scripts --force
+-i install packages
+-v provide more details
+-h print &lt;span class="nb"&gt;hash&lt;/span&gt; marks to show progress
+--nodepes:  don&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t verify package dependencies
+--scripts: list install/erase scriptlets from package&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;
+--force:
+    --replacefiles                   ignore file conflicts between packages
+    --replacepkgs                    reinstall &lt;span class="k"&gt;if&lt;/span&gt; the package is already present
+
+rpm -ivh ./*rpm --justdb --nodeps --scripts --force
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id12"&gt;Reference:&lt;/a&gt;&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Set Up an RPM Build Environment under CentOS : &lt;a class="reference external" href="https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment"&gt;https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Rpmbuild Tutorial &lt;a class="reference external" href="https://rpmbuildtut.wordpress.com/"&gt;https://rpmbuildtut.wordpress.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RPM Packaging Guide &lt;a class="reference external" href="https://rpm-packaging-guide.github.io/"&gt;https://rpm-packaging-guide.github.io/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS7"></category><category term="RPM"></category></entry><entry><title>Linux Fonts / 字体支持</title><link href="https://brianshen1990.github.io/linux_fonts.html" rel="alternate"></link><published>2018-06-06T00:00:00+08:00</published><updated>2018-06-06T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-06-06:/linux_fonts.html</id><summary type="html">&lt;p class="first last"&gt;Linux Fonts&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="linux-fonts-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#install-fontconfig-fontconfig" id="id1"&gt;Install &lt;code&gt;fontconfig&lt;/code&gt; / 安装 &lt;code&gt;fontconfig&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#copy-fonts" id="id2"&gt;Copy fonts / 拷贝字体&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;It's usually this case that we choose to install an OS in &lt;code&gt;minimal&lt;/code&gt; mode because it only costs little resource.&lt;/p&gt;
+&lt;p&gt;为了节约资源，我们常常会以最小化的形式全装一个系统。&lt;/p&gt;
+&lt;p&gt;If our environment is totally in EN, there won't be any mistake.&lt;/p&gt;
+&lt;p&gt;如果我们的系统只需要支持 英文环境， 那么一切都会OK。&lt;/p&gt;
+&lt;p&gt;Unfortunately, we have to do L10N, especially in Asia. Missing basic fonts would make whole result totally a mess.&lt;/p&gt;
+&lt;p&gt;但是，常常出现的情况是 我们要做本地化。 缺失基本的字体 会使得整个系统一团糟。&lt;/p&gt;
+&lt;p&gt;Recently I have encountered such a situation that the PDF report generated by &lt;code&gt;phantomjs&lt;/code&gt; cannot show Chinese character.&lt;/p&gt;
+&lt;p&gt;最近我遇到了一个问题就是，使用  &lt;code&gt;phantomjs&lt;/code&gt; 去生成PDF 报告。但是这个报告却不能够呈现中文。&lt;/p&gt;
+&lt;p&gt;After I searched on Google and implemented some suggestions, I found that the following steps are the solutions.&lt;/p&gt;
+&lt;p&gt;其实很简单，只需要两个步骤就能解决这个问题。&lt;/p&gt;
+&lt;div class="section" id="install-fontconfig-fontconfig"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Install &lt;code&gt;fontconfig&lt;/code&gt; / 安装 &lt;code&gt;fontconfig&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;However, I found it optional. Because I tried to ignore this step in a Docker environment, and found that it still works correctly.&lt;/p&gt;
+&lt;p&gt;不过这一步似乎是可选的，因为我们docker 环境下 忽略了这一步。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yum -y install fontconfig&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="copy-fonts"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;Copy fonts / 拷贝字体&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Find a fully installed OS and go to the corresponding folder &lt;code&gt;/usr/shared/fonts&lt;/code&gt;
+In this folder, we will see lots fonts:&lt;/p&gt;
+&lt;p&gt;从一个完整安装的系统上 去 拷贝对应的字体文件夹。 这个文件夹里面有很多的字体。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls
+abattis-cantarell         lklug             lohit-punjabi        sil-abyssinica
+cjkuni-uming              lohit-assamese    lohit-tamil          sil-nuosu
+default                   lohit-bengali     lohit-telugu         sil-padauk
+dejavu                    lohit-devanagari  madan                smc
+gnu-free                  lohit-gujarati    nhn-nanum            stix
+google-crosextra-caladea  lohit-kannada     open-sans            thai-scalable
+google-crosextra-carlito  lohit-malayalam   opensymbol           ucs-miscfixed
+jomolhari                 lohit-marathi     overpass             vlgothic
+khmeros                   lohit-nepali      paktype-naskh-basic  wqy-microhei
+liberation                lohit-oriya       paratype-pt-sans     wqy-zenhei
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Copy them to new Env, things will work OK.&lt;/p&gt;
+&lt;p&gt;将这些字体拷贝到新的环境中，就能 渲染出正常的字体。&lt;/p&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="https://blog.csdn.net/wlwlwlwl015/article/details/51482065"&gt;https://blog.csdn.net/wlwlwlwl015/article/details/51482065&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS7"></category><category term="fonts"></category></entry><entry><title>Program As Service at Windows Using NSSM</title><link href="https://brianshen1990.github.io/Program_As_Service_at_Windows.html" rel="alternate"></link><published>2018-04-02T00:00:00+08:00</published><updated>2018-04-02T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-04-02:/Program_As_Service_at_Windows.html</id><summary type="html">&lt;p class="first last"&gt;Program As Service at Windows&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="tools-nssm-windwos-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-s-the-problem" id="id1"&gt;What's The Problem / 问题是什么&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#sc" id="id2"&gt;sc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#nssm" id="id3"&gt;NSSM&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#using-gui-gui" id="id4"&gt;Using GUI / 使用 GUI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#using-command" id="id5"&gt;Using command / 使用 命令行&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-s-the-problem"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;What's The Problem / 问题是什么&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Here is the thing, I met a customer, and they can not provide their data using TCP through ssl.
+Even though they are willing to cooperate and give me the data to generate report for them.
+they said, the only way that they can provide these data is to use https.
+Our device doesn't have the function so I have to write a windows program as an adapter.&lt;/p&gt;
+&lt;p&gt;情况是这样的，有一个客户，他们需要将数据接入到Saas系统，但是他们不能够使用TCP SSL 加密的方式传输。
+虽然他们很愿意合作 并且 提供数据以便获得报告。
+而客户的情况是他们只能够将数据通过 https的方式提供出来。
+我们的设备不支持 https 传输数据， 因此我需要写一个程序来做转换。&lt;/p&gt;
+&lt;p&gt;The program is just a simply python scripts. I thought that they will provide a Linux platform to run the program, actually not, is a Windows.&lt;/p&gt;
+&lt;p&gt;程序很简单，只是python脚本。我以为会是 Linux， 结果是 Windows。&lt;/p&gt;
+&lt;p&gt;Unlike Linux, start a program as a service in Windows is rather tough.&lt;/p&gt;
+&lt;p&gt;与 Linux 不同，在 Windows 下 让程序像服务一样运行并不容易。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sc"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;sc&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;One main solution is to use &lt;code&gt;sc&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;一个主流的解决方式是使用  &lt;code&gt;sc&lt;/code&gt; 命令。&lt;/p&gt;
+&lt;p&gt;There is the sample: / 这是一个例子。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sc create BrianTest &lt;span class="nv"&gt;binPath&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;C:\Python27\python.exe --C:\AsiaLogTransferWindows\AsiaLogTransfer.py&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/nssm_01.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Without any difficulty. Then go to &lt;code&gt;Control Panel\System and Security\Administrative Tools\services&lt;/code&gt;
+But when I started the service, an error occurred.&lt;/p&gt;
+&lt;p&gt;这样作很简单。接着去往 &lt;code&gt;Control Panel\System and Security\Administrative Tools\services&lt;/code&gt; 查看服务。
+但是当我启动这个服务的时候， 一个错误发生了。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/nssm_02.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;What a pity. Actually, the exe should act like a real service, but it didn't. So this is the problem.&lt;/p&gt;
+&lt;p&gt;很遗憾。 一个可执行程序 应该像一个服务一样运行的，但是实际上并没有。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nssm"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id3"&gt;NSSM&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Then how to solve it? Yes, magic &lt;code&gt;NSSM&lt;/code&gt; (&lt;a class="reference external" href="https://nssm.cc/"&gt;https://nssm.cc/&lt;/a&gt;)
+It is so elegant, simple and easy to use, I would recommend to everyone.
+Download from the website then unzip it.&lt;/p&gt;
+&lt;p&gt;那么如何解决这个问题？ 对的，就是使用  &lt;code&gt;NSSM&lt;/code&gt; 。
+非常的优雅，简单 并且 容易。
+从官网下载 并且 解压。&lt;/p&gt;
+&lt;div class="section" id="using-gui-gui"&gt;
+&lt;h3&gt;3.1. &lt;a class="toc-backref" href="#id4"&gt;Using GUI / 使用 GUI&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Step 1: start a service by giving it a name: &lt;code&gt;nssm64.exe install AsiaLogTransfer&lt;/code&gt;
+第一步，准备注册一个服务，并且给它一个名字。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Step 2: Using GUI to find the service:&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;使用 GUI 来找到程序的位置。&lt;/p&gt;
+&lt;div class="last figure"&gt;
+&lt;img alt="" src="/images/tools/nssm_03.png" /&gt;
+&lt;/div&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Step 3: Start the service: &lt;code&gt;nssm64.exe start AsiaLogTransfer&lt;/code&gt;
+第三步，启动服务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now you can restart the OS without any concern of losing it.
+And there are many other options, I only use the simplest of it. Wish you can enjoy the amazing tool.&lt;/p&gt;
+&lt;p&gt;现在我们可以随意的启停系统，而不会有出现丢失服务的风险。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="using-command"&gt;
+&lt;h3&gt;3.2. &lt;a class="toc-backref" href="#id5"&gt;Using command / 使用 命令行&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;You can also use command line so that customer can install with 1 click.
+也可以使用命令行，这样用户只需要点击运行 即可。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; C:&lt;span class="se"&gt;\A&lt;/span&gt;siaLogTransferWindows
+:: Automatically add the program to service list.
+:: So that it can be run in background and restart automatically.
+nssm64.exe install AsiaLogTransfer C:&lt;span class="se"&gt;\\&lt;/span&gt;AsiaLogTransferWindows&lt;span class="se"&gt;\\&lt;/span&gt;AsiaLogTransfer.bat
+nssm64.exe start AsiaLogTransfer
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And in &lt;code&gt;AsiaLogTransfer.bat&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; C:&lt;span class="se"&gt;\\&lt;/span&gt;AsiaLogTransferWindows
+C:&lt;span class="se"&gt;\\&lt;/span&gt;Python27&lt;span class="se"&gt;\\&lt;/span&gt;python AsiaLogTransfer.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Windows"></category><category term="NSSM"></category></entry><entry><title>Local Yum Repo (CentOS 7) / 本地Yum源</title><link href="https://brianshen1990.github.io/local_yum_repo.html" rel="alternate"></link><published>2017-11-14T00:00:00+08:00</published><updated>2017-11-14T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2017-11-14:/local_yum_repo.html</id><summary type="html">&lt;p class="first last"&gt;Local Yum Repo&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="local-yum-repo-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro" id="id1"&gt;Intro 简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#prepare-the-packages" id="id2"&gt;Prepare the packages / 准备安装包&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#use-your-own-repo-yum" id="id3"&gt;Use your own REPO / 使用这个Yum源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#installation" id="id4"&gt;Installation / 安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference" id="id5"&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Intro 简介&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This article is sampled by installing Java.&lt;/p&gt;
+&lt;p&gt;基于JAVA介绍如何使用本地Yum源。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-the-packages"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;Prepare the packages / 准备安装包&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Find a clean CentOS with network available.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;找一个干净的 CentOS 环境，并且接通网络。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Download Software Packages 下载软件包&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To download software and their dependencies, you can just use native &lt;code&gt;yum&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;只需要使用 &lt;code&gt;yum&lt;/code&gt; 就可以下载并且解析依赖包。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Create a folder / 创建文件夹&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir ais_repo
+&lt;span class="nb"&gt;cd&lt;/span&gt; ais_repo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Download OpenJDK / 下载 OpenJDK&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum install --downloadonly --downloaddir ./ java-1.8.0-openjdk-headless.x86_64
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/local_repo_01.png" /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Make Local Repo / 制作本地 Yum 库&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It seems quite hard to create your own repo, since there are lots of package information to create and add.
+But actually it is quite simple, and you can just make repo with simple commands.&lt;/p&gt;
+&lt;p&gt;看起来很是复杂，因为有很多的依赖关系，但实际上，只需要很简单的命令就可以。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Install &lt;code&gt;createrepo&lt;/code&gt; / 安装 &lt;code&gt;createrepo&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;sudo yum install createrepo&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;create a directory to put packages and then make repo in that folder&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;创建一个目录来保存这些安装包。并且，制作安装包的元文件信息。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkdir /usr/share/ais_repo
+sudo mv ./* /usr/share/ais_repo
+sudo createrepo -v /usr/share/ais_repo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's see what happened: / 看看发生了什么&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/local_repo_02.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;As you can notice, there is an extra folder &lt;code&gt;repodata&lt;/code&gt; . Now, this is a local repo.&lt;/p&gt;
+&lt;p&gt;可以看出来，文件夹中多了一个 &lt;code&gt;repodata&lt;/code&gt; 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="use-your-own-repo-yum"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id3"&gt;Use your own REPO / 使用这个Yum源&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Backup all the repo files. / 备份已经存在的 Yum 源配置文件&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/yum.repos.d/
+sudo mkdir bak
+sudo mv *.repo ./bak
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Create local repo source file &lt;code&gt;/etc/yum.repos.d/local.repo&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为本地的Yum源添加配置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#name&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;local_server&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="c1"&gt;#description&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Thisis a &lt;span class="nb"&gt;local&lt;/span&gt; repo
+&lt;span class="c1"&gt;#yum source&lt;/span&gt;
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;file:///usr/share/ais_repo
+&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;span class="c1"&gt;#check GPG-KEY&lt;/span&gt;
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Make local yum source, clear cache and start cache. 清除缓存，开始使用本地Yum源。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum clean all
+sudo yum makecache
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id4"&gt;Installation / 安装&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/share/ais_repo/
+sudo yum install java-1.8.0-openjdk-headless-1.8.0.144-0.b01.el7_4.x86_64.rpm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id5"&gt;Reference&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://yq.aliyun.com/ziliao/97558/"&gt;https://yq.aliyun.com/ziliao/97558/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS"></category></entry><entry><title>Sphinx And RST</title><link href="https://brianshen1990.github.io/Sphinx_And_RST.html" rel="alternate"></link><published>2017-11-08T00:00:00+08:00</published><updated>2017-11-08T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2017-11-08:/Sphinx_And_RST.html</id><summary type="html">&lt;p class="first last"&gt;Sphinx And RST&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-is-sphinx-sphinx" id="id3"&gt;What is &lt;code&gt;Sphinx&lt;/code&gt; / 什么是 &lt;code&gt;Sphinx&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-install-sphinx" id="id4"&gt;How to install &lt;code&gt;Sphinx&lt;/code&gt; / 怎么安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#best-practice" id="id5"&gt;Best Practice / 最佳实践&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#rst-language-rst" id="id6"&gt;RST Language / RST 语言简介&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section" id="id7"&gt;Section / 章节&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#words-style" id="id8"&gt;Words Style / 样式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#list" id="id9"&gt;List / 清单&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#reference-link" id="id10"&gt;Reference Link / 参考链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#codes" id="id11"&gt;Codes / 代码段&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#pictures" id="id12"&gt;Pictures / 图片&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#tables" id="id13"&gt;Tables / 表格&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-is-sphinx-sphinx"&gt;
+&lt;span id="id1"&gt;&lt;/span&gt;&lt;h2&gt;1. &lt;a class="toc-backref" href="#id3"&gt;What is &lt;code&gt;Sphinx&lt;/code&gt; / 什么是 &lt;code&gt;Sphinx&lt;/code&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Reference : &lt;a class="reference external" href="http://www.sphinx-doc.org/en/stable/"&gt;Official Page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sphinx is a tool that makes it easy to create intelligent and beautiful documentation.&lt;/p&gt;
+&lt;p&gt;Sphinx 可以让你轻松地创建只能而漂亮的文档。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-install-sphinx"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id4"&gt;How to install &lt;code&gt;Sphinx&lt;/code&gt; / 怎么安装&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Prerequisite / 前提:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Pip&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Open cmd and execute:  / 打开命令行执行：
+&lt;code&gt;pip install sphinx&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Usually, most people use a theme named &lt;code&gt;rtd&lt;/code&gt; , so install this theme: / 我们通常看到的主题的名字叫 &lt;code&gt;rtd&lt;/code&gt; ，可以这样安装：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pip install sphinx_rtd_theme&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Create a folder, then run command: / 新建文件夹 并且运行命令：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sphinx-quickstart&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;After input some essential information, &lt;code&gt;sphinx&lt;/code&gt; has created some files.&lt;/p&gt;
+&lt;p&gt;再输入一些必要的信息之后， &lt;code&gt;sphinx&lt;/code&gt; 以及自动的为你创建了一些文件。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_02.png" /&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sphinx
+├── _build          &lt;span class="c1"&gt;# output&lt;/span&gt;
+├── _static         &lt;span class="c1"&gt;# resource, like pictures and files&lt;/span&gt;
+├── _templates      &lt;span class="c1"&gt;# ignore&lt;/span&gt;
+├── conf.py         &lt;span class="c1"&gt;# Sphinx configuration file&lt;/span&gt;
+├── index.rst       &lt;span class="c1"&gt;# entry&lt;/span&gt;
+├── make.bat        &lt;span class="c1"&gt;# Window make file&lt;/span&gt;
+├── Makefile        &lt;span class="c1"&gt;# Linux make file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;index.rst&lt;/code&gt; is the entry file, &lt;code&gt;sphinx&lt;/code&gt; will use this file and include other files mentioned in it.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;index.rst&lt;/code&gt; 是主入口文件，&lt;code&gt;sphinx&lt;/code&gt; 创建的 文档会包含其中的所有的其他链接文件。&lt;/p&gt;
+&lt;p&gt;Modify the configuration file &lt;code&gt;conf.py&lt;/code&gt; / 修改配置文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# sys.path.insert(0, os.path.abspath(&amp;#39;.&amp;#39;))&lt;/span&gt;
+import sphinx_rtd_theme
+
+&lt;span class="c1"&gt;# html_theme = &amp;#39;alabaster&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;html_theme&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sphinx_rtd_theme&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now run &lt;code&gt;.\make.bat html&lt;/code&gt; , it will automatically turn &lt;code&gt;rst&lt;/code&gt; into &lt;code&gt;html&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;现在，可以运行 &lt;code&gt;.\make.bat html&lt;/code&gt; ，这将会自动的将 &lt;code&gt;rst&lt;/code&gt; 转换为 &lt;code&gt;html&lt;/code&gt; 文件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sphinx
+├── _build
+│   ├── html
+│   │    ├── index.html &lt;span class="o"&gt;(&lt;/span&gt;Open this&lt;span class="o"&gt;)&lt;/span&gt;
+├── _static
+├── _templates
+├── conf.py
+├── index.rst
+├── make.bat
+├── Makefile
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_03.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="best-practice"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id5"&gt;Best Practice / 最佳实践&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;No matter we use &lt;code&gt;Sphinx&lt;/code&gt; for personal documents or for team projects documents, there will be a lot of documents. So, how to organize them?&lt;/p&gt;
+&lt;p&gt;无论是用 &lt;code&gt;Sphinx&lt;/code&gt; 来记录个人文档 还是 团队文档，毫无疑问都会慢慢积累大量的文档，所以，如何去组织他们呢？&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Create a folder named &lt;code&gt;_content&lt;/code&gt; for original documents, and include them in the main entry file &lt;code&gt;index.rst&lt;/code&gt; .&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;创建一个文件夹，叫 &lt;code&gt;_content&lt;/code&gt; 来存放原始的 rst 文件，并且 将需要的文档包括进 &lt;code&gt;index.rst&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;The content of &lt;code&gt;index.rst&lt;/code&gt; .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Welcome to my documentation!
+&lt;span class="o"&gt;==============================&lt;/span&gt;
+
+.. toctree::
+:maxdepth: 2
+       :caption: Contents:
+
+       ./_content/content_one.rst
+       ./_content/content_two.rst
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The content of &lt;code&gt;content_one.rst&lt;/code&gt; / &lt;code&gt;content_one.rst&lt;/code&gt; 的内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sphinx Content one
+&lt;span class="c1"&gt;##################&lt;/span&gt;
+
+RST Language one
+^^^^^^^^^^^^^^^^
+
+Header Sample One
+*****************
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compile and open in chrome: / 编译并且在 浏览器中打开：&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_04.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;If we need numbers, add &lt;code&gt;:numbered:&lt;/code&gt; in &lt;code&gt;index.rst&lt;/code&gt; .
+如果我们需要序号的话，可以加上 &lt;code&gt;:numbered:&lt;/code&gt;  标志。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. toctree::
+   :maxdepth: 2
+   :numbered:
+   :caption: Contents:
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compile and open in chrome。 / 编译再次在浏览器中打开即可。&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Multi Projects / 多个工程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we have two or projects, then how to organize?&lt;/p&gt;
+&lt;p&gt;如果我们有多个工程的话，那么怎么组织文件结构呢？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;index.rst
+content/
+├── Node
+│   ├── NodeIndex.rst
+│   └── Node_Scheduler.rst
+├── Tools
+│   ├── ToolIndex.rst
+│   ├── Tools_DiskMount.rst
+│   ├── Tools_LocalYumRepo.rst
+│   └── Tools_PDFToWord.rst
+└── images
+    └── tools
+        ├── local_repo_01.png
+        ├── local_repo_02.png
+        ├── mount_disk_01.png
+        └── pdf_to_word_01.png
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The content of &lt;code&gt;index.rst&lt;/code&gt; .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Welcome to my documentation!
+&lt;span class="o"&gt;==============================&lt;/span&gt;
+
+.. toctree::
+:maxdepth: 2
+       :caption: Contents:
+
+       ./_content/Tools/ToolsIndex.rst
+       ./_content/Node/NodeIndex.rst
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The content of &lt;code&gt;ToolsIndex.rst&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Project &lt;span class="nv"&gt;Tools&lt;/span&gt;
+&lt;span class="o"&gt;==============&lt;/span&gt;
+
+.. toctree::
+:maxdepth: 2
+       :caption: Contents:
+
+       ./Tools_DiskMount.rst
+       ./Tools_LocalYumRepo.rst
+       ./Tools_PDFToWord.rst
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this way, every folder can become a project and the main entry &lt;code&gt;index.rst&lt;/code&gt; doesn't need to care about the structure of sub directory..&lt;/p&gt;
+&lt;p&gt;这样的结构， 每一个文件夹就是一个工程，并且 顶层 不需要关心 子目录的结构。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rst-language-rst"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id6"&gt;RST Language / RST 语言简介&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Reference : &lt;a class="reference external" href="http://www.sphinx-doc.org/en/stable/rest.html#internal-links"&gt;RST reference&lt;/a&gt;&lt;/p&gt;
+&lt;div class="section" id="section"&gt;
+&lt;h3&gt;4.1. &lt;a class="toc-backref" href="#id7"&gt;Section / 章节&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Header&lt;/span&gt;
+Sphinx Introduction
+&lt;span class="c1"&gt;###################&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Sub Header&lt;/span&gt;
+RST Language
+^^^^^^^^^^^^
+
+&lt;span class="c1"&gt;# Small Header&lt;/span&gt;
+Header Sample
+*************
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Although official suggestion is the following, but use the previous one, it is compatible with many platforms.&lt;/p&gt;
+&lt;p&gt;虽然官方推荐是以下的标志，但是还是推荐上面的格式，因为兼容性更好。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# with overline, for parts&lt;/span&gt;
+* with overline, &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;chapters&lt;/span&gt;
+&lt;span class="o"&gt;=&lt;/span&gt;, &lt;span class="k"&gt;for&lt;/span&gt; sections
+-, &lt;span class="k"&gt;for&lt;/span&gt; subsections
+^, &lt;span class="k"&gt;for&lt;/span&gt; subsubsections
+&lt;span class="s2"&gt;&amp;quot;, for paragraphs&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="words-style"&gt;
+&lt;h3&gt;4.2. &lt;a class="toc-backref" href="#id8"&gt;Words Style / 样式&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;emphasis – alternate spelling for &lt;em&gt;emphasis&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;strong – alternate spelling for &lt;strong&gt;strong&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;literal – alternate spelling for &lt;tt class="docutils literal"&gt;literal&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;subscript – subscript text&lt;/li&gt;
+&lt;li&gt;superscript – superscript text&lt;/li&gt;
+&lt;li&gt;title-reference – for titles of books, periodicals, and other materials&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;*emphasis* , **strong**,  &lt;span class="sb"&gt;``&lt;/span&gt;literal&lt;span class="sb"&gt;``&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例 :&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;em&gt;emphasis&lt;/em&gt; , &lt;strong&gt;strong&lt;/strong&gt;,  &lt;tt class="docutils literal"&gt;literal&lt;/tt&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="list"&gt;
+&lt;h3&gt;4.3. &lt;a class="toc-backref" href="#id9"&gt;List / 清单&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* This is a bulleted list.
+* It has two items, the second
+  item uses two lines.
+
+1. This is a numbered list.
+2. It has two items too.
+
+&lt;span class="c1"&gt;#. This is a numbered list.&lt;/span&gt;
+&lt;span class="c1"&gt;#. It has two items too.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;This is a bulleted list.&lt;/li&gt;
+&lt;li&gt;It has two items, the second
+item uses two lines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;This is a numbered list.&lt;/li&gt;
+&lt;li&gt;It has two items too.&lt;/li&gt;
+&lt;li&gt;This is a numbered list.&lt;/li&gt;
+&lt;li&gt;It has two items too.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reference-link"&gt;
+&lt;h3&gt;4.4. &lt;a class="toc-backref" href="#id10"&gt;Reference Link / 参考链接&lt;/a&gt;&lt;/h3&gt;
+&lt;ul id="sphinx-external"&gt;
+&lt;li&gt;&lt;p class="first"&gt;External Link / 外部链接&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;Official Page &amp;lt;http://www.sphinx-doc.org/en/stable/&amp;gt;&lt;span class="sb"&gt;`&lt;/span&gt;_
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 样例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.sphinx-doc.org/en/stable/"&gt;Official Page&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Internal Link / 内部链接&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add a link flag in document. / 在文档中添加一个连接标志&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. _sphinx-external:
+
+- External Link
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To use this link: / 使用它：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:ref:&lt;span class="sb"&gt;`&lt;/span&gt;Go to External &amp;lt;sphinx-external&amp;gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例(Fail in pelican)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="codes"&gt;
+&lt;h3&gt;4.5. &lt;a class="toc-backref" href="#id11"&gt;Codes / 代码段&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Simple Code / 示例代码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;This is an introduction to :code:&lt;span class="sb"&gt;`&lt;/span&gt;Sphinx&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Sample / 示例:&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;This is an introduction to &lt;code&gt;Sphinx&lt;/code&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Doc tree / 文档树&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. code-block:: bash
+
+    storage_env
+    ├── config
+    ├── storage
+    │   ├── provision  &lt;span class="o"&gt;(&lt;/span&gt;provision core codes&lt;span class="o"&gt;)&lt;/span&gt;
+    │   │    ├── salesforce_provision.py
+    │   │    ├── salesforce_sandbox_provision.py
+    │   │    ├── salesforce_production_provision.py
+    │   │    └── salesforce_utils
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;storage_env
+├── config
+├── storage
+│   ├── provision  &lt;span class="o"&gt;(&lt;/span&gt;provision core codes&lt;span class="o"&gt;)&lt;/span&gt;
+│   │    ├── salesforce_provision.py
+│   │    ├── salesforce_sandbox_provision.py
+│   │    ├── salesforce_production_provision.py
+│   │    └── salesforce_utils
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Javascript / JS 代码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. code-block:: javascript
+
+    console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Sphinx&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Sphinx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pictures"&gt;
+&lt;h3&gt;4.6. &lt;a class="toc-backref" href="#id12"&gt;Pictures / 图片&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. figure::  /images/tools/sphinx_01.png
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample / 示例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/tools/sphinx_01.png" /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tables"&gt;
+&lt;h3&gt;4.7. &lt;a class="toc-backref" href="#id13"&gt;Tables / 表格&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.. list-table::
+    :widths: &lt;span class="m"&gt;25&lt;/span&gt; &lt;span class="m"&gt;25&lt;/span&gt; 50
+    :header-rows: 1
+
+    * - Heading row 1, column 1
+      - Heading row 1, column 2
+      - Heading row 1, column 3
+    * - Row 1, column 1
+      -
+      - Row 1, column 3
+    * - Row 2, column 1
+      - Row 2, column 2
+      - Row 2, column 3
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Sample / 示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="25%" /&gt;
+&lt;col width="25%" /&gt;
+&lt;col width="50%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Heading row 1, column 1&lt;/th&gt;
+&lt;th class="head"&gt;Heading row 1, column 2&lt;/th&gt;
+&lt;th class="head"&gt;Heading row 1, column 3&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Row 1, column 1&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;Row 1, column 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Row 2, column 1&lt;/td&gt;
+&lt;td&gt;Row 2, column 2&lt;/td&gt;
+&lt;td&gt;Row 2, column 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Enjoy!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Sphinx"></category><category term="RST"></category></entry></feed>

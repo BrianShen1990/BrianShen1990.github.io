@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Web</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/web.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2018-09-19T00:00:00+08:00</updated><entry><title>React Sharing / React 框架分享</title><link href="https://brianshen1990.github.io/React_Sharing.html" rel="alternate"></link><published>2018-09-19T00:00:00+08:00</published><updated>2018-09-19T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-09-19:/React_Sharing.html</id><summary type="html">&lt;p class="first last"&gt;React Sharing&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#dev-environment-establish" id="id1"&gt;Dev Environment Establish / 开发环境搭建&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#start-a-new-app-app" id="id2"&gt;Start a new App / 创建新的App&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#basic-components" id="id3"&gt;Basic components / 基础组件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#test" id="id4"&gt;Test / 测试&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#l10n" id="id5"&gt;L10N / 本地化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#router-conception-router" id="id6"&gt;Router Conception / Router的概念&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#route-implement" id="id7"&gt;Route implement / 路由使用实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#deploy-and-debug" id="id8"&gt;Deploy and Debug 部署和调试&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dev-environment-establish"&gt;
+&lt;span id="react-sharing-rst"&gt;&lt;/span&gt;&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Dev Environment Establish / 开发环境搭建&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Download Node from &lt;a class="reference external" href="https://nodejs.org/en/"&gt;https://nodejs.org/en/&lt;/a&gt; and install.&lt;/p&gt;
+&lt;p&gt;下载 Node 并且安装。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="start-a-new-app-app"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;Start a new App / 创建新的App&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;create-react-app&lt;/code&gt; is a helper program developed by React.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;create-react-app&lt;/code&gt; 是 React 自家开发的脚手架程序。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npx create-react-app esample
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's have a look at the directory.&lt;/p&gt;
+&lt;p&gt;可以看一看这个脚手架程序创建的目录。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;esample
+├── README.md
+├── node_modules  &lt;span class="o"&gt;(&lt;/span&gt;Lib/库&lt;span class="o"&gt;)&lt;/span&gt;
+├── package-lock.json
+├── package.json  &lt;span class="o"&gt;(&lt;/span&gt;dependencies and scripts/依赖和脚本&lt;span class="o"&gt;)&lt;/span&gt;
+├── public   &lt;span class="o"&gt;(&lt;/span&gt;static files/静态文件&lt;span class="o"&gt;)&lt;/span&gt;
+└── src  &lt;span class="o"&gt;(&lt;/span&gt;code/代码&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now run &lt;code&gt;npm start&lt;/code&gt; to start the app.&lt;/p&gt;
+&lt;p&gt;现在可以运行 &lt;code&gt;npm start&lt;/code&gt; 来启动App.&lt;/p&gt;
+&lt;p&gt;However, the recommendation:
+虽然默认的目录是这样的，但是在 &lt;code&gt;src&lt;/code&gt; 文件夹中，面对大型的构架，我们希望的是这样的目录结构：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;esample
+├─ node_modules &lt;span class="o"&gt;(&lt;/span&gt;Lib/库&lt;span class="o"&gt;)&lt;/span&gt;
+├─ public &lt;span class="o"&gt;(&lt;/span&gt;static files/静态文件&lt;span class="o"&gt;)&lt;/span&gt;
+├─ package.json &lt;span class="o"&gt;(&lt;/span&gt;dependencies and scripts/依赖和脚本&lt;span class="o"&gt;)&lt;/span&gt;
+└─ src &lt;span class="o"&gt;(&lt;/span&gt;code/代码&lt;span class="o"&gt;)&lt;/span&gt;
+    ├─ actions &lt;span class="o"&gt;(&lt;/span&gt;Reflux action/Reflux 的action&lt;span class="o"&gt;)&lt;/span&gt;
+    ├─ stores  &lt;span class="o"&gt;(&lt;/span&gt;Reflux store/Reflux 的存储&lt;span class="o"&gt;)&lt;/span&gt;
+    ├─ injection  &lt;span class="o"&gt;(&lt;/span&gt;Reflux inject / Reflux 注入&lt;span class="o"&gt;)&lt;/span&gt;
+    ├─ util  &lt;span class="o"&gt;(&lt;/span&gt;helpers / 帮助函数&lt;span class="o"&gt;)&lt;/span&gt;
+    └─ public &lt;span class="o"&gt;(&lt;/span&gt;static files/静态文件&lt;span class="o"&gt;)&lt;/span&gt;
+        ├─ images
+        └─ css
+    ├─ routing  &lt;span class="o"&gt;(&lt;/span&gt;router/路由设置&lt;span class="o"&gt;)&lt;/span&gt;
+    ├─ pages  &lt;span class="o"&gt;(&lt;/span&gt;main pages/页面&lt;span class="o"&gt;)&lt;/span&gt;
+    └─ components  &lt;span class="o"&gt;(&lt;/span&gt;react components/组件&lt;span class="o"&gt;)&lt;/span&gt;
+        ├─ common
+        └─ Each pages
+    └─ index.jsx &lt;span class="o"&gt;(&lt;/span&gt;Main entry/主进入点&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;Problems of Absolute path: 相对路径问题&lt;/p&gt;
+&lt;p&gt;Ref: &lt;a class="reference external" href="https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/"&gt;https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/&lt;/a&gt;&lt;/p&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;With the new structure, we can safely move our files around without worrying about where we are in the directory stack.&lt;/div&gt;
+&lt;div class="line"&gt;使用了新的目录结构之后，我们可以减少对于目录结构的关注，并且将根路径设置问 src.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;To achieve this, we create a .env file in the root of our directory with NODE_PATH set to src&lt;/div&gt;
+&lt;div class="line"&gt;为了达到这个目的，需要将设置一些环节变量。&lt;/div&gt;
+&lt;/div&gt;
+&lt;p class="last"&gt;&lt;code&gt;NODE_PATH=src&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-components"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id3"&gt;Basic components / 基础组件&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Quite Easy this part because we don't have to care how to create html elements and how to bind events, how to add elements dynamically.
+All we have to do is declare, declare. And the scope is in the components itself, which won't have any effects on others.&lt;/p&gt;
+&lt;p&gt;基础组件式 React 最容易的部分，我们不需要了解太多HTML 和 CSS， reactstrap 实际上既可以做很多的事情。 我们可以像写 Python 一样去写UI。
+每个组件都是一个对象。对， 都是对象。&lt;/p&gt;
+&lt;p&gt;Let's explore!&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://reactstrap.github.io/components/tabs/"&gt;https://reactstrap.github.io/components/tabs/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;PS: Let‘s use the prototype from Elves.&lt;/p&gt;
+&lt;p&gt;我们使用 Elves 给我们的雏形。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/React_LifeCycle.jpeg" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Most code is copied from &lt;code&gt;Reactstrap&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;大部分的代码我们都从 &lt;code&gt;Reactstrap&lt;/code&gt; 拷贝过来的，拿来即用。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class SampleComponents extends React.Component &lt;span class="o"&gt;{&lt;/span&gt;
+    constructor&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        super&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+        this.toggleTab &lt;span class="o"&gt;=&lt;/span&gt; this.toggleTab.bind&lt;span class="o"&gt;(&lt;/span&gt;this&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.state &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            activeTab: &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    toggleTab&lt;span class="o"&gt;(&lt;/span&gt;tab&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;this.state.activeTab !&lt;span class="o"&gt;==&lt;/span&gt; tab&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        this.setState&lt;span class="o"&gt;({&lt;/span&gt;
+            activeTab: tab
+        &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    render&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;
+        &amp;lt;div &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;={{&lt;/span&gt;marginLeft:&lt;span class="s2"&gt;&amp;quot;100px&amp;quot;&lt;/span&gt;,marginRight:&lt;span class="s2"&gt;&amp;quot;100px&amp;quot;&lt;/span&gt;,marginTop:&lt;span class="s2"&gt;&amp;quot;50px&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}}&lt;/span&gt;&amp;gt;
+            &amp;lt;Nav tabs&amp;gt;
+                &amp;lt;NavItem&amp;gt;
+                    &amp;lt;BoostNavLink
+                        &lt;span class="nv"&gt;className&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;classnames&lt;span class="o"&gt;({&lt;/span&gt; active: this.state.activeTab &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;})}&lt;/span&gt;
+                        &lt;span class="nv"&gt;onClick&lt;/span&gt;&lt;span class="o"&gt;={()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt; this.toggleTab&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}}&lt;/span&gt;&amp;gt;
+                        Tab1
+                    &amp;lt;/BoostNavLink&amp;gt;
+                &amp;lt;/NavItem&amp;gt;
+                &amp;lt;NavItem&amp;gt;
+                    &amp;lt;BoostNavLink
+                        &lt;span class="nv"&gt;className&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;classnames&lt;span class="o"&gt;({&lt;/span&gt; active: this.state.activeTab &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;})}&lt;/span&gt;
+                        &lt;span class="nv"&gt;onClick&lt;/span&gt;&lt;span class="o"&gt;={()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt; this.toggleTab&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}}&lt;/span&gt;&amp;gt;
+                        Tab 2
+                    &amp;lt;/BoostNavLink&amp;gt;
+                &amp;lt;/NavItem&amp;gt;
+            &amp;lt;/Nav&amp;gt;
+            &amp;lt;TabContent &lt;span class="nv"&gt;activeTab&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;this.state.activeTab&lt;span class="o"&gt;}&lt;/span&gt;&amp;gt;
+                &amp;lt;TabPane &lt;span class="nv"&gt;tabId&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;Row&amp;gt;
+                        &amp;lt;Col &lt;span class="nv"&gt;sm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;12&amp;quot;&lt;/span&gt;&amp;gt;
+                            &amp;lt;h4&amp;gt;Tab &lt;span class="m"&gt;1&lt;/span&gt; Contents&amp;lt;/h4&amp;gt;
+                        &amp;lt;/Col&amp;gt;
+                    &amp;lt;/Row&amp;gt;
+                &amp;lt;/TabPane&amp;gt;
+                &amp;lt;TabPane &lt;span class="nv"&gt;tabId&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;Row&amp;gt;
+                        &amp;lt;Col &lt;span class="nv"&gt;sm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;12&amp;quot;&lt;/span&gt;&amp;gt;
+                            &amp;lt;h4&amp;gt;Tab &lt;span class="m"&gt;2&lt;/span&gt; Contents&amp;lt;/h4&amp;gt;
+                        &amp;lt;/Col&amp;gt;
+                    &amp;lt;/Row&amp;gt;
+                &amp;lt;/TabPane&amp;gt;
+            &amp;lt;/TabContent&amp;gt;
+        &amp;lt;/div&amp;gt;
+        &lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0008.png" /&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class SubAV extends React.Component &lt;span class="o"&gt;{&lt;/span&gt;
+    constructor&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        super&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.apply &lt;span class="o"&gt;=&lt;/span&gt; this.apply.bind&lt;span class="o"&gt;(&lt;/span&gt;this&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.enable &lt;span class="o"&gt;=&lt;/span&gt; this.enable.bind&lt;span class="o"&gt;(&lt;/span&gt;this&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.state&lt;span class="o"&gt;={&lt;/span&gt;
+            enable: &lt;span class="nb"&gt;false&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    apply&lt;span class="o"&gt;(){&lt;/span&gt;
+        alert&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;enable:&amp;quot;&lt;/span&gt; + &lt;span class="o"&gt;(&lt;/span&gt;this.state.enable ? &lt;span class="s2"&gt;&amp;quot;True&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;False&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    enable&lt;span class="o"&gt;(&lt;/span&gt;event&lt;span class="o"&gt;){&lt;/span&gt;
+        debugger&lt;span class="p"&gt;;&lt;/span&gt;
+        this.setState&lt;span class="o"&gt;({&lt;/span&gt;enable: event.target.checked &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    render&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;Row&amp;gt;
+            &amp;lt;Col &lt;span class="nv"&gt;sm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;12&amp;quot;&lt;/span&gt;&amp;gt;
+                &amp;lt;div&amp;gt;防恶意软件安全测试 &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&lt;/span&gt;
+                &amp;lt;Input &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;checkbox&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;onChange&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;this.enable&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;checked&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;this.state.enable&lt;span class="o"&gt;}&lt;/span&gt; /&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&amp;lt;/div&amp;gt;
+                &amp;lt;Card&amp;gt;
+                    &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerAPT&amp;quot;&lt;/span&gt;&amp;gt;高级威胁扫描&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;UncontrolledCollapse &lt;span class="nv"&gt;toggler&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#AVTogglerAPT&amp;quot;&lt;/span&gt;&amp;gt;
+                        &amp;lt;CardBody&amp;gt;
+                            &amp;lt;Button&amp;gt;Go somewhere&amp;lt;/Button&amp;gt;
+                        &amp;lt;/CardBody&amp;gt;
+                    &amp;lt;/UncontrolledCollapse&amp;gt;
+                &amp;lt;/Card&amp;gt;
+                &amp;lt;Card&amp;gt;
+                    &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerExtension&amp;quot;&lt;/span&gt;&amp;gt;文件扩展名&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;UncontrolledCollapse &lt;span class="nv"&gt;toggler&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#AVTogglerExtension&amp;quot;&lt;/span&gt;&amp;gt;
+                        &amp;lt;CardBody&amp;gt;
+                            &amp;lt;Button&amp;gt;Go somewhere&amp;lt;/Button&amp;gt;
+                        &amp;lt;/CardBody&amp;gt;
+                    &amp;lt;/UncontrolledCollapse&amp;gt;
+                &amp;lt;/Card&amp;gt;
+                &amp;lt;Card&amp;gt;
+                    &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerScan&amp;quot;&lt;/span&gt;&amp;gt;扫描优化&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;UncontrolledCollapse &lt;span class="nv"&gt;toggler&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#AVTogglerScan&amp;quot;&lt;/span&gt;&amp;gt;
+                        &amp;lt;CardBody&amp;gt;
+                            &amp;lt;Button&amp;gt;Go somewhere&amp;lt;/Button&amp;gt;
+                        &amp;lt;/CardBody&amp;gt;
+                    &amp;lt;/UncontrolledCollapse&amp;gt;
+                &amp;lt;/Card&amp;gt;
+                &amp;lt;Card&amp;gt;
+                    &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerEmail&amp;quot;&lt;/span&gt;&amp;gt;防恶意邮件设置&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;UncontrolledCollapse &lt;span class="nv"&gt;toggler&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#AVTogglerEmail&amp;quot;&lt;/span&gt;&amp;gt;
+                        &amp;lt;CardBody&amp;gt;
+                            &amp;lt;Button&amp;gt;Go somewhere&amp;lt;/Button&amp;gt;
+                        &amp;lt;/CardBody&amp;gt;
+                    &amp;lt;/UncontrolledCollapse&amp;gt;
+                &amp;lt;/Card&amp;gt;
+                &amp;lt;Button &lt;span class="nv"&gt;onClick&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;this.apply&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;primary&amp;quot;&lt;/span&gt;&amp;gt;应用&amp;lt;/Button&amp;gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&lt;/span&gt;
+                &amp;lt;Button&amp;gt;重置&amp;lt;/Button&amp;gt;
+            &amp;lt;/Col&amp;gt;
+        &amp;lt;/Row&amp;gt;
+        &lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0009.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Let's add some CSS / 添加修改 CSS 即可实现基本相似的页面效果.&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0010.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="test"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id4"&gt;Test / 测试&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Recommendation : Airbnb ( &lt;a class="reference external" href="http://airbnb.io/enzyme/"&gt;http://airbnb.io/enzyme/&lt;/a&gt; )&lt;/p&gt;
+&lt;p&gt;React 本身的测试框架并不是很完善， 官方推荐的是 Airbnb 的测试框架  enzyme .&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Install 安装：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm i --save-dev enzyme enzyme-adapter-react-16 chai sinon jest-fetch-mock
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class SubAV extends React.Component &lt;span class="o"&gt;{&lt;/span&gt;
+    ...
+    render&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;Row &lt;span class="nv"&gt;className&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;subAV&amp;quot;&lt;/span&gt; &amp;gt;
+            &amp;lt;Col &lt;span class="nv"&gt;sm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;12&amp;quot;&lt;/span&gt;&amp;gt;
+                &amp;lt;div &lt;span class="nv"&gt;className&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;aisPanel&amp;quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;Card&amp;gt;
+                        &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerAPT&amp;quot;&lt;/span&gt;&amp;gt;高级威胁扫描&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;/Card&amp;gt;
+                    &amp;lt;Card&amp;gt;
+                        &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerExtension&amp;quot;&lt;/span&gt;&amp;gt;文件扩展名&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;/Card&amp;gt;
+                    &amp;lt;Card&amp;gt;
+                        &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerScan&amp;quot;&lt;/span&gt;&amp;gt;扫描优化&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;/Card&amp;gt;
+                    &amp;lt;Card&amp;gt;
+                        &amp;lt;CardHeader &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;AVTogglerEmail&amp;quot;&lt;/span&gt;&amp;gt;防恶意邮件设置&amp;lt;/CardHeader&amp;gt;
+                    &amp;lt;/Card&amp;gt;
+                &amp;lt;/div&amp;gt;
+            &amp;lt;/Col&amp;gt;
+        &amp;lt;/Row&amp;gt;
+        &lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;  SubAV &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class SampleRest extends Component &lt;span class="o"&gt;{&lt;/span&gt;
+    constructor&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        super&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.state &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        members: &lt;span class="o"&gt;[]&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    componentDidMount&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        fetch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://localhost:3001/rest/de_members&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        .then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; response.json&lt;span class="o"&gt;())&lt;/span&gt;
+        .then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            console.log&lt;span class="o"&gt;(&lt;/span&gt;data&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            this.setState&lt;span class="o"&gt;({&lt;/span&gt;members: data&lt;span class="o"&gt;})&lt;/span&gt;
+        &lt;span class="o"&gt;})&lt;/span&gt;
+        .catch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;err&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;err&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    render&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &amp;lt;div&amp;gt;
+        &amp;lt;h2&amp;gt;Network1&amp;lt;/h2&amp;gt;
+        &amp;lt;p&amp;gt;Response from localhost:3001 CROS and run in localhost:3000&amp;lt;/p&amp;gt;
+        &lt;span class="o"&gt;{&lt;/span&gt;this.state.members.map&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;span&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;item&lt;span class="o"&gt;}&lt;/span&gt;&amp;lt;br /&amp;gt;&amp;lt;/span&amp;gt;&lt;span class="o"&gt;))}&lt;/span&gt;
+        &amp;lt;/div&amp;gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import React from &lt;span class="s1"&gt;&amp;#39;react&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt; expect &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;chai&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt; shallow, mount, configure &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;enzyme&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import sinon from &lt;span class="s1"&gt;&amp;#39;sinon&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt; SampleRest &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;components/SampleRest.js&amp;#39;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt;SubAV&lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;components/SubAV.js&amp;#39;&lt;/span&gt;
+global.fetch &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;jest-fetch-mock&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt;  Row, Card &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;reactstrap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import Adapter from &lt;span class="s1"&gt;&amp;#39;enzyme-adapter-react-16&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+configure&lt;span class="o"&gt;({&lt;/span&gt; adapter: new Adapter&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+//jest.setTimeout&lt;span class="o"&gt;(&lt;/span&gt;10000&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;SubAV /&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;renders 1 &amp;lt;Row /&amp;gt; components&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        const &lt;span class="nv"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; shallow&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;SubAV /&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.find&lt;span class="o"&gt;(&lt;/span&gt;Row&lt;span class="o"&gt;))&lt;/span&gt;.to.have.lengthOf&lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;renders 4 &amp;lt;Card /&amp;gt; components&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        const &lt;span class="nv"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; shallow&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;SubAV /&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.find&lt;span class="o"&gt;(&lt;/span&gt;Card&lt;span class="o"&gt;))&lt;/span&gt;.to.have.lengthOf&lt;span class="o"&gt;(&lt;/span&gt;4&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;calls componentDidMount&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;SubAV.prototype.componentDidMount&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;undefined&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;SampleRest /&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    beforeEach&lt;span class="o"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        fetch.resetMocks&lt;span class="o"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;calls componentDidMount&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        sinon.spy&lt;span class="o"&gt;(&lt;/span&gt;SampleRest.prototype, &lt;span class="s1"&gt;&amp;#39;componentDidMount&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        fetch.mockResponseOnce&lt;span class="o"&gt;(&lt;/span&gt;JSON.stringify&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;Fay&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]))&lt;/span&gt;
+        const &lt;span class="nv"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; mount&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;SampleRest /&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;SampleRest.prototype.componentDidMount&lt;span class="o"&gt;)&lt;/span&gt;.to.have.property&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;callCount&amp;#39;&lt;/span&gt;, 1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        setTimeout&lt;span class="o"&gt;(()=&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;
+            console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;haha&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            console.log&lt;span class="o"&gt;(&lt;/span&gt;wrapper.text&lt;span class="o"&gt;())&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            wrapper.update&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.contains&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;span&amp;gt;Fay&amp;lt;br /&amp;gt;&amp;lt;/span&amp;gt;&lt;span class="o"&gt;))&lt;/span&gt;.to.equal&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;, 100&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Results / 结果 :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;PASS  src/pages/App.test.js
+&amp;lt;SubAV /&amp;gt;
+    ✓ renders &lt;span class="m"&gt;1&lt;/span&gt; &amp;lt;Row /&amp;gt; components &lt;span class="o"&gt;(&lt;/span&gt;6ms&lt;span class="o"&gt;)&lt;/span&gt;
+    ✓ renders &lt;span class="m"&gt;4&lt;/span&gt; &amp;lt;Card /&amp;gt; components &lt;span class="o"&gt;(&lt;/span&gt;3ms&lt;span class="o"&gt;)&lt;/span&gt;
+    ✓ calls componentDidMount
+&amp;lt;SampleRest /&amp;gt;
+    ✓ calls componentDidMount &lt;span class="o"&gt;(&lt;/span&gt;115ms&lt;span class="o"&gt;)&lt;/span&gt;
+
+Test Suites: &lt;span class="m"&gt;1&lt;/span&gt; passed, &lt;span class="m"&gt;1&lt;/span&gt; total
+Tests:       &lt;span class="m"&gt;4&lt;/span&gt; passed, &lt;span class="m"&gt;4&lt;/span&gt; total
+Snapshots:   &lt;span class="m"&gt;0&lt;/span&gt; total
+Time:        1.881s, estimated 2s
+Ran all &lt;span class="nb"&gt;test&lt;/span&gt; suites related to changed files.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="l10n"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id5"&gt;L10N / 本地化&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;React itself cannot support L10N. We have to rely on other libraries to implement this.
+As one of the most popular library id &lt;code&gt;react-intl&lt;/code&gt; (Developed by yahoo 8K).&lt;/p&gt;
+&lt;p&gt;React 本身不支持 L10N， 我们需要依赖于其他的模块。 最流行的目前是 yahoo 的 &lt;code&gt;react-intl&lt;/code&gt; .&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Other choice: 其他的选择为:&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;&lt;code&gt;react-i18next&lt;/code&gt;  ( &lt;a class="reference external" href="https://github.com/i18next/react-i18next"&gt;https://github.com/i18next/react-i18next&lt;/a&gt;  2K)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;react-intl-universal&lt;/code&gt; ( &lt;a class="reference external" href="https://github.com/alibaba/react-intl-universal"&gt;https://github.com/alibaba/react-intl-universal&lt;/a&gt; Supported by Alibaba 206)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Sample with &lt;code&gt;react-intl&lt;/code&gt; / 以 &lt;code&gt;react-intl&lt;/code&gt;  为例。&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Install / 安装  &lt;code&gt;npm install react-intl&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Code in &lt;code&gt;l10n.zh.json&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;common&amp;quot;&lt;/span&gt; : &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;亚信安全&amp;amp;trade; AIS Edge&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_LONG_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;亚信安全&amp;amp;trade; Deep Edge&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_FULL_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;Deep Edge&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_SHORT_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;TM-DE&amp;quot;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Code in &lt;code&gt;l10n.en.json&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;common&amp;quot;&lt;/span&gt; : &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;Trend Micro&amp;amp;trade; Deep Edge&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_LONG_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;Trend Micro&amp;amp;trade; Deep Edge&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_FULL_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;Deep Edge&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;PRODUCT_SHORT_NAME&amp;quot;&lt;/span&gt; : &lt;span class="s2"&gt;&amp;quot;TM-DE&amp;quot;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Load data and init: / 导入数据 并且初始化：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;en&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; flat&lt;span class="o"&gt;(&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./public/l10n/l10n.en.json&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;zh&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; flat&lt;span class="o"&gt;(&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./public/l10n/l10n.zh.json&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+ReactDOM.render&lt;span class="o"&gt;(&lt;/span&gt;
+    &amp;lt;IntlProvider &lt;span class="nv"&gt;locale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;en&lt;span class="o"&gt;}&lt;/span&gt;&amp;gt;
+        &amp;lt;Router&amp;gt;
+            &amp;lt;App /&amp;gt;
+        &amp;lt;/Router&amp;gt;
+    &amp;lt;/IntlProvider&amp;gt;,
+    document.getElementById&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+registerServiceWorker&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How to use it / 如何使用:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class SampleL10N extends Component &lt;span class="o"&gt;{&lt;/span&gt;
+
+    constructor&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        super&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    render&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &amp;lt;FormattedMessage &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;common.PRODUCT_NAME&amp;quot;&lt;/span&gt; /&amp;gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0006.png" /&gt;
+&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0007.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="router-conception-router"&gt;
+&lt;h2&gt;6. &lt;a class="toc-backref" href="#id6"&gt;Router Conception / Router的概念&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;React has its own compatible router module.&lt;/p&gt;
+&lt;p&gt;React的路由是开放的，但是facebook 仍然提供了一个比较官方的路由模块。&lt;/p&gt;
+&lt;p&gt;Ref: &lt;a class="reference external" href="https://reacttraining.com/react-router/web/guides/philosophy"&gt;https://reacttraining.com/react-router/web/guides/philosophy&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Routers / 总路由模块&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;use a &amp;lt;BrowserRouter&amp;gt; if you have a server that responds to requests and&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;BrowserRouter : 存在server端逻辑&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;use a &amp;lt;HashRouter&amp;gt; if you are using a static file server.&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;HashRouter : server端只需要提供静态文件和其他的 Restful API&lt;/p&gt;
+&lt;dl class="last docutils"&gt;
+&lt;dt&gt;IE: &lt;a class="reference external" href="https://10.21.137.42/policy/objects"&gt;https://10.21.137.42/policy/objects&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;blockquote class="first"&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;=&amp;gt; It can be a server API or a Page router&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;这个URL 在浏览器中输入时，浏览器向后端请求的就是完整的 API， 可能是一个静态页面，也可能是一个Restful API&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/blockquote&gt;
+&lt;dl class="last docutils"&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://10.21.137.42/#/policy/objects"&gt;https://10.21.137.42/#/policy/objects&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;dl class="first last docutils"&gt;
+&lt;dt&gt;=&amp;gt; It will always call  &lt;a class="reference external" href="https://10.21.137.42/"&gt;https://10.21.137.42/&lt;/a&gt; to get static file and render nextly.&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;这个URL 则一定是 &lt;a class="reference external" href="https://10.21.137.42/"&gt;https://10.21.137.42/&lt;/a&gt; 的静态文件，Hash 后面的参数是在后面render的时候使用的。&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Route Matching / 路由匹配&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;You can include a &amp;lt;Route&amp;gt; anywhere that you want to render content based on the location.&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;It will often make sense to list a number of possible &amp;lt;Route&amp;gt;s next to each other.
+路由匹配将 URL 和对应的 组件相关联。&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;The &amp;lt;Switch&amp;gt; component is used to group &amp;lt;Route&amp;gt;s together.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/about&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;About&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt; // renders &amp;lt;About/&amp;gt;
+&amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/contact&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;Contact&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt; // renders null
+&amp;lt;Route &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;Always&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt; // renders &amp;lt;Always/&amp;gt;
+
+&amp;lt;Switch&amp;gt;
+    &amp;lt;Route exact &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;Home&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt;
+    &amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/about&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;About&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt;
+    &amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/contact&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;Contact&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt;
+&amp;lt;/Switch&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Route Rendering Props / 路由渲染属性&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lt;Route&amp;gt;: component, render, and children  可以使用这三种方法， 但是推荐的做法是 component 和 children.
+You should not use the component prop with an inline function to pass in-scope variables because you will get undesired component unmounts/remounts.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;/* &lt;span class="k"&gt;do&lt;/span&gt; not &lt;span class="k"&gt;do&lt;/span&gt; this */&lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;Route
+    &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/contact&amp;#39;&lt;/span&gt;
+    &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &amp;lt;Contact &lt;span class="o"&gt;{&lt;/span&gt;...props&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;extra&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;someVariable&lt;span class="o"&gt;}&lt;/span&gt; /&amp;gt;&lt;span class="o"&gt;}&lt;/span&gt;
+/&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Navigation / 导航&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;React Router provides a &amp;lt;Link&amp;gt; component to create links in your application.&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;Wherever you render a &amp;lt;Link&amp;gt;, an anchor (&amp;lt;a&amp;gt;) will be rendered in your application’s HTML.
+Route 是确定什么样的URL 渲染怎样的组件， 而 Link 和 NavLink 则是 UI 上怎么显示这些锚点 并且相关联。&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;The &amp;lt;NavLink&amp;gt; is a special type of &amp;lt;Link&amp;gt; that can style itself as “active” when its to prop matches the current location.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;div class="last line-block"&gt;
+&lt;div class="line"&gt;NavLink can cause conflict with reactstrap NavLink, when imported, please add alias to escape.&lt;/div&gt;
+&lt;div class="line"&gt;NavLink 会和 reactstrap NavLink 产生冲突，引入时请指定别名。&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="route-implement"&gt;
+&lt;h2&gt;7. &lt;a class="toc-backref" href="#id7"&gt;Route implement / 路由使用实现&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Install / 安装&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;npm install react-router-dom&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;(The &lt;code&gt;create-react-app&lt;/code&gt; will download it automatically as it is so basic  / 默认是安装好的)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Bootstrap install (for theme) / 安装 Bootstrap 和 Reactstrap (CSS 样式和默认组件).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;reactstrap&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;^6.4.0&amp;quot;&lt;/span&gt;,
+&lt;span class="s2"&gt;&amp;quot;bootstrap&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;4.1.1&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Use &lt;code&gt;NavBar&lt;/code&gt; in reactstrap to render basic CSS.&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;使用 reactstrap 的 &lt;code&gt;NavBar&lt;/code&gt; 就会有基本的CSS 样式。&lt;/p&gt;
+&lt;div class="last"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import &lt;span class="o"&gt;{&lt;/span&gt; NavLink as RouterNavLink, Link,  Route &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;react-router-dom&amp;#39;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt;Button, Navbar, Nav, NavItem, NavLink as BoostNavLink, UncontrolledDropdown,
+    DropdownToggle, DropdownMenu, DropdownItem&lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;reactstrap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;Dashboard&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;(&lt;/span&gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;h2&amp;gt;Dashboard&amp;lt;/h2&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+class App extends Component &lt;span class="o"&gt;{&lt;/span&gt;
+    constructor&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        super&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    render&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;
+        &amp;lt;div&amp;gt;
+            &amp;lt;Navbar &lt;span class="nv"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dark&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;expand&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;md&amp;quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;img &lt;span class="nv"&gt;className&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;navLogo&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;toplogo&lt;span class="o"&gt;}&lt;/span&gt; /&amp;gt;
+            &amp;lt;Nav navbar&amp;gt;
+                &amp;lt;NavItem&amp;gt;
+                &amp;lt;Button &lt;span class="nv"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;link&amp;quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;Link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/dashboard&amp;quot;&lt;/span&gt;&amp;gt;实时监控&amp;lt;/Link&amp;gt;
+                &amp;lt;/Button&amp;gt;
+                &amp;lt;/NavItem&amp;gt;
+                ...
+            &amp;lt;/Nav&amp;gt;
+            &amp;lt;/Navbar&amp;gt;
+
+        &amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/dashboard&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;Dashboard&lt;span class="o"&gt;}&lt;/span&gt; /&amp;gt;
+        &amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/network&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;Network&lt;span class="o"&gt;}&lt;/span&gt; /&amp;gt;
+        &amp;lt;/div&amp;gt;
+        &lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And the results / 结果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0001.png" /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="deploy-and-debug"&gt;
+&lt;h2&gt;8. &lt;a class="toc-backref" href="#id8"&gt;Deploy and Debug 部署和调试&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Debug / 调试&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If we just want to develop a pure web Application, it will be quite easy, we didn't have to do anything as React has done it for us.
+However, everything is not so easy.&lt;/p&gt;
+&lt;p&gt;如果我们只是想开发一个单纯的没有后台交互的Web App, 非常简单，我们不需要做任何其他的操作就可以直接调试。 React已经做好了所有的事情。
+但是， 我们的Web不可能只有前台。&lt;/p&gt;
+&lt;p&gt;As reference to Graylog, which I'm quite familiar with, I think the best way is to use local Web Resources with remote.&lt;/p&gt;
+&lt;p&gt;参考比较大型正规的框架  Graylog，最简单和实用的办法是: 使用本地的UI 资源和远端的Restful API.&lt;/p&gt;
+&lt;p&gt;please refer to how to set up a Web Server with Express quickly .&lt;/p&gt;
+&lt;p&gt;如何构建一个简单地后台Restful 程序， 请参考：WebSharing (两分钟上手).&lt;/p&gt;
+&lt;p&gt;Now lets use web in local and rest API in remote.&lt;/p&gt;
+&lt;p&gt;现在我们来验证这种模式.&lt;/p&gt;
+&lt;p&gt;Let's modify Network Page.&lt;/p&gt;
+&lt;p&gt;首先是更新一下 网络 页面:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Network extends Component &lt;span class="o"&gt;{&lt;/span&gt;
+    constructor&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        super&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.state &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        members: &lt;span class="o"&gt;[]&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    componentDidMount&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        fetch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://localhost:3001/rest/de_members&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        .then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; response.json&lt;span class="o"&gt;())&lt;/span&gt;
+        .then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; this.setState&lt;span class="o"&gt;({&lt;/span&gt;members: data&lt;span class="o"&gt;}))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    render&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &amp;lt;div&amp;gt;
+            &amp;lt;h2&amp;gt;Network1&amp;lt;/h2&amp;gt;
+            &amp;lt;p&amp;gt;Response from localhost:3001 CROS and run in localhost:3000&amp;lt;/p&amp;gt;
+            &lt;span class="o"&gt;{&lt;/span&gt;this.state.members.map&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;span&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;item&lt;span class="o"&gt;}&lt;/span&gt;&amp;lt;br /&amp;gt;&amp;lt;/span&amp;gt;&lt;span class="o"&gt;))}&lt;/span&gt;
+        &amp;lt;/div&amp;gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We enable CORS on the server so that we can fetch results and apply in another App.&lt;/p&gt;
+&lt;p&gt;在后台， 我们需要使能 CORS, 这是个漏洞，但是调试很方便。这样的话我们就能跨域拿到资源。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0003.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;All API are provided from backend, so we may have to modify our Backend App to provide  a more friendly API.&lt;/p&gt;
+&lt;p&gt;现在我们看到的Restful 都是 后台拿到的， UI 用的是本地的资源。 这样开发的话， DE 的后台可能也需要进项相应的修改已提供更友好的 Restful API.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Deploy / 部署&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Generate static file: &lt;code&gt;npm run build&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;将React 代码编译成 IE9+ 可以接受的语法： &lt;code&gt;npm run build&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Let's see what has been generated.&lt;/p&gt;
+&lt;p&gt;可以查看下生成了什么:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;build/
+├── asset-manifest.json
+├── favicon.png
+├── index.css
+├── index.html
+├── manifest.json
+├── service-worker.js
+└── static
+    ├── css
+    │   ├── main.331fc925.css
+    │   └── main.331fc925.css.map
+    └── js
+        ├── main.9f57e139.js
+        └── main.9f57e139.js.map
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All js and lib files are combined into 1 file, which is &lt;code&gt;main.9f57e139.js&lt;/code&gt; .
+&lt;code&gt;main.9f57e139.js.map&lt;/code&gt; is used for debugging.&lt;/p&gt;
+&lt;p&gt;所有的库文件 和 我们的代码文件都会被压缩合并到同一个文件中.&lt;/p&gt;
+&lt;p&gt;Let's run it in a static file server.&lt;/p&gt;
+&lt;p&gt;我们可以将这些静态文件用一个静态服务器运行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install -g serve
+serve -s build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Visit / 访问他:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0004.png" /&gt;
+&lt;/div&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;However, usually we will use Webpack and Loadable. / 当然， 通常我们会使用 Webpack 和 Loadable.&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Webpack: Compress, uglify and minimize files. / 用于压缩 编译 最小化文件&lt;/li&gt;
+&lt;li&gt;Loadable: Separate into different files. / 用户将单个 JS 拆分成多个 防止单个文件过大&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="React"></category><category term="Store"></category><category term="Reflux"></category><category term="Web"></category><category term="node"></category></entry><entry><title>Vue Sharing / Vue 框架分享</title><link href="https://brianshen1990.github.io/Vue_Sharing.html" rel="alternate"></link><published>2018-09-19T00:00:00+08:00</published><updated>2018-09-19T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-09-19:/Vue_Sharing.html</id><summary type="html">&lt;p class="first last"&gt;Vue Sharing&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro" id="id1"&gt;Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#dev-environment-establish" id="id2"&gt;Dev Environment Establish / 开发环境搭建&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#basic-components" id="id3"&gt;Basic Components / 基础组件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#test" id="id4"&gt;Test / 测试&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#l10n" id="id5"&gt;L10N / 本地化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#router-conception-and-router-implementation" id="id6"&gt;Router Conception and Router Implementation / 路由概念和实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#debug-and-deploy" id="id7"&gt;Debug And Deploy / 调试和部署&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Intro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Amazing compatibility. / 无限的融合和兼容&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Upgrade =&amp;gt; React Components&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;向上可以到达React 模式
+React + Reflux =&amp;gt; Vuejs + Vuex&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Downgrade =&amp;gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;向下可以到达 AngularJS 声明式 和 双向绑定&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dev-environment-establish"&gt;
+&lt;span id="vue-sharing-rst"&gt;&lt;/span&gt;&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;Dev Environment Establish / 开发环境搭建&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Install / 安装:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Download Node from &lt;a class="reference external" href="https://nodejs.org/en/"&gt;https://nodejs.org/en/&lt;/a&gt; and install.&lt;/p&gt;
+&lt;p&gt;下载 Node 并且安装。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install -g @vue/cli
+vue create hello-world
+npm run serve
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;let's have a look at what files have been generated / 看一下Vue 脚手架程序自动生成的目录:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./
+├── README.md
+├── babel.config.js &lt;span class="o"&gt;(&lt;/span&gt;ES6 解析&lt;span class="o"&gt;)&lt;/span&gt;
+├── node_modules  &lt;span class="o"&gt;(&lt;/span&gt;库&lt;span class="o"&gt;)&lt;/span&gt;
+├── package-lock.json
+├── package.json  &lt;span class="o"&gt;(&lt;/span&gt;依赖声明和脚本&lt;span class="o"&gt;)&lt;/span&gt;
+├── public   &lt;span class="o"&gt;(&lt;/span&gt;静态库&lt;span class="o"&gt;)&lt;/span&gt;
+    ├── favicon.ico
+    └── index.html
+└── src  &lt;span class="o"&gt;(&lt;/span&gt;代码&lt;span class="o"&gt;)&lt;/span&gt;
+    ├── App.vue  &lt;span class="o"&gt;(&lt;/span&gt;默认App&lt;span class="o"&gt;)&lt;/span&gt;
+    ├── assets   &lt;span class="o"&gt;(&lt;/span&gt;使用文件&lt;span class="o"&gt;)&lt;/span&gt;
+    │   └── logo.png
+    ├── components &lt;span class="o"&gt;(&lt;/span&gt;组件&lt;span class="o"&gt;)&lt;/span&gt;
+    │   └── HelloWorld.vue
+    └── main.js &lt;span class="o"&gt;(&lt;/span&gt;主入口&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-components"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id3"&gt;Basic Components / 基础组件&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;SubAV: Most code is copied from bootstrapVue.  /大部分的代码拷贝自 bootstrapVue .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;template&amp;gt;
+    &amp;lt;div&amp;gt;
+    &amp;lt;b-form-checkbox &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;checkbox1&amp;quot;&lt;/span&gt;
+                        v-model&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;status&amp;quot;&lt;/span&gt;
+                        &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+                        unchecked-value&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;&amp;gt;
+        防恶意软件安全措施
+        &amp;lt;/b-form-checkbox&amp;gt;
+            &amp;lt;b-card&amp;gt;
+            &amp;lt;h5 &lt;span class="nv"&gt;slot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;header&amp;quot;&lt;/span&gt; v-b-toggle.collapse1&amp;gt;高级威胁扫描&amp;lt;/h5&amp;gt;
+            &amp;lt;b-collapse &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse1&amp;quot;&lt;/span&gt; visible&amp;gt;
+            &amp;lt;b-form-checkbox &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;checkbox2&amp;quot;&lt;/span&gt;
+                        v-model&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;status2&amp;quot;&lt;/span&gt;
+                        &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+                        unchecked-value&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;&amp;gt;
+                启用高级威胁扫描引擎
+            &amp;lt;/b-form-checkbox&amp;gt;
+            &amp;lt;br /&amp;gt;
+            &amp;lt;b-form-checkbox &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;checkbox3&amp;quot;&lt;/span&gt;
+                        v-model&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;status3&amp;quot;&lt;/span&gt;
+                        &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+                        unchecked-value&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;&amp;gt;
+                集成深度威胁发现设备 TDA 拒绝列表
+            &amp;lt;/b-form-checkbox&amp;gt;
+            &amp;lt;/b-collapse&amp;gt;
+        &amp;lt;/b-card&amp;gt;
+        &amp;lt;b-card &amp;gt;
+        &amp;lt;h5 &lt;span class="nv"&gt;slot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;header&amp;quot;&lt;/span&gt; v-b-toggle.collapse2&amp;gt;防恶意软件&amp;lt;/h5&amp;gt;
+            &amp;lt;b-collapse &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse2&amp;quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;p &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;card-text&amp;quot;&lt;/span&gt;&amp;gt;Header and footers using props.&amp;lt;/p&amp;gt;
+            &amp;lt;/b-collapse&amp;gt;
+        &amp;lt;/b-card&amp;gt;
+        &amp;lt;b-card &amp;gt;
+            &amp;lt;h5 &lt;span class="nv"&gt;slot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;header&amp;quot;&lt;/span&gt; v-b-toggle.collapse3&amp;gt;扫描优化&amp;lt;/h5&amp;gt;
+            &amp;lt;b-collapse &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse3&amp;quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;p &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;card-text&amp;quot;&lt;/span&gt;&amp;gt;Header and footers using props.&amp;lt;/p&amp;gt;
+            &amp;lt;/b-collapse&amp;gt;
+        &amp;lt;/b-card&amp;gt;
+        &amp;lt;b-card&amp;gt;
+            &amp;lt;h5 &lt;span class="nv"&gt;slot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;header&amp;quot;&lt;/span&gt; v-b-toggle.collapse4&amp;gt;防恶意软件设置&amp;lt;/h5&amp;gt;
+            &amp;lt;b-collapse &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse4&amp;quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;p &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;card-text&amp;quot;&lt;/span&gt;&amp;gt;Header and footers using props.&amp;lt;/p&amp;gt;
+            &amp;lt;/b-collapse&amp;gt;
+        &amp;lt;/b-card&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; default &lt;span class="o"&gt;{&lt;/span&gt;
+    name: &lt;span class="s1"&gt;&amp;#39;SubAV&amp;#39;&lt;/span&gt;,
+    data &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            status: &lt;span class="s1"&gt;&amp;#39;false&amp;#39;&lt;/span&gt;,
+            status2: &lt;span class="s1"&gt;&amp;#39;false&amp;#39;&lt;/span&gt;,
+            status3: &lt;span class="s1"&gt;&amp;#39;false&amp;#39;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use it / 组件定义好后可以被引用，就像一个模块一样:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;template&amp;gt;
+    &amp;lt;div&amp;gt;
+        &amp;lt;b-tabs&amp;gt;
+        &amp;lt;b-tab &lt;span class="nv"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;入侵防御及虚拟补丁&amp;quot;&lt;/span&gt; active&amp;gt;
+            &amp;lt;br&amp;gt;I&lt;span class="s1"&gt;&amp;#39;m the first fading tab&lt;/span&gt;
+&lt;span class="s1"&gt;        &amp;lt;/b-tab&amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;        &amp;lt;b-tab title=&amp;quot;防恶意软件&amp;quot; &amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;            &amp;lt;br&amp;gt; &amp;lt;subAV&amp;gt;&amp;lt;/subAV&amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;        &amp;lt;/b-tab&amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;        &amp;lt;b-tab title=&amp;quot;反垃圾邮件&amp;quot; &amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;            &amp;lt;br&amp;gt;I&amp;#39;&lt;/span&gt;m the second tab content
+        &amp;lt;/b-tab&amp;gt;
+        &amp;lt;b-tab &lt;span class="nv"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Web信誉服务&amp;quot;&lt;/span&gt; &amp;gt;
+            &amp;lt;br&amp;gt;I&lt;span class="s1"&gt;&amp;#39;m the second tab content&lt;/span&gt;
+&lt;span class="s1"&gt;        &amp;lt;/b-tab&amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;        &amp;lt;/b-tabs&amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
+
+&lt;span class="s1"&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+&lt;span class="s1"&gt;    import SubAV from &amp;#39;&lt;/span&gt;./SubAV.vue&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;    export default {&lt;/span&gt;
+&lt;span class="s1"&gt;        name: &amp;#39;&lt;/span&gt;ComponentSample&lt;span class="s1"&gt;&amp;#39;,&lt;/span&gt;
+&lt;span class="s1"&gt;        components: {&lt;/span&gt;
+&lt;span class="s1"&gt;            &amp;#39;&lt;/span&gt;subAV&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;: SubAV,
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/vue_sharing_0004.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Add some CSS / 添加CSS :&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/vue_sharing_0005.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="test"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id4"&gt;Test / 测试&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vue add @vue/unit-mocha
+npm install moxios --save-dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Component / 看一下组件代码:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;template&amp;gt;
+    &amp;lt;div&amp;gt;
+        RestSample
+        &amp;lt;p&amp;gt;Following info are from remote:&amp;lt;/p&amp;gt;
+        &amp;lt;ul&amp;gt;
+            &amp;lt;li v-for&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(item, index) in items&amp;quot;&lt;/span&gt; :key&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index&amp;quot;&lt;/span&gt;&amp;gt;
+                &lt;span class="o"&gt;{{&lt;/span&gt; item &lt;span class="o"&gt;}}&lt;/span&gt;
+            &amp;lt;/li&amp;gt;
+        &amp;lt;/ul&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+    import axios from &lt;span class="s1"&gt;&amp;#39;axios&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nb"&gt;export&lt;/span&gt; default &lt;span class="o"&gt;{&lt;/span&gt;
+        data&lt;span class="o"&gt;(){&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            items: &lt;span class="o"&gt;[]&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+        mounted: &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+            const &lt;span class="nv"&gt;_that&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; this&lt;span class="p"&gt;;&lt;/span&gt;
+            axios.get&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:3001/rest/de_members&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+            .then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;response&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                // handle success
+                // console.log&lt;span class="o"&gt;(&lt;/span&gt;response&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                _that.items &lt;span class="o"&gt;=&lt;/span&gt; response.data&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;})&lt;/span&gt;
+            .catch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                // handle error
+                //console.log&lt;span class="o"&gt;(&lt;/span&gt;error&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;})&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+        methods:&lt;span class="o"&gt;{&lt;/span&gt;
+
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+        name: &lt;span class="s1"&gt;&amp;#39;RestSample&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/Vue_Lifecycle.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Test / 看一下如何测试:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import Vue from &lt;span class="s1"&gt;&amp;#39;vue&amp;#39;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt; expect &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;chai&amp;#39;&lt;/span&gt;
+import &lt;span class="o"&gt;{&lt;/span&gt; shallowMount &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;@vue/test-utils&amp;#39;&lt;/span&gt;
+import Dashboard from &lt;span class="s1"&gt;&amp;#39;@/components/Dashboard.vue&amp;#39;&lt;/span&gt;
+import RestSample from &lt;span class="s1"&gt;&amp;#39;@/components/RestSample.vue&amp;#39;&lt;/span&gt;
+import moxios from &lt;span class="s1"&gt;&amp;#39;moxios&amp;#39;&lt;/span&gt;
+
+describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Dashboard.vue&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;renders&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        const &lt;span class="nv"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Dashboard&amp;#39;&lt;/span&gt;
+        const &lt;span class="nv"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; shallowMount&lt;span class="o"&gt;(&lt;/span&gt;Dashboard&lt;span class="o"&gt;)&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.text&lt;span class="o"&gt;())&lt;/span&gt;.to.include&lt;span class="o"&gt;(&lt;/span&gt;msg&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+
+describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;RestSample Static&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;has a mounted hook&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;typeof RestSample.mounted&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;function&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sets the correct default data&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;typeof RestSample.data&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;function&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        const &lt;span class="nv"&gt;defaultData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; RestSample.data&lt;span class="o"&gt;()&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;defaultData.items.length&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;0&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+
+describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;RestSample Async&amp;#39;&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    beforeEach&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        // import and pass your custom axios instance to this method
+        moxios.install&lt;span class="o"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+    afterEach&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        // import and pass your custom axios instance to this method
+        moxios.uninstall&lt;span class="o"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Mounted Fetch, should fetch and render correctly&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        const &lt;span class="nv"&gt;vm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new Vue&lt;span class="o"&gt;(&lt;/span&gt;RestSample&lt;span class="o"&gt;)&lt;/span&gt;.&lt;span class="nv"&gt;$mount&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+        Vue.nextTick&lt;span class="o"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            moxios.wait&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;request&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; moxios.requests.mostRecent&lt;span class="o"&gt;()&lt;/span&gt;
+                request.respondWith&lt;span class="o"&gt;({&lt;/span&gt;
+                    status: 200,
+                    response: &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt; ,&lt;span class="s2"&gt;&amp;quot;Ben&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+                &lt;span class="o"&gt;})&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    expect&lt;span class="o"&gt;(&lt;/span&gt;vm.items&lt;span class="o"&gt;)&lt;/span&gt;.to.eql&lt;span class="o"&gt;([&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt; ,&lt;span class="s2"&gt;&amp;quot;Ben&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;])&lt;/span&gt;
+                    expect&lt;span class="o"&gt;(&lt;/span&gt;vm.&lt;span class="nv"&gt;$el&lt;/span&gt;.textContent&lt;span class="o"&gt;)&lt;/span&gt;.to.include&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ben&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+                    expect&lt;span class="o"&gt;(&lt;/span&gt;vm.&lt;span class="nv"&gt;$el&lt;/span&gt;.textContent&lt;span class="o"&gt;)&lt;/span&gt;.to.include&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+                    //expect&lt;span class="o"&gt;(&lt;/span&gt;vm.&lt;span class="nv"&gt;$el&lt;/span&gt;.textContent&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt;
+                    &lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+                &lt;span class="o"&gt;})&lt;/span&gt;
+            &lt;span class="o"&gt;})&lt;/span&gt;
+        &lt;span class="o"&gt;})&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Results / 结果:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;WEBPACK  Compiled successfully in 3252ms
+MOCHA  Testing...
+
+Dashboard.vue
+    ✓ renders &lt;span class="o"&gt;(&lt;/span&gt;42ms&lt;span class="o"&gt;)&lt;/span&gt;
+
+RestSample Static
+    ✓ has a mounted hook
+    ✓ sets the correct default data
+
+RestSample Async
+    ✓ Mounted Fetch, should fetch and render correctly &lt;span class="o"&gt;(&lt;/span&gt;323ms&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="m"&gt;4&lt;/span&gt; passing &lt;span class="o"&gt;(&lt;/span&gt;453ms&lt;span class="o"&gt;)&lt;/span&gt;
+
+MOCHA  Tests completed successfully
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="l10n"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id5"&gt;L10N / 本地化&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Official Recommendation: &lt;code&gt;Vue-i18n&lt;/code&gt;  /  Vue 因为是新生产物，基本上每一个都有官方的库。推荐 &lt;code&gt;Vue-i18n&lt;/code&gt;  .&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Install / 安装:&lt;/dt&gt;
+&lt;dd&gt;&lt;code&gt;npm install vue-i18n&lt;/code&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Load it and init it / 导入并且初始化:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import Vue from &lt;span class="s1"&gt;&amp;#39;vue&amp;#39;&lt;/span&gt;
+import App from &lt;span class="s1"&gt;&amp;#39;./App.vue&amp;#39;&lt;/span&gt;
+import router from &lt;span class="s2"&gt;&amp;quot;./router.js&amp;quot;&lt;/span&gt;
+import &lt;span class="s1"&gt;&amp;#39;bootstrap/dist/css/bootstrap.css&amp;#39;&lt;/span&gt;
+import &lt;span class="s1"&gt;&amp;#39;bootstrap-vue/dist/bootstrap-vue.css&amp;#39;&lt;/span&gt;
+import VueI18n from &lt;span class="s1"&gt;&amp;#39;vue-i18n&amp;#39;&lt;/span&gt;
+
+Vue.use&lt;span class="o"&gt;(&lt;/span&gt;VueI18n&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;messages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    en: require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./assets/l10n/l10n.en.json&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,
+    zh: require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./assets/l10n/l10n.zh.json&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+const &lt;span class="nv"&gt;i18n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; new VueI18n&lt;span class="o"&gt;({&lt;/span&gt;
+    locale: &lt;span class="s1"&gt;&amp;#39;zh&amp;#39;&lt;/span&gt;, // &lt;span class="nb"&gt;set&lt;/span&gt; locale
+    messages, // &lt;span class="nb"&gt;set&lt;/span&gt; locale messages
+&lt;span class="o"&gt;})&lt;/span&gt;
+
+new Vue&lt;span class="o"&gt;({&lt;/span&gt;
+    el: &lt;span class="s1"&gt;&amp;#39;#app&amp;#39;&lt;/span&gt;,
+    router,
+    i18n,
+    render: &lt;span class="nv"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; h&lt;span class="o"&gt;(&lt;/span&gt;App&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use it / 使用:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;template&amp;gt;
+    &amp;lt;div&amp;gt;
+        L10N Sample
+        &amp;lt;p&amp;gt;l10n&amp;lt;/p&amp;gt;
+        &amp;lt;div&amp;gt;
+        &amp;lt;p&amp;gt;&lt;span class="o"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;$t&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;common.PRODUCT_NAME&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;}}&lt;/span&gt;&amp;lt;/p&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+    &lt;span class="nb"&gt;export&lt;/span&gt; default &lt;span class="o"&gt;{&lt;/span&gt;
+        name: &lt;span class="s1"&gt;&amp;#39;L10NSample&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/vue_sharing_0003.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="router-conception-and-router-implementation"&gt;
+&lt;h2&gt;6. &lt;a class="toc-backref" href="#id6"&gt;Router Conception and Router Implementation / 路由概念和实现&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Install / 安装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(&lt;a class="reference external" href="https://bootstrap-vue.js.org/docs/components/navbar"&gt;https://bootstrap-vue.js.org/docs/components/navbar&lt;/a&gt;)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install vue-router
+npm i bootstrap-vue   &lt;span class="o"&gt;[&lt;/span&gt;For them 为了添加样式&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let's add some files to support router:&lt;/p&gt;
+&lt;p&gt;我们可以添加一些文件来支持路由:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;src/
+├── App.vue
+├── assets
+│   └── logo.png
+├── components
+│   ├── About.vue
+│   ├── Dashboard.vue   &lt;span class="o"&gt;(&lt;/span&gt;Add/添加&lt;span class="o"&gt;)&lt;/span&gt;
+│   ├── Home.vue   &lt;span class="o"&gt;(&lt;/span&gt;Add/添加&lt;span class="o"&gt;)&lt;/span&gt;
+│   └── RestSample.vue  &lt;span class="o"&gt;(&lt;/span&gt;Add/添加&lt;span class="o"&gt;)&lt;/span&gt;
+├── main.js
+└── router.js  &lt;span class="o"&gt;(&lt;/span&gt;Add/添加&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;main.js&lt;/code&gt; :  use App and Router / 加载App 和 路由&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import Vue from &lt;span class="s1"&gt;&amp;#39;vue&amp;#39;&lt;/span&gt;
+import App from &lt;span class="s1"&gt;&amp;#39;./App.vue&amp;#39;&lt;/span&gt;
+import router from &lt;span class="s2"&gt;&amp;quot;./router.js&amp;quot;&lt;/span&gt;
+import &lt;span class="s1"&gt;&amp;#39;bootstrap/dist/css/bootstrap.css&amp;#39;&lt;/span&gt;
+import &lt;span class="s1"&gt;&amp;#39;bootstrap-vue/dist/bootstrap-vue.css&amp;#39;&lt;/span&gt;
+
+new Vue&lt;span class="o"&gt;({&lt;/span&gt;
+    el: &lt;span class="s1"&gt;&amp;#39;#app&amp;#39;&lt;/span&gt;,
+    router,
+    render: &lt;span class="nv"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; h&lt;span class="o"&gt;(&lt;/span&gt;App&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;App.vue&lt;/code&gt; : html (Most code is copied from BootstrapVue / 发部分的模板拷贝自 BootstrapVue)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;template&amp;gt;
+    &amp;lt;div &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;app&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;b-navbar &lt;span class="nv"&gt;toggleable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;md&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;variant&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;info&amp;quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;b-navbar-toggle &lt;span class="nv"&gt;target&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;nav_collapse&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/b-navbar-toggle&amp;gt;
+        &amp;lt;b-collapse is-nav &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;nav_collapse&amp;quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;b-navbar-nav&amp;gt;
+            &amp;lt;b-nav-item&amp;gt;&amp;lt;router-link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/dashboard&amp;quot;&lt;/span&gt;&amp;gt;实时监控&amp;lt;/router-link&amp;gt;&amp;lt;/b-nav-item&amp;gt;
+            &amp;lt;b-nav-item-dropdown &lt;span class="nv"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;网络&amp;quot;&lt;/span&gt; left&amp;gt;
+                &amp;lt;b-dropdown-item&amp;gt;&amp;lt;router-link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/rest&amp;quot;&lt;/span&gt;&amp;gt;Sample Rest&amp;lt;/router-link&amp;gt;&amp;lt;/b-dropdown-item&amp;gt;
+                &amp;lt;b-dropdown-item&amp;gt;&amp;lt;router-link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/l10n&amp;quot;&lt;/span&gt;&amp;gt;Sample L10N&amp;lt;/router-link&amp;gt;&amp;lt;/b-dropdown-item&amp;gt;
+                &amp;lt;b-dropdown-item&amp;gt;&amp;lt;router-link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/components&amp;quot;&lt;/span&gt;&amp;gt;Sample Components&amp;lt;/router-link&amp;gt;&amp;lt;/b-dropdown-item&amp;gt;
+            &amp;lt;/b-nav-item-dropdown&amp;gt;
+            &amp;lt;b-nav-item&amp;gt;&amp;lt;router-link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/policy&amp;quot;&lt;/span&gt;&amp;gt;策略&amp;lt;/router-link&amp;gt;&amp;lt;/b-nav-item&amp;gt;
+            &amp;lt;b-nav-item&amp;gt;&amp;lt;router-link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/report&amp;quot;&lt;/span&gt;&amp;gt;分析与报告&amp;lt;/router-link&amp;gt;&amp;lt;/b-nav-item&amp;gt;
+            &amp;lt;b-nav-item&amp;gt;&amp;lt;router-link &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/admin&amp;quot;&lt;/span&gt;&amp;gt;管理&amp;lt;/router-link&amp;gt;&amp;lt;/b-nav-item&amp;gt;
+            &amp;lt;/b-navbar-nav&amp;gt;
+        &amp;lt;/b-collapse&amp;gt;
+        &amp;lt;/b-navbar&amp;gt;
+        &amp;lt;router-view&amp;gt;&amp;lt;/router-view&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+    &lt;span class="nb"&gt;export&lt;/span&gt; default &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;router.js&lt;/code&gt; : define routes / 定义路由&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import Vue from &lt;span class="s2"&gt;&amp;quot;vue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import VueRouter from &lt;span class="s2"&gt;&amp;quot;vue-router&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import BootstrapVue from &lt;span class="s1"&gt;&amp;#39;bootstrap-vue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import Dashboard from &lt;span class="s1"&gt;&amp;#39;./components/Dashboard.vue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import Home from &lt;span class="s1"&gt;&amp;#39;./components/Home.vue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import About from &lt;span class="s1"&gt;&amp;#39;./components/About.vue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+import RestSample from &lt;span class="s1"&gt;&amp;#39;./components/RestSample.vue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+Vue.use&lt;span class="o"&gt;(&lt;/span&gt;VueRouter&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Vue.use&lt;span class="o"&gt;(&lt;/span&gt;BootstrapVue&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+const &lt;span class="nv"&gt;routes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;{&lt;/span&gt; path:&lt;span class="s2"&gt;&amp;quot;/dashboard&amp;quot;&lt;/span&gt;, component: Dashboard &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;{&lt;/span&gt; path:&lt;span class="s2"&gt;&amp;quot;/home&amp;quot;&lt;/span&gt;, component: Home &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;{&lt;/span&gt; path:&lt;span class="s2"&gt;&amp;quot;/rest&amp;quot;&lt;/span&gt;, component: RestSample &lt;span class="o"&gt;}&lt;/span&gt;,
+    &lt;span class="o"&gt;{&lt;/span&gt; path: &lt;span class="s2"&gt;&amp;quot;/about&amp;quot;&lt;/span&gt;, component: About&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+var &lt;span class="nv"&gt;router&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  new VueRouter&lt;span class="o"&gt;({&lt;/span&gt;
+    routes
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; default router&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;Dashboard.vue&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;template&amp;gt;
+    &amp;lt;div&amp;gt;
+        Dashboard
+    &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+    &lt;span class="nb"&gt;export&lt;/span&gt; default &lt;span class="o"&gt;{&lt;/span&gt;
+        name: &lt;span class="s1"&gt;&amp;#39;Dashboard&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Results: / 运行结果:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/vue_sharing_0001.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="debug-and-deploy"&gt;
+&lt;h2&gt;7. &lt;a class="toc-backref" href="#id7"&gt;Debug And Deploy / 调试和部署&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Debug / 调试&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For Restful API, install &lt;code&gt;npm install axios&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;为了获取远端资源， 安装 &lt;code&gt;npm install axios&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;If you want to use console and debugger, in package.json:&lt;/div&gt;
+&lt;div class="line"&gt;如果想使用  console 和 debugger， 请在  package.json里面添加:&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="last"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;rules&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;comma-dangle&amp;quot;&lt;/span&gt;: 0,
+    &lt;span class="s2"&gt;&amp;quot;no-console&amp;quot;&lt;/span&gt;: 0,
+    &lt;span class="s2"&gt;&amp;quot;no-debugger&amp;quot;&lt;/span&gt;: 0
+&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Use remote side API and local UI / 使用远端API 和 本地 UI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;template&amp;gt;
+    &amp;lt;div&amp;gt;
+        RestSample
+        &amp;lt;p&amp;gt;Following info are from remote:&amp;lt;/p&amp;gt;
+        &amp;lt;ul&amp;gt;
+        &amp;lt;li v-for&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(item, index) in items&amp;quot;&lt;/span&gt; :key&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index&amp;quot;&lt;/span&gt;&amp;gt;
+            &lt;span class="o"&gt;{{&lt;/span&gt; item &lt;span class="o"&gt;}}&lt;/span&gt;
+        &amp;lt;/li&amp;gt;
+        &amp;lt;/ul&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+    import axios from &lt;span class="s1"&gt;&amp;#39;axios&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nb"&gt;export&lt;/span&gt; default &lt;span class="o"&gt;{&lt;/span&gt;
+        data&lt;span class="o"&gt;(){&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                items: &lt;span class="o"&gt;[]&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+        mounted: &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+            const &lt;span class="nv"&gt;_that&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; this&lt;span class="p"&gt;;&lt;/span&gt;
+            axios.get&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:3001/rest/de_members&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+            .then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;response&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                // handle success
+                console.log&lt;span class="o"&gt;(&lt;/span&gt;response&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                debugger&lt;span class="p"&gt;;&lt;/span&gt;
+                _that.items &lt;span class="o"&gt;=&lt;/span&gt; response.data&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;})&lt;/span&gt;
+            .catch&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;error&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                // handle error
+                console.log&lt;span class="o"&gt;(&lt;/span&gt;error&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;})&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;,
+        name: &lt;span class="s1"&gt;&amp;#39;RestSample&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&amp;lt;/script&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Deploy / 部署&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm run build
+&lt;span class="c1"&gt;# npm install -g serve&lt;/span&gt;
+serve -s dist
+
+.. code-block:: bash
+
+    ./dist/
+    ├── css
+    │   └── chunk-vendors.18ce9b24.css
+    ├── favicon.ico
+    ├── index.html
+    └── js
+        ├── app.2c52c92f.js
+        ├── app.2c52c92f.js.map
+        ├── chunk-vendors.9e2f9af0.js
+        └── chunk-vendors.9e2f9af0.js.map
+
+.. figure:: /images/web/vue_sharing_0002.png
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Amazing easy! 是非常容易的， 因为直接可以测试变量.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="React"></category><category term="Store"></category><category term="Reflux"></category><category term="Node"></category></entry><entry><title>Web Frameworks Sharing / Web框架分享</title><link href="https://brianshen1990.github.io/Web_Sharing.html" rel="alternate"></link><published>2018-09-19T00:00:00+08:00</published><updated>2018-09-19T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2018-09-19:/Web_Sharing.html</id><summary type="html">&lt;p class="first last"&gt;Web Knowledge&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="web-sharing-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-we-should-use-ui-frameworks" id="id1"&gt;Why we should use UI Frameworks? / 为什么我们要使用框架&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#example" id="id2"&gt;Example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#for-de" id="id3"&gt;For DE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#comparison" id="id4"&gt;Comparison 对比介绍&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#react" id="id5"&gt;React&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#vue" id="id6"&gt;Vue&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#ui-debug-tips" id="id7"&gt;UI Debug Tips&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#web-server-with-express-express-web-server" id="id8"&gt;Web Server with Express / 使用 Express 搭建Web Server&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-we-should-use-ui-frameworks"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Why we should use UI Frameworks? / 为什么我们要使用框架&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;These are reasons, but not why we use it. / 这些是理由，但是，其实并不是真正的原因:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;They are based on components; / 组件基础&lt;/li&gt;
+&lt;li&gt;They have a strong community; / 强大的社区&lt;/li&gt;
+&lt;li&gt;They have plenty of third party libraries to deal with things; /  第三方模块和库&lt;/li&gt;
+&lt;li&gt;They have useful third party components;  / 第三方组件&lt;/li&gt;
+&lt;li&gt;They have browser extensions that help debugging things;  / 浏览器调试更加的方便&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The most important thing is that: / 最重要的是:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Keeping the UI in sync with the state is hard. / 将 UI 保持与状态一致， 是一件非常困难的事情.&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;It is not possible to write complex, efficient and easy to maintain UIs with Pure JavaScript.
+如果不引入这些框架， 我们很难写出复杂 高效 和 可维护的App.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Keep focusing on data handling. / 将更多的精力集中在写有用的代码上。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="section" id="example"&gt;
+&lt;h3&gt;1.1. &lt;a class="toc-backref" href="#id2"&gt;Example&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Let's write a simple UI with state.
+我们写一个简单的带state 的UI 进行查看。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;script &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jquery-3.3.1.min.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+        &amp;lt;script &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;test.js&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;div&amp;gt;
+            &amp;lt;h5&amp;gt;Test&amp;lt;/h5&amp;gt;
+            &amp;lt;input &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; /&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&lt;/span&gt;
+            &amp;lt;input &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;button&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;butonClick&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Add&amp;quot;&lt;/span&gt; /&amp;gt;
+            &amp;lt;ul &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;names&amp;quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+
+&lt;span class="k"&gt;$(&lt;/span&gt;document&lt;span class="k"&gt;)&lt;/span&gt;.ready&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+    &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;rebindClick&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.deleteBtn&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.click&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+            &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;this&lt;span class="k"&gt;)&lt;/span&gt;.attr&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; names.indexOf&lt;span class="o"&gt;(&lt;/span&gt;item&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;index &amp;gt; -1&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            names.splice&lt;span class="o"&gt;(&lt;/span&gt;index, 1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+            reRender&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;reRender&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;htmls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        names.map&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;
+            htmls +&lt;span class="o"&gt;=&lt;/span&gt; item + &lt;span class="s1"&gt;&amp;#39;&amp;amp;nbsp;&amp;lt;input class=&amp;quot;deleteBtn&amp;quot; type=&amp;quot;button&amp;quot; data=&amp;quot;&amp;#39;&lt;/span&gt; + item + &lt;span class="s1"&gt;&amp;#39;&amp;quot; value=&amp;quot;Delete&amp;quot; /&amp;gt;&amp;#39;&lt;/span&gt;
+        &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#names&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.html&lt;span class="o"&gt;(&lt;/span&gt;htmls&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        rebindClick&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#butonClick&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.click&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#name&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.val&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        names.push&lt;span class="o"&gt;(&lt;/span&gt;value&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        reRender&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/web_sharing_0002.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;When &lt;code&gt;names&lt;/code&gt; updates, ui won't update unless we manually handle it.
+In this situation, we only have one global variable, so it seems we can still handle it.
+But if we have thousands of variables, it will be a diasaster to handle and watch them all.&lt;/p&gt;
+&lt;p&gt;当全局状态 &lt;code&gt;names&lt;/code&gt; 更新时， UI 并不会跟着改变，除非我们手动的去处理他。
+在这种情况下， 我们只有一个全局变量， 我们跟踪起来已经需要做很多的事情了，如果变量多时， 处理和监听这些变量需要花费很多的精力。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import React, &lt;span class="o"&gt;{&lt;/span&gt; Component &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;react&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+class SampleState extends Component &lt;span class="o"&gt;{&lt;/span&gt;
+    constructor&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        super&lt;span class="o"&gt;(&lt;/span&gt;props&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.clickAdd &lt;span class="o"&gt;=&lt;/span&gt; this.clickAdd.bind&lt;span class="o"&gt;(&lt;/span&gt;this&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.clickDelete &lt;span class="o"&gt;=&lt;/span&gt; this.clickDelete.bind&lt;span class="o"&gt;(&lt;/span&gt;this&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.nameChange &lt;span class="o"&gt;=&lt;/span&gt; this.nameChange.bind&lt;span class="o"&gt;(&lt;/span&gt;this&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.state &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            inputValue: &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;,
+            names: &lt;span class="o"&gt;[]&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    nameChange&lt;span class="o"&gt;(&lt;/span&gt;event&lt;span class="o"&gt;){&lt;/span&gt;
+        this.setState&lt;span class="o"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;inputValue&amp;quot;&lt;/span&gt; : event.target.value&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    clickAdd&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; this.state.names&lt;span class="p"&gt;;&lt;/span&gt;
+        names.push&lt;span class="o"&gt;(&lt;/span&gt;this.state.inputValue&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        this.setState&lt;span class="o"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;names&amp;quot;&lt;/span&gt;: names&lt;span class="o"&gt;})&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    clickDelete&lt;span class="o"&gt;(&lt;/span&gt;item&lt;span class="o"&gt;){&lt;/span&gt;
+        &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; this.state.names&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; names.indexOf&lt;span class="o"&gt;(&lt;/span&gt;item&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;index &amp;gt; -1&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            names.splice&lt;span class="o"&gt;(&lt;/span&gt;index, 1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        this.setState&lt;span class="o"&gt;({&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;names&amp;quot;&lt;/span&gt;: names,
+            &lt;span class="s2"&gt;&amp;quot;inputValue&amp;quot;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    render&lt;span class="o"&gt;(){&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &amp;lt;div&amp;gt;
+            &amp;lt;h5&amp;gt;Test&amp;lt;/h5&amp;gt;
+            &amp;lt;input &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;this.state.inputValue&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;onChange&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;this.nameChange&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&lt;/span&gt;
+            &amp;lt;input &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;button&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;onClick&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;this.clickAdd&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Add&amp;quot;&lt;/span&gt; /&amp;gt;
+            &amp;lt;ul&amp;gt;
+            &lt;span class="o"&gt;{&lt;/span&gt; this.state.names.map&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt; &amp;lt;li&amp;gt;
+                &lt;span class="o"&gt;{&lt;/span&gt;item&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&lt;/span&gt;&amp;lt;input &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;button&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;onClick&lt;/span&gt;&lt;span class="o"&gt;={()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt; this.clickDelete&lt;span class="o"&gt;(&lt;/span&gt;item&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;}}&lt;/span&gt; &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Delete&amp;quot;&lt;/span&gt; /&amp;gt;
+            &amp;lt;/li&amp;gt;&lt;span class="o"&gt;})&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;  SampleState &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Every time we update state, UI will update automatically. We only need to focus on our data.&lt;/p&gt;
+&lt;p&gt;每一个当我们去更改state的时候， UI 会自动跟着改变。 因此，我们只需要关注数据即可， 数据正确， 渲染，一定也是正确的。UI 一定会保持与数据的一致性。&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/web_sharing_0001.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="for-de"&gt;
+&lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;For DE&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Easy coding &amp;amp; efficiency / 简化编程， 提高效率&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Do less, get more. / 写更少的程序，获得更好的效果&lt;/li&gt;
+&lt;li&gt;Understandable code. / 易懂的代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Easy Learning for all RD / 学习曲线平滑， 容易入门， RD 可修改&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Backend developers can also add simple features without problem. / 后端工程师也能够快速的实现自己想要添加的修修改改&lt;/li&gt;
+&lt;li&gt;Frontend developers can do better and do enhancements. / 前端工程师 在优化时 可控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Scalability &amp;amp; Ecosystem / 扩展性 和 生态系统&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Plugins and Modules / 丰富的插件 和 模块，开发者社区&lt;/li&gt;
+&lt;li&gt;Maintainability / 可维护性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Cost of Upgrading / 升级代价&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;No framework to framework / 从无框架到有框架的扩展&lt;/li&gt;
+&lt;li&gt;Framework self upgrading / 框架本身升级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As one of Node users,
+I will recommend React because everything is composed of Node, ES6, Object and strict data flow.
+It bridges the gap between Node backend and UI.&lt;/p&gt;
+&lt;p&gt;作为了一个 Node 的使用者，我会毫不犹豫的推荐React， React 的一切都是由 Node ES6 对象 和 严格的数据流构成的。
+在前后端基本没有太多的区别， 很多模块都是共用的。&lt;/p&gt;
+&lt;p&gt;And that is the reason why I recommend React for DE as most of us are backend developers.
+We don't want to touch difficult HTML, CSS. But for ES (JS), it looks like Python and any other languages.&lt;/p&gt;
+&lt;p&gt;这也是我为什么会去推荐 DE 团队 以及 整个亚信安全 这一块的人都去使用React， 因为大多数人都是后端开发者。
+更多的人并不了解 HTML CSS 怎么去工作，我们更愿意像写一个 Python 类一样去写一个组件。
+Vue.js 给了我们太多的可选择性，上下兼顾，很容易被写成 AngularJS + React 的混合语法， 导致歧义。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="comparison"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id4"&gt;Comparison 对比介绍&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When building apps. we care those things best:&lt;/p&gt;
+&lt;p&gt;当构建Web 应用时，我们比较注意的是一下几点：&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Basic components / 页面组件&lt;/li&gt;
+&lt;li&gt;Tests / 测试&lt;/li&gt;
+&lt;li&gt;L10N / 本地化&lt;/li&gt;
+&lt;li&gt;Router / 路由&lt;/li&gt;
+&lt;li&gt;Debug &amp;amp; Deploy / 调试和部署&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let's explore in React, Vue to see how to implement those features.&lt;/p&gt;
+&lt;p&gt;我们会去探索 React, Vue 来了解如何实现这些功能。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="react"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id5"&gt;React&lt;/a&gt;&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="React_Sharing.html"&gt;React Sharing&lt;/a&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="vue"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id6"&gt;Vue&lt;/a&gt;&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="Vue_Sharing.html"&gt;Vue Sharing&lt;/a&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ui-debug-tips"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id7"&gt;UI Debug Tips&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class="section" id="web-server-with-express-express-web-server"&gt;
+&lt;span id="express-server"&gt;&lt;/span&gt;&lt;h2&gt;6. &lt;a class="toc-backref" href="#id8"&gt;Web Server with Express / 使用 Express 搭建Web Server&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Install  / 安装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install body-parser
+npm install express
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Server / 搭建服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;express&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;bodyParser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;body-parser&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; express&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+app.use&lt;span class="o"&gt;(&lt;/span&gt;bodyParser.urlencoded&lt;span class="o"&gt;({&lt;/span&gt; extended: &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;}))&lt;/span&gt;
+app.use&lt;span class="o"&gt;(&lt;/span&gt;bodyParser.json&lt;span class="o"&gt;())&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+app.use&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;req, res, next&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    res.header&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Control-Allow-Origin&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    res.header&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Control-Allow-Headers&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;Origin, X-Requested-With, Content-Type, Accept&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    next&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+app.get&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/rest/de_members&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    res.send&lt;span class="o"&gt;([&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;Ben&amp;quot;&lt;/span&gt;,
+        &lt;span class="s2"&gt;&amp;quot;So on&amp;quot;&lt;/span&gt;
+    &lt;span class="o"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+app.post&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/rest/hello&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    res.send&lt;span class="o"&gt;({&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;message&amp;quot;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;welcome, &amp;#39;&lt;/span&gt; + &lt;span class="o"&gt;(&lt;/span&gt; req.body.name &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;undefined&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot;!&amp;quot;&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+app.listen&lt;span class="o"&gt;(&lt;/span&gt;3001, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Example app listening on port 3001!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Run &lt;code&gt;node server.js&lt;/code&gt;  / 运行服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/web/react_sharing_0002.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Client: Restlet Client&lt;/p&gt;
+&lt;p&gt;使用的测试工具: Restlet Client, Chrome 的插件，好东西，一生推... :)&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="React"></category><category term="Store"></category><category term="Reflux"></category><category term="Web"></category><category term="Node"></category></entry></feed>

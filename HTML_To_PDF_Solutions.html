@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>HTML To PDF Solutions / HTML 转换 PDF 解决方案</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/HTML_To_PDF_Solutions.html" rel="bookmark"
+          title="Permalink to HTML To PDF Solutions / HTML 转换 PDF 解决方案">HTML To PDF Solutions / HTML 转换 PDF 解决方案
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Thu 10 January 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Tools</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/phantomjs.html">phantomjs</a> 
+          <a href="https://brianshen1990.github.io/tag/wkhtmltopdf.html">wkhtmltopdf</a> 
+          <a href="https://brianshen1990.github.io/tag/pdf.html">PDF</a> 
+          <a href="https://brianshen1990.github.io/tag/html.html">HTML</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="html-to-pdf-solutions"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#intro" id="id3">Intro / 简介</a></li>
+<li><a class="reference internal" href="#sample-files" id="id4">Sample Files / 示例文件</a></li>
+<li><a class="reference internal" href="#phantomjs" id="id5"><code>phantomjs</code></a><ul>
+<li><a class="reference internal" href="#installation" id="id6">Installation / 安装</a></li>
+<li><a class="reference internal" href="#usage-in-js-js" id="id7">Usage in JS / JS  调用</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wkhtmltopdf" id="id8"><code>wkhtmltopdf</code></a><ul>
+<li><a class="reference internal" href="#id1" id="id9">Installation / 安装</a></li>
+<li><a class="reference internal" href="#usage-in-command-line" id="id10">Usage in Command Line / 命令行使用</a></li>
+<li><a class="reference internal" href="#id2" id="id11">Usage in JS / JS 使用</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-tips" id="id12">Other Tips / 其他</a><ul>
+<li><a class="reference internal" href="#charts-can-be-partial" id="id13">Charts can be partial / 图表显示不全</a></li>
+<li><a class="reference internal" href="#jquery-3-3-1-is-not-fully-compatible-with-wkhtmltopdf" id="id14">jQuery 3.3.1 is not fully compatible with wkhtmltopdf</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="intro">
+<h2>1. <a class="toc-backref" href="#id3">Intro / 简介</a></h2>
+<p>There are many situations that we need to generate reports in PDF. And there are many solutions.</p>
+<ul class="simple">
+<li>Use libraries to manipulate pdf content. That suffers.</li>
+<li>Use html and then render it to PDF. That's wonderful.</li>
+</ul>
+<p>I think everyone like the last solution since you can always have a preview.</p>
+<p>And to render html to PDF, there are many solutions.
+But the most popular ones are <code>phantomjs</code> and <code>wkhtmltopdf</code> .</p>
+<p>I thought <code>phantomjs</code> would be more popular if it's still under maintenance.
+Unfortunately, it doesn't. So the lack of some necessary features makes <code>wkhtmltopdf</code> an appearing alternative.</p>
+<p>In my project, I used to generate PDF using <code>phantomjs</code> . One day a customer asked for a menu.
+And I found it unable to fulfill.
+And then I began to use <code>wkhtmltopdf</code> .</p>
+<p>However, there are some problems both. And I'll explain.</p>
+<p>很多情况下， 我们需要产生PDF的报告。 因此也有很多现存的解决方案：</p>
+<ul class="simple">
+<li>可以使用 PDF 库 去操作PDF 的内容， 那会非常的痛苦</li>
+<li>使用HTML 然后 渲染为PDF， 那会很好</li>
+</ul>
+<p>我想每个人都改会喜欢后一种解决方案， 因为你永远可以有一个预览。</p>
+<p>至于 将 HTML 转换为 PDF， 现在也有很多的解决方案。 最流行的就是 <code>phantomjs</code> 和 <code>wkhtmltopdf</code> 。</p>
+<p>我想 <code>phantomjs</code> 会更加的流行 如果 它还在被维护的话。 可惜的是，他被停止维护了。 一些基础必要功能的缺少使得 <code>wkhtmltopdf</code> 称为很好的选择。</p>
+<p>我曾使用 <code>phantomjs</code> 产生 PDF，但是后来客户需要 一个 目录，<code>phantomjs</code> 不具备这样的功能。因为我转向了 <code>wkhtmltopdf</code> 。</p>
+</div>
+<div class="section" id="sample-files">
+<h2>2. <a class="toc-backref" href="#id4">Sample Files / 示例文件</a></h2>
+<p>To compare the render results of the two Scriptable Headless Browser. We will use the following samples.</p>
+<p>为了对比渲染结果，我们使用以下的示例。</p>
+<div class="highlight"><pre><span></span>./resources/
+├── DailyReport.js
+├── DailyReport1x.html
+├── DailyReport3x.html
+├── Report.css
+├── echarts.common.min.js
+├── jquery-1.12.4.min.js
+└── jquery-3.3.1.min.js
+</pre></div>
+<p><code>DailyReport1x.html</code> (We render a link and a chart / 我们渲染一个 连接 和 图表):</p>
+<div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html <span class="nv">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span>&gt;
+&lt;head&gt;
+&lt;meta <span class="nv">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span>&gt;
+&lt;title&gt;Daily Report&lt;/title&gt;
+&lt;link <span class="nv">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;Report.css&quot;</span>&gt;
+&lt;script <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;jquery-1.12.4.min.js&quot;</span>&gt;&lt;/script&gt;
+&lt;script <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;echarts.common.min.js&quot;</span>&gt;&lt;/script&gt;
+&lt;script <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;DailyReport.js&quot;</span>&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;page&quot;</span>&gt;
+    &lt;div&gt;
+    &lt;h2&gt;Menu&lt;/h2&gt;
+    &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;chartDiv&quot;</span>&gt;
+        &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;#chartDiv&quot;</span>&gt;● Test Internal Link&lt;/a&gt;
+        &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;page&quot;</span>&gt;
+    &lt;div <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;height:100mm; width:180mm;&quot;</span> <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;chartDiv&quot;</span>&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+<p><code>DailyReport.js</code> :</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> drawPie<span class="o">()</span> <span class="o">{</span>
+  var <span class="nv">chartOptions</span> <span class="o">=</span> <span class="o">{</span>
+    animation: false,
+    xAxis: <span class="o">{</span>
+      type: <span class="s1">&#39;category&#39;</span>,
+      data: <span class="o">[</span><span class="s1">&#39;Mon&#39;</span>, <span class="s1">&#39;Tue&#39;</span>, <span class="s1">&#39;Wed&#39;</span>, <span class="s1">&#39;Thu&#39;</span>, <span class="s1">&#39;Fri&#39;</span>, <span class="s1">&#39;Sat&#39;</span>, <span class="s1">&#39;Sun&#39;</span><span class="o">]</span>
+    <span class="o">}</span>,
+    yAxis: <span class="o">{</span>
+      type: <span class="s1">&#39;value&#39;</span>
+    <span class="o">}</span>,
+    series: <span class="o">[{</span>
+      data: <span class="o">[</span>820, 932, 901, 934, 1290, 1330, 1320<span class="o">]</span>,
+      type: <span class="s1">&#39;line&#39;</span>
+    <span class="o">}]</span>
+  <span class="o">}</span><span class="p">;</span>
+  var <span class="nv">myChart</span> <span class="o">=</span> echarts.init<span class="o">(</span>document.getElementById<span class="o">(</span><span class="s1">&#39;chartDiv&#39;</span><span class="o">))</span><span class="p">;</span>
+  myChart.setOption<span class="o">(</span>chartOptions<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+<span class="k">$(</span>document<span class="k">)</span>.ready<span class="o">(</span><span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+  drawPie<span class="o">()</span><span class="p">;</span>
+<span class="o">})</span><span class="p">;</span>
+</pre></div>
+<p><code>Report.css</code> :</p>
+<div class="highlight"><pre><span></span>@page <span class="o">{</span>
+  size: A4<span class="p">;</span>
+  margin: 0<span class="p">;</span>
+<span class="o">}</span>
+@media print <span class="o">{</span>
+  body <span class="o">{</span>
+    background: white<span class="p">;</span>
+  <span class="o">}</span>
+  .page <span class="o">{</span>
+    width: 210mm<span class="p">;</span>
+    page-break-after: always<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+html, body <span class="o">{</span>
+  background: rgb<span class="o">(</span>241,241,241<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+.page <span class="o">{</span>
+  page-break-after: always<span class="p">;</span>
+  width: 210mm<span class="p">;</span>
+  background: white<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>And preview in Chrome / 在Chrome 中预览:</p>
+<div class="figure">
+<img alt="" src="/images/tools/htmltopdf01.png" />
+</div>
+<p>Print Preview / Chrome 打印预览:</p>
+<div class="figure">
+<img alt="" src="/images/tools/htmltopdf02.png" />
+</div>
+</div>
+<div class="section" id="phantomjs">
+<h2>3. <a class="toc-backref" href="#id5"><code>phantomjs</code></a></h2>
+<div class="section" id="installation">
+<h3>3.1. <a class="toc-backref" href="#id6">Installation / 安装</a></h3>
+<p>Download from its <a class="reference external" href="http://phantomjs.org/download.html">Phantomjs Official Site</a> and move it to <code>/usr/bin/</code> .</p>
+<p>The latest and end version is <code>2.1.1</code> .</p>
+<p>从官网去下载，移动到 <code>/usr/bin/</code>  . 最新也是最后的版本是 <code>2.1.1</code>  .</p>
+</div>
+<div class="section" id="usage-in-js-js">
+<h3>3.2. <a class="toc-backref" href="#id7">Usage in JS / JS  调用</a></h3>
+<p>We use <code>html-pdf</code> because it is simple.</p>
+<p>使用 <code>html-pdf</code> ， 因为这样很简单。</p>
+<p><code>npm install html-pdf</code></p>
+<div class="highlight"><pre><span></span>const <span class="nv">fs</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;fs&#39;</span><span class="o">)</span><span class="p">;</span>
+const <span class="nv">phantomjs</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;html-pdf&#39;</span><span class="o">)</span><span class="p">;</span>
+
+const <span class="nv">SrcPath1x</span> <span class="o">=</span>
+  <span class="s1">&#39;/Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/DailyReport1x.html&#39;</span><span class="p">;</span>
+const <span class="nv">BasePath</span> <span class="o">=</span>
+  <span class="s1">&#39;file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/&#39;</span><span class="p">;</span>
+const <span class="nv">OutPath</span> <span class="o">=</span> <span class="s1">&#39;test.pdf&#39;</span><span class="p">;</span>
+
+const <span class="nv">genPDFPahntomJS</span> <span class="o">=</span> <span class="k">function</span><span class="o">(</span>srcPath, basePath, outPath<span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> new Promise<span class="o">(</span> <span class="o">(</span>resolve, reject<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    fs.readFile<span class="o">(</span>srcPath, <span class="s1">&#39;UTF8&#39;</span>, <span class="k">function</span><span class="o">(</span>errfs, html<span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span>errfs<span class="o">)</span> <span class="o">{</span>
+        reject<span class="o">(</span>errfs<span class="o">)</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="o">}</span>
+      const <span class="nv">genOptions</span> <span class="o">=</span> <span class="o">{</span>
+        height: <span class="s1">&#39;297mm&#39;</span>,
+        width: <span class="s1">&#39;210mm&#39;</span>,
+        base: basePath,
+        type: <span class="s1">&#39;pdf&#39;</span>,
+        border: <span class="o">{</span>
+          top: <span class="s1">&#39;12mm&#39;</span>, // default is 0, units: mm, cm, in, px
+          right: <span class="s1">&#39;0&#39;</span>,
+          bottom: <span class="s1">&#39;0&#39;</span>,
+          left: <span class="s1">&#39;0&#39;</span>,
+        <span class="o">}</span>,
+        paginationOffset: 1, // Override the initial pagination number
+        footer: <span class="o">{</span>
+          height: <span class="s1">&#39;20mm&#39;</span>,
+          contents: <span class="o">{</span>
+            first: <span class="s1">&#39; &#39;</span>,
+            default:<span class="s1">&#39;{{page}}/{{pages}}&#39;</span>,
+          <span class="o">}</span>,
+        <span class="o">}</span>,
+      <span class="o">}</span><span class="p">;</span>
+      phantomjs.create<span class="o">(</span>html, genOptions<span class="o">)</span>.toFile<span class="o">(</span>outPath, <span class="o">(</span>err, res<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span>err<span class="o">)</span> <span class="o">{</span>
+          reject<span class="o">(</span>err<span class="o">)</span><span class="p">;</span>
+          <span class="k">return</span><span class="p">;</span>
+        <span class="o">}</span>
+        resolve<span class="o">(</span>res<span class="o">)</span><span class="p">;</span>
+      <span class="o">})</span><span class="p">;</span>
+    <span class="o">})</span><span class="p">;</span>
+  <span class="o">})</span><span class="p">;</span>
+<span class="o">}</span>
+
+genPDFPahntomJS<span class="o">(</span>SrcPath1x, BasePath, OutPath<span class="o">)</span>.then<span class="o">(</span> <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  console.log<span class="o">(</span><span class="s1">&#39;Success&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="o">})</span>.catch<span class="o">(</span> <span class="o">(</span>err<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  console.log<span class="o">(</span>err<span class="o">)</span><span class="p">;</span>
+<span class="o">})</span>
+</pre></div>
+<p>let's see the result / 看看结果:</p>
+<div class="figure">
+<img alt="" src="/images/tools/htmltopdf03.png" />
+</div>
+<p>Very strange, isn't it?</p>
+<p><code>phantomjs 2.1.1</code> has a very strange bug, that the size of printed page is only 75% as big as the standard page. For example, for A4 with 29.7*21. When we design our html, we can only use (29.7 * 0.75) * (21 * 0.75) .</p>
+<p>And the fatal fault is that the internal hyperlink in the PDF cannot be clicked!</p>
+<p>非常的奇怪。 <code>phantomjs 2.1.1</code> 有一个非常奇怪的bug，大的A4 是平常 A4 的 75% 。 这就意味着你在设计html 的时候要按照75%的比例进行设计.</p>
+</div>
+</div>
+<div class="section" id="wkhtmltopdf">
+<h2>4. <a class="toc-backref" href="#id8"><code>wkhtmltopdf</code></a></h2>
+<div class="section" id="id1">
+<h3>4.1. <a class="toc-backref" href="#id9">Installation / 安装</a></h3>
+<p>OK, still download from <a class="reference external" href="https://wkhtmltopdf.org/downloads.html">wkhtmltopdf Official Site</a>  and install.</p>
+<p>仍然从 官网下载并且安装 .</p>
+</div>
+<div class="section" id="usage-in-command-line">
+<h3>4.2. <a class="toc-backref" href="#id10">Usage in Command Line / 命令行使用</a></h3>
+<p>Quite simple. I just like it because it is simple and easy to begin and test.</p>
+<p>非常简单，能让你快速的开始。</p>
+<div class="highlight"><pre><span></span><span class="c1"># wkhtmltopdf --debug-javascript --print-media-type --page-size A4 ./resources/DailyReport1x.html test.pdf</span>
+Loading pages <span class="o">(</span>1/6<span class="o">)</span>
+Counting pages <span class="o">(</span>2/6<span class="o">)</span>
+Resolving links <span class="o">(</span>4/6<span class="o">)</span>
+Loading headers and footers <span class="o">(</span>5/6<span class="o">)</span>
+Printing pages <span class="o">(</span>6/6<span class="o">)</span>
+Done
+</pre></div>
+<p>And let's see the result: / 看一看结果。</p>
+<div class="figure">
+<img alt="" src="/images/tools/htmltopdf04.png" />
+</div>
+<p>Everything works fine!</p>
+<p>符合预期。</p>
+</div>
+<div class="section" id="id2">
+<h3>4.3. <a class="toc-backref" href="#id11">Usage in JS / JS 使用</a></h3>
+<p>I use <code>wkhtmltopdf</code> as it is very popular.</p>
+<p>我使用的是 <code>wkhtmltopdf</code> 。</p>
+<p><code>npm install wkhtmltopdf</code></p>
+<div class="highlight"><pre><span></span>const <span class="nv">wkhtmltopdf</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;wkhtmltopdf&#39;</span><span class="o">)</span><span class="p">;</span>
+
+const <span class="nv">SrcPath1x</span> <span class="o">=</span>
+  <span class="s1">&#39;file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/DailyReport1x.html&#39;</span><span class="p">;</span>
+const <span class="nv">OutPath</span> <span class="o">=</span>
+  <span class="s1">&#39;./test1.pdf&#39;</span><span class="p">;</span>
+
+const <span class="nv">genPDFWkHtmlToPdf</span> <span class="o">=</span> <span class="k">function</span><span class="o">(</span>srcPath, outPath<span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> new Promise<span class="o">(</span> <span class="o">(</span>resolve, reject<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    wkhtmltopdf<span class="o">(</span>srcPath, <span class="o">{</span>
+      output: outPath,
+      printMediaType: true,
+      footerLeft: <span class="s1">&#39;[page] / [toPage]&#39;</span>,
+    <span class="o">}</span>, <span class="o">(</span>err<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span>err<span class="o">)</span> <span class="o">{</span>
+        reject<span class="o">(</span>err<span class="o">)</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="o">}</span>
+      resolve<span class="o">()</span><span class="p">;</span>
+    <span class="o">})</span><span class="p">;</span>
+  <span class="o">})</span><span class="p">;</span>
+<span class="o">}</span>
+
+genPDFWkHtmlToPdf<span class="o">(</span>SrcPath1x, OutPath<span class="o">)</span>.then<span class="o">(</span> <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  console.log<span class="o">(</span><span class="s1">&#39;Success&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="o">})</span>.catch<span class="o">(</span> <span class="o">(</span>err<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  console.log<span class="o">(</span>err<span class="o">)</span><span class="p">;</span>
+<span class="o">})</span>
+</pre></div>
+<p>The result / 结果:</p>
+<div class="figure">
+<img alt="" src="/images/tools/htmltopdf05.png" />
+</div>
+<p>It's as same as we rendered with command line!</p>
+<p>Besides, the internal hyperlink works!</p>
+<p>与 命令行中 渲染的结果是一样的。此外，内部的连接是可以使用的。</p>
+</div>
+</div>
+<div class="section" id="other-tips">
+<h2>5. <a class="toc-backref" href="#id12">Other Tips / 其他</a></h2>
+<div class="section" id="charts-can-be-partial">
+<h3>5.1. <a class="toc-backref" href="#id13">Charts can be partial / 图表显示不全</a></h3>
+<p>ECharts will use animation by default, so disable it.</p>
+<p>ECharts 会自动的开启 动画效果。会导致延时。关闭即可。</p>
+<p><code>animation: false,</code></p>
+</div>
+<div class="section" id="jquery-3-3-1-is-not-fully-compatible-with-wkhtmltopdf">
+<h3>5.2. <a class="toc-backref" href="#id14">jQuery 3.3.1 is not fully compatible with wkhtmltopdf</a></h3>
+<p>jQuery 3.3.1 与 wkhtmltopdf 不兼容。</p>
+<p>Let's see a sample:</p>
+<p>看个例子。</p>
+<div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html <span class="nv">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span>&gt;
+&lt;head&gt;
+  &lt;meta <span class="nv">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span>&gt;
+  &lt;title&gt;Daily Report&lt;/title&gt;
+  &lt;link <span class="nv">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;Report.css&quot;</span>&gt;
+  &lt;script <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;jquery-3.3.1.min.js&quot;</span>&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;page&quot;</span>&gt;
+    &lt;div&gt;
+      &lt;h2&gt;Menu&lt;/h2&gt;
+      &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;chartDiv&quot;</span>&gt;
+        &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;#chartDiv&quot;</span>&gt;● Test Internal Link&lt;/a&gt;
+        &lt;br /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;table <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;tableDiv&quot;</span>&gt;
+        &lt;tr&gt;&lt;td&gt;Test&lt;/td&gt;&lt;td&gt;Title&lt;/td&gt;&lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  <span class="k">$(</span>document<span class="k">)</span>.ready<span class="o">(</span><span class="k">function</span><span class="o">(){</span>
+    <span class="k">$(</span><span class="s1">&#39;#tableDiv&#39;</span><span class="k">)</span>.append<span class="o">(</span><span class="s1">&#39;&lt;tr&gt;&lt;td&gt;Row1&lt;/td&gt;&lt;td&gt;Row1&lt;/td&gt;&lt;/tr&gt;&#39;</span><span class="o">)</span><span class="p">;</span>
+  <span class="o">})</span>
+&lt;/script&gt;
+&lt;/html&gt;
+</pre></div>
+<p>When we open it in Chrome:</p>
+<p>从Chrome 中打开。</p>
+<div class="figure">
+<img alt="" src="/images/tools/htmltopdf06.png" />
+</div>
+<p>And render it with <code>wkhtmltopdf</code> :</p>
+<p>使用 <code>wkhtmltopdf</code> 去渲染。</p>
+<div class="highlight"><pre><span></span><span class="c1">#wkhtmltopdf --debug-javascript --print-media-type --page-size A4 --footer-left &quot;Page [page] of [toPage]&quot; ./resources/DailyReport3x.html test.pdf</span>
+Loading pages <span class="o">(</span>1/6<span class="o">)</span>
+Warning: file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/jquery-3.3.1.min.js:2 jQuery.Deferred exception: <span class="s1">&#39;undefined&#39;</span> is not a <span class="k">function</span>
+Warning: undefined:0 TypeError: <span class="s1">&#39;undefined&#39;</span> is not a <span class="k">function</span>
+Counting pages <span class="o">(</span>2/6<span class="o">)</span>
+Resolving links <span class="o">(</span>4/6<span class="o">)</span>
+Loading headers and footers <span class="o">(</span>5/6<span class="o">)</span>
+Printing pages <span class="o">(</span>6/6<span class="o">)</span>
+Done
+</pre></div>
+<p>It can't work.</p>
+<p>But when we switch to 1.12.4 and render it, everything works fine.</p>
+<p>发生了错误。但是我们切换到 1.12.4 的 jQuery， 一切工作正常。</p>
+<div class="figure">
+<img alt="" src="/images/tools/htmltopdf05.png" />
+</div>
+<p>Sad thing is that jQuery 1.12.4 is not under maintenance anymore.</p>
+<p>遗憾的是，jQuery 1.12.4 不在维护了。</p>
+</div>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'HTML_To_PDF_Solutions.html';
+        var disqus_url = 'https://brianshen1990.github.io/HTML_To_PDF_Solutions.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>6</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos.html">CentOS </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/disk.html">Disk </a><span>1</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>

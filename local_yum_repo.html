@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Local Yum Repo (CentOS 7) / 本地Yum源</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/local_yum_repo.html" rel="bookmark"
+          title="Permalink to Local Yum Repo (CentOS 7) / 本地Yum源">Local Yum Repo (CentOS 7) / 本地Yum源
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Tue 14 November 2017</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Tools</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/linux.html">Linux</a> 
+          <a href="https://brianshen1990.github.io/tag/centos.html">CentOS</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="local-yum-repo-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#intro" id="id1">Intro 简介</a></li>
+<li><a class="reference internal" href="#prepare-the-packages" id="id2">Prepare the packages / 准备安装包</a></li>
+<li><a class="reference internal" href="#use-your-own-repo-yum" id="id3">Use your own REPO / 使用这个Yum源</a></li>
+<li><a class="reference internal" href="#installation" id="id4">Installation / 安装</a></li>
+<li><a class="reference internal" href="#reference" id="id5">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="intro">
+<h2>1. <a class="toc-backref" href="#id1">Intro 简介</a></h2>
+<p>This article is sampled by installing Java.</p>
+<p>基于JAVA介绍如何使用本地Yum源。</p>
+</div>
+<div class="section" id="prepare-the-packages">
+<h2>2. <a class="toc-backref" href="#id2">Prepare the packages / 准备安装包</a></h2>
+<ul>
+<li><p class="first">Find a clean CentOS with network available.</p>
+<blockquote>
+<p>找一个干净的 CentOS 环境，并且接通网络。</p>
+</blockquote>
+</li>
+<li><p class="first">Download Software Packages 下载软件包</p>
+<blockquote>
+<p>To download software and their dependencies, you can just use native <code>yum</code> .</p>
+<p>只需要使用 <code>yum</code> 就可以下载并且解析依赖包。</p>
+<ul>
+<li><p class="first">Create a folder / 创建文件夹</p>
+<blockquote>
+<div class="highlight"><pre><span></span>mkdir ais_repo
+<span class="nb">cd</span> ais_repo
+</pre></div>
+</blockquote>
+</li>
+<li><p class="first">Download OpenJDK / 下载 OpenJDK</p>
+<blockquote>
+<div class="highlight"><pre><span></span>sudo yum install --downloadonly --downloaddir ./ java-1.8.0-openjdk-headless.x86_64
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/tools/local_repo_01.png" />
+</div>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Make Local Repo / 制作本地 Yum 库</p>
+<blockquote>
+<p>It seems quite hard to create your own repo, since there are lots of package information to create and add.
+But actually it is quite simple, and you can just make repo with simple commands.</p>
+<p>看起来很是复杂，因为有很多的依赖关系，但实际上，只需要很简单的命令就可以。</p>
+<ul>
+<li><p class="first">Install <code>createrepo</code> / 安装 <code>createrepo</code></p>
+<blockquote>
+<p><code>sudo yum install createrepo</code></p>
+</blockquote>
+</li>
+<li><p class="first">create a directory to put packages and then make repo in that folder</p>
+<blockquote>
+<p>创建一个目录来保存这些安装包。并且，制作安装包的元文件信息。</p>
+<div class="highlight"><pre><span></span>sudo mkdir /usr/share/ais_repo
+sudo mv ./* /usr/share/ais_repo
+sudo createrepo -v /usr/share/ais_repo
+</pre></div>
+<p>Let's see what happened: / 看看发生了什么</p>
+<div class="figure">
+<img alt="" src="/images/tools/local_repo_02.png" />
+</div>
+<p>As you can notice, there is an extra folder <code>repodata</code> . Now, this is a local repo.</p>
+<p>可以看出来，文件夹中多了一个 <code>repodata</code> 。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="use-your-own-repo-yum">
+<h2>3. <a class="toc-backref" href="#id3">Use your own REPO / 使用这个Yum源</a></h2>
+<ul>
+<li><p class="first">Backup all the repo files. / 备份已经存在的 Yum 源配置文件</p>
+<blockquote>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /etc/yum.repos.d/
+sudo mkdir bak
+sudo mv *.repo ./bak
+</pre></div>
+</blockquote>
+</li>
+<li><p class="first">Create local repo source file <code>/etc/yum.repos.d/local.repo</code></p>
+<blockquote>
+<p>为本地的Yum源添加配置</p>
+<div class="highlight"><pre><span></span><span class="c1">#name</span>
+<span class="o">[</span>local_server<span class="o">]</span>
+<span class="c1">#description</span>
+<span class="nv">name</span><span class="o">=</span>Thisis a <span class="nb">local</span> repo
+<span class="c1">#yum source</span>
+<span class="nv">baseurl</span><span class="o">=</span>file:///usr/share/ais_repo
+<span class="nv">enabled</span><span class="o">=</span>1
+<span class="c1">#check GPG-KEY</span>
+<span class="nv">gpgcheck</span><span class="o">=</span>0
+</pre></div>
+</blockquote>
+</li>
+<li><p class="first">Make local yum source, clear cache and start cache. 清除缓存，开始使用本地Yum源。</p>
+<blockquote>
+<div class="highlight"><pre><span></span>sudo yum clean all
+sudo yum makecache
+</pre></div>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>4. <a class="toc-backref" href="#id4">Installation / 安装</a></h2>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/share/ais_repo/
+sudo yum install java-1.8.0-openjdk-headless-1.8.0.144-0.b01.el7_4.x86_64.rpm
+</pre></div>
+</div>
+<div class="section" id="reference">
+<h2>5. <a class="toc-backref" href="#id5">Reference</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://yq.aliyun.com/ziliao/97558/">https://yq.aliyun.com/ziliao/97558/</a></li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'local_yum_repo.html';
+        var disqus_url = 'https://brianshen1990.github.io/local_yum_repo.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>6</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos.html">CentOS </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/disk.html">Disk </a><span>1</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>

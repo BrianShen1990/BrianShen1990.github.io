@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>GEvent && Zeromq</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/GEvent_and_Zeromq.html" rel="bookmark"
+          title="Permalink to GEvent && Zeromq">GEvent &amp;&amp; Zeromq
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Mon 18 December 2017</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Python</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/python.html">Python</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="gevent-and-zeromq-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#gevent" id="id3">GEvent</a><ul>
+<li><a class="reference internal" href="#reference" id="id4">Reference</a></li>
+<li><a class="reference internal" href="#code-sample" id="id5">Code Sample</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zeromq" id="id6">Zeromq</a><ul>
+<li><a class="reference internal" href="#id1" id="id7">Reference</a></li>
+<li><a class="reference internal" href="#id2" id="id8">Code Sample</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="gevent">
+<h2>1. <a class="toc-backref" href="#id3">GEvent</a></h2>
+<p>gevent is a concurrency library based around libev. It provides a clean API for a variety of concurrency and network related tasks.</p>
+<div class="section" id="reference">
+<h3>1.1. <a class="toc-backref" href="#id4">Reference</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://sdiehl.github.io/gevent-tutorial/">https://sdiehl.github.io/gevent-tutorial/</a>  (An excellent tutorial website)</li>
+<li><a class="reference external" href="https://github.com/gevent/gevent">https://github.com/gevent/gevent</a></li>
+<li><a class="reference external" href="http://www.gevent.org/intro.html#installation">http://www.gevent.org/intro.html#installation</a></li>
+</ul>
+</div>
+<div class="section" id="code-sample">
+<h3>1.2. <a class="toc-backref" href="#id5">Code Sample</a></h3>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gevent</span>
+<span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">socket</span>
+<span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">queue</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Sample 1: Simple, usage for execute them in order</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;www.baidu.com&#39;</span><span class="p">,</span> <span class="s1">&#39;www.python.org&#39;</span><span class="p">]</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+<span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">[</span><span class="n">job</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">]</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Sample 2: Simple, usage for execute them in order</span>
+<span class="sd">But it will spare cpu to  other if there exists ant waiting</span>
+<span class="sd">(Remember to use gevent.sleep instead of time.sleep )</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">waitandprint</span><span class="p">(</span><span class="n">pstr</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;init&quot;</span> <span class="o">+</span> <span class="n">pstr</span>
+    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Important</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pstr</span><span class="p">)</span>
+
+<span class="n">jobs_loop</span> <span class="o">=</span> <span class="p">[</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">waitandprint</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">]</span> <span class="p">]</span>
+<span class="k">print</span> <span class="n">jobs_loop</span>
+<span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs_loop</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Sample 3: Simple, usage for consumer and assigner</span>
+<span class="sd">But it will spare cpu to  other if there exists ant waiting</span>
+<span class="sd">(Remember to use gevent.sleep instead of time.sleep )</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">wait_forever_and_print</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s2">&quot;Incomming: [</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="n">item</span>
+    <span class="k">except</span> <span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&quot;Quitting&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">generate_forever_and_print</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">beginnum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">beginnum</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">beginnum</span> <span class="o">=</span> <span class="n">beginnum</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">print</span> <span class="s2">&quot;outting=&gt;[</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="n">beginnum</span>
+                <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">beginnum</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="n">q</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+
+<span class="n">task_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">JoinableQueue</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">jobs_loop</span> <span class="o">=</span> <span class="p">[</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">wait_forever_and_print</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">),</span>
+                <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">generate_forever_and_print</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs_loop</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s2">&quot;Done&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zeromq">
+<h2>2. <a class="toc-backref" href="#id6">Zeromq</a></h2>
+<p>Much simple!</p>
+<div class="section" id="id1">
+<h3>2.1. <a class="toc-backref" href="#id7">Reference</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://sdiehl.github.io/gevent-tutorial/">https://sdiehl.github.io/gevent-tutorial/</a>  (An excellent tutorial website)</li>
+<li><a class="reference external" href="https://github.com/zeromq/pyzmq">https://github.com/zeromq/pyzmq</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>2.2. <a class="toc-backref" href="#id8">Code Sample</a></h3>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gevent</span>
+<span class="kn">import</span> <span class="nn">zmq.green</span> <span class="kn">as</span> <span class="nn">zmq</span>
+<span class="kn">from</span> <span class="nn">gevent.server</span> <span class="kn">import</span> <span class="n">StreamServer</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">server</span><span class="p">():</span>
+    <span class="n">server_socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REQ</span><span class="p">)</span>
+    <span class="n">server_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tcp://127.0.0.1:5000&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="n">server_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Switched to Server for </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">request</span><span class="p">)</span>
+        <span class="n">server_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">client</span><span class="p">():</span>
+    <span class="n">client_socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REP</span><span class="p">)</span>
+    <span class="n">client_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;tcp://127.0.0.1:5000&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+
+        <span class="n">client_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Switched to Client for </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">request</span><span class="p">)</span>
+        <span class="c1"># Implicit context switch occurs here</span>
+        <span class="n">client_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span>
+
+<span class="n">publisher</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
+<span class="n">client</span>    <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">([</span><span class="n">publisher</span><span class="p">,</span> <span class="n">client</span><span class="p">])</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># On Unix: Access with ``$ nc 127.0.0.1 5001``</span>
+<span class="c1"># On Window: Access with ``$ telnet 127.0.0.1 5001``</span>
+
+<span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Hello from a telnet!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">StreamServer</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5001</span><span class="p">),</span> <span class="n">handle</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/python/python_gevent_01.png" />
+</div>
+</div>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'GEvent_and_Zeromq.html';
+        var disqus_url = 'https://brianshen1990.github.io/GEvent_and_Zeromq.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>6</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos.html">CentOS </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/disk.html">Disk </a><span>1</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
