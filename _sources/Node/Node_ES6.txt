@@ -1663,3 +1663,7 @@ Reference
 ^^^^^^^^^^^
 
 - http://es6.ruanyifeng.com/
+
+
+.. disqus::
+    :disqus_identifier: _es6_reference_rst

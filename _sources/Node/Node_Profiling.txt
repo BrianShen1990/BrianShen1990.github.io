@@ -9,7 +9,7 @@ Easy profiling for Node.js Applications
 :author: Brian Shen
 :summary: Easy profiling for Node.js Applications
 
-.. _easy_profiling_for_node_js_applications.rst:
+.. _easy_profiling_for_node_js_applications_rst:
 
 .. contents::
 
@@ -233,3 +233,6 @@ ab 的输出如下：
 
 希望 从上面的性能分析示例中，你能够看到 V8 刻度处理器 能够如何帮助你更好的理解 Node.js 应用程序的效率。
 
+
+.. disqus::
+    :disqus_identifier: _easy_profiling_for_node_js_applications_rst

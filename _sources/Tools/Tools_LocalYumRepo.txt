@@ -9,7 +9,7 @@ Local Yum Repo (CentOS 7) / 本地Yum源
 :author: Brian Shen
 :summary: Local Yum Repo
 
-.. _local_yum_repo.rst:
+.. _local_yum_repo_rst:
 
 .. contents::
 
@@ -124,3 +124,6 @@ Reference
 ^^^^^^^^^
 
 - https://yq.aliyun.com/ziliao/97558/
+
+.. disqus::
+    :disqus_identifier: _local_yum_repo_rst

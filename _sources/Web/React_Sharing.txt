@@ -706,3 +706,6 @@ Deploy and Debug 部署和调试
     However, usually we will use Webpack and Loadable. / 当然， 通常我们会使用 Webpack 和 Loadable.
         - Webpack: Compress, uglify and minimize files. / 用于压缩 编译 最小化文件 
         - Loadable: Separate into different files. / 用户将单个 JS 拆分成多个 防止单个文件过大
+
+.. disqus::
+    :disqus_identifier: _react_sharing_rst

@@ -8,7 +8,7 @@ Program As Service at Windows Using NSSM
 :author: Brian Shen
 :summary: Program As Service at Windows
 
-.. _tools_nssm_windwos.rst:
+.. _tools_nssm_windwos_rst:
 
 .. contents::
 
@@ -110,3 +110,6 @@ And in :code:`AsiaLogTransfer.bat` :
 
     cd C:\\AsiaLogTransferWindows
     C:\\Python27\\python AsiaLogTransfer.py 
+
+.. disqus::
+    :disqus_identifier: _tools_nssm_windwos_rst

@@ -8,7 +8,7 @@ Linux Fonts / 字体支持
 :slug: linux_fonts
 :summary: Linux Fonts
 
-.. _linux_fonts.rst:
+.. _linux_fonts_rst:
 
 .. contents::
 
@@ -70,3 +70,5 @@ Copy them to new Env, things will work OK.
 
 Reference: https://blog.csdn.net/wlwlwlwl015/article/details/51482065
 
+.. disqus::
+    :disqus_identifier: _linux_fonts_rst

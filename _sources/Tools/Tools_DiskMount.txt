@@ -9,7 +9,7 @@ Mount disk to VG / 磁盘挂载到虚拟分区
 :author: Brian Shen
 :summary: Tools - Mount Disk to VG
 
-.. _mount_disk_to_vg.rst:
+.. _mount_disk_to_vg_rst:
 
 .. contents::
 
@@ -287,5 +287,6 @@ Reference
 
 
 
-
+.. disqus::
+    :disqus_identifier: _mount_disk_to_vg_rst
 

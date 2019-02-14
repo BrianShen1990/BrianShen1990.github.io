@@ -11,6 +11,8 @@ Vue Sharing / Vue 框架分享
 
 .. contents::
 
+.. _vue_sharing_rst:
+
 Intro
 *******
 
@@ -23,8 +25,6 @@ Amazing compatibility. / 无限的融合和兼容
     - Downgrade => 
 
         向下可以到达 AngularJS 声明式 和 双向绑定
-
-.. _vue_sharing_rst:
 
 Dev Environment Establish / 开发环境搭建
 *********************************************
@@ -588,3 +588,6 @@ Use remote side API and local UI / 使用远端API 和 本地 UI:
 
 
 Amazing easy! 是非常容易的， 因为直接可以测试变量.
+
+.. disqus::
+    :disqus_identifier: _vue_sharing_rst

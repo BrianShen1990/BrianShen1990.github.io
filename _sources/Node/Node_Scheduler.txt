@@ -9,7 +9,7 @@ Node Task Queue Research / Node 任务队列学习
 :author: Brian Shen
 :summary: Node Task Queue Research
 
-.. _node_task_rst:
+.. _node_task_queue_research_rst:
 
 .. contents::
 
@@ -219,3 +219,6 @@ In TM, I used to be a member of CAS, we use two kind types of queues:
     基于 MS SQL，周期性任务会存在在 MSSQL 中 每一步会去更新状态， 直到最终完成。 
 - Celery + RabbitMQ + Python
    Python Web Service 有一些长期的异步任务需要实现，使用的是 Celery (http://www.celeryproject.org/) , 基于 RabbitMQ。
+
+.. disqus::
+    :disqus_identifier: _node_task_queue_research_rst
