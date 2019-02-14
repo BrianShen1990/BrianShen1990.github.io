@@ -420,3 +420,6 @@ But when we switch to 1.12.4 and render it, everything works fine.
 Sad thing is that jQuery 1.12.4 is not under maintenance anymore.
 
 遗憾的是，jQuery 1.12.4 不在维护了。
+
+.. disqus::
+    :disqus_identifier: _HTML_To_PDF_Solutions

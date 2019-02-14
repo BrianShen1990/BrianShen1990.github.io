@@ -8,7 +8,7 @@ GEvent && Zeromq
 :author: Brian Shen
 :summary: GEvent && Zeromq
 
-.. _gevent_and_zeromq.rst:
+.. _gevent_and_zeromq_rst:
 
 .. contents::
 
@@ -175,3 +175,6 @@ Code Sample
 
 
 .. figure::  /images/python/python_gevent_01.png
+
+.. disqus::
+    :disqus_identifier: _gevent_and_zeromq_rst

@@ -9,7 +9,7 @@ The Node.js Event Loop, Timers, and :code:`process.nextTick()`
 :author: Brian Shen
 :summary: The Node.js Event Loop, Timers, and :code:`process.nextTick()`
 
-.. _the_node_js_event_loop.rst:
+.. _the_node_js_event_loop_rst:
 
 .. contents::
 
@@ -364,3 +364,6 @@ Reference: https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
     myEmitter.on('event', () => {
       console.log('an event occurred!');
     });
+
+.. disqus::
+    :disqus_identifier: _the_node_js_event_loop_rst

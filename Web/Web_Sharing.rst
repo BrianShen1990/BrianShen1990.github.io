@@ -264,3 +264,5 @@ Client: Restlet Client
 
 使用的测试工具: Restlet Client, Chrome 的插件，好东西，一生推... :)
 
+.. disqus::
+    :disqus_identifier: _web_sharing_rst

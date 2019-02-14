@@ -8,7 +8,7 @@ PDF To Word / PDF转Word格式
 :author: Brian Shen
 :summary: PDF To Word
 
-.. _pdf_to_word.rst:
+.. _pdf_to_word_rst:
 
 .. contents::
 
@@ -153,3 +153,6 @@ Failure - pandoc
 The output document only include basic text. Still give it up.
 
 pandoc 导出的文件也是没有格式的。
+
+.. disqus::
+    :disqus_identifier: _pdf_to_word_rst

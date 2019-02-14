@@ -9,7 +9,7 @@ Build RPM / 构建 RPM
 :slug: Build_RPM
 :summary: Build RPM
 
-.. _build_rpm.rst:
+.. _build_rpm_rst:
 
 .. contents::
 
@@ -416,3 +416,6 @@ Reference:
     - Set Up an RPM Build Environment under CentOS : https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment
     - Rpmbuild Tutorial https://rpmbuildtut.wordpress.com/
     - RPM Packaging Guide https://rpm-packaging-guide.github.io/
+
+.. disqus::
+    :disqus_identifier: _build_rpm_rst
