@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program As Service at Windows Using NSSM &mdash; KNWON Blog documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="KNWON Blog documentation" href="../index.html"/>
+        <link rel="up" title="Tools" href="Tools.html"/>
+        <link rel="next" title="PDF To Word / PDF转Word格式" href="Tools_PDFToWord.html"/>
+        <link rel="prev" title="Local Yum Repo (CentOS 7) / 本地Yum源" href="Tools_LocalYumRepo.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> KNWON
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Blog
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Index</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Tools.html">Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="HtmlToPdf.html">HTML To PDF Solutions / HTML 转换 PDF 解决方案</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tools_DiskMount.html">Mount disk to VG / 磁盘挂载到虚拟分区</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tools_fonts.html">Linux Fonts / 字体支持</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tools_LocalYumRepo.html">Local Yum Repo (CentOS 7) / 本地Yum源</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Program As Service at Windows Using NSSM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-the-problem">What&#8217;s The Problem / 问题是什么</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sc">sc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nssm">NSSM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-gui-gui">Using GUI / 使用 GUI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-command">Using command / 使用 命令行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tools_PDFToWord.html">PDF To Word / PDF转Word格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tools_RPM.html">Build RPM / 构建 RPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tools_Sphinx.html">Sphinx And RST</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Web/Web.html">Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Node/Node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Python/Python.html">Python</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">KNWON</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="Tools.html">Tools</a> &raquo;</li>
+      
+    <li>Program As Service at Windows Using NSSM</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Tools/Tools_NSSM_Windows.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-as-service-at-windows-using-nssm">
+<h1><a class="toc-backref" href="#id1">Program As Service at Windows Using NSSM</a><a class="headerlink" href="#program-as-service-at-windows-using-nssm" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">date:</th><td class="field-body">2018-04-02</td>
+</tr>
+<tr class="field-even field"><th class="field-name">tags:</th><td class="field-body">Windows, NSSM</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">category:</th><td class="field-body">Tools</td>
+</tr>
+<tr class="field-even field"><th class="field-name">slug:</th><td class="field-body">Program_As_Service_at_Windows</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">author:</th><td class="field-body">Brian Shen</td>
+</tr>
+<tr class="field-even field"><th class="field-name">summary:</th><td class="field-body">Program As Service at Windows</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<span id="tools-nssm-windwos-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#program-as-service-at-windows-using-nssm" id="id1">Program As Service at Windows Using NSSM</a><ul>
+<li><a class="reference internal" href="#what-s-the-problem" id="id2">What&#8217;s The Problem / 问题是什么</a></li>
+<li><a class="reference internal" href="#sc" id="id3">sc</a></li>
+<li><a class="reference internal" href="#nssm" id="id4">NSSM</a><ul>
+<li><a class="reference internal" href="#using-gui-gui" id="id5">Using GUI / 使用 GUI</a></li>
+<li><a class="reference internal" href="#using-command" id="id6">Using command / 使用 命令行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-s-the-problem">
+<h2><a class="toc-backref" href="#id2">What&#8217;s The Problem / 问题是什么</a><a class="headerlink" href="#what-s-the-problem" title="Permalink to this headline">¶</a></h2>
+<p>Here is the thing, I met a customer, and they can not provide their data using TCP through ssl.
+Even though they are willing to cooperate and give me the data to generate report for them.
+they said, the only way that they can provide these data is to use https.
+Our device doesn&#8217;t have the function so I have to write a windows program as an adapter.</p>
+<p>情况是这样的，有一个客户，他们需要将数据接入到Saas系统，但是他们不能够使用TCP SSL 加密的方式传输。
+虽然他们很愿意合作 并且 提供数据以便获得报告。
+而客户的情况是他们只能够将数据通过 https的方式提供出来。
+我们的设备不支持 https 传输数据， 因此我需要写一个程序来做转换。</p>
+<p>The program is just a simply python scripts. I thought that they will provide a Linux platform to run the program, actually not, is a Windows.</p>
+<p>程序很简单，只是python脚本。我以为会是 Linux， 结果是 Windows。</p>
+<p>Unlike Linux, start a program as a service in Windows is rather tough.</p>
+<p>与 Linux 不同，在 Windows 下 让程序像服务一样运行并不容易。</p>
+</div>
+<div class="section" id="sc">
+<h2><a class="toc-backref" href="#id3">sc</a><a class="headerlink" href="#sc" title="Permalink to this headline">¶</a></h2>
+<p>One main solution is to use <code class="code docutils literal"><span class="pre">sc</span></code> command.</p>
+<p>一个主流的解决方式是使用  <code class="code docutils literal"><span class="pre">sc</span></code> 命令。</p>
+<p>There is the sample: / 这是一个例子。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sc create BrianTest <span class="nv">binPath</span><span class="o">=</span> <span class="s2">&quot;C:\Python27\python.exe --C:\AsiaLogTransferWindows\AsiaLogTransfer.py&quot;</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/nssm_01.png" src="../_images/nssm_01.png" />
+</div>
+<p>Without any difficulty. Then go to <code class="code docutils literal"><span class="pre">Control</span> <span class="pre">Panel\System</span> <span class="pre">and</span> <span class="pre">Security\Administrative</span> <span class="pre">Tools\services</span></code>
+But when I started the service, an error occurred.</p>
+<p>这样作很简单。接着去往 <code class="code docutils literal"><span class="pre">Control</span> <span class="pre">Panel\System</span> <span class="pre">and</span> <span class="pre">Security\Administrative</span> <span class="pre">Tools\services</span></code> 查看服务。
+但是当我启动这个服务的时候， 一个错误发生了。</p>
+<div class="figure">
+<img alt="../_images/nssm_02.png" src="../_images/nssm_02.png" />
+</div>
+<p>What a pity. Actually, the exe should act like a real service, but it didn&#8217;t. So this is the problem.</p>
+<p>很遗憾。 一个可执行程序 应该像一个服务一样运行的，但是实际上并没有。</p>
+</div>
+<div class="section" id="nssm">
+<h2><a class="toc-backref" href="#id4">NSSM</a><a class="headerlink" href="#nssm" title="Permalink to this headline">¶</a></h2>
+<p>Then how to solve it? Yes, magic <code class="code docutils literal"><span class="pre">NSSM</span></code> (<a class="reference external" href="https://nssm.cc/">https://nssm.cc/</a>)
+It is so elegant, simple and easy to use, I would recommend to everyone.
+Download from the website then unzip it.</p>
+<p>那么如何解决这个问题？ 对的，就是使用  <code class="code docutils literal"><span class="pre">NSSM</span></code> 。
+非常的优雅，简单 并且 容易。
+从官网下载 并且 解压。</p>
+<div class="section" id="using-gui-gui">
+<h3><a class="toc-backref" href="#id5">Using GUI / 使用 GUI</a><a class="headerlink" href="#using-gui-gui" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Step 1: start a service by giving it a name: <code class="code docutils literal"><span class="pre">nssm64.exe</span> <span class="pre">install</span> <span class="pre">AsiaLogTransfer</span></code>
+第一步，准备注册一个服务，并且给它一个名字。</p>
+</li>
+<li><dl class="first docutils">
+<dt>Step 2: Using GUI to find the service:</dt>
+<dd><p class="first">使用 GUI 来找到程序的位置。</p>
+<div class="last figure">
+<img alt="../_images/nssm_03.png" src="../_images/nssm_03.png" />
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Step 3: Start the service: <code class="code docutils literal"><span class="pre">nssm64.exe</span> <span class="pre">start</span> <span class="pre">AsiaLogTransfer</span></code>
+第三步，启动服务。</p>
+</li>
+</ul>
+<p>Now you can restart the OS without any concern of losing it.
+And there are many other options, I only use the simplest of it. Wish you can enjoy the amazing tool.</p>
+<p>现在我们可以随意的启停系统，而不会有出现丢失服务的风险。</p>
+</div>
+<div class="section" id="using-command">
+<h3><a class="toc-backref" href="#id6">Using command / 使用 命令行</a><a class="headerlink" href="#using-command" title="Permalink to this headline">¶</a></h3>
+<p>You can also use command line so that customer can install with 1 click.
+也可以使用命令行，这样用户只需要点击运行 即可。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> C:<span class="se">\A</span>siaLogTransferWindows
+:: Automatically add the program to service list.
+:: So that it can be run in background and restart automatically.
+nssm64.exe install AsiaLogTransfer C:<span class="se">\\</span>AsiaLogTransferWindows<span class="se">\\</span>AsiaLogTransfer.bat
+nssm64.exe start AsiaLogTransfer
+</pre></div>
+</div>
+<p>And in <code class="code docutils literal"><span class="pre">AsiaLogTransfer.bat</span></code> :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> C:<span class="se">\\</span>AsiaLogTransferWindows
+C:<span class="se">\\</span>Python27<span class="se">\\</span>python AsiaLogTransfer.py
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Tools_PDFToWord.html" class="btn btn-neutral float-right" title="PDF To Word / PDF转Word格式" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Tools_LocalYumRepo.html" class="btn btn-neutral" title="Local Yum Repo (CentOS 7) / 本地Yum源" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, BrianShen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'Blog',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

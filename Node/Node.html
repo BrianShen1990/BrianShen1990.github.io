@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Node &mdash; KNWON Blog documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="KNWON Blog documentation" href="../index.html"/>
+        <link rel="next" title="ES6 Reference" href="Node_ES6.html"/>
+        <link rel="prev" title="Vue Sharing / Vue 框架分享" href="../Web/Vue_Sharing.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> KNWON
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Blog
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tools/Tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Web/Web.html">Web</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Node</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html">ES6 Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html">The Node.js Event Loop, Timers, and <code class="code docutils literal"><span class="pre">process.nextTick()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html">Node Event Loop From The Inside Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Profiling.html">Easy profiling for Node.js Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Scheduler.html">Node Task Queue Research / Node 任务队列学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html">Node Webpack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Python/Python.html">Python</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">KNWON</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Node</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Node/Node.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="contents topic" id="contents">
+<span id="node-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#node" id="id1">Node</a></li>
+</ul>
+</div>
+<div class="section" id="node">
+<h1><a class="toc-backref" href="#id1">Node</a><a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Node_ES6.html">ES6 Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#let-const">let &amp; const</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#destructuring">destructuring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#string">String</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#unicode">Unicode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#codepointat">codePointAt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#fromcodepoint">fromCodePoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#iteration">iteration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#normalize">normalize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#newapis">newAPIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#string-template">String Template</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#regex">Regex</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#unicode-support-u">Unicode support <code class="code docutils literal"><span class="pre">u</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#stick-y">Stick <code class="code docutils literal"><span class="pre">y</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#dotall-s">dotAll <code class="code docutils literal"><span class="pre">s</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#number">Number</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#apis">APIS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#function">Function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#rest-parameters">Rest parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#strict-mode">strict mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#array-function">Array Function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#array">Array</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#spread-operator">spread operator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#object">Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#syntax">syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#attr">ATTR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#operator">Operator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#id1">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#symbol">Symbol</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#id2">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#id3">Iteration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#id4">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#set-and-map">Set and  Map</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#set">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#map">Map</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#proxy">Proxy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#proxy-actions-supoorted">Proxy Actions Supoorted</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#proxy-revocable">Proxy.revocable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#this">This</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#reflect">Reflect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#promises">Promises</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#id5">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#iterator">Iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#generator">Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#class">Class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#class-specials">class specials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#warnings">Warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#static">Static</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#attrs">attrs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#private-variables-and-attrs">private variables and attrs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#new-target">new.target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#extends">extends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#super">super</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#prototype-and-proto">prototype and __proto__</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#decorator">Decorator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#module">Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#export">export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#import">import</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#export-default">export default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#browser-load-es6">Browser Load ES6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_ES6.html#es6-vs-commonjs">ES6 VS CommonJS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_ES6.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Node_EventLoop.html">The Node.js Event Loop, Timers, and <code class="code docutils literal"><span class="pre">process.nextTick()</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html#intro">Intro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html#id1">什么是事件循环？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html#id2">事件循环解释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html#id3">阶段概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html#id4">阶段详情</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id5">定时器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id6">等待的回调</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id7">轮询</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id8">检查</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id9">关闭的回调</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html#setimmediate-settimeout"><code class="code docutils literal"><span class="pre">setImmediate()</span></code> 与 <code class="code docutils literal"><span class="pre">setTimeout()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoop.html#process-nexttick"><code class="code docutils literal"><span class="pre">process.nextTick()</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id10">理解 <code class="code docutils literal"><span class="pre">process.nextTick()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id11">为什么这样被允许？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#process-nexttick-setimmediate"><code class="code docutils literal"><span class="pre">process.nextTick()</span></code> 与 <code class="code docutils literal"><span class="pre">setImmediate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_EventLoop.html#id12">为什么我们使用 <code class="code docutils literal"><span class="pre">process.nextTick()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html">Node Event Loop From The Inside Out</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#linux-unix-programer">Linux/Unix Programer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#what-is-node-event-loop">What is Node Event Loop?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#when-does-node-exit">When does Node exit?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#can-everything-be-async">can everything be async?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#details">Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#important-notes-about-the-uv-thread-pool">Important notes about the UV thread pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#linux-unix">Linux/Unix 程序员问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#node">什么是 Node 事件循环</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#id1">Node什么时候退出？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#id2">所有事件都可以异步么？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#id3">详情</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_EventLoopFromTheInsideOut.html#uv">关于 UV 进程池的重要信息</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Node_Profiling.html">Easy profiling for Node.js Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Node_Profiling.html#intro">Intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Node_Scheduler.html">Node Task Queue Research / Node 任务队列学习</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Node_Scheduler.html#queue-based-on-node-node">Queue based on Node / 基于 Node 的队列</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_Scheduler.html#comparison">Comparison / 对比</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_Scheduler.html#my-opinion">My opinion / 个人观点</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Scheduler.html#other-queues">Other Queues / 其他可选的队列</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_Scheduler.html#rabbitmq">RabbitMQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_Scheduler.html#saas-aws-simple-queue-service-saas-aws">Saas -  AWS Simple Queue Service / Saas AWS 简单队列服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_Scheduler.html#saas-azure-service-bus">Saas - Azure Service Bus</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Scheduler.html#queues-i-have-encountered">Queues I have encountered  / 我遇到的队列</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Node_Webpack.html">Node Webpack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#asset-management">Asset Management 资产管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#output-management">Output Management / 输出管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#development">Development / 友好开发</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#hot-module-replacement">Hot Module Replacement / 热模块加载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#tree-shaking">Tree Shaking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#production">Production / 生产环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#code-splitting">Code Splitting / 代码分割</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#lazy-loading">Lazy Loading / 懒加载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#caching">Caching / 缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#authoring-libraries">Authoring Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#shimming">Shimming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#progressive-web-application-web">Progressive Web Application / 渐进式Web应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#type-script">Type Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Node_Webpack.html#sample">Sample / 示例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Node_Webpack.html#webpack-common-js">webpack.common.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_Webpack.html#webpack-dev-js">webpack.dev.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_Webpack.html#webpack-prod-js">webpack.prod.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_Webpack.html#package-json">package.json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Node_Webpack.html#tsconfig-json">tsconfig.json</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Node_ES6.html" class="btn btn-neutral float-right" title="ES6 Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Web/Vue_Sharing.html" class="btn btn-neutral" title="Vue Sharing / Vue 框架分享" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, BrianShen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'Blog',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
