@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Web Security 05 - X-Frame-Options</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Web_Security_05_X_Frame_Options.html" rel="bookmark"
+          title="Permalink to Web Security 05 - X-Frame-Options">Web Security 05 - X-Frame-Options
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Wed 20 February 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Security</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/security.html">Security</a> 
+          <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
+          <a href="https://brianshen1990.github.io/tag/x-frame-options.html">X-Frame-Options</a> 
+          <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="id1"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-x-frame-options" id="id2">What is X-Frame-Options</a></li>
+<li><a class="reference internal" href="#how-to-fix" id="id3">How to fix</a></li>
+<li><a class="reference internal" href="#sample-clickjacking" id="id4">Sample clickjacking</a></li>
+<li><a class="reference internal" href="#reference" id="id5">Reference</a></li>
+</ul>
+</div>
+<p>All the sample code is in <a class="reference external" href="https://github.com/brianshen1990/WebSecurity">https://github.com/brianshen1990/WebSecurity</a> .</p>
+<div class="section" id="what-is-x-frame-options">
+<h2>1. <a class="toc-backref" href="#id2">What is X-Frame-Options</a></h2>
+<p>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a <code>&lt;frame&gt;</code> , <code>&lt;iframe&gt;</code> , <code>&lt;embed&gt;</code> or <code>&lt;object&gt;</code> . Sites can use this to avoid clickjacking attacks, by ensuring that their content is not embedded into other sites.</p>
+<p>There are mainly three types of options:</p>
+<div class="highlight"><pre><span></span>X-Frame-Options: deny
+X-Frame-Options: sameorigin
+X-Frame-Options: allow-from https://example.com/
+</pre></div>
+<p>So what will happen is I don't set any value?</p>
+<p>Let's have a test:</p>
+<p>Modify the <code>staticHack/index.html</code> to add a iframe load our blog site:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Hack<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;http://localhost:8888/api/transferPoints?dstUser=user02&#39;</span><span class="p">&gt;</span>Click and you can get some discount in Amazon!<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://localhost:8888&quot;</span> <span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>Now start:</p>
+<div class="highlight"><pre><span></span>node index.js
+node indexHack.js
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity11.png" />
+</div>
+<p>Wow, our 8889 site can load 8888 site's content. That's not what we are expecting.</p>
+</div>
+<div class="section" id="how-to-fix">
+<h2>2. <a class="toc-backref" href="#id3">How to fix</a></h2>
+<p>Quite easy, all we need to do is to set the options to <code>deny</code> so that our blog site won't be embed in any other site.</p>
+<p>In <code>indexSafe.js</code> :</p>
+<div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s1">&#39;x-powered-by&#39;</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">.</span><span class="nx">frameguard</span><span class="p">({</span> <span class="nx">action</span><span class="o">:</span> <span class="s1">&#39;deny&#39;</span> <span class="p">}));</span>
+</pre></div>
+<p>Now start again:</p>
+<div class="highlight"><pre><span></span>node indexSafe.js
+node indexHack.js
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity12.png" />
+</div>
+<p>We can see that our blog system won't be loaded in another site anymore.</p>
+</div>
+<div class="section" id="sample-clickjacking">
+<h2>3. <a class="toc-backref" href="#id4">Sample clickjacking</a></h2>
+<p>Let's talk something more about clickjacking.</p>
+<p>Let's add another static page <code>staticFile/hijack.html</code> in our blog system.</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+    <span class="kd">function</span> <span class="nx">hiJack</span><span class="p">(){</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Secrets 12345678 from 8888 blog system&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;logon&#39;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;hiJack()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Secret From 8888&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>And in the hack site, we also add an static page <code>staticHack/hijack.html</code> :</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://localhost:8888/hijack.html&quot;</span> <span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>And run sample:</p>
+<div class="highlight"><pre><span></span>node index.js
+node indexHack.js
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity13.png" />
+</div>
+<p>OK, if we are a user from blog system, then we know this will popup our secret, so we won't click the button at all.</p>
+<p>But if we hide the iframe and put something interesting content above it to attract user to click the exactly position, then, we can luckily popup the secret.</p>
+<p>So let's have a small change to our hack static page <code>staticHack/hijack.html</code> :</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">image</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 180px; height: 60px; position: absolute;&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;./hijack.png&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">image</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://localhost:8888/hijack.html&quot;</span>
+      <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 300px; height: 150px; border: 0; border: none; position: absolute; opacity: 0.1;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>The picture we use:</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity14.png" />
+</div>
+<p>Now run the demo:</p>
+<div class="highlight"><pre><span></span>node index.js
+node indexHack.js
+</pre></div>
+<p>and the results:</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity15.png" />
+</div>
+<p>As we can see, when we want to click <code>Movies</code> button faked by a picture, we actually click the iframe's button from 8888.</p>
+<p>And the event in 8888 is triggered.</p>
+<p>Actually, in reality, we would set <code>opacity</code> to 0 so that the iframe won't display at all.</p>
+</div>
+<div class="section" id="reference">
+<h2>4. <a class="toc-backref" href="#id5">Reference</a></h2>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a></p>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Web_Security_05_X_Frame_Options.html';
+        var disqus_url = 'https://brianshen1990.github.io/Web_Security_05_X_Frame_Options.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>6</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>

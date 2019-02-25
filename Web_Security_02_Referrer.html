@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Web Security 02 - Referrer</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Web_Security_02_Referrer.html" rel="bookmark"
+          title="Permalink to Web Security 02 - Referrer">Web Security 02 - Referrer
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Wed 13 February 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Security</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/security.html">Security</a> 
+          <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
+          <a href="https://brianshen1990.github.io/tag/referrer.html">Referrer</a> 
+          <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="web-security-02-referrer-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#definition-of-referrer" id="id2">Definition of Referrer</a></li>
+<li><a class="reference internal" href="#security-check-referrer" id="id3">Security - Check Referrer</a><ul>
+<li><a class="reference internal" href="#sample" id="id4">Sample</a></li>
+<li><a class="reference internal" href="#how-to-fix" id="id5">How to fix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#security-referrer-policy" id="id6">Security - Referrer Policy</a><ul>
+<li><a class="reference internal" href="#id1" id="id7">Sample</a></li>
+<li><a class="reference internal" href="#how-to-fix-it" id="id8">How to fix it</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>All the sample code is in <a class="reference external" href="https://github.com/brianshen1990/WebSecurity">https://github.com/brianshen1990/WebSecurity</a> .</p>
+<div class="section" id="definition-of-referrer">
+<h2>1. <a class="toc-backref" href="#id2">Definition of Referrer</a></h2>
+<p>The Referrer request header contains the address of the previous web page from which a link to the currently requested page was followed. The Referrer header allows servers to identify where people are visiting them from and may use that data for analytics, logging, or optimized caching, for example.</p>
+<p>A Referrer header is not sent by browsers if:</p>
+<blockquote>
+<ul class="simple">
+<li>The referring resource is a local &quot;file&quot; or &quot;data&quot; URI.</li>
+<li>An unsecured HTTP request is used and the referring page was received with a secure protocol (HTTPS).</li>
+</ul>
+</blockquote>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer</a>
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns">https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns</a></p>
+</div>
+<div class="section" id="security-check-referrer">
+<h2>2. <a class="toc-backref" href="#id3">Security - Check Referrer</a></h2>
+<p>If we do not check Referrer, API can be called from anyplace, which may cause security problems.</p>
+<div class="section" id="sample">
+<h3>2.1. <a class="toc-backref" href="#id4">Sample</a></h3>
+<p>Let's use the Website in the prepare session, and then, we will fake another website, which contains a malicious link to attract user to click. This malicious link is the transfer points link.</p>
+<p>Backend code:<cite>indexHack.js</cite> :</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express-session&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="s1">&#39;staticHack&#39;</span><span class="p">))</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8889</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Example app listening on port 8889!&#39;</span><span class="p">))</span>
+</pre></div>
+<p>HTML <code>staticHack/index.html</code> :</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;jquery-3.3.1.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;test.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Hack<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;http://localhost:8888/api/transferPoints?dstUser=user02&#39;</span><span class="p">&gt;</span>Click and you can get some discount in Amazon!<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>Now start the two websites:</p>
+<div class="highlight"><pre><span></span>node index.js
+node indexHack.js
+</pre></div>
+<p>This is the Malicious website:</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity03.png" />
+</div>
+<p>When we click the URL, the authentication will fail. A message like this will appear <code>{&quot;messgae&quot;:&quot;auth broken!&quot;}</code> .</p>
+<p>This is because we haven't login yet. But what if we've opened our Blog System and already login?</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity04.png" />
+</div>
+<p>Now, we jump to the malicious website, and click the link, successful message will appear <code>{&quot;message&quot;:&quot;success!&quot;}</code> . and user01 will transfer his points to user02, unconsciously.</p>
+</div>
+<div class="section" id="how-to-fix">
+<h3>2.2. <a class="toc-backref" href="#id5">How to fix</a></h3>
+<p>As we can see, this is totally something we are not expecting: how can a user from another site, calls API in this site?</p>
+<p>This is something what Referrer does: APIs should be only called from the same site. Calls from other sites should be rejected.</p>
+<p>Now, let's add some Referrer check functions (in <code>indexSafe.js</code> , same content with security implementation):</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">REFERES</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">&#39;http://localhost:8888&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+<span class="kr">const</span> <span class="nx">refererCheck</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">refer</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s1">&#39;referer&#39;</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">refer</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">refer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span><span class="nx">messgae</span><span class="o">:</span> <span class="s1">&#39;referer check failure!&#39;</span><span class="p">})</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">found</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="nx">REFERES</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">refer</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">item</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">found</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">next</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span><span class="nx">messgae</span><span class="o">:</span> <span class="s1">&#39;referer check failure!&#39;</span><span class="p">})</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/api/addUser&#39;</span><span class="p">,</span> <span class="nx">refererCheck</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">...</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/api/login&#39;</span><span class="p">,</span> <span class="nx">refererCheck</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">...</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/getPoints&#39;</span><span class="p">,</span> <span class="nx">refererCheck</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">...</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/transferPoints&#39;</span><span class="p">,</span> <span class="nx">refererCheck</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">...</span>
+</pre></div>
+<p>When we start this website again,</p>
+<div class="highlight"><pre><span></span>node indexSafe.js
+</pre></div>
+<p>A Referrer check failure message will appear: <code>{&quot;messgae&quot;:&quot;referer check failure!&quot;}</code> .</p>
+</div>
+</div>
+<div class="section" id="security-referrer-policy">
+<h2>3. <a class="toc-backref" href="#id6">Security - Referrer Policy</a></h2>
+<p>While Referrer check is very important, some users don't want to expose their Referrer at all.</p>
+<p>For example, if we are surfing <code>http://localhost:8888/</code> , then, we type <code>http://localhost:8889/</code> in the browser address column, it will go to 8889 website. But, we don't want 8889 to know where do I come from. I want to hide my Referrer when I go to another website.</p>
+<p>That is the Referrer Policy.</p>
+<p>There are many types of Referrer policy (<a class="reference external" href="https://www.w3.org/TR/referrer-policy/#referrer-policies">https://www.w3.org/TR/referrer-policy/#referrer-policies</a>).</p>
+<ul class="simple">
+<li>&quot;no-referrer&quot;:
+no referrer information is to be sent along with requests made from a particular request client to any origin. The header will be omitted entirely.</li>
+<li>&quot;no-referrer-when-downgrade&quot; :
+The &quot;no-referrer-when-downgrade&quot; policy sends a full URL along with requests from a TLS-protected environment settings object to a potentially trustworthy URL, and requests from clients which are not TLS-protected to any origin.</li>
+<li>&quot;same-origin&quot; :
+a full URL, stripped for use as a referrer, is sent as referrer information when making same-origin requests from a particular client.</li>
+<li>&quot;origin&quot; :
+only the ASCII serialization of the origin of the request client is sent as referrer information when making both same-origin requests and cross-origin requests from a particular client.</li>
+<li>&quot;strict-origin&quot; :
+The &quot;strict-origin&quot; policy sends the ASCII serialization of the origin of the request client when making requests:<ul>
+<li>from a TLS-protected environment settings object to a potentially trustworthy URL, and</li>
+<li>from non-TLS-protected environment settings objects to any origin.</li>
+</ul>
+</li>
+<li>&quot;origin-when-cross-origin&quot; :
+a full URL, stripped for use as a referrer, is sent as referrer information when making same-origin requests from a particular request client, and only the ASCII serialization of the origin of the request client is sent as referrer information when making cross-origin requests from a particular client.</li>
+<li>&quot;strict-origin-when-cross-origin&quot; :
+a full URL, stripped for use as a referrer, is sent as referrer information when making same-origin requests from a particular request client, and only the ASCII serialization of the origin of the request client when making cross-origin requests:<ul>
+<li>from a TLS-protected environment settings object to a potentially trustworthy URL, and</li>
+<li>from non-TLS-protected environment settings objects to any origin.</li>
+</ul>
+</li>
+<li>&quot;unsafe-url&quot; :
+a full URL, stripped for use as a referrer, is sent along with both cross-origin requests and same-origin requests made from a particular client.</li>
+</ul>
+<p>So many definitions, but mainly we will use <code>same-origin</code> .</p>
+<div class="section" id="id1">
+<h3>3.1. <a class="toc-backref" href="#id7">Sample</a></h3>
+<p>Let's make a little change to our code. Add a link in html page <code>staticFile/index.html</code> :</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;http://localhost:8889&#39;</span><span class="p">&gt;</span>Go To 8889<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+<p>Start our application:</p>
+<div class="highlight"><pre><span></span>node index.js
+</pre></div>
+<p>When we click the link, it will get 8889's index.html with referrer 8888:</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity05.png" />
+</div>
+<p>Sometimes, it can leak our information.</p>
+</div>
+<div class="section" id="how-to-fix-it">
+<h3>3.2. <a class="toc-backref" href="#id8">How to fix it</a></h3>
+<p>Let's add some referrer policy:</p>
+<div class="highlight"><pre><span></span>const <span class="nv">helmet</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;helmet&#39;</span><span class="o">)</span>
+...
+app.use<span class="o">(</span>helmet.referrerPolicy<span class="o">({</span> policy: <span class="s1">&#39;same-origin&#39;</span> <span class="o">}))</span><span class="p">;</span>
+</pre></div>
+<p>Now, let check our websites again:</p>
+<div class="highlight"><pre><span></span>node indexSafe.js
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity06.png" />
+</div>
+<p>There will be no referrer at all.</p>
+</div>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Web_Security_02_Referrer.html';
+        var disqus_url = 'https://brianshen1990.github.io/Web_Security_02_Referrer.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>6</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Web Security 06 CSP</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Web_Security_06_CSP.html" rel="bookmark"
+          title="Permalink to Web Security 06 CSP">Web Security 06 CSP
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Thu 21 February 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Security</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/security.html">Security</a> 
+          <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
+          <a href="https://brianshen1990.github.io/tag/csp.html">CSP</a> 
+          <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="id1"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-content-security-policy" id="id2">What is Content Security Policy</a></li>
+<li><a class="reference internal" href="#sample" id="id3">Sample</a></li>
+<li><a class="reference internal" href="#how-to-fix" id="id4">How to fix</a></li>
+<li><a class="reference internal" href="#reference" id="id5">Reference</a></li>
+</ul>
+</div>
+<p>All the sample code is in <a class="reference external" href="https://github.com/brianshen1990/WebSecurity">https://github.com/brianshen1990/WebSecurity</a> .</p>
+<div class="section" id="what-is-content-security-policy">
+<h2>1. <a class="toc-backref" href="#id2">What is Content Security Policy</a></h2>
+<p>The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (XSS).</p>
+<p>For example, if I open my github blog, it will load resources from Google. I trust google, so It's OK that some google scripts are in my site.</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity16.png" />
+</div>
+<p>But what if my site load some resource from other site that I don't trust? So CSP is very important in this situation.</p>
+<p>The syntax of CSP is simple, but we can define complex situations.</p>
+<p><code>Content-Security-Policy: &lt;policy-directive&gt;; &lt;policy-directive&gt;</code></p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span>Content-Security-Policy: default-src <span class="s1">&#39;self&#39;</span> http://example.com<span class="p">;</span>
+                         script-src http://example.com/
+</pre></div>
+<p>This definition means all resources can be only loaded from the current site and <a class="reference external" href="http://example.com">http://example.com</a>, but scripts can be only loaded from <a class="reference external" href="http://example.com/">http://example.com/</a>.</p>
+<p>There are many kinds of source:</p>
+<ul class="simple">
+<li>child-src</li>
+<li>connect-src</li>
+<li>font-src</li>
+<li>frame-src</li>
+<li>img-src</li>
+<li>manifest-src</li>
+<li>media-src</li>
+<li>object-src</li>
+<li>prefetch-src</li>
+<li>script-src</li>
+<li>style-src</li>
+<li>worker-src</li>
+</ul>
+</div>
+<div class="section" id="sample">
+<h2>2. <a class="toc-backref" href="#id3">Sample</a></h2>
+<p>Let's assume one  bad user in our blog system post a blog. The content includes some malicious scripts.</p>
+<p>And when other users read his article, the page will load like this <code>staticFile/blogView.html</code> :</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;jquery-3.3.1.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Blog Title: Sample CSP<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;blogContent&quot;</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is the content of my blog.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://localhost:8889/hackCSP.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>And I will show you how dangerous if we do not use CSP.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>To make the demo more simple, let assume that we do not set httpOnly to our cookies <code>index.js</code> :</p>
+<div class="highlight"><pre><span></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="nx">secret</span><span class="o">:</span> <span class="s1">&#39;our apps little secret&#39;</span><span class="p">,</span>
+  <span class="nx">resave</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">saveUninitialized</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">cookie</span><span class="o">:</span> <span class="p">{</span> <span class="nx">maxAge</span><span class="o">:</span> <span class="mi">60000</span><span class="p">,</span> <span class="nx">httpOnly</span><span class="o">:</span> <span class="kc">false</span> <span class="p">}</span>
+<span class="p">}))</span>
+</pre></div>
+<p>Since we load scripts from 8889, so let's add a malicious script <code>staticHack/hackCSP.js</code> :</p>
+<div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">xxx</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">;</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;I got cookie:&#39;</span> <span class="o">+</span> <span class="nx">xxx</span><span class="p">);</span>
+<span class="p">})</span>
+</pre></div>
+<p>now let's begin:</p>
+<div class="highlight"><pre><span></span>node index.js
+node indexHack.js
+</pre></div>
+<p>Open <a class="reference external" href="http://localhost:8888">http://localhost:8888</a> to login, and then open <a class="reference external" href="http://localhost:8888/blogView.html">http://localhost:8888/blogView.html</a> :</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity17.png" />
+</div>
+<p>Now we get the cookie, and we can use it to do anything.</p>
+</div>
+<div class="section" id="how-to-fix">
+<h2>3. <a class="toc-backref" href="#id4">How to fix</a></h2>
+<p>Actually, there are many ways to fix this problem:</p>
+<ul class="simple">
+<li>Cookie httpOnly</li>
+<li>User Content Filter</li>
+<li>Content Security Policy</li>
+</ul>
+<p>We will use Content Security Policy to solve this problem. So let's do a little modification to our safe site <code>indexSafe.js</code> :</p>
+<div class="highlight"><pre><span></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">.</span><span class="nx">contentSecurityPolicy</span><span class="p">({</span>
+  <span class="nx">directives</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">defaultSrc</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;&#39;self&#39;&quot;</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}));</span>
+</pre></div>
+<p>and run again:</p>
+<div class="highlight"><pre><span></span>node indexSafe.js
+node indexHack.js
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity18.png" />
+</div>
+<p>We can see from the console that the resources from 8889 are refused to load.</p>
+</div>
+<div class="section" id="reference">
+<h2>4. <a class="toc-backref" href="#id5">Reference</a></h2>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy</a></p>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Web_Security_06_CSP.html';
+        var disqus_url = 'https://brianshen1990.github.io/Web_Security_06_CSP.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>6</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
