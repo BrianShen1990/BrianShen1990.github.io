@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Web Security 03 - X Powered By / Server</title>
+  <title>Web Security 08 - Sniff</title>
   <link rel="icon" href="/images/logo/logo.png" >
   <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
 </head>
@@ -24,8 +24,8 @@
 <section>
   <article>
     <h1 class="_article_header">
-      <a href="https://brianshen1990.github.io/Web_Security_03_X_Powered_By.html" rel="bookmark"
-          title="Permalink to Web Security 03 - X Powered By / Server">Web Security 03 - X Powered By / Server
+      <a href="https://brianshen1990.github.io/Web_Security_07_MIME_Sniff.html" rel="bookmark"
+          title="Permalink to Web Security 08 - Sniff">Web Security 08 - Sniff
       </a>
     </h1>
 
@@ -34,7 +34,7 @@
   <table>
     <tr>
       <td>Published:</td>
-      <td>Thu 14 February 2019</td>
+      <td>Thu 28 February 2019</td>
     </tr>
 
 
@@ -55,65 +55,86 @@
       <td>
           <a href="https://brianshen1990.github.io/tag/security.html">Security</a> 
           <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
-          <a href="https://brianshen1990.github.io/tag/xpoweredby.html">XPoweredBy</a> 
+          <a href="https://brianshen1990.github.io/tag/mime-sniff.html">MIME Sniff</a> 
           <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security</a> 
       </td>
     </tr>
 
   </table>
 </div>      <div class="contents topic" id="contents">
-<span id="web-security-03-x-powered-by"></span><p class="topic-title first">Contents</p>
+<span id="web-security-07-mime-sniff"></span><p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#what-is-x-powered-by-server" id="id1">What is X-Powered-By / Server</a></li>
-<li><a class="reference internal" href="#how-to-fix" id="id2">How to fix</a></li>
+<li><a class="reference internal" href="#what-is-mime-type" id="id1">What is MIME Type</a></li>
+<li><a class="reference internal" href="#what-s-mime-sniffing" id="id2">What's MIME sniffing</a></li>
+<li><a class="reference internal" href="#sample" id="id3">Sample</a></li>
+<li><a class="reference internal" href="#how-to-fix" id="id4">How to fix</a></li>
 </ul>
 </div>
 <p>All the sample code is in <a class="reference external" href="https://github.com/brianshen1990/WebSecurity">https://github.com/brianshen1990/WebSecurity</a> .</p>
-<div class="section" id="what-is-x-powered-by-server">
-<h2>1. <a class="toc-backref" href="#id1">What is X-Powered-By / Server</a></h2>
-<p>Many of us may not notice this http header until we use a security scan tool to scan our website. And we notice that those tools often suggest us to remove this kind of header, for 2 reasons:</p>
-<ol class="arabic simple">
-<li>Make http header more slight</li>
-<li>Avoid potential vulnerability.</li>
-</ol>
-<p>So let's have a look at this header.</p>
+<div class="section" id="what-is-mime-type">
+<h2>1. <a class="toc-backref" href="#id1">What is MIME Type</a></h2>
+<p>A Multipurpose Internet Mail Extensions (MIME) type is a standard that indicates the nature and format of a document, file, or assortment of bytes.</p>
+<p>Browsers use the MIME type, not the file extension, to determine how to process a URL, so it's important that web servers send the correct MIME type in the response's Content-Type header. If this is not correctly configured, browsers are likely to misinterpret the contents of files and sites will not work correctly, and downloaded files may be mishandled.</p>
+<p>General Types:</p>
+<ul class="simple">
+<li>applicationList (application/octet-stream, application/pdf, application/pkcs8, and application/zip)</li>
+<li>audio (audio/mpeg, audio/vorbis)</li>
+<li>font (font/woff, font/ttf, and font/otf)</li>
+<li>image (image/jpeg, image/png, image/gif, and image/svg+xml)</li>
+<li>model (model/3mf and model/vml)</li>
+<li>text (text/html, text/plain, text/html, text/javascript, text/css)</li>
+<li>video (video/mp4)</li>
+</ul>
+</div>
+<div class="section" id="what-s-mime-sniffing">
+<h2>2. <a class="toc-backref" href="#id2">What's MIME sniffing</a></h2>
+<p>In the absence of a MIME type, or in certain cases where browsers believe they are incorrect, browsers may perform MIME sniffing — guessing the correct MIME type by looking at the bytes of the resource.</p>
+<p>Each browser performs MIME sniffing differently and under different circumstances. (For example, Safari will look at the file extension in the URL if the sent MIME type is unsuitable.) There are security concerns as some MIME types represent executable content. Servers can prevent MIME sniffing by sending the X-Content-Type-Options header.</p>
+</div>
+<div class="section" id="sample">
+<h2>3. <a class="toc-backref" href="#id3">Sample</a></h2>
+<p>Let's see what happened in our blog system:</p>
+<div class="figure">
+<img alt="" src="/images/security/WebSecurity23.png" />
+</div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If a file is cached in our browser, then we cannot see the content type in DevTools.</p>
+</div>
+<p>Let's modifying our system ( <code>index.html</code> ):</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;./userImage.txt&quot;</span> <span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+<p><code>userImage.txt</code> :</p>
+<div class="highlight"><pre><span></span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;I take over the browser!&#39;</span><span class="p">);</span>
+</pre></div>
+<p>And run our system:</p>
 <div class="highlight"><pre><span></span>node index.js
 </pre></div>
+<p>It seems that the <code>txt</code> plain file is being executed!</p>
 <div class="figure">
-<img alt="" src="/images/security/WebSecurity07.png" />
+<img alt="" src="/images/security/WebSecurity24.png" />
 </div>
-<p>This header suggests that our backend is supported by Express.</p>
-<p>Other sample:</p>
-<div class="figure">
-<img alt="" src="/images/security/WebSecurity08.png" />
-</div>
-<div class="figure">
-<img alt="" src="/images/security/WebSecurity09.png" />
-</div>
-<p>Those can leak the backend server information. As we know, for Apache, IIS, there are some special security bugs. If a hacker knows which server a website is using and potential bugs of this kind of server, some attacks may be taken.</p>
+<p>What if our system allows users to upload txt file types, and some bad guys upload a txt file full of scripts, and in the blog content, they somehow import this scripts, then XSS attack can be happened.</p>
 </div>
 <div class="section" id="how-to-fix">
-<h2>2. <a class="toc-backref" href="#id2">How to fix</a></h2>
-<p>How can we remove this kind of http header then?</p>
-<p>Different backends have different configurations. Here we only cover our sample: Express.</p>
-<p>In Express, we also use Helmet.</p>
-<p>In <code>indexSafe.js</code> :</p>
-<div class="highlight"><pre><span></span><span class="p">...</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span>
-  <span class="nx">extended</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">}));</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">.</span><span class="nx">referrerPolicy</span><span class="p">({</span> <span class="nx">policy</span><span class="o">:</span> <span class="s1">&#39;same-origin&#39;</span> <span class="p">}));</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s1">&#39;x-powered-by&#39;</span><span class="p">);</span>
-<span class="p">...</span>
+<h2>4. <a class="toc-backref" href="#id4">How to fix</a></h2>
+<ol class="arabic simple">
+<li>Stop browser performing MIME sniffing</li>
+<li>Send the correct MIME Type</li>
+</ol>
+<p>Now let's build a safe website <code>indexSafe.js</code> :</p>
+<div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">.</span><span class="nx">noSniff</span><span class="p">());</span>
+<span class="c1">// ...</span>
 </pre></div>
-<p>Now start again:</p>
+<p>And run our system:</p>
 <div class="highlight"><pre><span></span>node indexSafe.js
 </pre></div>
 <div class="figure">
-<img alt="" src="/images/security/WebSecurity10.png" />
+<img alt="" src="/images/security/WebSecurity25.png" />
 </div>
-<p>There will be no server information any more.</p>
+<p>The plain txt file won't be executed any more.</p>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types</a></p>
 </div>
 
     </div><!-- /.entry-content -->
@@ -127,8 +148,8 @@
       <div id="disqus_thread"></div>
       <script type="text/javascript">
         var disqus_shortname = 'brianshen1990';
-        var disqus_identifier = 'Web_Security_03_X_Powered_By.html';
-        var disqus_url = 'https://brianshen1990.github.io/Web_Security_03_X_Powered_By.html';
+        var disqus_identifier = 'Web_Security_07_MIME_Sniff.html';
+        var disqus_url = 'https://brianshen1990.github.io/Web_Security_07_MIME_Sniff.html';
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//brianshen1990.disqus.com/embed.js';
