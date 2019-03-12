@@ -4,7 +4,7 @@ Browser Render Process
 :date: 2019-03-01
 :tags: UI, Render Process 
 :category: Web
-:slug: Render Process
+:slug: Browser Render Process
 :author: Brian Shen
 :summary: Browser Render Process
 
@@ -13,7 +13,7 @@ Browser Render Process
 .. _Browser_Render_Process:
 
 Render Process 
-**************
+****************
 
 The normal render process in a browser goes through this periods.
 
