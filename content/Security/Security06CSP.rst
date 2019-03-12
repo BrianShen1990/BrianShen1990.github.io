@@ -1,4 +1,4 @@
-Web Security 06 CSP
+Web Security 06 - CSP
 #########################################
 
 :date: 2019-02-21
