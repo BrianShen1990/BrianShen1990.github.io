@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Browser Render Process</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Render Process.html" rel="bookmark"
+          title="Permalink to Browser Render Process">Browser Render Process
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Fri 01 March 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Web</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/ui.html">UI</a> 
+          <a href="https://brianshen1990.github.io/tag/render-process.html">Render Process</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#render-process" id="id2">Render Process</a></li>
+<li><a class="reference internal" href="#visual-change-process" id="id3">Visual Change Process</a></li>
+<li><a class="reference internal" href="#sample" id="id4">Sample</a></li>
+<li><a class="reference internal" href="#optimizing-js" id="id5">Optimizing - JS</a></li>
+<li><a class="reference internal" href="#optimizing-style" id="id6">Optimizing - Style</a></li>
+<li><a class="reference internal" href="#optimizing-layout" id="id7">Optimizing - Layout</a></li>
+<li><a class="reference internal" href="#optimizing-painting" id="id8">Optimizing - Painting</a></li>
+<li><a class="reference internal" href="#optimizing-compositing" id="id9">Optimizing - Compositing</a></li>
+<li><a class="reference internal" href="#debounce-your-input-handlers" id="id10">Debounce Your Input Handlers</a></li>
+<li><a class="reference internal" href="#reference" id="id11">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="render-process">
+<span id="id1"></span><h2>1. <a class="toc-backref" href="#id2">Render Process</a></h2>
+<p>The normal render process in a browser goes through this periods.</p>
+<p><code>JavaScript =&gt; Style =&gt; Layout =&gt; Paint =&gt; Compositing</code></p>
+<ul class="simple">
+<li><strong>JavaScript.</strong> Typically JavaScript is used to handle work that will result in visual changes, whether it’s jQuery’s animate function, sorting a data set, or adding DOM elements to the page. It doesn’t have to be JavaScript that triggers a visual change, though: CSS Animations, Transitions, and the Web Animations API are also commonly used.</li>
+<li><strong>Style calculations.</strong> This is the process of figuring out which CSS rules apply to which elements based on matching selectors, for example, <code>.headline</code> or <code>.nav &gt; .nav__item</code> . From there, once rules are known, they are applied and the final styles for each element are calculated.</li>
+<li><strong>Layout.</strong> Once the browser knows which rules apply to an element it can begin to calculate how much space it takes up and where it is on screen. The web’s layout model means that one element can affect others, for example the width of the &lt;body&gt; element typically affects its children’s widths and so on all the way up and down the tree, so the process can be quite involved for the browser.</li>
+<li><strong>Paint.</strong> Painting is the process of filling in pixels. It involves drawing out text, colors, images, borders, and shadows, essentially every visual part of the elements. The drawing is typically done onto multiple surfaces, often called layers.</li>
+<li><strong>Compositing.</strong> Since the parts of the page were drawn into potentially multiple layers they need to be drawn to the screen in the correct order so that the page renders correctly. This is especially important for elements that overlap another, since a mistake could result in one element appearing over the top of another incorrectly.</li>
+</ul>
+</div>
+<div class="section" id="visual-change-process">
+<h2>2. <a class="toc-backref" href="#id3">Visual Change Process</a></h2>
+<p>You won’t always necessarily touch every part of the pipeline on every frame. In fact, there are three ways the pipeline normally plays out for a given frame when you make a visual change, either with JavaScript, CSS, or Web Animations:</p>
+<ul class="simple">
+<li>JS &gt; Style &gt; Layout &gt; Paint &gt; Composite ( <code>Re-Layout</code> or <code>re-flow</code> )</li>
+</ul>
+<p><code>JavaScript =&gt; Style =&gt; Layout =&gt; Paint =&gt; Compositing</code></p>
+<p>If you change a “layout” property, so that’s one that changes an element’s geometry, like its width, height, or its position with left or top, the browser will have to check all the other elements and “reflow” the page. Any affected areas will need to be repainted, and the final painted elements will need to be composited back together.</p>
+<ul class="simple">
+<li>JS &gt; Style &gt; Paint &gt; Composite  ( <code>Re-Paint</code> )</li>
+</ul>
+<p><code>JavaScript =&gt; Style =&gt; Paint =&gt; Compositing</code></p>
+<p>If you changed a “paint only” property, like a background image, text color, or shadows, in other words one that does not affect the layout of the page, then the browser skips layout, but it will still do paint.</p>
+<ul class="simple">
+<li>JS &gt; Style &gt; Composite</li>
+</ul>
+<p><code>JavaScript =&gt; Style =&gt; Compositing</code></p>
+<p>If you change a property that requires neither layout nor paint, and the browser jumps to just do compositing.</p>
+<p>This final version is the cheapest and most desirable for high pressure points in an app's lifecycle, like animations or scrolling.</p>
+</div>
+<div class="section" id="sample">
+<h2>3. <a class="toc-backref" href="#id4">Sample</a></h2>
+<p>OK Let's have a quick sample.</p>
+<p><code>test.html</code> :</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="nc">.paintOnly</span> <span class="p">{</span>
+      <span class="nb">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;jquery-3.3.1.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kr">const</span> <span class="nx">reLayout</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#divTest&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
+    <span class="p">};</span>
+    <span class="kr">const</span> <span class="nx">rePaint</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#divTest&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;paintOnly&#39;</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Test<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;divTest&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;reLayout()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Test Re-Layout&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;rePaint()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Test Re-Paint&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>Open in chrome:</p>
+<div class="figure">
+<img alt="" src="/images/web/webRender03.png" />
+</div>
+<p>And when I record the performance in Chrome and analyze it:</p>
+<div class="figure">
+<img alt="" src="/images/web/webRender02.png" />
+</div>
+<div class="figure">
+<img alt="" src="/images/web/webRender01.png" />
+</div>
+<p>As we can see, <code>html()</code> method will lead the div to change width and heigh, so it will trigger re-Layout.</p>
+<p>But when we use <code>addClass()</code> and the added class only changes the text color, no Layout needs to be changed, and there is no Layout process.</p>
+</div>
+<div class="section" id="optimizing-js">
+<h2>4. <a class="toc-backref" href="#id5">Optimizing - JS</a></h2>
+<ul>
+<li><p class="first">Avoid <code>setTimeout</code> or <code>setInterval</code> for visual updates; always use <code>requestAnimationFrame</code> instead.</p>
+<p>The only way to guarantee that your JavaScript will run at the start of a frame is to use <code>requestAnimationFrame</code> .</p>
+<p>Frameworks or samples may use <code>setTimeout</code> or <code>setInterval</code> to do visual changes like animations, but the problem with this is that the callback will run at some point in the frame, possibly right at the end, and that can often have the effect of causing us to miss a frame, resulting in jank.</p>
+</li>
+<li><p class="first">Move long-running JavaScript off the main thread to Web Workers.</p>
+</li>
+<li><p class="first">Use micro-tasks to make DOM changes over several frames.</p>
+</li>
+<li><p class="first">Use Chrome DevTools’ Timeline and JavaScript Profiler to assess the impact of JavaScript.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="optimizing-style">
+<h2>5. <a class="toc-backref" href="#id6">Optimizing - Style</a></h2>
+<p>Reduce the Scope and Complexity of Style Calculations:</p>
+<ul class="simple">
+<li>Reduce the complexity of your selectors; use a class-centric methodology like BEM.</li>
+<li>Reduce the number of elements on which style calculation must be calculated.</li>
+</ul>
+<p>BEM (Block, Element, Modifier):</p>
+<blockquote>
+It recommends that everything has a single class, and, where you need hierarchy, that gets baked into the name of the class as well:</blockquote>
+<div class="highlight"><pre><span></span><span class="nc">.list</span> <span class="p">{</span> <span class="p">}</span>
+<span class="nc">.list__list-item</span> <span class="p">{</span> <span class="p">}</span>
+<span class="nc">.list__list-item--last-child</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<div class="section" id="optimizing-layout">
+<h2>6. <a class="toc-backref" href="#id7">Optimizing - Layout</a></h2>
+<p>Avoid Large, Complex Layouts and Layout Thrashing</p>
+<ul>
+<li><p class="first">Layout is normally scoped to the whole document.</p>
+</li>
+<li><p class="first">The number of DOM elements will affect performance; you should avoid triggering layout wherever possible.</p>
+<p>Layout is almost always scoped to the entire document</p>
+</li>
+<li><p class="first">Assess layout model performance; new Flexbox is typically faster than older Flexbox or float-based layout - models.</p>
+</li>
+<li><p class="first">Avoid forced synchronous layouts and layout thrashing; read style values then make style changes.</p>
+<p>First the JavaScript runs, then style calculations, then layout. It is, however, possible to force a browser to perform layout earlier with JavaScript. It is called a <strong>forced synchronous layout</strong>.</p>
+<p>We may want to write out the height of an element (let’s call it “box”) at the start of the frame you may write some code like this:</p>
+<div class="highlight"><pre><span></span><span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">logBoxHeight</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">logBoxHeight</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Gets the height of the box in pixels and logs it out.</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>Things get problematic if we changed the styles of the box before we ask for its height:</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">logBoxHeight</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="nx">box</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;super-big&#39;</span><span class="p">);</span>
+
+  <span class="c1">// Gets the height of the box in pixels</span>
+  <span class="c1">// and logs it out.</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>Now, in order to answer the height question, the browser must first apply the style change (because of adding the super-big class), and then run layout. Only then will it be able to return the correct height. This is unnecessary and potentially expensive work.</p>
+<p>Correct:</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">logBoxHeight</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Gets the height of the box in pixels</span>
+  <span class="c1">// and logs it out.</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">);</span>
+
+  <span class="nx">box</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;super-big&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>There’s a way to make forced synchronous layouts even worse: <strong>do lots of them in quick succession</strong> . Take a look at this code:</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">resizeAllParagraphsToMatchBlockWidth</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Puts the browser into a read-write-read-write cycle.</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">paragraphs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">paragraphs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nx">offsetWidth</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>Fix :</p>
+<div class="highlight"><pre><span></span><span class="c1">// Read.</span>
+<span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nx">offsetWidth</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">resizeAllParagraphsToMatchBlockWidth</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">paragraphs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Now write.</span>
+    <span class="nx">paragraphs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="optimizing-painting">
+<h2>7. <a class="toc-backref" href="#id8">Optimizing - Painting</a></h2>
+<ul>
+<li><p class="first">Changing any property apart from transforms or opacity always triggers paint.</p>
+</li>
+<li><p class="first">Paint is often the most expensive part of the pixel pipeline; avoid it where you can.</p>
+</li>
+<li><p class="first">Reduce paint areas through layer promotion and orchestration of animations.</p>
+<div class="highlight"><pre><span></span><span class="nc">.moving-element</span> <span class="p">{</span>
+  <span class="n">will</span><span class="o">-</span><span class="n">change</span><span class="o">:</span> <span class="n">transform</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.moving-element</span> <span class="p">{</span>
+  <span class="n">transform</span><span class="o">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+<li><p class="first">Use the Chrome DevTools paint profiler to assess paint complexity and cost; reduce where you can.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="optimizing-compositing">
+<h2>8. <a class="toc-backref" href="#id9">Optimizing - Compositing</a></h2>
+<p>There are two key factors in this area that affect page performance:</p>
+<blockquote>
+<ul class="simple">
+<li>the number of compositor layers that need to be managed</li>
+<li>the properties that you use for animations.</li>
+</ul>
+</blockquote>
+<ul>
+<li><p class="first">Stick to transform and opacity changes for your animations.</p>
+<p>Do not need Layout and Paint:</p>
+<p>Today there are only two properties for which that is true - <code>transforms</code> and <code>opacity</code> :</p>
+</li>
+<li><p class="first">Promote moving elements with <code>will-change</code> or <code>translateZ</code> .</p>
+</li>
+<li><p class="first">Avoid overusing promotion rules; layers require memory and management.</p>
+<p>Manage layers and avoid layer explosions</p>
+</li>
+</ul>
+</div>
+<div class="section" id="debounce-your-input-handlers">
+<h2>9. <a class="toc-backref" href="#id10">Debounce Your Input Handlers</a></h2>
+<ul>
+<li><p class="first">Avoid long-running input handlers; they can block scrolling.</p>
+</li>
+<li><p class="first">Do not make style changes in input handlers.</p>
+</li>
+<li><p class="first">Debounce your handlers; store event values and deal with style changes in the next requestAnimationFrame callback.</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> onScroll <span class="o">(</span>evt<span class="o">)</span> <span class="o">{</span>
+
+  // Store the scroll value <span class="k">for</span> laterz.
+  <span class="nv">lastScrollY</span> <span class="o">=</span> window.scrollY<span class="p">;</span>
+
+  // Prevent multiple rAF callbacks.
+  <span class="k">if</span> <span class="o">(</span>scheduledAnimationFrame<span class="o">)</span>
+    <span class="k">return</span><span class="p">;</span>
+
+  <span class="nv">scheduledAnimationFrame</span> <span class="o">=</span> true<span class="p">;</span>
+  requestAnimationFrame<span class="o">(</span>readAndUpdatePage<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+window.addEventListener<span class="o">(</span><span class="s1">&#39;scroll&#39;</span>, onScroll<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="reference">
+<h2>10. <a class="toc-backref" href="#id11">Reference</a></h2>
+<p><a class="reference external" href="https://developers.google.com/web/fundamentals/performance/rendering/">https://developers.google.com/web/fundamentals/performance/rendering/</a></p>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Render Process.html';
+        var disqus_url = 'https://brianshen1990.github.io/Render Process.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>6</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>4</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/pdf.html">PDF </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
