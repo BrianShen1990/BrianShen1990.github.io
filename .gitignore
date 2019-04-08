@@ -3,3 +3,4 @@ output
 venv
 .vscode
 *.pyc
+pelicanconf.pyc
