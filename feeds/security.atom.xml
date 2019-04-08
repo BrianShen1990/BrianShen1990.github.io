@@ -1,5 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Security</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/security.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2019-02-28T00:00:00+08:00</updated><entry><title>Web Security 08 - Sniff</title><link href="https://brianshen1990.github.io/Web_Security_07_MIME_Sniff.html" rel="alternate"></link><published>2019-02-28T00:00:00+08:00</published><updated>2019-02-28T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-02-28:/Web_Security_07_MIME_Sniff.html</id><summary type="html">&lt;p class="first last"&gt;Web Security 08 - MIME Sniff&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Security</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/security.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2019-03-26T00:00:00+08:00</updated><entry><title>Web Security 10 - CSRF</title><link href="https://brianshen1990.github.io/Web_Security_10_CSRF.html" rel="alternate"></link><published>2019-03-26T00:00:00+08:00</published><updated>2019-03-26T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-03-26:/Web_Security_10_CSRF.html</id><summary type="html">&lt;p class="first last"&gt;Web Security 10 - CSRF&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="id1"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro" id="id3"&gt;Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#sample" id="id4"&gt;Sample&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-avoid-csrf-attack" id="id5"&gt;How to avoid CSRF attack?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id6"&gt;Sample&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;All the sample code is in &lt;a class="reference external" href="https://github.com/brianshen1990/WebSecurity"&gt;https://github.com/brianshen1990/WebSecurity&lt;/a&gt; .&lt;/p&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id3"&gt;Intro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;CSRF, Cross Site Request Forgery, is an attack that forces an end user to execute unwanted actions on a web application in which they're currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request.&lt;/p&gt;
+&lt;p&gt;In  &lt;a class="reference external" href="https://brianshen1990.github.io/Web_Security_02_Referrer.html"&gt;https://brianshen1990.github.io/Web_Security_02_Referrer.html&lt;/a&gt;, we have given a simple example of How referrer can avoid basic attack. Actually, that sample is some kind of CSRF attack.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sample"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id4"&gt;Sample&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Let's have a short review:&lt;/p&gt;
+&lt;p&gt;Let's use the Website in the prepare session, and then, we will fake another website, which contains a malicious link to attract user to click. This malicious link is the transfer points link.&lt;/p&gt;
+&lt;p&gt;Backend &lt;code&gt;indexHack.js&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;express&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;express-session&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;use&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="kr"&gt;static&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;staticHack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8889&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Example app listening on port 8889!&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;HTML &lt;code&gt;staticHack/index.html&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;jquery-3.3.1.min.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;test.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h5&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Hack&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h5&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;http://localhost:8888/api/transferPoints?dstUser=user02&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Click and you can get some discount in Amazon!&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now start the two websites:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;node index.js
+node indexHack.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is the Malicious website:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/security/WebSecurity03.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;When we click the URL, the authentication will fail. A message like this will appear &lt;code&gt;{&amp;quot;messgae&amp;quot;:&amp;quot;auth broken!&amp;quot;}&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;This is because we haven't login yet. But what if we've opened our Blog System and already login?&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/security/WebSecurity04.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Now, we jump to the malicious website, and click the link, successful message will appear &lt;code&gt;{&amp;quot;message&amp;quot;:&amp;quot;success!&amp;quot;}&lt;/code&gt; . and user01 will transfer his points to user02, unconsciously.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-avoid-csrf-attack"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id5"&gt;How to avoid CSRF attack?&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Use only JSON APIs&lt;/p&gt;
+&lt;p&gt;AJAX calls use JavaScript and are CORS-restricted.
+There is no way for a simple &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; to send &lt;code&gt;JSON&lt;/code&gt;,
+so by accepting only JSON,
+you eliminate the possibility of the above form.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Disable CORS&lt;/p&gt;
+&lt;p&gt;The first way to mitigate CSRF attacks is to disable cross-origin requests.
+If you're going to allow CORS,
+only allow it on &lt;code&gt;OPTIONS, HEAD, GET&lt;/code&gt; as they are not supposed to have side-effects.&lt;/p&gt;
+&lt;p&gt;Unfortunately, this does not block the above request as it does not use JavaScript (so CORS is not applicable).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Check the referrer header&lt;/p&gt;
+&lt;p&gt;Unfortunately, checking the referrer header is a pain in the ass,
+but you could always block requests whose referrer headers are not from your site.
+This really isn't worth the trouble.&lt;/p&gt;
+&lt;p&gt;For example, you could not load sessions if the referrer header is not your server.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;GET should not have side effects&lt;/p&gt;
+&lt;p&gt;Make sure that none of your &lt;code&gt;GET&lt;/code&gt; requests change any relevant data in your database.
+This is a very novice mistake to make and makes your app susceptible to more than just CSRF attacks.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Avoid using POST&lt;/p&gt;
+&lt;p&gt;Because &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; s can only &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;,
+by using other methods like &lt;code&gt;PUT&lt;/code&gt;, &lt;code&gt;PATCH&lt;/code&gt;, and &lt;code&gt;DELETE&lt;/code&gt;,
+an attacker has fewer methods to attack your site.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Don't use method override!&lt;/p&gt;
+&lt;p&gt;Many applications use (&lt;a class="reference external" href="https://github.com/expressjs/method-override"&gt;https://github.com/expressjs/method-override&lt;/a&gt;) to use
+&lt;code&gt;PUT&lt;/code&gt;, &lt;code&gt;PATCH&lt;/code&gt;, and &lt;code&gt;DELETE&lt;/code&gt; requests over a regular form.
+This, however, converts requests that were previously invulnerable vulnerable!&lt;/p&gt;
+&lt;p&gt;Don't use &lt;code&gt;method-override&lt;/code&gt; in your apps - just use AJAX!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Don't support old browsers&lt;/p&gt;
+&lt;p&gt;Old browsers do not support CORS or security policies.
+By disabling support for older browsers
+(which more technologically-illiterate people use, who are more (easily) attacked),
+you minimize CSRF attack vectors.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;CSRF Tokens&lt;/p&gt;
+&lt;p&gt;Alas, the final solution is using CSRF tokens.
+How do CSRF tokens work?&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Server sends the client a token.&lt;/li&gt;
+&lt;li&gt;Client submits a form with the token.&lt;/li&gt;
+&lt;li&gt;The server rejects the request if the token is invalid.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;An attacker would have to somehow get the CSRF token from your site,
+and they would have to use JavaScript to do so.
+Thus, if your site does not support CORS,
+then there's no way for the attacker to get the CSRF token,
+eliminating the threat.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Make sure CSRF tokens can not be accessed with AJAX!&lt;/em&gt;
+Don't create a &lt;code&gt;/csrf&lt;/code&gt; route just to grab a token,
+and especially don't support CORS on that route!&lt;/p&gt;
+&lt;p&gt;The token just needs to be &amp;quot;unguessable&amp;quot;,
+making it difficult for an attacker to successfully guess within a couple of tries.
+It does not have to be cryptographically secure.
+An attack is one or two clicks by an unbeknownst user,
+not a brute force attack by a server.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id6"&gt;Sample&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;So there are many fix solutions:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Check change referrer &lt;a class="reference external" href="https://brianshen1990.github.io/Web_Security_02_Referrer.html"&gt;https://brianshen1990.github.io/Web_Security_02_Referrer.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Disable CORS (We will talk about it in &lt;a class="reference external" href="https://brianshen1990.github.io/Web_Security_11_CORS.html"&gt;https://brianshen1990.github.io/Web_Security_11_CORS.html&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Change this API to post instead of using get as this API will cause backend changes&lt;/li&gt;
+&lt;li&gt;CSRF Tokens&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now we will fix this problem in solution 3 and 4.&lt;/p&gt;
+&lt;p&gt;First let's update our API from get to post.&lt;/p&gt;
+&lt;p&gt;In backend &lt;code&gt;indexSafe.js&lt;/code&gt; , we change API from get to post :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/api/transferPoints&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;auth&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;UserInfo&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;dstUser&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;UserInfo&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;points&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;UserInfo&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;points&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nx"&gt;UserInfo&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;dstUser&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;points&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;UserInfo&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;dstUser&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;points&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nx"&gt;saveUser&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;success!&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="k"&gt;catch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Internal Server error!&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;401&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;messgae&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;user not exists!&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And in our UI &lt;code&gt;staticFileSafe/test.js&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;transfer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  const &lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#dstUser&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.val&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  $.ajax&lt;span class="o"&gt;({&lt;/span&gt;
+    method: &lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;,
+    url: &lt;span class="s2"&gt;&amp;quot;./api/transferPoints&amp;quot;&lt;/span&gt;,
+    data: &lt;span class="o"&gt;{&lt;/span&gt;
+      dstUser: name
+    &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;.done&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt; msg &lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    getPoints&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's start our application again:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;node indexSafe.js
+node indexHack.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As we can see, the malicious url cannot transfer any points now.&lt;/p&gt;
+&lt;p&gt;However, hackers can also update their methods. Let's also have an example:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;staticHackPost/index.html&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;div&amp;gt;
+    &amp;lt;h5&amp;gt;Hack&amp;lt;/h5&amp;gt;
+    &amp;lt;form &lt;span class="nv"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;action&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://localhost:8888/api/transferPoints&amp;quot;&lt;/span&gt;&amp;gt;
+      &amp;lt;input &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dstUser&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dstUser&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;user02&amp;quot;&lt;/span&gt;/&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;nbsp&lt;span class="p"&gt;;&lt;/span&gt;
+      &amp;lt;button &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;submit&amp;quot;&lt;/span&gt;&amp;gt;Click and you can get some discount in Amazon!&amp;lt;/button&amp;gt;
+    &amp;lt;/form&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and &lt;code&gt;indexHackPost.js&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;express&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;express-session&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+const &lt;span class="nv"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; express&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+app.use&lt;span class="o"&gt;(&lt;/span&gt;express.static&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;staticHackPost&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+
+app.listen&lt;span class="o"&gt;(&lt;/span&gt;8889, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Example app listening on port 8889!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now start our application again:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;node indexSafe.js
+node indexHackPost.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/security/WebSecurity28.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;And when we click the button, we can see our post from hack site 8889 is handled by our blog site 8888.&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/security/WebSecurity29.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;As we have said before, there are many methods to fix this problem, referrer is still an easy and simple way. However, next we will talk about the method of CSRF token.&lt;/p&gt;
+&lt;p&gt;The point of CSRF token is that, we will use another token to verify the user's identity. And for each post request, which could do modification to our backend, we will check this CSRF token and refresh it.&lt;/p&gt;
+&lt;p&gt;Many people think it is not necessary to refresh them every time. But we won't talk about that here. We will only give a simple example.&lt;/p&gt;
+&lt;p&gt;Now every time, if a user logged, we will put a CSRF token in the session, and we will stored it. When we use post method in UI, backend will verify the token in session and from post body, if verified OK,we will refresh this token. And if not , we will redirect user to login page.&lt;/p&gt;
+&lt;p&gt;Now in our &lt;code&gt;indexCSRF.js&lt;/code&gt; , we add CRF related functions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;setCSRF&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  const &lt;span class="nv"&gt;tempCsrf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.random()&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  req.session.csrf &lt;span class="o"&gt;=&lt;/span&gt; tempCsrf&lt;span class="p"&gt;;&lt;/span&gt;
+  res.setHeader&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;csrf&amp;quot;&lt;/span&gt;, tempCsrf&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+const &lt;span class="nv"&gt;clearCSRF&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  req.session.csrf &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+const &lt;span class="nv"&gt;checkCSRF&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;req, res, next&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;req.headers.csrf&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  console.log&lt;span class="o"&gt;(&lt;/span&gt;req.session.csrf&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt; req.headers.csrf &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; req.session.csrf &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; req.session.csrf &lt;span class="o"&gt;===&lt;/span&gt; req.headers.csrf &lt;span class="o"&gt;){&lt;/span&gt;
+    setCSRF&lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    next&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    clearCSRF&lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    res.status&lt;span class="o"&gt;(&lt;/span&gt;403&lt;span class="o"&gt;)&lt;/span&gt;.send&lt;span class="o"&gt;({&lt;/span&gt;messgae: &lt;span class="s1"&gt;&amp;#39;CSRF Failure!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;})&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we first logon, if everything is OK, we will setCSRF:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;app.post&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/api/login&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;req.body.name &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; req.body.passwd&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;!UserInfo&lt;span class="o"&gt;[&lt;/span&gt;req.body.name&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      res.status&lt;span class="o"&gt;(&lt;/span&gt;401&lt;span class="o"&gt;)&lt;/span&gt;.send&lt;span class="o"&gt;({&lt;/span&gt;messgae: &lt;span class="s1"&gt;&amp;#39;name or password error!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;})&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+      const &lt;span class="nv"&gt;derivedKey&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; crypto.createHash&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;md5&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.update&lt;span class="o"&gt;(&lt;/span&gt;req.body.passwd&lt;span class="o"&gt;)&lt;/span&gt;.digest&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;hex&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt; UserInfo&lt;span class="o"&gt;[&lt;/span&gt;req.body.name&lt;span class="o"&gt;]&lt;/span&gt;.passwd &lt;span class="o"&gt;===&lt;/span&gt; derivedKey &lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        req.session.login &lt;span class="o"&gt;=&lt;/span&gt; true&lt;span class="p"&gt;;&lt;/span&gt;
+        req.session.name &lt;span class="o"&gt;=&lt;/span&gt; req.body.name&lt;span class="p"&gt;;&lt;/span&gt;
+        setCSRF&lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        res.status&lt;span class="o"&gt;(&lt;/span&gt;200&lt;span class="o"&gt;)&lt;/span&gt;.send&lt;span class="o"&gt;({&lt;/span&gt;
+          messgae: &lt;span class="s1"&gt;&amp;#39;success!&amp;#39;&lt;/span&gt;
+        &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        req.session.login &lt;span class="o"&gt;=&lt;/span&gt; false&lt;span class="p"&gt;;&lt;/span&gt;
+        res.status&lt;span class="o"&gt;(&lt;/span&gt;401&lt;span class="o"&gt;)&lt;/span&gt;.send&lt;span class="o"&gt;({&lt;/span&gt;messgae: &lt;span class="s1"&gt;&amp;#39;name or password error!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;})&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    res.status&lt;span class="o"&gt;(&lt;/span&gt;402&lt;span class="o"&gt;)&lt;/span&gt;.send&lt;span class="o"&gt;({&lt;/span&gt;messgae: &lt;span class="s1"&gt;&amp;#39;body broken!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and in the following post requests:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;app.post&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/api/transferPoints&amp;#39;&lt;/span&gt;, auth, checkCSRF, &lt;span class="o"&gt;(&lt;/span&gt;req, res&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What about UI? &lt;code&gt;staticFileSafeCSRF/index.html&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;body&amp;gt;
+  &amp;lt;meta &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;csrf-token&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;csrf-token&amp;quot;&lt;/span&gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And when we do post, we should do more things &lt;code&gt;staticFileSafeCSRF/post.js&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;const &lt;span class="nv"&gt;setCSRF&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;req&lt;span class="o"&gt;){&lt;/span&gt;
+  &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#csrf-token&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.attr&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;, req.getResponseHeader&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;CSRF&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+const &lt;span class="nv"&gt;getCSRF&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#csrf-token&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.attr&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+const &lt;span class="nv"&gt;logon&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  const &lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#name&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.val&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  const &lt;span class="nv"&gt;passwd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#passwd&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.val&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  $.ajax&lt;span class="o"&gt;({&lt;/span&gt;
+    method: &lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;,
+    url: &lt;span class="s2"&gt;&amp;quot;./api/login&amp;quot;&lt;/span&gt;,
+    data: &lt;span class="o"&gt;{&lt;/span&gt;
+      name: name,
+      passwd: passwd
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+  &lt;span class="o"&gt;})&lt;/span&gt;.done&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt; msg,textStatus, request &lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#logon&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.hide&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    setCSRF&lt;span class="o"&gt;(&lt;/span&gt;request&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#main&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.show&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+// ...
+
+const &lt;span class="nv"&gt;transfer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  const &lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#dstUser&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.val&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  $.ajax&lt;span class="o"&gt;({&lt;/span&gt;
+    method: &lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;,
+    url: &lt;span class="s2"&gt;&amp;quot;./api/transferPoints&amp;quot;&lt;/span&gt;,
+    headers: &lt;span class="o"&gt;{&lt;/span&gt;
+      &lt;span class="s1"&gt;&amp;#39;csrf&amp;#39;&lt;/span&gt;: getCSRF&lt;span class="o"&gt;()&lt;/span&gt;,
+    &lt;span class="o"&gt;}&lt;/span&gt;,
+    data: &lt;span class="o"&gt;{&lt;/span&gt;
+      dstUser: name
+    &lt;span class="o"&gt;}&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;.done&lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt; msg, textStatus, request &lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    setCSRF&lt;span class="o"&gt;(&lt;/span&gt;request&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    getPoints&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+...
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And now, begin application again:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;node indexCSRF.js
+node indexHack.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Without valid CSRF, these API's cannot be accessed any more.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="/images/security/WebSecurity30.png" /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/index.html"&gt;https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/pillarjs/understanding-csrf"&gt;https://github.com/pillarjs/understanding-csrf&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Security"></category><category term="Web"></category><category term="Https"></category><category term="Web Security"></category><category term="CSRF"></category></entry><entry><title>Web Security 08 - Sniff</title><link href="https://brianshen1990.github.io/Web_Security_07_MIME_Sniff.html" rel="alternate"></link><published>2019-02-28T00:00:00+08:00</published><updated>2019-02-28T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-02-28:/Web_Security_07_MIME_Sniff.html</id><summary type="html">&lt;p class="first last"&gt;Web Security 08 - MIME Sniff&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
 &lt;span id="web-security-07-mime-sniff"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
