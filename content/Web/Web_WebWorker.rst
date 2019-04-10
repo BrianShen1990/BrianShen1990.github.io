@@ -129,10 +129,64 @@ Now start our website :code:` http-server ./` :
 
 .. figure:: /images/web/webworker01.png 
 
+React and Webworker
+********************
+
+Mainly we can use Embedded workers loaded form functions!
+
+:code:`/src/app.worker.js`
+
+.. code-block:: javascript
+
+  export default () => {
+    self.addEventListener('message', e => {
+      if (!e) return;
+      let res = e.data;
+      // ...
+      postMessage(res);
+    })
+  }
+
+:code:`WebWorker.js`
+
+.. code-block:: javascript
+
+  export default class WebWorker {
+    constructor(worker) {
+      const code = worker.toString();
+      const blob = new Blob(['('+code+')()']);
+      return new Worker(URL.createObjectURL(blob));
+    }
+  }
+
+App:
+
+.. code-block:: javascript
+
+  import worker from './app.worker.js';
+  import WebWorker from './WebWorker';
+
+  // ...
+  componentDidMount() {
+    this.worker = new WebWorker(worker);
+    this.worker.addEventListener('message', event => {
+      const sortedList = event.data;
+      this.setState({
+        users: sortedList
+      })
+    });
+  }
+
+  handleSort() {
+    this.worker.postMessage(this.state.users);
+  }
+  // ...
+
+
 Reference
 **********
 
 https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
 
-
+https://medium.com/prolanceer/optimizing-react-app-performance-using-web-workers-79266afd4a7
 
