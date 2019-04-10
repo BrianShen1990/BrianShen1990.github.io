@@ -64,7 +64,8 @@
 <li><a class="reference internal" href="#intro" id="id2">Intro</a></li>
 <li><a class="reference internal" href="#warnings" id="id3">Warnings</a></li>
 <li><a class="reference internal" href="#sample" id="id4">Sample</a></li>
-<li><a class="reference internal" href="#reference" id="id5">Reference</a></li>
+<li><a class="reference internal" href="#react-and-webworker" id="id5">React and Webworker</a></li>
+<li><a class="reference internal" href="#reference" id="id6">Reference</a></li>
 </ul>
 </div>
 <div class="section" id="intro">
@@ -177,9 +178,53 @@
 <img alt="" src="/images/web/webworker01.png" />
 </div>
 </div>
+<div class="section" id="react-and-webworker">
+<h2>4. <a class="toc-backref" href="#id5">React and Webworker</a></h2>
+<p>Mainly we can use Embedded workers loaded form functions!</p>
+<p><code>/src/app.worker.js</code></p>
+<div class="highlight"><pre><span></span><span class="kr">export</span> <span class="k">default</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">e</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+    <span class="nx">postMessage</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+<p><code>WebWorker.js</code></p>
+<div class="highlight"><pre><span></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">WebWorker</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">worker</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">worker</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="kr">const</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="s1">&#39;(&#39;</span><span class="o">+</span><span class="nx">code</span><span class="o">+</span><span class="s1">&#39;)()&#39;</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Worker</span><span class="p">(</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>App:</p>
+<div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">worker</span> <span class="nx">from</span> <span class="s1">&#39;./app.worker.js&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">WebWorker</span> <span class="nx">from</span> <span class="s1">&#39;./WebWorker&#39;</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebWorker</span><span class="p">(</span><span class="nx">worker</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">worker</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">sortedList</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="nx">users</span><span class="o">:</span> <span class="nx">sortedList</span>
+    <span class="p">})</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">handleSort</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">worker</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
 <div class="section" id="reference">
-<h2>4. <a class="toc-backref" href="#id5">Reference</a></h2>
+<h2>5. <a class="toc-backref" href="#id6">Reference</a></h2>
 <p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers</a></p>
+<p><a class="reference external" href="https://medium.com/prolanceer/optimizing-react-app-performance-using-web-workers-79266afd4a7">https://medium.com/prolanceer/optimizing-react-app-performance-using-web-workers-79266afd4a7</a></p>
 </div>
 
     </div><!-- /.entry-content -->
