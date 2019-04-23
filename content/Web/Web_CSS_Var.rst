@@ -3,7 +3,7 @@ CSS Custom Properties, Less and Theme
 
 
 :date: 2019-04-15
-:tags: React, Webpack, React-Router, React-Table, React-Chartjs, Reflux
+:tags: CSS, Less
 :category: Web
 :slug: CSS_Custom_Properties_Less_and_Theme
 :author: Brian Shen
