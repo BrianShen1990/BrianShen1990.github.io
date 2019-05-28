@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Node Mocha Sinon</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Node_Mocha_Sinon.html" rel="bookmark"
+          title="Permalink to Node Mocha Sinon">Node Mocha Sinon
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Thu 23 May 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Node</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/node.html">Node</a> 
+          <a href="https://brianshen1990.github.io/tag/test.html">Test</a> 
+          <a href="https://brianshen1990.github.io/tag/mocha.html">Mocha</a> 
+          <a href="https://brianshen1990.github.io/tag/sinon.html">Sinon</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#intro" id="id2">Intro</a><ul>
+<li><a class="reference internal" href="#mocha-test-framework" id="id3">Mocha -&gt; Test Framework</a></li>
+<li><a class="reference internal" href="#sinon-associated-mocks" id="id4">sinon -&gt; Associated Mocks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-usage" id="id5">Quick Usage</a><ul>
+<li><a class="reference internal" href="#function-without-calling-functions-from-other-modules" id="id6">Function without calling functions from other modules</a></li>
+<li><a class="reference internal" href="#calling-sync-function-from-other-modules" id="id7">Calling sync function from other modules</a></li>
+<li><a class="reference internal" href="#calling-promise-from-other-modules" id="id8">Calling promise from other modules</a></li>
+<li><a class="reference internal" href="#calling-callbacks-from-other-modules" id="id9">Calling callbacks from other modules</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-test-cases" id="id10">Run Test Cases</a></li>
+<li><a class="reference internal" href="#report-enhancements" id="id11">Report Enhancements</a></li>
+<li><a class="reference internal" href="#reference" id="id12">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="intro">
+<span id="id1"></span><h2>1. <a class="toc-backref" href="#id2">Intro</a></h2>
+<div class="section" id="mocha-test-framework">
+<h3>1.1. <a class="toc-backref" href="#id3">Mocha -&gt; Test Framework</a></h3>
+<p>Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser, making asynchronous testing simple and fun. Mocha tests run serially, allowing for flexible and accurate reporting, while mapping uncaught exceptions to the correct test cases.</p>
+</div>
+<div class="section" id="sinon-associated-mocks">
+<h3>1.2. <a class="toc-backref" href="#id4">sinon -&gt; Associated Mocks</a></h3>
+<p>Standalone test spies, stubs and mocks for JavaScript.
+Works with any unit testing framework.</p>
+</div>
+</div>
+<div class="section" id="quick-usage">
+<h2>2. <a class="toc-backref" href="#id5">Quick Usage</a></h2>
+<p>We will talk about 4 types of API test:</p>
+<ol class="arabic simple">
+<li>Function without calling functions from other modules</li>
+<li>Calling sync function from other modules</li>
+<li>Calling promise from other modules</li>
+<li>Calling callbacks from other modules</li>
+</ol>
+<div class="section" id="function-without-calling-functions-from-other-modules">
+<h3>2.1. <a class="toc-backref" href="#id6">Function without calling functions from other modules</a></h3>
+<div class="highlight"><pre><span></span><span class="c1">// index.js</span>
+<span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restEmpty</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+<p>Test Case:</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;assert&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">sinon</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;sinon&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./index&#39;</span><span class="p">);</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#restEmpty() simple&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should run ok&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restEmpty</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="calling-sync-function-from-other-modules">
+<h3>2.2. <a class="toc-backref" href="#id7">Calling sync function from other modules</a></h3>
+<div class="highlight"><pre><span></span><span class="c1">// index.js</span>
+<span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetDBInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span>  <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbInfo</span><span class="p">();</span>
+  <span class="c1">// send info</span>
+  <span class="c1">// console.log(res);</span>
+<span class="p">}</span>
+
+<span class="c1">// ModuleB.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{};</span>
+<span class="p">}</span>
+</pre></div>
+<p>Test Case:</p>
+<div class="highlight"><pre><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#dbOp.restGetDBInfo() function&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">dbInfo</span><span class="p">;</span>
+  <span class="nx">beforeEach</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbInfo</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">stub</span><span class="p">(</span><span class="nx">ModuleB</span><span class="p">,</span> <span class="s1">&#39;dbInfo&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">afterEach</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbInfo</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should return value&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbInfo</span><span class="p">.</span><span class="nx">returns</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetDBInfo</span><span class="p">();</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">dbInfo</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">rReq</span> <span class="o">=</span> <span class="nx">dbInfo</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">rReq</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="calling-promise-from-other-modules">
+<h3>2.3. <a class="toc-backref" href="#id8">Calling promise from other modules</a></h3>
+<div class="highlight"><pre><span></span><span class="c1">// index.js</span>
+<span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetUsers</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbGetUser</span><span class="p">(</span><span class="nx">name</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// send success</span>
+    <span class="c1">// console.log(res);</span>
+    <span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// ModuleB.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbGetUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// do something</span>
+    <span class="nx">resolve</span><span class="p">();</span>
+  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+<p>Test Case:</p>
+<div class="highlight"><pre><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#dbOp.restGetUsers() promise&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">send</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
+    <span class="nx">error</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+  <span class="p">};</span>
+  <span class="kr">const</span> <span class="nx">RetValue</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;test&#39;</span><span class="p">}];</span>
+  <span class="kd">let</span> <span class="nx">dbGetUser</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">send</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="nx">beforeEach</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbGetUser</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">stub</span><span class="p">(</span><span class="nx">ModuleB</span><span class="p">,</span> <span class="s1">&#39;dbGetUser&#39;</span><span class="p">);</span>
+    <span class="nx">send</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">stub</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="s1">&#39;send&#39;</span><span class="p">);</span>
+    <span class="nx">error</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">stub</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">afterEach</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+    <span class="nx">send</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+    <span class="nx">error</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should return value&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">resolves</span><span class="p">(</span><span class="nx">RetValue</span><span class="p">);</span>
+    <span class="nx">send</span><span class="p">.</span><span class="nx">returns</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsers</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="nx">send</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">error</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+
+      <span class="kr">const</span> <span class="nx">dbArg</span> <span class="o">=</span> <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="nx">dbArg</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+      <span class="kr">const</span> <span class="nx">sendArg</span> <span class="o">=</span> <span class="nx">send</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+      <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">sendArg</span><span class="p">,</span> <span class="nx">RetValue</span><span class="p">);</span>
+
+      <span class="nx">done</span><span class="p">();</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should reject&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">rejects</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">);</span>
+    <span class="nx">error</span><span class="p">.</span><span class="nx">returns</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsers</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">send</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+
+      <span class="kr">const</span> <span class="nx">dbArg</span> <span class="o">=</span> <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+      <span class="nx">assert</span><span class="p">(</span><span class="nx">dbArg</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+      <span class="nx">done</span><span class="p">();</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="calling-callbacks-from-other-modules">
+<h3>2.4. <a class="toc-backref" href="#id9">Calling callbacks from other modules</a></h3>
+<div class="highlight"><pre><span></span><span class="c1">// index.js</span>
+<span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetUsersCB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbGetUserCB</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// send success</span>
+    <span class="c1">// console.log(res);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// moduleB.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbGetUserCB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// do something</span>
+  <span class="nx">cb</span><span class="p">({});</span>
+<span class="p">}</span>
+</pre></div>
+<p>Test Case:</p>
+<div class="highlight"><pre><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#dbOp.restGetUsersCB() callback&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">send</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
+    <span class="nx">error</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+  <span class="p">};</span>
+  <span class="kr">const</span> <span class="nx">RetValue</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;test&#39;</span><span class="p">}];</span>
+  <span class="kd">let</span> <span class="nx">dbGetUserCB</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">send</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="nx">beforeEach</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbGetUserCB</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">stub</span><span class="p">(</span><span class="nx">ModuleB</span><span class="p">,</span> <span class="s1">&#39;dbGetUserCB&#39;</span><span class="p">);</span>
+    <span class="nx">send</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">stub</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="s1">&#39;send&#39;</span><span class="p">);</span>
+    <span class="nx">error</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">stub</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">afterEach</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbGetUserCB</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+    <span class="nx">send</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+    <span class="nx">error</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should call error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbGetUserCB</span><span class="p">.</span><span class="nx">callsArgWith</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+    <span class="nx">error</span><span class="p">.</span><span class="nx">returns</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsersCB</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">dbGetUserCB</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">send</span><span class="p">.</span><span class="nx">called</span><span class="p">);</span>
+
+    <span class="kr">const</span> <span class="nx">dbArg</span> <span class="o">=</span> <span class="nx">dbGetUserCB</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">dbArg</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">errorArg</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">errorArg</span> <span class="o">===</span> <span class="s1">&#39;error&#39;</span><span class="p">);</span>
+
+  <span class="p">});</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should call send&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dbGetUserCB</span><span class="p">.</span><span class="nx">callsArgWith</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="nx">send</span><span class="p">.</span><span class="nx">returns</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsersCB</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">dbGetUserCB</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">error</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">send</span><span class="p">.</span><span class="nx">called</span><span class="p">);</span>
+
+    <span class="kr">const</span> <span class="nx">dbArg</span> <span class="o">=</span> <span class="nx">dbGetUserCB</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">dbArg</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">sendArg</span> <span class="o">=</span> <span class="nx">send</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">sendArg</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+
+  <span class="p">});</span>
+
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-test-cases">
+<h2>3. <a class="toc-backref" href="#id10">Run Test Cases</a></h2>
+<div class="highlight"><pre><span></span>mocha test_moduleB.js
+
+  index
+    <span class="c1">#restEmpty() simple</span>
+      ✓ should run ok
+    <span class="c1">#dbOp.restGetDBInfo() function</span>
+      ✓ should <span class="k">return</span> value
+    <span class="c1">#dbOp.restGetUsers() promise</span>
+      ✓ should <span class="k">return</span> value
+      ✓ should reject
+    <span class="c1">#dbOp.restGetUsersCB() callback</span>
+      ✓ should call error
+      ✓ should call send
+
+  <span class="m">6</span> passing <span class="o">(</span>30ms<span class="o">)</span>
+</pre></div>
+</div>
+<div class="section" id="report-enhancements">
+<h2>4. <a class="toc-backref" href="#id11">Report Enhancements</a></h2>
+<p>Typically, Mocha only support one kind of report which can be conjuncted with <code>console.log</code> . To generate better reports, a better report extension should be added.</p>
+<p>We use <code>mochawesome</code> , a Gorgeous HTML/CSS Reporter for Mocha.js.</p>
+<p>Quite simple usage:</p>
+<p><code>mocha testfile.js --reporter mochawesome</code> .</p>
+</div>
+<div class="section" id="reference">
+<h2>5. <a class="toc-backref" href="#id12">Reference</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://mochajs.org/">https://mochajs.org/</a></li>
+<li><a class="reference external" href="https://sinonjs.org/">https://sinonjs.org/</a></li>
+<li><a class="reference external" href="https://github.com/adamgruber/mochawesome">https://github.com/adamgruber/mochawesome</a></li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Node_Mocha_Sinon.html';
+        var disqus_url = 'https://brianshen1990.github.io/Node_Mocha_Sinon.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>9</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/https.html">Https </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
