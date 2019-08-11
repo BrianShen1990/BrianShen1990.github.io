@@ -44,14 +44,14 @@
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;CSS Variables&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;http-equiv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;content-type&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="nc"&gt;.flex-test&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nb"&gt;border&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1px&lt;/span&gt; &lt;span class="nb"&gt;red&lt;/span&gt; &lt;span class="nb"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;flex-test&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;red&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
       &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="nc"&gt;.flex-test&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nb"&gt;border&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1px&lt;/span&gt; &lt;span class="nb"&gt;black&lt;/span&gt; &lt;span class="nb"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="nb"&gt;border-collapse&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;collapse&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="nb"&gt;border&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;radius&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;3px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="nb"&gt;margin&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;1px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;flex-test&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;black&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;border-collapse&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;collapse&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;border-radius&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;margin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
       &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -178,14 +178,14 @@
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;CSS Grid&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;http-equiv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;content-type&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="nc"&gt;.grid-test&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nb"&gt;border&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1px&lt;/span&gt; &lt;span class="nb"&gt;red&lt;/span&gt; &lt;span class="nb"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;grid-test&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;red&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
       &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="nc"&gt;.grid-test&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nb"&gt;border&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1px&lt;/span&gt; &lt;span class="nb"&gt;black&lt;/span&gt; &lt;span class="nb"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="nb"&gt;border-collapse&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;collapse&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="nb"&gt;border&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;radius&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;3px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="nb"&gt;margin&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;1px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;grid-test&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;black&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;border-collapse&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;collapse&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;border-radius&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;margin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
       &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -209,17 +209,17 @@
     &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="nn"&gt;#grid3&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nb"&gt;display&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt;
+      &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;grid3&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;grid-template-columns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;grid-template-rows&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt;
       &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="nn"&gt;#A&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;align&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="nn"&gt;#B&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;z-index&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="nn"&gt;#C&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;align&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;margin-left&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;-20px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="nn"&gt;#D&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;justify&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;align&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="nn"&gt;#E&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-          &lt;span class="nb"&gt;z-index&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;justify&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;center&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;align&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;center&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;A&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;align-self&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;B&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;z-index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;C&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;align-self&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;start&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;margin-left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;-20&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;D&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;justify-self&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;align-self&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;start&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;E&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="k"&gt;z-index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;justify-self&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;center&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;align-self&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;center&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
       &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
       &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h3&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Basic Sample Z-axis: &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;code&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;grid-column: 1; grid-row: 1; z-index: 10; &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;code&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h3&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
       &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;grid3&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;grid-test&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -231,17 +231,17 @@
       &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
       &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h3&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Basic Sample  Implicit&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h3&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
       &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class="nn"&gt;#grid4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-          &lt;span class="nb"&gt;display&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-          &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;20px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-          &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;40px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-          &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;20px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-          &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;40px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;grid4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+          &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="k"&gt;grid-template-columns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="k"&gt;grid-auto-columns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="k"&gt;grid-template-rows&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="k"&gt;grid-auto-rows&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="nn"&gt;#A4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="nn"&gt;#B4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="nn"&gt;#C4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="nn"&gt;#D4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;A4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;B4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;C4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;D4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;grid-column&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;grid-row&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
       &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 
       &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;grid4&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;grid-test&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -282,7 +282,7 @@
 &lt;span class="nt"&gt;grid&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;         &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;‘&lt;/span&gt;&lt;span class="nt"&gt;grid-template&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;‘&lt;/span&gt;&lt;span class="nt"&gt;grid-template-rows&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nt"&gt;auto-flow&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nt"&gt;dense&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;‘&lt;/span&gt;&lt;span class="nt"&gt;grid-auto-columns&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;?&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nt"&gt;auto-flow&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nt"&gt;dense&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;‘&lt;/span&gt;&lt;span class="nt"&gt;grid-auto-rows&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;?&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;‘&lt;/span&gt;&lt;span class="nt"&gt;grid-template-columns&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;grid-row-start&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;grid-column-start&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;grid-row-end&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;grid-column-end&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;     &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;grid-line&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;grid-row&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;grid-column&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;grid-line&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;grid-line&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;]?&lt;/span&gt;
-&lt;span class="nt"&gt;grid-area&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;grid-line&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;grid-line&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nt"&gt;grid-area&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;grid-line&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;grid-line&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;0,3&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -338,7 +338,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;Declare:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;element&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;brown&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main-bg-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;brown&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Use:&lt;/p&gt;
@@ -382,18 +382,18 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;index.css&lt;/code&gt; :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nt"&gt;data-theme&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;red-theme&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;white&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main-bg-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;white&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
 &lt;span class="nt"&gt;html&lt;/span&gt;  &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;white&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main-bg-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;white&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
 &lt;span class="nt"&gt;body&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;background-color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kc"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kc"&gt;color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And when we click the &lt;code&gt;To Red Theme&lt;/code&gt; Button, our theme is changed! Wow, quite simple!&lt;/p&gt;
@@ -411,12 +411,12 @@
 &lt;div class="section" id="variables"&gt;
 &lt;h3&gt;4.1. &lt;a class="toc-backref" href="#id8"&gt;Variables&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;@width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;10px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;@height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;@width&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nt"&gt;10px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;10px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;width&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nt"&gt;10px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-&lt;span class="nn"&gt;#header&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nt"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;@width&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="nt"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;@height&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;header&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nt"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nt"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
@@ -424,13 +424,13 @@
 &lt;div class="section" id="mixins"&gt;
 &lt;h3&gt;4.2. &lt;a class="toc-backref" href="#id9"&gt;Mixins&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nc"&gt;.bordered&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;border-top&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;dotted&lt;/span&gt; &lt;span class="m"&gt;1px&lt;/span&gt; &lt;span class="nb"&gt;black&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="nb"&gt;border-bottom&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;solid&lt;/span&gt; &lt;span class="m"&gt;2px&lt;/span&gt; &lt;span class="nb"&gt;black&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;bordered&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;border-top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;dotted&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;black&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;border-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;black&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="nn"&gt;#menu&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;#111&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bordered&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;menu&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#111&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;.bordered()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
@@ -438,28 +438,28 @@
 &lt;div class="section" id="nesting"&gt;
 &lt;h3&gt;4.3. &lt;a class="toc-backref" href="#id10"&gt;Nesting&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nn"&gt;#header&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;black&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;navigation&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;font-size&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;12px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;header&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;black&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;.navigation&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="nc"&gt;.logo&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;300px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;logo&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
 
 &lt;span class="c"&gt;/* &amp;amp; represents the current selector parent */&lt;/span&gt;
-&lt;span class="nc"&gt;.clearfix&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;display&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;zoom&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;clearfix&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;zoom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-  &lt;span class="o"&gt;&amp;amp;:&lt;/span&gt;&lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;content&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nb"&gt;display&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nb"&gt;font-size&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nb"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nb"&gt;clear&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;both&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nb"&gt;visibility&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;hidden&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;&amp;amp;:after&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;clear&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;both&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;visibility&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;hidden&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -468,35 +468,35 @@
 &lt;div class="section" id="nested-at-rules-and-bubbling"&gt;
 &lt;h3&gt;4.4. &lt;a class="toc-backref" href="#id11"&gt;Nested At-Rules and Bubbling&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nc"&gt;.component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;300px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;768px&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;600px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;resolution&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;192&lt;/span&gt;&lt;span class="n"&gt;dpi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-      &lt;span class="nb"&gt;background-image&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="sx"&gt;url(/img/retina2x.png)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;@media&lt;/span&gt; &lt;span class="err"&gt;(&lt;/span&gt;&lt;span class="k"&gt;min-width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;768&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;@media&lt;/span&gt;  &lt;span class="err"&gt;(&lt;/span&gt;&lt;span class="n"&gt;min-resolution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;&lt;span class="kt"&gt;dpi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;background-image&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sx"&gt;/img/retina2x.png&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="err"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;@media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;1280px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;1280px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nt"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;800px&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
 &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-&lt;span class="nc"&gt;.component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;300px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;@media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;768px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nc"&gt;.component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;600px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;768px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;@media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;768px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-resolution&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;192dpi&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nc"&gt;.component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;background-image&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="sx"&gt;url(/img/retina2x.png)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;768px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-resolution&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;192dpi&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;background-image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sx"&gt;/img/retina2x.png&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;@media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;1280px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nc"&gt;.component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;800px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;media&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;1280px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -507,18 +507,18 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;+,-,*,/&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;calc() exception&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;@var&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;50vh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="nt"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;calc&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;50&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;@var&lt;/span&gt; &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;20px&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nt"&gt;result&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;calc&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;50&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;25vh&lt;/span&gt; &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;20px&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;50vh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nt"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;calc&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;50&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;20px&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nt"&gt;result&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;calc&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;50&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;25vh&lt;/span&gt; &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;20px&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;div class="section" id="escaping"&gt;
 &lt;h3&gt;4.6. &lt;a class="toc-backref" href="#id13"&gt;Escaping&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;@min768&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(min-width: 768px)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="nc"&gt;.element&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt; &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;min768&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;font-size&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="n"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;min768&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(min-width: 768px)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;element&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="err"&gt;@media&lt;/span&gt; &lt;span class="err"&gt;@min768&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -527,13 +527,13 @@
 &lt;div class="section" id="functions"&gt;
 &lt;h3&gt;4.7. &lt;a class="toc-backref" href="#id14"&gt;Functions&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;@base&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nn"&gt;#f04615&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;@width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;0&lt;/span&gt;&lt;span class="nc"&gt;.5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;base&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;f04615&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-&lt;span class="nc"&gt;.class&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;percentage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;returns&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="m"&gt;50%&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
-  &lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;saturate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="m"&gt;5%&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="nb"&gt;background-color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;spin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lighten&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="m"&gt;25%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;class&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nf"&gt;percentage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;returns&lt;/span&gt; &lt;span class="err"&gt;`50%`&lt;/span&gt;
+  &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;saturate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nf"&gt;spin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;lighten&lt;/span&gt;&lt;span class="err"&gt;(@&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
@@ -541,14 +541,14 @@
 &lt;div class="section" id="maps"&gt;
 &lt;h3&gt;4.8. &lt;a class="toc-backref" href="#id15"&gt;Maps&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nn"&gt;#colors&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="n"&gt;primary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;blue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;secondary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;green&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;colors&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;primary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;blue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;secondary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;green&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="nc"&gt;.button&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;#colors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;primary&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-  &lt;span class="nb"&gt;border&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1px&lt;/span&gt; &lt;span class="nb"&gt;solid&lt;/span&gt; &lt;span class="m"&gt;#colors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;secondary&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;button&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#colors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;primary&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+  &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt; &lt;span class="mh"&gt;#colors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;secondary&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
@@ -557,12 +557,12 @@
 &lt;h3&gt;4.9. &lt;a class="toc-backref" href="#id16"&gt;Scope&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Local First&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;@var&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-&lt;span class="nn"&gt;#page&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;white&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="m"&gt;#header&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nb"&gt;white&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;page&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;white&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="err"&gt;#header&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;white&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -571,8 +571,8 @@
 &lt;div class="section" id="importing"&gt;
 &lt;h3&gt;4.10. &lt;a class="toc-backref" href="#id17"&gt;Importing&lt;/a&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;@import&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;library&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nt"&gt;library&lt;/span&gt;&lt;span class="nc"&gt;.less&lt;/span&gt;
-&lt;span class="k"&gt;@import&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;typo.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;library&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nt"&gt;library&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;less&lt;/span&gt;
+&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;typo.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
@@ -744,10 +744,10 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;index.js&lt;/code&gt; :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;myWorker&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Worker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./worker.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="nx"&gt;myWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;onmessage&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nx"&gt;myWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;onmessage&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#res&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
-&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;testWorker&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;testWorker&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="nx"&gt;myWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;postMessage&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -768,8 +768,8 @@
 &lt;h2&gt;4. &lt;a class="toc-backref" href="#id5"&gt;React and Webworker&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Mainly we can use Embedded workers loaded form functions!&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;/src/app.worker.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;message&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;message&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="c1"&gt;// ...&lt;/span&gt;
@@ -793,7 +793,7 @@
 &lt;span class="c1"&gt;// ...&lt;/span&gt;
 &lt;span class="nx"&gt;componentDidMount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;worker&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;WebWorker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;worker&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;worker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;message&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;worker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;message&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;event&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;sortedList&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setState&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
       &lt;span class="nx"&gt;users&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;sortedList&lt;/span&gt;
@@ -867,8 +867,8 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="nc"&gt;.paintOnly&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="nb"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;paintOnly&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;jquery-3.3.1.min.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -930,9 +930,9 @@
 &lt;p&gt;BEM (Block, Element, Modifier):&lt;/p&gt;
 &lt;blockquote&gt;
 It recommends that everything has a single class, and, where you need hierarchy, that gets baked into the name of the class as well:&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nc"&gt;.list&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="nc"&gt;.list__list-item&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="nc"&gt;.list__list-item--last-child&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;list&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;list__list-item&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;list__list-item--last-child&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="optimizing-layout"&gt;
@@ -1006,12 +1006,12 @@ It recommends that everything has a single class, and, where you need hierarchy,
 &lt;li&gt;&lt;p class="first"&gt;Paint is often the most expensive part of the pixel pipeline; avoid it where you can.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p class="first"&gt;Reduce paint areas through layer promotion and orchestration of animations.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nc"&gt;.moving-element&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="n"&gt;will&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;change&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;moving-element&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;will-change&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="nc"&gt;.moving-element&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;translateZ&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;moving-element&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;translateZ&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
@@ -1128,7 +1128,7 @@ window.addEventListener&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&g
         └─ Each pages
     └─ index.jsx &lt;span class="o"&gt;(&lt;/span&gt;Main entry/主进入点&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="tip"&gt;
+&lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
 &lt;p&gt;Problems of Absolute path: 相对路径问题&lt;/p&gt;
 &lt;p&gt;Ref: &lt;a class="reference external" href="https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/"&gt;https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/&lt;/a&gt;&lt;/p&gt;
@@ -1189,7 +1189,7 @@ All we have to do is declare, declare. And the scope is in the components itself
                     &amp;lt;BoostNavLink
                         &lt;span class="nv"&gt;className&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;classnames&lt;span class="o"&gt;({&lt;/span&gt; active: this.state.activeTab &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;})}&lt;/span&gt;
                         &lt;span class="nv"&gt;onClick&lt;/span&gt;&lt;span class="o"&gt;={()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt; this.toggleTab&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}}&lt;/span&gt;&amp;gt;
-                        Tab 2
+                        Tab &lt;span class="m"&gt;2&lt;/span&gt;
                     &amp;lt;/BoostNavLink&amp;gt;
                 &amp;lt;/NavItem&amp;gt;
             &amp;lt;/Nav&amp;gt;
@@ -1356,17 +1356,17 @@ global.fetch &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(
 import &lt;span class="o"&gt;{&lt;/span&gt;  Row, Card &lt;span class="o"&gt;}&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;reactstrap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 import Adapter from &lt;span class="s1"&gt;&amp;#39;enzyme-adapter-react-16&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 configure&lt;span class="o"&gt;({&lt;/span&gt; adapter: new Adapter&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-//jest.setTimeout&lt;span class="o"&gt;(&lt;/span&gt;10000&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+//jest.setTimeout&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10000&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;SubAV /&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
     it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;renders 1 &amp;lt;Row /&amp;gt; components&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
         const &lt;span class="nv"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; shallow&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;SubAV /&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.find&lt;span class="o"&gt;(&lt;/span&gt;Row&lt;span class="o"&gt;))&lt;/span&gt;.to.have.lengthOf&lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.find&lt;span class="o"&gt;(&lt;/span&gt;Row&lt;span class="o"&gt;))&lt;/span&gt;.to.have.lengthOf&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
     it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;renders 4 &amp;lt;Card /&amp;gt; components&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
         const &lt;span class="nv"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; shallow&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;SubAV /&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.find&lt;span class="o"&gt;(&lt;/span&gt;Card&lt;span class="o"&gt;))&lt;/span&gt;.to.have.lengthOf&lt;span class="o"&gt;(&lt;/span&gt;4&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.find&lt;span class="o"&gt;(&lt;/span&gt;Card&lt;span class="o"&gt;))&lt;/span&gt;.to.have.lengthOf&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
     it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;calls componentDidMount&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
@@ -1384,14 +1384,14 @@ describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp
         sinon.spy&lt;span class="o"&gt;(&lt;/span&gt;SampleRest.prototype, &lt;span class="s1"&gt;&amp;#39;componentDidMount&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         fetch.mockResponseOnce&lt;span class="o"&gt;(&lt;/span&gt;JSON.stringify&lt;span class="o"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;Fay&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]))&lt;/span&gt;
         const &lt;span class="nv"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; mount&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;SampleRest /&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        expect&lt;span class="o"&gt;(&lt;/span&gt;SampleRest.prototype.componentDidMount&lt;span class="o"&gt;)&lt;/span&gt;.to.have.property&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;callCount&amp;#39;&lt;/span&gt;, 1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;SampleRest.prototype.componentDidMount&lt;span class="o"&gt;)&lt;/span&gt;.to.have.property&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;callCount&amp;#39;&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         setTimeout&lt;span class="o"&gt;(()=&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;
             console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;haha&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
             console.log&lt;span class="o"&gt;(&lt;/span&gt;wrapper.text&lt;span class="o"&gt;())&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
             wrapper.update&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
             expect&lt;span class="o"&gt;(&lt;/span&gt;wrapper.contains&lt;span class="o"&gt;(&lt;/span&gt;&amp;lt;span&amp;gt;Fay&amp;lt;br /&amp;gt;&amp;lt;/span&amp;gt;&lt;span class="o"&gt;))&lt;/span&gt;.to.equal&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
             &lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="o"&gt;}&lt;/span&gt;, 100&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;, &lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
     &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1407,7 +1407,7 @@ describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp
 Test Suites: &lt;span class="m"&gt;1&lt;/span&gt; passed, &lt;span class="m"&gt;1&lt;/span&gt; total
 Tests:       &lt;span class="m"&gt;4&lt;/span&gt; passed, &lt;span class="m"&gt;4&lt;/span&gt; total
 Snapshots:   &lt;span class="m"&gt;0&lt;/span&gt; total
-Time:        1.881s, estimated 2s
+Time:        &lt;span class="m"&gt;1&lt;/span&gt;.881s, estimated 2s
 Ran all &lt;span class="nb"&gt;test&lt;/span&gt; suites related to changed files.
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -1525,16 +1525,14 @@ registerServiceWorker&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p class="first"&gt;Route Matching / 路由匹配&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;ul&gt;
+&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;You can include a &amp;lt;Route&amp;gt; anywhere that you want to render content based on the location.&lt;/dt&gt;
-&lt;dd&gt;&lt;p class="first last"&gt;It will often make sense to list a number of possible &amp;lt;Route&amp;gt;s next to each other.
-路由匹配将 URL 和对应的 组件相关联。&lt;/p&gt;
-&lt;/dd&gt;
+&lt;dd&gt;It will often make sense to list a number of possible &amp;lt;Route&amp;gt;s next to each other.
+路由匹配将 URL 和对应的 组件相关联。&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;The &amp;lt;Switch&amp;gt; component is used to group &amp;lt;Route&amp;gt;s together.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;The &amp;lt;Switch&amp;gt; component is used to group &amp;lt;Route&amp;gt;s together.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/about&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;About&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt; // renders &amp;lt;About/&amp;gt;
 &amp;lt;Route &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/contact&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt;&lt;span class="o"&gt;={&lt;/span&gt;Contact&lt;span class="o"&gt;}&lt;/span&gt;/&amp;gt; // renders null
@@ -1562,18 +1560,16 @@ You should not use the component prop with an inline function to pass in-scope v
 &lt;/li&gt;
 &lt;li&gt;&lt;p class="first"&gt;Navigation / 导航&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;ul&gt;
+&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;React Router provides a &amp;lt;Link&amp;gt; component to create links in your application.&lt;/dt&gt;
-&lt;dd&gt;&lt;p class="first last"&gt;Wherever you render a &amp;lt;Link&amp;gt;, an anchor (&amp;lt;a&amp;gt;) will be rendered in your application’s HTML.
-Route 是确定什么样的URL 渲染怎样的组件， 而 Link 和 NavLink 则是 UI 上怎么显示这些锚点 并且相关联。&lt;/p&gt;
-&lt;/dd&gt;
+&lt;dd&gt;Wherever you render a &amp;lt;Link&amp;gt;, an anchor (&amp;lt;a&amp;gt;) will be rendered in your application’s HTML.
+Route 是确定什么样的URL 渲染怎样的组件， 而 Link 和 NavLink 则是 UI 上怎么显示这些锚点 并且相关联。&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;The &amp;lt;NavLink&amp;gt; is a special type of &amp;lt;Link&amp;gt; that can style itself as “active” when its to prop matches the current location.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;The &amp;lt;NavLink&amp;gt; is a special type of &amp;lt;Link&amp;gt; that can style itself as “active” when its to prop matches the current location.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="warning"&gt;
+&lt;div class="admonition warning"&gt;
 &lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
 &lt;div class="last line-block"&gt;
 &lt;div class="line"&gt;NavLink can cause conflict with reactstrap NavLink, when imported, please add alias to escape.&lt;/div&gt;
@@ -1978,7 +1974,7 @@ describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Rest
     it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sets the correct default data&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="o"&gt;{&lt;/span&gt;
         expect&lt;span class="o"&gt;(&lt;/span&gt;typeof RestSample.data&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;function&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
         const &lt;span class="nv"&gt;defaultData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; RestSample.data&lt;span class="o"&gt;()&lt;/span&gt;
-        expect&lt;span class="o"&gt;(&lt;/span&gt;defaultData.items.length&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;0&lt;span class="o"&gt;)&lt;/span&gt;
+        expect&lt;span class="o"&gt;(&lt;/span&gt;defaultData.items.length&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
     &lt;span class="o"&gt;})&lt;/span&gt;
 &lt;span class="o"&gt;})&lt;/span&gt;
 
@@ -1997,13 +1993,13 @@ describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Rest
             moxios.wait&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
                 &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;request&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; moxios.requests.mostRecent&lt;span class="o"&gt;()&lt;/span&gt;
                 request.respondWith&lt;span class="o"&gt;({&lt;/span&gt;
-                    status: 200,
+                    status: &lt;span class="m"&gt;200&lt;/span&gt;,
                     response: &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt; ,&lt;span class="s2"&gt;&amp;quot;Ben&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
                 &lt;span class="o"&gt;})&lt;/span&gt;.then&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
                     expect&lt;span class="o"&gt;(&lt;/span&gt;vm.items&lt;span class="o"&gt;)&lt;/span&gt;.to.eql&lt;span class="o"&gt;([&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt; ,&lt;span class="s2"&gt;&amp;quot;Ben&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;])&lt;/span&gt;
                     expect&lt;span class="o"&gt;(&lt;/span&gt;vm.&lt;span class="nv"&gt;$el&lt;/span&gt;.textContent&lt;span class="o"&gt;)&lt;/span&gt;.to.include&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ben&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
                     expect&lt;span class="o"&gt;(&lt;/span&gt;vm.&lt;span class="nv"&gt;$el&lt;/span&gt;.textContent&lt;span class="o"&gt;)&lt;/span&gt;.to.include&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-                    //expect&lt;span class="o"&gt;(&lt;/span&gt;vm.&lt;span class="nv"&gt;$el&lt;/span&gt;.textContent&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt;
+                    //expect&lt;span class="o"&gt;(&lt;/span&gt;vm.&lt;span class="nv"&gt;$el&lt;/span&gt;.textContent&lt;span class="o"&gt;)&lt;/span&gt;.to.eq&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
                     &lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
                 &lt;span class="o"&gt;})&lt;/span&gt;
             &lt;span class="o"&gt;})&lt;/span&gt;
@@ -2199,16 +2195,16 @@ var &lt;span class="nv"&gt;router&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="warning"&gt;
+&lt;div class="admonition warning"&gt;
 &lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;If you want to use console and debugger, in package.json:&lt;/div&gt;
 &lt;div class="line"&gt;如果想使用  console 和 debugger， 请在  package.json里面添加:&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="last"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;rules&amp;quot;&lt;/span&gt;: &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;comma-dangle&amp;quot;&lt;/span&gt;: 0,
-    &lt;span class="s2"&gt;&amp;quot;no-console&amp;quot;&lt;/span&gt;: 0,
-    &lt;span class="s2"&gt;&amp;quot;no-debugger&amp;quot;&lt;/span&gt;: 0
+    &lt;span class="s2"&gt;&amp;quot;comma-dangle&amp;quot;&lt;/span&gt;: &lt;span class="m"&gt;0&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;no-console&amp;quot;&lt;/span&gt;: &lt;span class="m"&gt;0&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;no-debugger&amp;quot;&lt;/span&gt;: &lt;span class="m"&gt;0&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;,
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;
@@ -2304,16 +2300,14 @@ serve -s dist
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The most important thing is that: / 最重要的是:&lt;/p&gt;
-&lt;ul&gt;
+&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Keeping the UI in sync with the state is hard. / 将 UI 保持与状态一致， 是一件非常困难的事情.&lt;/dt&gt;
-&lt;dd&gt;&lt;p class="first last"&gt;It is not possible to write complex, efficient and easy to maintain UIs with Pure JavaScript.
-如果不引入这些框架， 我们很难写出复杂 高效 和 可维护的App.&lt;/p&gt;
-&lt;/dd&gt;
+&lt;dd&gt;It is not possible to write complex, efficient and easy to maintain UIs with Pure JavaScript.
+如果不引入这些框架， 我们很难写出复杂 高效 和 可维护的App.&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;Keep focusing on data handling. / 将更多的精力集中在写有用的代码上。&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;Keep focusing on data handling. / 将更多的精力集中在写有用的代码上。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="section" id="example"&gt;
 &lt;h3&gt;1.1. &lt;a class="toc-backref" href="#id2"&gt;Example&lt;/a&gt;&lt;/h3&gt;
@@ -2342,7 +2336,7 @@ serve -s dist
             &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;this&lt;span class="k"&gt;)&lt;/span&gt;.attr&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
             &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; names.indexOf&lt;span class="o"&gt;(&lt;/span&gt;item&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;index &amp;gt; -1&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-            names.splice&lt;span class="o"&gt;(&lt;/span&gt;index, 1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            names.splice&lt;span class="o"&gt;(&lt;/span&gt;index, &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
             &lt;span class="o"&gt;}&lt;/span&gt;
             reRender&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -2351,7 +2345,7 @@ serve -s dist
     &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;reRender&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
         &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;htmls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         names.map&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;{&lt;/span&gt;
-            htmls +&lt;span class="o"&gt;=&lt;/span&gt; item + &lt;span class="s1"&gt;&amp;#39;&amp;amp;nbsp;&amp;lt;input class=&amp;quot;deleteBtn&amp;quot; type=&amp;quot;button&amp;quot; data=&amp;quot;&amp;#39;&lt;/span&gt; + item + &lt;span class="s1"&gt;&amp;#39;&amp;quot; value=&amp;quot;Delete&amp;quot; /&amp;gt;&amp;#39;&lt;/span&gt;
+            &lt;span class="nv"&gt;htmls&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; item + &lt;span class="s1"&gt;&amp;#39;&amp;amp;nbsp;&amp;lt;input class=&amp;quot;deleteBtn&amp;quot; type=&amp;quot;button&amp;quot; data=&amp;quot;&amp;#39;&lt;/span&gt; + item + &lt;span class="s1"&gt;&amp;#39;&amp;quot; value=&amp;quot;Delete&amp;quot; /&amp;gt;&amp;#39;&lt;/span&gt;
         &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#names&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;.html&lt;span class="o"&gt;(&lt;/span&gt;htmls&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         rebindClick&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -2396,7 +2390,7 @@ class SampleState extends Component &lt;span class="o"&gt;{&lt;/span&gt;
         &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; this.state.names&lt;span class="p"&gt;;&lt;/span&gt;
         &lt;span class="nb"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; names.indexOf&lt;span class="o"&gt;(&lt;/span&gt;item&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;index &amp;gt; -1&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-            names.splice&lt;span class="o"&gt;(&lt;/span&gt;index, 1&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            names.splice&lt;span class="o"&gt;(&lt;/span&gt;index, &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         &lt;span class="o"&gt;}&lt;/span&gt;
         this.setState&lt;span class="o"&gt;({&lt;/span&gt;
             &lt;span class="s2"&gt;&amp;quot;names&amp;quot;&lt;/span&gt;: names,
@@ -2426,10 +2420,10 @@ class SampleState extends Component &lt;span class="o"&gt;{&lt;/span&gt;
 &lt;/div&gt;
 &lt;div class="section" id="for-de"&gt;
 &lt;h3&gt;1.2. &lt;a class="toc-backref" href="#id3"&gt;For DE&lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
+&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Easy coding &amp;amp; efficiency / 简化编程， 提高效率&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;Do less, get more. / 写更少的程序，获得更好的效果&lt;/li&gt;
 &lt;li&gt;Understandable code. / 易懂的代码&lt;/li&gt;
 &lt;/ul&gt;
@@ -2438,7 +2432,7 @@ class SampleState extends Component &lt;span class="o"&gt;{&lt;/span&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Easy Learning for all RD / 学习曲线平滑， 容易入门， RD 可修改&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;Backend developers can also add simple features without problem. / 后端工程师也能够快速的实现自己想要添加的修修改改&lt;/li&gt;
 &lt;li&gt;Frontend developers can do better and do enhancements. / 前端工程师 在优化时 可控&lt;/li&gt;
 &lt;/ul&gt;
@@ -2447,7 +2441,7 @@ class SampleState extends Component &lt;span class="o"&gt;{&lt;/span&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Scalability &amp;amp; Ecosystem / 扩展性 和 生态系统&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;Plugins and Modules / 丰富的插件 和 模块，开发者社区&lt;/li&gt;
 &lt;li&gt;Maintainability / 可维护性&lt;/li&gt;
 &lt;/ul&gt;
@@ -2456,7 +2450,7 @@ class SampleState extends Component &lt;span class="o"&gt;{&lt;/span&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;Cost of Upgrading / 升级代价&lt;/dt&gt;
-&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
 &lt;li&gt;No framework to framework / 从无框架到有框架的扩展&lt;/li&gt;
 &lt;li&gt;Framework self upgrading / 框架本身升级&lt;/li&gt;
 &lt;/ul&gt;
@@ -2539,7 +2533,7 @@ app.post&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/res
     &lt;span class="o"&gt;})&lt;/span&gt;
 &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-app.listen&lt;span class="o"&gt;(&lt;/span&gt;3001, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Example app listening on port 3001!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+app.listen&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3001&lt;/span&gt;, &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; console.log&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Example app listening on port 3001!&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Run &lt;code&gt;node server.js&lt;/code&gt;  / 运行服务器&lt;/li&gt;

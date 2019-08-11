@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Linux</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/linux.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2019-07-19T00:00:00+08:00</updated><entry><title>NPM Local Registry and debug</title><link href="https://brianshen1990.github.io/NPM_Local_Registry_and_debug.html" rel="alternate"></link><published>2019-07-19T00:00:00+08:00</published><updated>2019-07-19T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-07-19:/NPM_Local_Registry_and_debug.html</id><summary type="html">&lt;p class="first last"&gt;NPM Local Registry and debug&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="contents"&gt;
+&lt;span id="node-npm-local-reg-rst"&gt;&lt;/span&gt;&lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-we-should-use-local-npm-registry" id="id1"&gt;Why we should use local npm registry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-establish-a-local-registry" id="id2"&gt;how to establish a local registry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-get-basic-information-of-local-npm-registry" id="id3"&gt;How to get basic information of local npm registry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-to-use" id="id4"&gt;How to use&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#other-tips" id="id5"&gt;Other Tips&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-we-should-use-local-npm-registry"&gt;
+&lt;h2&gt;1. &lt;a class="toc-backref" href="#id1"&gt;Why we should use local npm registry&lt;/a&gt;&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Decouple building from Internet.
+Especially in China, where connections to npm default registry ( &lt;code&gt;https://registry.npmjs.org/&lt;/code&gt; ) are very unstable. If our build process depends on such kind of connection, build system could be very fragile and can lead to failures more frequently.&lt;/li&gt;
+&lt;li&gt;Improve download speed.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-establish-a-local-registry"&gt;
+&lt;h2&gt;2. &lt;a class="toc-backref" href="#id2"&gt;how to establish a local registry&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Please refer to cnpmjs:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/cnpm/cnpmjs.org"&gt;https://github.com/cnpm/cnpmjs.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes"&gt;https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-get-basic-information-of-local-npm-registry"&gt;
+&lt;h2&gt;3. &lt;a class="toc-backref" href="#id3"&gt;How to get basic information of local npm registry&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;UI (default 7002)&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://ipaddress:7002"&gt;http://ipaddress:7002&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;MySQL - Package versions&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mysql -u root -p
+use cnpmjs
+show tables&lt;span class="p"&gt;;&lt;/span&gt;
+describe module&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;select&lt;/span&gt; name, version, dist_tarball from module WHERE &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bluebird&amp;#39;&lt;/span&gt; AND &lt;span class="nv"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;3.4.0&amp;#39;&lt;/span&gt; LIMIT &lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
++----------+---------+--------------------------------+
+&lt;span class="p"&gt;|&lt;/span&gt; name     &lt;span class="p"&gt;|&lt;/span&gt; version &lt;span class="p"&gt;|&lt;/span&gt; dist_tarball                   &lt;span class="p"&gt;|&lt;/span&gt;
++----------+---------+--------------------------------+
+&lt;span class="p"&gt;|&lt;/span&gt; bluebird &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.4.0   &lt;span class="p"&gt;|&lt;/span&gt; /bluebird/-/bluebird-3.4.0.tgz &lt;span class="p"&gt;|&lt;/span&gt;
++----------+---------+--------------------------------+
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Package Locations&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;~/.cnpmjs.org/nfs/&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-use"&gt;
+&lt;h2&gt;4. &lt;a class="toc-backref" href="#id4"&gt;How to use&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm config &lt;span class="nb"&gt;set&lt;/span&gt; registry http://ipaddress:7001
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="other-tips"&gt;
+&lt;h2&gt;5. &lt;a class="toc-backref" href="#id5"&gt;Other Tips&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Using local registry doesn't mean that internet can be totally disconnected&lt;/p&gt;
+&lt;p&gt;Packages such as  &lt;code&gt;phantom-prebuild&lt;/code&gt; contains some system dependencies ( &lt;code&gt;phantomjs&lt;/code&gt; ). Without it, npm will try to download binaries from internet.&lt;/p&gt;
+&lt;p&gt;Other examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;phantom-prebuild&lt;/code&gt; : need to install &lt;code&gt;phantomjs&lt;/code&gt; manually first.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;ffi&lt;/code&gt; : need to be compiled with node libraries. I'm using node 8.16.0, so  &lt;a class="reference external" href="https://nodejs.org/download/release/v8.16.0/node-v8.16.0-headers.tar.gz"&gt;https://nodejs.org/download/release/v8.16.0/node-v8.16.0-headers.tar.gz&lt;/a&gt; is needed.&lt;/p&gt;
+&lt;p&gt;Download from internet and then config nodedir：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/plugins-scripts/Dockfile&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tar -xvf /plugins-scripts/node-v6.14.3-headers.tar.gz
+npm config &lt;span class="nb"&gt;set&lt;/span&gt; nodedir /node-v6.14.3
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;code&gt;vis-react&lt;/code&gt; : This package wrappers &lt;code&gt;vis&lt;/code&gt; , and it will secretly download &lt;code&gt;vis&lt;/code&gt; from github. Totally a disaster. Try use &lt;code&gt;react-graph-vis&lt;/code&gt; .&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Sync can be a long progress&lt;/p&gt;
+&lt;p&gt;Many reasons. The first is the internet speed. The second is that all dependencies and all versions should be downloaded.&lt;/p&gt;
+&lt;p&gt;So what if we need a package urgently?&lt;/p&gt;
+&lt;p&gt;Try go to &lt;a class="reference external" href="http://ipaddress:7002"&gt;http://ipaddress:7002&lt;/a&gt; to search and sync manually.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;How to debug why npm fails with local registry?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm install --loglevel verbose&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;By using this, it will print nearly all information you need. Especially steps about internet connections.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Log"></category><category term="Web"></category></entry></feed>

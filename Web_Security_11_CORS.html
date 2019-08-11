@@ -103,7 +103,7 @@
 <div class="section" id="sample-not-sharing-data">
 <h2>3. <a class="toc-backref" href="#id4">Sample: Not sharing data</a></h2>
 <p>Let's look at our blog system <code>index.js</code> , there is an API that will send Hello World.</p>
-<div class="highlight"><pre><span></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">))</span>
 </pre></div>
 <p>If we try to get the resource from a different site 8889:</p>
 <p><code>staticFileHack/index.html</code> :</p>
@@ -148,7 +148,7 @@ node indexHack.js
 <div class="highlight"><pre><span></span><span class="c1">// ...</span>
 <span class="kr">const</span> <span class="nx">cors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cors&#39;</span><span class="p">);</span>
 <span class="c1">// ...</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/&#39;</span><span class="p">,</span>  <span class="nx">cors</span><span class="p">(),</span>  <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">))</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/&#39;</span><span class="p">,</span>  <span class="nx">cors</span><span class="p">(),</span>  <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">))</span>
 <span class="c1">// ...</span>
 </pre></div>
 <div class="highlight"><pre><span></span>node indexShare.js
@@ -215,6 +215,9 @@ node indexHack.js
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -223,7 +226,7 @@ node indexHack.js
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

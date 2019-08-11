@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>NPM Local Registry and debug</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/NPM_Local_Registry_and_debug.html" rel="bookmark"
+          title="Permalink to NPM Local Registry and debug">NPM Local Registry and debug
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Fri 19 July 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Linux</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/log.html">Log</a> 
+          <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="node-npm-local-reg-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#why-we-should-use-local-npm-registry" id="id1">Why we should use local npm registry</a></li>
+<li><a class="reference internal" href="#how-to-establish-a-local-registry" id="id2">how to establish a local registry</a></li>
+<li><a class="reference internal" href="#how-to-get-basic-information-of-local-npm-registry" id="id3">How to get basic information of local npm registry</a></li>
+<li><a class="reference internal" href="#how-to-use" id="id4">How to use</a></li>
+<li><a class="reference internal" href="#other-tips" id="id5">Other Tips</a></li>
+</ul>
+</div>
+<div class="section" id="why-we-should-use-local-npm-registry">
+<h2>1. <a class="toc-backref" href="#id1">Why we should use local npm registry</a></h2>
+<ol class="arabic simple">
+<li>Decouple building from Internet.
+Especially in China, where connections to npm default registry ( <code>https://registry.npmjs.org/</code> ) are very unstable. If our build process depends on such kind of connection, build system could be very fragile and can lead to failures more frequently.</li>
+<li>Improve download speed.</li>
+</ol>
+</div>
+<div class="section" id="how-to-establish-a-local-registry">
+<h2>2. <a class="toc-backref" href="#id2">how to establish a local registry</a></h2>
+<p>Please refer to cnpmjs:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/cnpm/cnpmjs.org">https://github.com/cnpm/cnpmjs.org</a></li>
+<li><a class="reference external" href="https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes">https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes</a></li>
+</ul>
+</div>
+<div class="section" id="how-to-get-basic-information-of-local-npm-registry">
+<h2>3. <a class="toc-backref" href="#id3">How to get basic information of local npm registry</a></h2>
+<ul>
+<li><p class="first">UI (default 7002)</p>
+<p><a class="reference external" href="http://ipaddress:7002">http://ipaddress:7002</a></p>
+</li>
+<li><p class="first">MySQL - Package versions</p>
+<div class="highlight"><pre><span></span>mysql -u root -p
+use cnpmjs
+show tables<span class="p">;</span>
+describe module<span class="p">;</span>
+
+<span class="k">select</span> name, version, dist_tarball from module WHERE <span class="nv">name</span><span class="o">=</span><span class="s1">&#39;bluebird&#39;</span> AND <span class="nv">version</span><span class="o">=</span><span class="s1">&#39;3.4.0&#39;</span> LIMIT <span class="m">10</span><span class="p">;</span>
++----------+---------+--------------------------------+
+<span class="p">|</span> name     <span class="p">|</span> version <span class="p">|</span> dist_tarball                   <span class="p">|</span>
++----------+---------+--------------------------------+
+<span class="p">|</span> bluebird <span class="p">|</span> <span class="m">3</span>.4.0   <span class="p">|</span> /bluebird/-/bluebird-3.4.0.tgz <span class="p">|</span>
++----------+---------+--------------------------------+
+</pre></div>
+</li>
+<li><p class="first">Package Locations</p>
+<p><code>~/.cnpmjs.org/nfs/</code></p>
+</li>
+</ul>
+</div>
+<div class="section" id="how-to-use">
+<h2>4. <a class="toc-backref" href="#id4">How to use</a></h2>
+<div class="highlight"><pre><span></span>npm config <span class="nb">set</span> registry http://ipaddress:7001
+</pre></div>
+</div>
+<div class="section" id="other-tips">
+<h2>5. <a class="toc-backref" href="#id5">Other Tips</a></h2>
+<ul>
+<li><p class="first">Using local registry doesn't mean that internet can be totally disconnected</p>
+<p>Packages such as  <code>phantom-prebuild</code> contains some system dependencies ( <code>phantomjs</code> ). Without it, npm will try to download binaries from internet.</p>
+<p>Other examples:</p>
+<ul>
+<li><p class="first"><code>phantom-prebuild</code> : need to install <code>phantomjs</code> manually first.</p>
+</li>
+<li><p class="first"><code>ffi</code> : need to be compiled with node libraries. I'm using node 8.16.0, so  <a class="reference external" href="https://nodejs.org/download/release/v8.16.0/node-v8.16.0-headers.tar.gz">https://nodejs.org/download/release/v8.16.0/node-v8.16.0-headers.tar.gz</a> is needed.</p>
+<p>Download from internet and then config nodedir：</p>
+<p><code>/plugins-scripts/Dockfile</code> 。</p>
+<div class="highlight"><pre><span></span>tar -xvf /plugins-scripts/node-v6.14.3-headers.tar.gz
+npm config <span class="nb">set</span> nodedir /node-v6.14.3
+</pre></div>
+</li>
+<li><p class="first"><code>vis-react</code> : This package wrappers <code>vis</code> , and it will secretly download <code>vis</code> from github. Totally a disaster. Try use <code>react-graph-vis</code> .</p>
+</li>
+</ul>
+</li>
+<li><p class="first">Sync can be a long progress</p>
+<p>Many reasons. The first is the internet speed. The second is that all dependencies and all versions should be downloaded.</p>
+<p>So what if we need a package urgently?</p>
+<p>Try go to <a class="reference external" href="http://ipaddress:7002">http://ipaddress:7002</a> to search and sync manually.</p>
+</li>
+<li><p class="first">How to debug why npm fails with local registry?</p>
+<p><code>npm install --loglevel verbose</code></p>
+<p>By using this, it will print nearly all information you need. Especially steps about internet connections.</p>
+</li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'NPM_Local_Registry_and_debug.html';
+        var disqus_url = 'https://brianshen1990.github.io/NPM_Local_Registry_and_debug.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/https.html">Https </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>

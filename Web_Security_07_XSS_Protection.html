@@ -110,7 +110,7 @@ XSS Tested:
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 <p>To demo the <code>X-XSS-Protection</code> flag, we will send client the raw content, instead of a file <code>index.js</code> :</p>
-<div class="highlight"><pre><span></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/viewPage.html&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/viewPage.html&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">tempVal</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">);</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tempVal</span><span class="p">);</span>
   <span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="sb">`&lt;html&gt;</span>
@@ -236,6 +236,9 @@ XSS Tested:
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -244,7 +247,7 @@ XSS Tested:
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

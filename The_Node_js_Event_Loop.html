@@ -148,7 +148,7 @@
 
 <span class="kr">const</span> <span class="nx">timeoutScheduled</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
 
-<span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">timeoutScheduled</span><span class="p">;</span>
 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">delay</span><span class="si">}</span><span class="sb">ms have passed since I was scheduled`</span><span class="p">);</span>
@@ -156,7 +156,7 @@
 
 
 <span class="c1">// do someAsyncOperation which takes 95 ms to complete</span>
-<span class="nx">someAsyncOperation</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">someAsyncOperation</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">startCallback</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
 
   <span class="c1">// do something that will take 10ms...</span>
@@ -212,11 +212,11 @@
 <p>哪一个定时器会被执行 会与他们的上下文环境相关。如果两个函数在同一个 模块中被调用，那么定时器会依赖于这个进程的性能（会被这台机器上其他的程序影响）。</p>
 <p>举例来说，如果我们在非 I/O 循环中（比方说 主模块）运行下面的脚本，哪一个定时器会被先执行是无法确定的，因为与进程的性能相关。</p>
 <div class="highlight"><pre><span></span><span class="c1">// timeout_vs_immediate.js</span>
-<span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">);</span>
 <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
 
-<span class="nx">setImmediate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">setImmediate</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;immediate&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
@@ -232,11 +232,11 @@
 <div class="highlight"><pre><span></span><span class="c1">// timeout_vs_immediate.js</span>
 <span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
 
-<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">__filename</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">__filename</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">);</span>
   <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
-  <span class="nx">setImmediate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">setImmediate</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;immediate&#39;</span><span class="p">);</span>
   <span class="p">});</span>
 <span class="p">});</span>
@@ -276,7 +276,7 @@
 <span class="kd">function</span> <span class="nx">someAsyncApiCall</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="nx">callback</span><span class="p">();</span> <span class="p">}</span>
 
 <span class="c1">// the callback is called before `someAsyncApiCall` completes.</span>
-<span class="nx">someAsyncApiCall</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">someAsyncApiCall</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// since someAsyncApiCall has completed, bar hasn&#39;t been assigned any value</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nx">bar</span><span class="p">);</span> <span class="c1">// undefined</span>
 <span class="p">});</span>
@@ -291,16 +291,16 @@
   <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="nx">someAsyncApiCall</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">someAsyncApiCall</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nx">bar</span><span class="p">);</span> <span class="c1">// 1</span>
 <span class="p">});</span>
 
 <span class="nx">bar</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </pre></div>
 <p>这是另一个例子：</p>
-<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;listening&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{});</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;listening&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{});</span>
 </pre></div>
 <p>只有当一个端口被传递之后，才会立马绑定。 所以 <code>listening</code> 能够被立马调用。 问题是， <code>.on('listening')</code> 回调还没有被设定。</p>
 <p>为了解决这个问题， <code>listening</code> 会被放在 <code>netxTick()</code> 中 以允许当前的代码运行完毕。这使得用户能够随意的设定事件处理函数。</p>
@@ -324,10 +324,10 @@
 </ol>
 <p>一个例子 就是符合用户的预期。简单的例子：</p>
 <div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">();</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">conn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="p">});</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">conn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">});</span>
 
 <span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;listening&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="p">});</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;listening&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">});</span>
 </pre></div>
 <p><code>listen()</code> 在事件循环的一开始就被执行了， 但是事件循环的回调被安排在了 <code>setImmediate()</code> 中，除非一个 主机名 被传递，否则端口绑定会立马执行。当 事件循环继续时，最终会到达 轮询阶段，这就意味着，有非0的概率发生这样的情况：已经接收到了连接 但是 连接事件却仍然没有被触发。</p>
 <p>另一个例子就是 运行一个构造函数，继承自 <code>EventEmitter</code> ，他想在构造函数中调用事件。</p>
@@ -341,7 +341,7 @@
 <span class="nx">util</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">MyEmitter</span><span class="p">,</span> <span class="nx">EventEmitter</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">myEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEmitter</span><span class="p">();</span>
-<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;an event occurred!&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
@@ -353,14 +353,14 @@
   <span class="nx">EventEmitter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 
   <span class="c1">// use nextTick to emit the event once a handler is assigned</span>
-  <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">);</span>
   <span class="p">});</span>
 <span class="p">}</span>
 <span class="nx">util</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">MyEmitter</span><span class="p">,</span> <span class="nx">EventEmitter</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">myEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEmitter</span><span class="p">();</span>
-<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;an event occurred!&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
@@ -417,6 +417,9 @@
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -425,7 +428,7 @@
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

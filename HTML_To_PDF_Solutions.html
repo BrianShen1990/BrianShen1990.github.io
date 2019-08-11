@@ -163,7 +163,7 @@ And then I began to use <code>wkhtmltopdf</code> .</p>
       type: <span class="s1">&#39;value&#39;</span>
     <span class="o">}</span>,
     series: <span class="o">[{</span>
-      data: <span class="o">[</span>820, 932, 901, 934, 1290, 1330, 1320<span class="o">]</span>,
+      data: <span class="o">[</span><span class="m">820</span>, <span class="m">932</span>, <span class="m">901</span>, <span class="m">934</span>, <span class="m">1290</span>, <span class="m">1330</span>, <span class="m">1320</span><span class="o">]</span>,
       type: <span class="s1">&#39;line&#39;</span>
     <span class="o">}]</span>
   <span class="o">}</span><span class="p">;</span>
@@ -177,7 +177,7 @@ And then I began to use <code>wkhtmltopdf</code> .</p>
 <p><code>Report.css</code> :</p>
 <div class="highlight"><pre><span></span>@page <span class="o">{</span>
   size: A4<span class="p">;</span>
-  margin: 0<span class="p">;</span>
+  margin: <span class="m">0</span><span class="p">;</span>
 <span class="o">}</span>
 @media print <span class="o">{</span>
   body <span class="o">{</span>
@@ -189,7 +189,7 @@ And then I began to use <code>wkhtmltopdf</code> .</p>
   <span class="o">}</span>
 <span class="o">}</span>
 html, body <span class="o">{</span>
-  background: rgb<span class="o">(</span>241,241,241<span class="o">)</span><span class="p">;</span>
+  background: rgb<span class="o">(</span><span class="m">241</span>,241,241<span class="o">)</span><span class="p">;</span>
 <span class="o">}</span>
 .page <span class="o">{</span>
   page-break-after: always<span class="p">;</span>
@@ -241,12 +241,12 @@ const <span class="nv">genPDFPahntomJS</span> <span class="o">=</span> <span cla
         base: basePath,
         type: <span class="s1">&#39;pdf&#39;</span>,
         border: <span class="o">{</span>
-          top: <span class="s1">&#39;12mm&#39;</span>, // default is 0, units: mm, cm, in, px
+          top: <span class="s1">&#39;12mm&#39;</span>, // default is <span class="m">0</span>, units: mm, cm, in, px
           right: <span class="s1">&#39;0&#39;</span>,
           bottom: <span class="s1">&#39;0&#39;</span>,
           left: <span class="s1">&#39;0&#39;</span>,
         <span class="o">}</span>,
-        paginationOffset: 1, // Override the initial pagination number
+        paginationOffset: <span class="m">1</span>, // Override the initial pagination number
         footer: <span class="o">{</span>
           height: <span class="s1">&#39;20mm&#39;</span>,
           contents: <span class="o">{</span>
@@ -294,11 +294,11 @@ genPDFPahntomJS<span class="o">(</span>SrcPath1x, BasePath, OutPath<span class="
 <p>Quite simple. I just like it because it is simple and easy to begin and test.</p>
 <p>非常简单，能让你快速的开始。</p>
 <div class="highlight"><pre><span></span><span class="c1"># wkhtmltopdf --debug-javascript --print-media-type --page-size A4 ./resources/DailyReport1x.html test.pdf</span>
-Loading pages <span class="o">(</span>1/6<span class="o">)</span>
-Counting pages <span class="o">(</span>2/6<span class="o">)</span>
-Resolving links <span class="o">(</span>4/6<span class="o">)</span>
-Loading headers and footers <span class="o">(</span>5/6<span class="o">)</span>
-Printing pages <span class="o">(</span>6/6<span class="o">)</span>
+Loading pages <span class="o">(</span><span class="m">1</span>/6<span class="o">)</span>
+Counting pages <span class="o">(</span><span class="m">2</span>/6<span class="o">)</span>
+Resolving links <span class="o">(</span><span class="m">4</span>/6<span class="o">)</span>
+Loading headers and footers <span class="o">(</span><span class="m">5</span>/6<span class="o">)</span>
+Printing pages <span class="o">(</span><span class="m">6</span>/6<span class="o">)</span>
 Done
 </pre></div>
 <p>And let's see the result: / 看一看结果。</p>
@@ -403,13 +403,13 @@ genPDFWkHtmlToPdf<span class="o">(</span>SrcPath1x, OutPath<span class="o">)</sp
 <p>And render it with <code>wkhtmltopdf</code> :</p>
 <p>使用 <code>wkhtmltopdf</code> 去渲染。</p>
 <div class="highlight"><pre><span></span><span class="c1">#wkhtmltopdf --debug-javascript --print-media-type --page-size A4 --footer-left &quot;Page [page] of [toPage]&quot; ./resources/DailyReport3x.html test.pdf</span>
-Loading pages <span class="o">(</span>1/6<span class="o">)</span>
+Loading pages <span class="o">(</span><span class="m">1</span>/6<span class="o">)</span>
 Warning: file:///Users/BrianShen/Code/Asia/tset/Node/testPDF/resources/jquery-3.3.1.min.js:2 jQuery.Deferred exception: <span class="s1">&#39;undefined&#39;</span> is not a <span class="k">function</span>
 Warning: undefined:0 TypeError: <span class="s1">&#39;undefined&#39;</span> is not a <span class="k">function</span>
-Counting pages <span class="o">(</span>2/6<span class="o">)</span>
-Resolving links <span class="o">(</span>4/6<span class="o">)</span>
-Loading headers and footers <span class="o">(</span>5/6<span class="o">)</span>
-Printing pages <span class="o">(</span>6/6<span class="o">)</span>
+Counting pages <span class="o">(</span><span class="m">2</span>/6<span class="o">)</span>
+Resolving links <span class="o">(</span><span class="m">4</span>/6<span class="o">)</span>
+Loading headers and footers <span class="o">(</span><span class="m">5</span>/6<span class="o">)</span>
+Printing pages <span class="o">(</span><span class="m">6</span>/6<span class="o">)</span>
 Done
 </pre></div>
 <p>It can't work.</p>
@@ -473,6 +473,9 @@ Done
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -481,7 +484,7 @@ Done
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

@@ -151,7 +151,7 @@ rpmdev-newspec
 <p>看看里面的内容。</p>
 <div class="highlight"><pre><span></span>Name:
 Version:
-Release:        1%<span class="o">{</span>?dist<span class="o">}</span>
+Release:        <span class="m">1</span>%<span class="o">{</span>?dist<span class="o">}</span>
 Summary:
 
 License:
@@ -239,7 +239,7 @@ rm -rf <span class="nv">$RPM_BUILD_ROOT</span>
 </div>
 <div class="section" id="when-we-want-to-ignore-some-steps">
 <h3>2.6. <a class="toc-backref" href="#id8">When we want to ignore some steps / 如果我们想忽略一些步骤的话</a></h3>
-<div class="warning">
+<div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>When I wanted to ignore some steps, I like to comment out them. For example, NodeJS and Python programs do not need build step.</p>
 <p>当我想要忽略这些步骤的时候，本能的反映是 注释掉他们。 比方说 NodeJS 或者Python 程序，就不需要 build 步骤。</p>
@@ -261,8 +261,8 @@ cp briansample.tar rpmbuild/SOURCES/
 </pre></div>
 <p>Now edit our SPEC file: / 现在我们来更改SPEC 文件：</p>
 <div class="highlight"><pre><span></span>Name:           briansample  <span class="c1">#####watch the name  注意名称</span>
-Version:        1.0          <span class="c1">#####watch the version 注意版本</span>
-Release:        1%<span class="o">{</span>?dist<span class="o">}</span>
+Version:        <span class="m">1</span>.0          <span class="c1">#####watch the version 注意版本</span>
+Release:        <span class="m">1</span>%<span class="o">{</span>?dist<span class="o">}</span>
 Summary:        sample
 
 License:        GPL
@@ -300,7 +300,7 @@ cp -rf ./* %<span class="o">{</span>buildroot<span class="o">}</span>/usr/brians
 <code>rpmbuild -ba newpackage.spec</code></blockquote>
 <div class="highlight"><pre><span></span>rpmbuild -ba newpackage.spec
     Executing<span class="o">(</span>%prep<span class="o">)</span>: /bin/sh -e /var/tmp/rpm-tmp.h7l5eo
-    + <span class="nb">umask</span> 022
+    + <span class="nb">umask</span> <span class="m">022</span>
     + <span class="nb">cd</span> /home/admin/rpmbuild/BUILD
     + <span class="nb">echo</span> <span class="s1">&#39;BrianSample Prepare&#39;</span>
     BrianSample Prepare
@@ -309,9 +309,9 @@ cp -rf ./* %<span class="o">{</span>buildroot<span class="o">}</span>/usr/brians
     + /usr/bin/tar -xf /home/admin/rpmbuild/SOURCES/briansample.tar
     + <span class="nb">cd</span> briansample-1.0
     + /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
-    + <span class="nb">exit</span> 0
+    + <span class="nb">exit</span> <span class="m">0</span>
     Executing<span class="o">(</span>%install<span class="o">)</span>: /bin/sh -e /var/tmp/rpm-tmp.HEqZg2
-    + <span class="nb">umask</span> 022
+    + <span class="nb">umask</span> <span class="m">022</span>
     + <span class="nb">cd</span> /home/admin/rpmbuild/BUILD
     + <span class="s1">&#39;[&#39;</span> /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64 <span class="s1">&#39;!=&#39;</span> / <span class="s1">&#39;]&#39;</span>
     + rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
@@ -326,7 +326,7 @@ cp -rf ./* %<span class="o">{</span>buildroot<span class="o">}</span>/usr/brians
     /home/admin/rpmbuild/BUILD/briansample-1.0
     + cp -rf ./briansample.sh ./briansample.tar /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64/usr/briansample
     + <span class="s1">&#39;[&#39;</span> <span class="s1">&#39;%{buildarch}&#39;</span> <span class="o">=</span> noarch <span class="s1">&#39;]&#39;</span>
-    + <span class="nv">QA_CHECK_RPATHS</span><span class="o">=</span>1
+    + <span class="nv">QA_CHECK_RPATHS</span><span class="o">=</span><span class="m">1</span>
     + <span class="k">case</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">QA_CHECK_RPATHS</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span> in
     + /usr/lib/rpm/check-rpaths
     + /usr/lib/rpm/check-buildroot
@@ -334,23 +334,23 @@ cp -rf ./* %<span class="o">{</span>buildroot<span class="o">}</span>/usr/brians
     + /usr/lib/rpm/redhat/brp-strip /usr/bin/strip
     + /usr/lib/rpm/redhat/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
     + /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
-    + /usr/lib/rpm/brp-python-bytecompile /usr/bin/python 1
+    + /usr/lib/rpm/brp-python-bytecompile /usr/bin/python <span class="m">1</span>
     + /usr/lib/rpm/redhat/brp-python-hardlink
     + /usr/lib/rpm/redhat/brp-java-repack-jars
     Processing files: briansample-1.0-1.el7.centos.x86_64
-    Provides: <span class="nv">briansample</span> <span class="o">=</span> 1.0-1.el7.centos briansample<span class="o">(</span>x86-64<span class="o">)</span> <span class="o">=</span> 1.0-1.el7.centos
+    Provides: <span class="nv">briansample</span> <span class="o">=</span> <span class="m">1</span>.0-1.el7.centos briansample<span class="o">(</span>x86-64<span class="o">)</span> <span class="o">=</span> <span class="m">1</span>.0-1.el7.centos
     Requires<span class="o">(</span>interp<span class="o">)</span>: /bin/sh
-    Requires<span class="o">(</span>rpmlib<span class="o">)</span>: rpmlib<span class="o">(</span>CompressedFileNames<span class="o">)</span> &lt;<span class="o">=</span> 3.0.4-1 rpmlib<span class="o">(</span>FileDigests<span class="o">)</span> &lt;<span class="o">=</span> 4.6.0-1 rpmlib<span class="o">(</span>PayloadFilesHavePrefix<span class="o">)</span> &lt;<span class="o">=</span> 4.0-1
+    Requires<span class="o">(</span>rpmlib<span class="o">)</span>: rpmlib<span class="o">(</span>CompressedFileNames<span class="o">)</span> &lt;<span class="o">=</span> <span class="m">3</span>.0.4-1 rpmlib<span class="o">(</span>FileDigests<span class="o">)</span> &lt;<span class="o">=</span> <span class="m">4</span>.6.0-1 rpmlib<span class="o">(</span>PayloadFilesHavePrefix<span class="o">)</span> &lt;<span class="o">=</span> <span class="m">4</span>.0-1
     Requires<span class="o">(</span>post<span class="o">)</span>: /bin/sh
     Checking <span class="k">for</span> unpackaged file<span class="o">(</span>s<span class="o">)</span>: /usr/lib/rpm/check-files /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
     Wrote: /home/admin/rpmbuild/SRPMS/briansample-1.0-1.el7.centos.src.rpm
     Wrote: /home/admin/rpmbuild/RPMS/x86_64/briansample-1.0-1.el7.centos.x86_64.rpm
     Executing<span class="o">(</span>%clean<span class="o">)</span>: /bin/sh -e /var/tmp/rpm-tmp.UhdYZ0
-    + <span class="nb">umask</span> 022
+    + <span class="nb">umask</span> <span class="m">022</span>
     + <span class="nb">cd</span> /home/admin/rpmbuild/BUILD
     + <span class="nb">cd</span> briansample-1.0
     + /usr/bin/rm -rf /home/admin/rpmbuild/BUILDROOT/briansample-1.0-1.el7.centos.x86_64
-    + <span class="nb">exit</span> 0
+    + <span class="nb">exit</span> <span class="m">0</span>
 </pre></div>
 <p>Now let's see what had been generated :code:` tree /home/admin/rpmbuild/`
 现在看看生成了什么！</p>
@@ -496,6 +496,9 @@ rpm -ivh ./*rpm --justdb --nodeps --scripts --force
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -504,7 +507,7 @@ rpm -ivh ./*rpm --justdb --nodeps --scripts --force
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

@@ -149,7 +149,7 @@ import sphinx_rtd_theme
 <span class="o">==============================</span>
 
 .. toctree::
-:maxdepth: 2
+:maxdepth: <span class="m">2</span>
        :caption: Contents:
 
        ./_content/content_one.rst
@@ -172,7 +172,7 @@ Header Sample One
 <p>If we need numbers, add <code>:numbered:</code> in <code>index.rst</code> .
 如果我们需要序号的话，可以加上 <code>:numbered:</code>  标志。</p>
 <div class="highlight"><pre><span></span>.. toctree::
-   :maxdepth: 2
+   :maxdepth: <span class="m">2</span>
    :numbered:
    :caption: Contents:
 </pre></div>
@@ -204,7 +204,7 @@ content/
 <span class="o">==============================</span>
 
 .. toctree::
-:maxdepth: 2
+:maxdepth: <span class="m">2</span>
        :caption: Contents:
 
        ./_content/Tools/ToolsIndex.rst
@@ -215,7 +215,7 @@ content/
 <span class="o">==============</span>
 
 .. toctree::
-:maxdepth: 2
+:maxdepth: <span class="m">2</span>
        :caption: Contents:
 
        ./Tools_DiskMount.rst
@@ -275,8 +275,8 @@ Header Sample
 * It has two items, the second
   item uses two lines.
 
-1. This is a numbered list.
-2. It has two items too.
+<span class="m">1</span>. This is a numbered list.
+<span class="m">2</span>. It has two items too.
 
 <span class="c1">#. This is a numbered list.</span>
 <span class="c1">#. It has two items too.</span>
@@ -391,23 +391,23 @@ item uses two lines.</li>
 <div class="section" id="tables">
 <h3>4.7. <a class="toc-backref" href="#id13">Tables / 表格</a></h3>
 <div class="highlight"><pre><span></span>.. list-table::
-    :widths: <span class="m">25</span> <span class="m">25</span> 50
-    :header-rows: 1
+    :widths: <span class="m">25</span> <span class="m">25</span> <span class="m">50</span>
+    :header-rows: <span class="m">1</span>
 
-    * - Heading row 1, column 1
-      - Heading row 1, column 2
-      - Heading row 1, column 3
-    * - Row 1, column 1
+    * - Heading row <span class="m">1</span>, column <span class="m">1</span>
+      - Heading row <span class="m">1</span>, column <span class="m">2</span>
+      - Heading row <span class="m">1</span>, column <span class="m">3</span>
+    * - Row <span class="m">1</span>, column <span class="m">1</span>
       -
-      - Row 1, column 3
-    * - Row 2, column 1
-      - Row 2, column 2
-      - Row 2, column 3
+      - Row <span class="m">1</span>, column <span class="m">3</span>
+    * - Row <span class="m">2</span>, column <span class="m">1</span>
+      - Row <span class="m">2</span>, column <span class="m">2</span>
+      - Row <span class="m">2</span>, column <span class="m">3</span>
 </pre></div>
 <ul class="simple">
 <li>Sample / 示例</li>
 </ul>
-<table border="1" class="docutils">
+<table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="25%" />
 <col width="25%" />
@@ -484,6 +484,9 @@ item uses two lines.</li>
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -492,7 +495,7 @@ item uses two lines.</li>
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

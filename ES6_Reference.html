@@ -161,16 +161,16 @@
 <h3>2.1. <a class="toc-backref" href="#id8">Usage</a></h3>
 <ul>
 <li><p class="first">Exchange value</p>
-<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">x</span> <span class="o">=</span> 1<span class="p">;</span>
-<span class="nb">let</span> <span class="nv">y</span> <span class="o">=</span> 2<span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+<span class="nb">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
 <span class="o">[</span>x, y<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>y, x<span class="o">]</span><span class="p">;</span>
 </pre></div>
 </li>
 <li><p class="first">Return many values</p>
 <div class="highlight"><pre><span></span><span class="k">function</span> example<span class="o">()</span> <span class="o">{</span>
   <span class="k">return</span> <span class="o">{</span>
-    foo: 1,
-    bar: 2
+    foo: <span class="m">1</span>,
+    bar: <span class="m">2</span>
   <span class="o">}</span><span class="p">;</span>
 <span class="o">}</span>
 <span class="nb">let</span> <span class="o">{</span> foo, bar <span class="o">}</span> <span class="o">=</span> example<span class="o">()</span><span class="p">;</span>
@@ -178,17 +178,17 @@
 </li>
 <li><p class="first">Function definition</p>
 <div class="highlight"><pre><span></span><span class="k">function</span> f<span class="o">([</span>x, y, z<span class="o">])</span> <span class="o">{</span> ... <span class="o">}</span>
-f<span class="o">([</span>1, 2, 3<span class="o">])</span><span class="p">;</span>
+f<span class="o">([</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">])</span><span class="p">;</span>
 
 <span class="k">function</span> f<span class="o">({</span>x, y, z<span class="o">})</span> <span class="o">{</span> ... <span class="o">}</span>
-f<span class="o">({</span>z: 3, y: 2, x: 1<span class="o">})</span><span class="p">;</span>
+f<span class="o">({</span>z: <span class="m">3</span>, y: <span class="m">2</span>, x: <span class="m">1</span><span class="o">})</span><span class="p">;</span>
 </pre></div>
 </li>
 <li><p class="first">JSON extraction</p>
 <div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">jsonData</span> <span class="o">=</span> <span class="o">{</span>
-  id: 42,
+  id: <span class="m">42</span>,
   status: <span class="s2">&quot;OK&quot;</span>,
-  data: <span class="o">[</span>867, 5309<span class="o">]</span>
+  data: <span class="o">[</span><span class="m">867</span>, <span class="m">5309</span><span class="o">]</span>
 <span class="o">}</span><span class="p">;</span>
 <span class="nb">let</span> <span class="o">{</span> id, status, data: number <span class="o">}</span> <span class="o">=</span> jsonData<span class="p">;</span>
 </pre></div>
@@ -236,14 +236,14 @@ f<span class="o">({</span>z: 3, y: 2, x: 1<span class="o">})</span><span class="
 <p>Handle characters taken more than 4 bytes.</p>
 <div class="highlight"><pre><span></span>var <span class="nv">s</span> <span class="o">=</span> <span class="s2">&quot;𠮷a&quot;</span><span class="p">;</span>
 
-s.length // 2
-s.charAt<span class="o">(</span>0<span class="o">)</span> // <span class="s1">&#39;&#39;</span>
-s.charAt<span class="o">(</span>1<span class="o">)</span> // <span class="s1">&#39;&#39;</span>
-s.charCodeAt<span class="o">(</span>0<span class="o">)</span> // 55362
-s.charCodeAt<span class="o">(</span>1<span class="o">)</span> // 57271
-s.codePointAt<span class="o">(</span>0<span class="o">)</span> // 134071
-s.codePointAt<span class="o">(</span>1<span class="o">)</span> // 57271
-s.codePointAt<span class="o">(</span>2<span class="o">)</span> // 97
+s.length // <span class="m">2</span>
+s.charAt<span class="o">(</span><span class="m">0</span><span class="o">)</span> // <span class="s1">&#39;&#39;</span>
+s.charAt<span class="o">(</span><span class="m">1</span><span class="o">)</span> // <span class="s1">&#39;&#39;</span>
+s.charCodeAt<span class="o">(</span><span class="m">0</span><span class="o">)</span> // <span class="m">55362</span>
+s.charCodeAt<span class="o">(</span><span class="m">1</span><span class="o">)</span> // <span class="m">57271</span>
+s.codePointAt<span class="o">(</span><span class="m">0</span><span class="o">)</span> // <span class="m">134071</span>
+s.codePointAt<span class="o">(</span><span class="m">1</span><span class="o">)</span> // <span class="m">57271</span>
+s.codePointAt<span class="o">(</span><span class="m">2</span><span class="o">)</span> // <span class="m">97</span>
 </pre></div>
 </div>
 <div class="section" id="fromcodepoint">
@@ -257,7 +257,7 @@ s.codePointAt<span class="o">(</span>2<span class="o">)</span> // 97
 <h3>3.4. <a class="toc-backref" href="#id13">iteration</a></h3>
 <p><code>for...of</code> syntax can handler all kinds of characters.</p>
 <div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">text</span> <span class="o">=</span> String.fromCodePoint<span class="o">(</span>0x20BB7<span class="o">)</span><span class="p">;</span>
-<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> <span class="nv">i</span> <span class="o">=</span> 0<span class="p">;</span> i &lt; text.length<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
+<span class="k">for</span> <span class="o">(</span><span class="nb">let</span> <span class="nv">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> i &lt; text.length<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
   console.log<span class="o">(</span>text<span class="o">[</span>i<span class="o">])</span><span class="p">;</span>
 <span class="o">}</span>
 // <span class="s2">&quot; &quot;</span>
@@ -298,14 +298,14 @@ padEnd<span class="o">()</span>
 /^.$/.test<span class="o">(</span>s<span class="o">)</span> // <span class="nb">false</span>
 /^.$/u.test<span class="o">(</span>s<span class="o">)</span> // <span class="nb">true</span>
 
-/<span class="se">\u</span><span class="o">{</span>61<span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span> // <span class="nb">false</span>
-/<span class="se">\u</span><span class="o">{</span>61<span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+/<span class="se">\u</span><span class="o">{</span><span class="m">61</span><span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span> // <span class="nb">false</span>
+/<span class="se">\u</span><span class="o">{</span><span class="m">61</span><span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">)</span> // <span class="nb">true</span>
 /<span class="se">\u</span><span class="o">{</span>20BB7<span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;𠮷&#39;</span><span class="o">)</span> // <span class="nb">true</span>
 
-/a<span class="o">{</span>2<span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;aa&#39;</span><span class="o">)</span> // <span class="nb">true</span>
-/a<span class="o">{</span>2<span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;aa&#39;</span><span class="o">)</span> // <span class="nb">true</span>
-/𠮷<span class="o">{</span>2<span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;𠮷𠮷&#39;</span><span class="o">)</span> // <span class="nb">false</span>
-/𠮷<span class="o">{</span>2<span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;𠮷𠮷&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+/a<span class="o">{</span><span class="m">2</span><span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;aa&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+/a<span class="o">{</span><span class="m">2</span><span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;aa&#39;</span><span class="o">)</span> // <span class="nb">true</span>
+/𠮷<span class="o">{</span><span class="m">2</span><span class="o">}</span>/.test<span class="o">(</span><span class="s1">&#39;𠮷𠮷&#39;</span><span class="o">)</span> // <span class="nb">false</span>
+/𠮷<span class="o">{</span><span class="m">2</span><span class="o">}</span>/u.test<span class="o">(</span><span class="s1">&#39;𠮷𠮷&#39;</span><span class="o">)</span> // <span class="nb">true</span>
 </pre></div>
 </div>
 <div class="section" id="stick-y">
@@ -337,8 +337,8 @@ r2.exec<span class="o">(</span>s<span class="o">)</span> // null
 <h3>5.1. <a class="toc-backref" href="#id22">APIS</a></h3>
 <ul>
 <li><p class="first">isFinite, isNaN</p>
-<div class="highlight"><pre><span></span>Number.isFinite<span class="o">(</span>15<span class="o">)</span><span class="p">;</span> // <span class="nb">true</span>
-Number.isFinite<span class="o">(</span>0.8<span class="o">)</span><span class="p">;</span> // <span class="nb">true</span>
+<div class="highlight"><pre><span></span>Number.isFinite<span class="o">(</span><span class="m">15</span><span class="o">)</span><span class="p">;</span> // <span class="nb">true</span>
+Number.isFinite<span class="o">(</span><span class="m">0</span>.8<span class="o">)</span><span class="p">;</span> // <span class="nb">true</span>
 Number.isFinite<span class="o">(</span>NaN<span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
 Number.isFinite<span class="o">(</span>Infinity<span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
 Number.isFinite<span class="o">(</span>-Infinity<span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
@@ -347,11 +347,11 @@ Number.isFinite<span class="o">(</span><span class="s1">&#39;15&#39;</span><span
 Number.isFinite<span class="o">(</span><span class="nb">true</span><span class="o">)</span><span class="p">;</span> // <span class="nb">false</span>
 
 Number.isNaN<span class="o">(</span>NaN<span class="o">)</span> // <span class="nb">true</span>
-Number.isNaN<span class="o">(</span>15<span class="o">)</span> // <span class="nb">false</span>
+Number.isNaN<span class="o">(</span><span class="m">15</span><span class="o">)</span> // <span class="nb">false</span>
 Number.isNaN<span class="o">(</span><span class="s1">&#39;15&#39;</span><span class="o">)</span> // <span class="nb">false</span>
 Number.isNaN<span class="o">(</span><span class="nb">true</span><span class="o">)</span> // <span class="nb">false</span>
-Number.isNaN<span class="o">(</span>9/NaN<span class="o">)</span> // <span class="nb">true</span>
-Number.isNaN<span class="o">(</span><span class="s1">&#39;true&#39;</span> / 0<span class="o">)</span> // <span class="nb">true</span>
+Number.isNaN<span class="o">(</span><span class="m">9</span>/NaN<span class="o">)</span> // <span class="nb">true</span>
+Number.isNaN<span class="o">(</span><span class="s1">&#39;true&#39;</span> / <span class="m">0</span><span class="o">)</span> // <span class="nb">true</span>
 Number.isNaN<span class="o">(</span><span class="s1">&#39;true&#39;</span> / <span class="s1">&#39;true&#39;</span><span class="o">)</span> // <span class="nb">true</span>
 </pre></div>
 </li>
@@ -372,13 +372,13 @@ Number.isNaN<span class="o">(</span><span class="s1">&#39;true&#39;</span> / <sp
 <h3>6.1. <a class="toc-backref" href="#id24">Rest parameters</a></h3>
 <p><code>...varaiable</code> to get all rest parameters. Array.</p>
 <div class="highlight"><pre><span></span><span class="k">function</span> add<span class="o">(</span>...values<span class="o">)</span> <span class="o">{</span>
-  <span class="nb">let</span> <span class="nv">sum</span> <span class="o">=</span> 0<span class="p">;</span>
+  <span class="nb">let</span> <span class="nv">sum</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
   <span class="k">for</span> <span class="o">(</span>var val of values<span class="o">)</span> <span class="o">{</span>
-    sum +<span class="o">=</span> val<span class="p">;</span>
+    <span class="nv">sum</span> <span class="o">+=</span> val<span class="p">;</span>
   <span class="o">}</span>
   <span class="k">return</span> sum<span class="p">;</span>
 <span class="o">}</span>
-add<span class="o">(</span>2, 5, 3<span class="o">)</span> // 10
+add<span class="o">(</span><span class="m">2</span>, <span class="m">5</span>, <span class="m">3</span><span class="o">)</span> // <span class="m">10</span>
 </pre></div>
 </div>
 <div class="section" id="strict-mode">
@@ -420,7 +420,7 @@ const <span class="nv">obj</span> <span class="o">=</span> <span class="o">{</sp
 <span class="c1"># 2</span>
 const <span class="nv">doSomething</span> <span class="o">=</span> <span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
   <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
-  <span class="k">return</span> <span class="k">function</span><span class="o">(</span><span class="nv">value</span> <span class="o">=</span> 42<span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="k">function</span><span class="o">(</span><span class="nv">value</span> <span class="o">=</span> <span class="m">42</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> value<span class="p">;</span>
   <span class="o">}</span><span class="p">;</span>
 <span class="o">}())</span><span class="p">;</span>
@@ -439,13 +439,13 @@ const <span class="nv">doSomething</span> <span class="o">=</span> <span class="
 <h2>7. <a class="toc-backref" href="#id27">Array</a></h2>
 <div class="section" id="spread-operator">
 <h3>7.1. <a class="toc-backref" href="#id28">spread operator</a></h3>
-<div class="highlight"><pre><span></span>console.log<span class="o">(</span>...<span class="o">[</span>1, 2, 3<span class="o">])</span>
-// <span class="m">1</span> <span class="m">2</span> 3
+<div class="highlight"><pre><span></span>console.log<span class="o">(</span>...<span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">])</span>
+// <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
 </pre></div>
 <p>Usage:</p>
 <ul>
 <li><p class="first">clone</p>
-<div class="highlight"><pre><span></span>const <span class="nv">a1</span> <span class="o">=</span> <span class="o">[</span>1, 2<span class="o">]</span><span class="p">;</span>
+<div class="highlight"><pre><span></span>const <span class="nv">a1</span> <span class="o">=</span> <span class="o">[</span><span class="m">1</span>, <span class="m">2</span><span class="o">]</span><span class="p">;</span>
 const <span class="nv">a2</span> <span class="o">=</span> <span class="o">[</span>...a1<span class="o">]</span><span class="p">;</span>
 </pre></div>
 </li>
@@ -456,18 +456,18 @@ const <span class="nv">arr2</span> <span class="o">=</span> <span class="o">[</s
 </pre></div>
 </li>
 <li><p class="first">String length</p>
-<div class="highlight"><pre><span></span><span class="s1">&#39;x\uD83D\uDE80y&#39;</span>.length // 4
-<span class="o">[</span>...<span class="s1">&#39;x\uD83D\uDE80y&#39;</span><span class="o">]</span>.length // 3
+<div class="highlight"><pre><span></span><span class="s1">&#39;x\uD83D\uDE80y&#39;</span>.length // <span class="m">4</span>
+<span class="o">[</span>...<span class="s1">&#39;x\uD83D\uDE80y&#39;</span><span class="o">]</span>.length // <span class="m">3</span>
 </pre></div>
 </li>
 <li><p class="first">generator</p>
 <div class="highlight"><pre><span></span>const <span class="nv">go</span> <span class="o">=</span> <span class="k">function</span>*<span class="o">(){</span>
-  yield 1<span class="p">;</span>
-  yield 2<span class="p">;</span>
-  yield 3<span class="p">;</span>
+  yield <span class="m">1</span><span class="p">;</span>
+  yield <span class="m">2</span><span class="p">;</span>
+  yield <span class="m">3</span><span class="p">;</span>
 <span class="o">}</span><span class="p">;</span>
 
-<span class="o">[</span>...go<span class="o">()]</span> // <span class="o">[</span>1, 2, 3<span class="o">]</span>
+<span class="o">[</span>...go<span class="o">()]</span> // <span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span>
 </pre></div>
 </li>
 </ul>
@@ -478,20 +478,20 @@ const <span class="nv">arr2</span> <span class="o">=</span> <span class="o">[</s
     <span class="s1">&#39;0&#39;</span>: <span class="s1">&#39;a&#39;</span>,
     <span class="s1">&#39;1&#39;</span>: <span class="s1">&#39;b&#39;</span>,
     <span class="s1">&#39;2&#39;</span>: <span class="s1">&#39;c&#39;</span>,
-    length: 3
+    length: <span class="m">3</span>
 <span class="o">}</span><span class="p">;</span>
 <span class="nb">let</span> <span class="nv">arr2</span> <span class="o">=</span> Array.from<span class="o">(</span>arrayLike<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span>
 </pre></div>
 </li>
 <li><p class="first">Array.Of</p>
 <p>Array constructor exists some misunderstanding.</p>
-<div class="highlight"><pre><span></span>Array.of<span class="o">(</span>3, 11, 8<span class="o">)</span> // <span class="o">[</span>3,11,8<span class="o">]</span>
-Array.of<span class="o">(</span>3<span class="o">)</span> // <span class="o">[</span>3<span class="o">]</span>
-Array.of<span class="o">(</span>3<span class="o">)</span>.length // 1
+<div class="highlight"><pre><span></span>Array.of<span class="o">(</span><span class="m">3</span>, <span class="m">11</span>, <span class="m">8</span><span class="o">)</span> // <span class="o">[</span><span class="m">3</span>,11,8<span class="o">]</span>
+Array.of<span class="o">(</span><span class="m">3</span><span class="o">)</span> // <span class="o">[</span><span class="m">3</span><span class="o">]</span>
+Array.of<span class="o">(</span><span class="m">3</span><span class="o">)</span>.length // <span class="m">1</span>
 
 Array<span class="o">()</span> // <span class="o">[]</span>
-Array<span class="o">(</span>3<span class="o">)</span> // <span class="o">[</span>, , ,<span class="o">]</span>
-Array<span class="o">(</span>3, 11, 8<span class="o">)</span> // <span class="o">[</span>3, 11, 8<span class="o">]</span>
+Array<span class="o">(</span><span class="m">3</span><span class="o">)</span> // <span class="o">[</span>, , ,<span class="o">]</span>
+Array<span class="o">(</span><span class="m">3</span>, <span class="m">11</span>, <span class="m">8</span><span class="o">)</span> // <span class="o">[</span><span class="m">3</span>, <span class="m">11</span>, <span class="m">8</span><span class="o">]</span>
 </pre></div>
 </li>
 <li><p class="first">find, findIndex</p>
@@ -502,8 +502,8 @@ Array<span class="o">(</span>3, 11, 8<span class="o">)</span> // <span class="o"
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="o">(</span><span class="nb">let</span> index of <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span>.keys<span class="o">())</span> <span class="o">{</span>
   console.log<span class="o">(</span>index<span class="o">)</span><span class="p">;</span>
 <span class="o">}</span>
-// 0
-// 1
+// <span class="m">0</span>
+// <span class="m">1</span>
 
 <span class="k">for</span> <span class="o">(</span><span class="nb">let</span> elem of <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span>.values<span class="o">())</span> <span class="o">{</span>
   console.log<span class="o">(</span>elem<span class="o">)</span><span class="p">;</span>
@@ -519,20 +519,20 @@ Array<span class="o">(</span>3, 11, 8<span class="o">)</span> // <span class="o"
 
 <span class="nb">let</span> <span class="nv">letter</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span><span class="p">;</span>
 <span class="nb">let</span> <span class="nv">entries</span> <span class="o">=</span> letter.entries<span class="o">()</span><span class="p">;</span>
-console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span>0, <span class="s1">&#39;a&#39;</span><span class="o">]</span>
-console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span>1, <span class="s1">&#39;b&#39;</span><span class="o">]</span>
-console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span>2, <span class="s1">&#39;c&#39;</span><span class="o">]</span>
+console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="m">0</span>, <span class="s1">&#39;a&#39;</span><span class="o">]</span>
+console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="m">1</span>, <span class="s1">&#39;b&#39;</span><span class="o">]</span>
+console.log<span class="o">(</span>entries.next<span class="o">()</span>.value<span class="o">)</span><span class="p">;</span> // <span class="o">[</span><span class="m">2</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span>
 </pre></div>
 </li>
 <li><p class="first">includes</p>
 </li>
 <li><p class="first">flat, flatMap</p>
-<div class="highlight"><pre><span></span><span class="o">[</span>1, 2, <span class="o">[</span>3, 4<span class="o">]]</span>.flat<span class="o">()</span>
-// <span class="o">[</span>1, 2, 3, 4<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="o">[</span><span class="m">3</span>, <span class="m">4</span><span class="o">]]</span>.flat<span class="o">()</span>
+// <span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span><span class="o">]</span>
 
 
-<span class="o">[</span>2, 3, 4<span class="o">]</span>.flatMap<span class="o">((</span>x<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">[</span>x, x * 2<span class="o">])</span>
-// <span class="o">[</span>2, 4, 3, 6, 4, 8<span class="o">]</span>
+<span class="o">[</span><span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span><span class="o">]</span>.flatMap<span class="o">((</span>x<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">[</span>x, x * <span class="m">2</span><span class="o">])</span>
+// <span class="o">[</span><span class="m">2</span>, <span class="m">4</span>, <span class="m">3</span>, <span class="m">6</span>, <span class="m">4</span>, <span class="m">8</span><span class="o">]</span>
 </pre></div>
 </li>
 </ul>
@@ -598,13 +598,13 @@ obj.find<span class="o">()</span> // <span class="s2">&quot;hello&quot;</span>
 </div>
 <div class="section" id="operator">
 <h3>8.3. <a class="toc-backref" href="#id32">Operator</a></h3>
-<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="o">{</span> a: 3, b: <span class="m">4</span> <span class="o">}</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="o">{</span> a: <span class="m">3</span>, b: <span class="m">4</span> <span class="o">}</span><span class="p">;</span>
 <span class="nb">let</span> <span class="nv">n</span> <span class="o">=</span> <span class="o">{</span> ...z <span class="o">}</span><span class="p">;</span>
-n // <span class="o">{</span> a: 3, b: <span class="m">4</span> <span class="o">}</span>
+n // <span class="o">{</span> a: <span class="m">3</span>, b: <span class="m">4</span> <span class="o">}</span>
 
 <span class="nb">let</span> <span class="nv">foo</span> <span class="o">=</span> <span class="o">{</span> ...<span class="o">[</span><span class="s1">&#39;a&#39;</span>, <span class="s1">&#39;b&#39;</span>, <span class="s1">&#39;c&#39;</span><span class="o">]</span> <span class="o">}</span><span class="p">;</span>
 foo
-// <span class="o">{</span>0: <span class="s2">&quot;a&quot;</span>, 1: <span class="s2">&quot;b&quot;</span>, 2: <span class="s2">&quot;c&quot;</span><span class="o">}</span>
+// <span class="o">{</span><span class="m">0</span>: <span class="s2">&quot;a&quot;</span>, <span class="m">1</span>: <span class="s2">&quot;b&quot;</span>, <span class="m">2</span>: <span class="s2">&quot;c&quot;</span><span class="o">}</span>
 
 <span class="nb">let</span> <span class="nv">aClone</span> <span class="o">=</span> <span class="o">{</span> ...a <span class="o">}</span><span class="p">;</span>
 // Same as
@@ -620,8 +620,8 @@ foo
 - Shallow Copy
 - Array handle as object</p>
 <blockquote>
-<div class="highlight"><pre><span></span>Object.assign<span class="o">([</span>1, 2, 3<span class="o">]</span>, <span class="o">[</span>4, 5<span class="o">])</span>
-// <span class="o">[</span>4, 5, 3<span class="o">]</span>
+<div class="highlight"><pre><span></span>Object.assign<span class="o">([</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span>, <span class="o">[</span><span class="m">4</span>, <span class="m">5</span><span class="o">])</span>
+// <span class="o">[</span><span class="m">4</span>, <span class="m">5</span>, <span class="m">3</span><span class="o">]</span>
 </pre></div>
 </blockquote>
 <ul class="simple">
@@ -717,15 +717,15 @@ Symbol.keyFor<span class="o">(</span>s2<span class="o">)</span> // undefined
 <h3>10.1. <a class="toc-backref" href="#id39">Set</a></h3>
 <div class="highlight"><pre><span></span>const <span class="nv">s</span> <span class="o">=</span> new Set<span class="o">()</span><span class="p">;</span>
 
-<span class="o">[</span>2, 3, 5, 4, 5, 2, 2<span class="o">]</span>.forEach<span class="o">(</span><span class="nv">x</span> <span class="o">=</span>&gt; s.add<span class="o">(</span>x<span class="o">))</span><span class="p">;</span>
+<span class="o">[</span><span class="m">2</span>, <span class="m">3</span>, <span class="m">5</span>, <span class="m">4</span>, <span class="m">5</span>, <span class="m">2</span>, <span class="m">2</span><span class="o">]</span>.forEach<span class="o">(</span><span class="nv">x</span> <span class="o">=</span>&gt; s.add<span class="o">(</span>x<span class="o">))</span><span class="p">;</span>
 <span class="k">for</span> <span class="o">(</span><span class="nb">let</span> i of s<span class="o">)</span> <span class="o">{</span>
   console.log<span class="o">(</span>i<span class="o">)</span><span class="p">;</span>
 <span class="o">}</span>
-// <span class="m">2</span> <span class="m">3</span> <span class="m">5</span> 4
+// <span class="m">2</span> <span class="m">3</span> <span class="m">5</span> <span class="m">4</span>
 
-const <span class="nb">set</span> <span class="o">=</span> new Set<span class="o">([</span>1, 2, 3, 4, 4<span class="o">])</span><span class="p">;</span>
+const <span class="nb">set</span> <span class="o">=</span> new Set<span class="o">([</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">4</span><span class="o">])</span><span class="p">;</span>
 <span class="o">[</span>...set<span class="o">]</span>
-// <span class="o">[</span>1, 2, 3, 4<span class="o">]</span>
+// <span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span><span class="o">]</span>
 </pre></div>
 <ul class="simple">
 <li>size</li>
@@ -747,7 +747,7 @@ But, we can add everything as a key.</p>
   <span class="o">[</span><span class="s1">&#39;name&#39;</span>, <span class="s1">&#39;张三&#39;</span><span class="o">]</span>,
   <span class="o">[</span><span class="s1">&#39;title&#39;</span>, <span class="s1">&#39;Author&#39;</span><span class="o">]</span>
 <span class="o">])</span><span class="p">;</span>
-map.size // 2
+map.size // <span class="m">2</span>
 map.has<span class="o">(</span><span class="s1">&#39;name&#39;</span><span class="o">)</span> // <span class="nb">true</span>
 map.get<span class="o">(</span><span class="s1">&#39;name&#39;</span><span class="o">)</span> // <span class="s2">&quot;张三&quot;</span>
 map.has<span class="o">(</span><span class="s1">&#39;title&#39;</span><span class="o">)</span> // <span class="nb">true</span>
@@ -788,12 +788,12 @@ items.forEach<span class="o">(</span>
     <span class="k">return</span> Reflect.set<span class="o">(</span>target, key, value, receiver<span class="o">)</span><span class="p">;</span>
   <span class="o">}</span>
 <span class="o">})</span><span class="p">;</span>
-obj.count <span class="o">=</span> 1
+obj.count <span class="o">=</span> <span class="m">1</span>
 //  setting count!
 ++obj.count
 //  getting count!
 //  setting count!
-//  2
+//  <span class="m">2</span>
 </pre></div>
 <div class="section" id="proxy-actions-supoorted">
 <h3>11.1. <a class="toc-backref" href="#id42">Proxy Actions Supoorted</a></h3>
@@ -821,8 +821,8 @@ obj.count <span class="o">=</span> 1
 
 <span class="nb">let</span> <span class="o">{</span>proxy, revoke<span class="o">}</span> <span class="o">=</span> Proxy.revocable<span class="o">(</span>target, handler<span class="o">)</span><span class="p">;</span>
 
-proxy.foo <span class="o">=</span> 123<span class="p">;</span>
-proxy.foo // 123
+proxy.foo <span class="o">=</span> <span class="m">123</span><span class="p">;</span>
+proxy.foo // <span class="m">123</span>
 
 revoke<span class="o">()</span><span class="p">;</span>
 proxy.foo // TypeError: Revoked
@@ -923,7 +923,7 @@ Resolve and Reject cannot terminate Promise. So, always add return.</p>
 </pre></div>
 </li>
 <li><p class="first">all</p>
-<div class="highlight"><pre><span></span>const <span class="nv">promises</span> <span class="o">=</span> <span class="o">[</span>2, 3, 5, 7, 11, 13<span class="o">]</span>.map<span class="o">(</span><span class="k">function</span> <span class="o">(</span>id<span class="o">)</span> <span class="o">{</span>
+<div class="highlight"><pre><span></span>const <span class="nv">promises</span> <span class="o">=</span> <span class="o">[</span><span class="m">2</span>, <span class="m">3</span>, <span class="m">5</span>, <span class="m">7</span>, <span class="m">11</span>, <span class="m">13</span><span class="o">]</span>.map<span class="o">(</span><span class="k">function</span> <span class="o">(</span>id<span class="o">)</span> <span class="o">{</span>
   <span class="k">return</span> getJSON<span class="o">(</span><span class="s1">&#39;/post/&#39;</span> + id + <span class="s2">&quot;.json&quot;</span><span class="o">)</span><span class="p">;</span>
 <span class="o">})</span><span class="p">;</span>
 
@@ -939,7 +939,7 @@ Promise.all<span class="o">(</span>promises<span class="o">)</span>.then<span cl
 <div class="highlight"><pre><span></span>const <span class="nv">p</span> <span class="o">=</span> Promise.race<span class="o">([</span>
   fetch<span class="o">(</span><span class="s1">&#39;/resource-that-may-take-a-while&#39;</span><span class="o">)</span>,
   new Promise<span class="o">(</span><span class="k">function</span> <span class="o">(</span>resolve, reject<span class="o">)</span> <span class="o">{</span>
-    setTimeout<span class="o">(()</span> <span class="o">=</span>&gt; reject<span class="o">(</span>new Error<span class="o">(</span><span class="s1">&#39;request timeout&#39;</span><span class="o">))</span>, 5000<span class="o">)</span>
+    setTimeout<span class="o">(()</span> <span class="o">=</span>&gt; reject<span class="o">(</span>new Error<span class="o">(</span><span class="s1">&#39;request timeout&#39;</span><span class="o">))</span>, <span class="m">5000</span><span class="o">)</span>
   <span class="o">})</span>
 <span class="o">])</span><span class="p">;</span>
 
@@ -975,7 +975,7 @@ And we can use <code>for...of</code> to iterate it.</p>
     <span class="k">return</span> <span class="o">{</span>
       next: <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="o">{</span>
-          value: 1,
+          value: <span class="m">1</span>,
           <span class="k">done</span>: <span class="nb">true</span>
         <span class="o">}</span><span class="p">;</span>
       <span class="o">}</span>
@@ -1019,18 +1019,18 @@ iter.next<span class="o">()</span> // <span class="o">{</span> value: undefined,
 </li>
 <li><p class="first"><code>yield*</code></p>
 <div class="highlight"><pre><span></span><span class="nb">let</span> <span class="nv">generator</span> <span class="o">=</span> <span class="k">function</span>* <span class="o">()</span> <span class="o">{</span>
-  yield 1<span class="p">;</span>
-  yield* <span class="o">[</span>2,3,4<span class="o">]</span><span class="p">;</span>
-  yield 5<span class="p">;</span>
+  yield <span class="m">1</span><span class="p">;</span>
+  yield* <span class="o">[</span><span class="m">2</span>,3,4<span class="o">]</span><span class="p">;</span>
+  yield <span class="m">5</span><span class="p">;</span>
 <span class="o">}</span><span class="p">;</span>
 
 var <span class="nv">iterator</span> <span class="o">=</span> generator<span class="o">()</span><span class="p">;</span>
 
-iterator.next<span class="o">()</span> // <span class="o">{</span> value: 1, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
-iterator.next<span class="o">()</span> // <span class="o">{</span> value: 2, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
-iterator.next<span class="o">()</span> // <span class="o">{</span> value: 3, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
-iterator.next<span class="o">()</span> // <span class="o">{</span> value: 4, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
-iterator.next<span class="o">()</span> // <span class="o">{</span> value: 5, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">1</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">2</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">3</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">4</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+iterator.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">5</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
 iterator.next<span class="o">()</span> // <span class="o">{</span> value: undefined, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
 </pre></div>
 </li>
@@ -1067,53 +1067,53 @@ hw.next<span class="o">()</span>
 </pre></div>
 <p>A parameter can be added to next function. And this value will be regarded as the previous yeild value.</p>
 <div class="highlight"><pre><span></span><span class="k">function</span>* f<span class="o">()</span> <span class="o">{</span>
-  <span class="k">for</span><span class="o">(</span>var <span class="nv">i</span> <span class="o">=</span> 0<span class="p">;</span> true<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
+  <span class="k">for</span><span class="o">(</span>var <span class="nv">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> true<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
     var <span class="nv">reset</span> <span class="o">=</span> yield i<span class="p">;</span>
     <span class="k">if</span><span class="o">(</span>reset<span class="o">)</span> <span class="o">{</span> <span class="nv">i</span> <span class="o">=</span> -1<span class="p">;</span> <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
 var <span class="nv">g</span> <span class="o">=</span> f<span class="o">()</span><span class="p">;</span>
-g.next<span class="o">()</span> // <span class="o">{</span> value: 0, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
-g.next<span class="o">()</span> // <span class="o">{</span> value: 1, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
-g.next<span class="o">(</span><span class="nb">true</span><span class="o">)</span> // <span class="o">{</span> value: 0, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+g.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">0</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+g.next<span class="o">()</span> // <span class="o">{</span> value: <span class="m">1</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+g.next<span class="o">(</span><span class="nb">true</span><span class="o">)</span> // <span class="o">{</span> value: <span class="m">0</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
 </pre></div>
 <p>Complex:</p>
 <div class="highlight"><pre><span></span><span class="k">function</span>* foo<span class="o">(</span>x<span class="o">)</span> <span class="o">{</span>
-  var <span class="nv">y</span> <span class="o">=</span> <span class="m">2</span> * <span class="o">(</span>yield <span class="o">(</span>x + 1<span class="o">))</span><span class="p">;</span>
-  var <span class="nv">z</span> <span class="o">=</span> yield <span class="o">(</span>y / 3<span class="o">)</span><span class="p">;</span>
+  var <span class="nv">y</span> <span class="o">=</span> <span class="m">2</span> * <span class="o">(</span>yield <span class="o">(</span>x + <span class="m">1</span><span class="o">))</span><span class="p">;</span>
+  var <span class="nv">z</span> <span class="o">=</span> yield <span class="o">(</span>y / <span class="m">3</span><span class="o">)</span><span class="p">;</span>
   <span class="k">return</span> <span class="o">(</span>x + y + z<span class="o">)</span><span class="p">;</span>
 <span class="o">}</span>
 
-var <span class="nv">a</span> <span class="o">=</span> foo<span class="o">(</span>5<span class="o">)</span><span class="p">;</span>
+var <span class="nv">a</span> <span class="o">=</span> foo<span class="o">(</span><span class="m">5</span><span class="o">)</span><span class="p">;</span>
 a.next<span class="o">()</span> // Object<span class="o">{</span>value:6, <span class="k">done</span>:false<span class="o">}</span>
 a.next<span class="o">()</span> // Object<span class="o">{</span>value:NaN, <span class="k">done</span>:false<span class="o">}</span>
 a.next<span class="o">()</span> // Object<span class="o">{</span>value:NaN, <span class="k">done</span>:true<span class="o">}</span>
 
-var <span class="nv">b</span> <span class="o">=</span> foo<span class="o">(</span>5<span class="o">)</span><span class="p">;</span>
-b.next<span class="o">()</span> // <span class="o">{</span> value:6, <span class="k">done</span>:false <span class="o">}</span> <span class="nv">x</span> <span class="o">=</span> 5
-b.next<span class="o">(</span>12<span class="o">)</span> // <span class="o">{</span> value:8, <span class="k">done</span>:false <span class="o">}</span> <span class="nv">y</span> <span class="o">=</span> 2*12, <span class="nv">yield</span> <span class="o">=</span> 24/3 <span class="o">=</span> 8
-b.next<span class="o">(</span>13<span class="o">)</span> // <span class="o">{</span> value:42, <span class="k">done</span>:true <span class="o">}</span> <span class="nv">z</span> <span class="o">=</span> 13, so 5+ <span class="m">24</span> + <span class="nv">13</span> <span class="o">=</span> 42
+var <span class="nv">b</span> <span class="o">=</span> foo<span class="o">(</span><span class="m">5</span><span class="o">)</span><span class="p">;</span>
+b.next<span class="o">()</span> // <span class="o">{</span> value:6, <span class="k">done</span>:false <span class="o">}</span> <span class="nv">x</span> <span class="o">=</span> <span class="m">5</span>
+b.next<span class="o">(</span><span class="m">12</span><span class="o">)</span> // <span class="o">{</span> value:8, <span class="k">done</span>:false <span class="o">}</span> <span class="nv">y</span> <span class="o">=</span> <span class="m">2</span>*12, <span class="nv">yield</span> <span class="o">=</span> <span class="m">24</span>/3 <span class="o">=</span> <span class="m">8</span>
+b.next<span class="o">(</span><span class="m">13</span><span class="o">)</span> // <span class="o">{</span> value:42, <span class="k">done</span>:true <span class="o">}</span> <span class="nv">z</span> <span class="o">=</span> <span class="m">13</span>, so <span class="m">5</span>+ <span class="m">24</span> + <span class="nv">13</span> <span class="o">=</span> <span class="m">42</span>
 </pre></div>
 <div class="highlight"><pre><span></span><span class="k">function</span>* numbers <span class="o">()</span> <span class="o">{</span>
-  yield 1
-  yield 2
-  <span class="k">return</span> 3
-  yield 4
+  yield <span class="m">1</span>
+  yield <span class="m">2</span>
+  <span class="k">return</span> <span class="m">3</span>
+  yield <span class="m">4</span>
 <span class="o">}</span>
 
-<span class="o">[</span>...numbers<span class="o">()]</span> // <span class="o">[</span>1, 2<span class="o">]</span>
+<span class="o">[</span>...numbers<span class="o">()]</span> // <span class="o">[</span><span class="m">1</span>, <span class="m">2</span><span class="o">]</span>
 
-Array.from<span class="o">(</span>numbers<span class="o">())</span> // <span class="o">[</span>1, 2<span class="o">]</span>
+Array.from<span class="o">(</span>numbers<span class="o">())</span> // <span class="o">[</span><span class="m">1</span>, <span class="m">2</span><span class="o">]</span>
 
 <span class="nb">let</span> <span class="o">[</span>x, y<span class="o">]</span> <span class="o">=</span> numbers<span class="o">()</span><span class="p">;</span>
-x // 1
-y // 2
+x // <span class="m">1</span>
+y // <span class="m">2</span>
 
 <span class="k">for</span> <span class="o">(</span><span class="nb">let</span> n of numbers<span class="o">())</span> <span class="o">{</span>
   console.log<span class="o">(</span>n<span class="o">)</span>
 <span class="o">}</span>
-// 1
-// 2
+// <span class="m">1</span>
+// <span class="m">2</span>
 </pre></div>
 <ul class="simple">
 <li>throw</li>
@@ -1143,14 +1143,14 @@ try <span class="o">{</span>
 </ul>
 <p>terminate iteration.</p>
 <div class="highlight"><pre><span></span><span class="k">function</span>* gen<span class="o">()</span> <span class="o">{</span>
-  yield 1<span class="p">;</span>
-  yield 2<span class="p">;</span>
-  yield 3<span class="p">;</span>
+  yield <span class="m">1</span><span class="p">;</span>
+  yield <span class="m">2</span><span class="p">;</span>
+  yield <span class="m">3</span><span class="p">;</span>
 <span class="o">}</span>
 
 var <span class="nv">g</span> <span class="o">=</span> gen<span class="o">()</span><span class="p">;</span>
 
-g.next<span class="o">()</span>        // <span class="o">{</span> value: 1, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
+g.next<span class="o">()</span>        // <span class="o">{</span> value: <span class="m">1</span>, <span class="k">done</span>: <span class="nb">false</span> <span class="o">}</span>
 g.return<span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span> // <span class="o">{</span> value: <span class="s2">&quot;foo&quot;</span>, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
 g.next<span class="o">()</span>        // <span class="o">{</span> value: undefined, <span class="k">done</span>: <span class="nb">true</span> <span class="o">}</span>
 </pre></div>
@@ -1188,7 +1188,7 @@ g.next<span class="o">()</span>        // <span class="o">{</span> value: undefi
 Point.prototype.toString <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
   <span class="k">return</span> <span class="s1">&#39;(&#39;</span> + this.x + <span class="s1">&#39;, &#39;</span> + this.y + <span class="s1">&#39;)&#39;</span><span class="p">;</span>
 <span class="o">}</span><span class="p">;</span>
-var <span class="nv">p</span> <span class="o">=</span> new Point<span class="o">(</span>1, 2<span class="o">)</span><span class="p">;</span>
+var <span class="nv">p</span> <span class="o">=</span> new Point<span class="o">(</span><span class="m">1</span>, <span class="m">2</span><span class="o">)</span><span class="p">;</span>
 
 <span class="c1"># New</span>
 class Point <span class="o">{</span>
@@ -1219,8 +1219,8 @@ class Point <span class="o">{</span>
   <span class="o">}</span>
 <span class="o">}</span>
 <span class="nb">let</span> <span class="nv">inst</span> <span class="o">=</span> new MyClass<span class="o">()</span><span class="p">;</span>
-inst.prop <span class="o">=</span> 123<span class="p">;</span>
-// setter: 123
+inst.prop <span class="o">=</span> <span class="m">123</span><span class="p">;</span>
+// setter: <span class="m">123</span>
 inst.prop
 // <span class="s1">&#39;getter&#39;</span>
 </pre></div>
@@ -1271,15 +1271,15 @@ Bar.classMethod<span class="o">()</span> // <span class="s1">&#39;hello&#39;</sp
 class Foo <span class="o">{</span>
 <span class="o">}</span>
 
-Foo.prop <span class="o">=</span> 1<span class="p">;</span>
-Foo.prop // 1
+Foo.prop <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+Foo.prop // <span class="m">1</span>
 </pre></div>
 </div>
 <div class="section" id="attrs">
 <h3>16.4. <a class="toc-backref" href="#id54">attrs</a></h3>
 <div class="highlight"><pre><span></span>class IncreasingCounter <span class="o">{</span>
   constructor<span class="o">()</span> <span class="o">{</span>
-    this._count <span class="o">=</span> 0<span class="p">;</span>
+    this._count <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
   <span class="o">}</span>
   get value<span class="o">()</span> <span class="o">{</span>
     console.log<span class="o">(</span><span class="s1">&#39;Getting the current value!&#39;</span><span class="o">)</span><span class="p">;</span>
@@ -1292,7 +1292,7 @@ Foo.prop // 1
 
 // same
 class IncreasingCounter <span class="o">{</span>
-  <span class="nv">_count</span> <span class="o">=</span> 0<span class="p">;</span>
+  <span class="nv">_count</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
   get value<span class="o">()</span> <span class="o">{</span>
     console.log<span class="o">(</span><span class="s1">&#39;Getting the current value!&#39;</span><span class="o">)</span><span class="p">;</span>
     <span class="k">return</span> this._count<span class="p">;</span>
@@ -1391,7 +1391,7 @@ class ColorPoint extends Point <span class="o">{</span>
 <p>when we use super as an object, that means we are using <code>Parent.prototype</code> .</p>
 <div class="highlight"><pre><span></span>class A <span class="o">{</span>
   constructor<span class="o">()</span> <span class="o">{</span>
-    this.p <span class="o">=</span> 2<span class="p">;</span>
+    this.p <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
 class B extends A <span class="o">{</span>
@@ -1406,7 +1406,7 @@ b.m // undefined
 <li><p class="first">Child class calls parent class functions, <code>this</code> represents Child class.</p>
 <div class="highlight"><pre><span></span>class A <span class="o">{</span>
   constructor<span class="o">()</span> <span class="o">{</span>
-    this.x <span class="o">=</span> 1<span class="p">;</span>
+    this.x <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
   <span class="o">}</span>
   print<span class="o">()</span> <span class="o">{</span>
     console.log<span class="o">(</span>this.x<span class="o">)</span><span class="p">;</span>
@@ -1415,29 +1415,29 @@ b.m // undefined
 class B extends A <span class="o">{</span>
   constructor<span class="o">()</span> <span class="o">{</span>
     super<span class="o">()</span><span class="p">;</span>
-    this.x <span class="o">=</span> 2<span class="p">;</span>
+    this.x <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
   <span class="o">}</span>
   m<span class="o">()</span> <span class="o">{</span>
     super.print<span class="o">()</span><span class="p">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
 <span class="nb">let</span> <span class="nv">b</span> <span class="o">=</span> new B<span class="o">()</span><span class="p">;</span>
-b.m<span class="o">()</span> // 2
+b.m<span class="o">()</span> // <span class="m">2</span>
 </pre></div>
 </li>
 <li><p class="first">In Child, if we assign super a value (<code>super.x = 3;</code> ), then we are also using child itself.</p>
 <div class="highlight"><pre><span></span>class A <span class="o">{</span>
   constructor<span class="o">()</span> <span class="o">{</span>
-    this.x <span class="o">=</span> 1<span class="p">;</span>
+    this.x <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
 class B extends A <span class="o">{</span>
   constructor<span class="o">()</span> <span class="o">{</span>
     super<span class="o">()</span><span class="p">;</span>
-    this.x <span class="o">=</span> 2<span class="p">;</span>
-    super.x <span class="o">=</span> 3<span class="p">;</span>
+    this.x <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
+    super.x <span class="o">=</span> <span class="m">3</span><span class="p">;</span>
     console.log<span class="o">(</span>super.x<span class="o">)</span><span class="p">;</span> // undefined
-    console.log<span class="o">(</span>this.x<span class="o">)</span><span class="p">;</span> // 3
+    console.log<span class="o">(</span>this.x<span class="o">)</span><span class="p">;</span> // <span class="m">3</span>
   <span class="o">}</span>
 <span class="o">}</span>
 <span class="nb">let</span> <span class="nv">b</span> <span class="o">=</span> new B<span class="o">()</span><span class="p">;</span>
@@ -1464,10 +1464,10 @@ class Child extends Parent <span class="o">{</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
-Child.myMethod<span class="o">(</span>1<span class="o">)</span><span class="p">;</span> // static 1
+Child.myMethod<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span> // static <span class="m">1</span>
 
 var <span class="nv">child</span> <span class="o">=</span> new Child<span class="o">()</span><span class="p">;</span>
-child.myMethod<span class="o">(</span>2<span class="o">)</span><span class="p">;</span> // instance 2
+child.myMethod<span class="o">(</span><span class="m">2</span><span class="o">)</span><span class="p">;</span> // instance <span class="m">2</span>
 </pre></div>
 </li>
 </ul>
@@ -1571,19 +1571,19 @@ import _, <span class="o">{</span> each, forEach <span class="o">}</span> from <
 <p>Using defualt will make the module in a single package.</p>
 <p>Constants in different modules:</p>
 <div class="highlight"><pre><span></span>// constants.js 模块
-<span class="nb">export</span> const <span class="nv">A</span> <span class="o">=</span> 1<span class="p">;</span>
-<span class="nb">export</span> const <span class="nv">B</span> <span class="o">=</span> 3<span class="p">;</span>
-<span class="nb">export</span> const <span class="nv">C</span> <span class="o">=</span> 4<span class="p">;</span>
+<span class="nb">export</span> const <span class="nv">A</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+<span class="nb">export</span> const <span class="nv">B</span> <span class="o">=</span> <span class="m">3</span><span class="p">;</span>
+<span class="nb">export</span> const <span class="nv">C</span> <span class="o">=</span> <span class="m">4</span><span class="p">;</span>
 
 // test1.js 模块
 import * as constants from <span class="s1">&#39;./constants&#39;</span><span class="p">;</span>
-console.log<span class="o">(</span>constants.A<span class="o">)</span><span class="p">;</span> // 1
-console.log<span class="o">(</span>constants.B<span class="o">)</span><span class="p">;</span> // 3
+console.log<span class="o">(</span>constants.A<span class="o">)</span><span class="p">;</span> // <span class="m">1</span>
+console.log<span class="o">(</span>constants.B<span class="o">)</span><span class="p">;</span> // <span class="m">3</span>
 
 // test2.js 模块
 import <span class="o">{</span>A, B<span class="o">}</span> from <span class="s1">&#39;./constants&#39;</span><span class="p">;</span>
-console.log<span class="o">(</span>A<span class="o">)</span><span class="p">;</span> // 1
-console.log<span class="o">(</span>B<span class="o">)</span><span class="p">;</span> // 3
+console.log<span class="o">(</span>A<span class="o">)</span><span class="p">;</span> // <span class="m">1</span>
+console.log<span class="o">(</span>B<span class="o">)</span><span class="p">;</span> // <span class="m">3</span>
 </pre></div>
 </div>
 <div class="section" id="browser-load-es6">
@@ -1657,6 +1657,9 @@ console.log<span class="o">(</span>B<span class="o">)</span><span class="p">;</s
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -1665,7 +1668,7 @@ console.log<span class="o">(</span>B<span class="o">)</span><span class="p">;</s
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

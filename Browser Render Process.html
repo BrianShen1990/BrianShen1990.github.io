@@ -113,8 +113,8 @@
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-    <span class="nc">.paintOnly</span> <span class="p">{</span>
-      <span class="nb">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+    <span class="p">.</span><span class="nc">paintOnly</span> <span class="p">{</span>
+      <span class="k">color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;jquery-3.3.1.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -176,9 +176,9 @@
 <p>BEM (Block, Element, Modifier):</p>
 <blockquote>
 It recommends that everything has a single class, and, where you need hierarchy, that gets baked into the name of the class as well:</blockquote>
-<div class="highlight"><pre><span></span><span class="nc">.list</span> <span class="p">{</span> <span class="p">}</span>
-<span class="nc">.list__list-item</span> <span class="p">{</span> <span class="p">}</span>
-<span class="nc">.list__list-item--last-child</span> <span class="p">{}</span>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">list</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">list__list-item</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">list__list-item--last-child</span> <span class="p">{}</span>
 </pre></div>
 </div>
 <div class="section" id="optimizing-layout">
@@ -252,12 +252,12 @@ It recommends that everything has a single class, and, where you need hierarchy,
 <li><p class="first">Paint is often the most expensive part of the pixel pipeline; avoid it where you can.</p>
 </li>
 <li><p class="first">Reduce paint areas through layer promotion and orchestration of animations.</p>
-<div class="highlight"><pre><span></span><span class="nc">.moving-element</span> <span class="p">{</span>
-  <span class="n">will</span><span class="o">-</span><span class="n">change</span><span class="o">:</span> <span class="n">transform</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">moving-element</span> <span class="p">{</span>
+  <span class="k">will-change</span><span class="p">:</span> <span class="k">transform</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nc">.moving-element</span> <span class="p">{</span>
-  <span class="n">transform</span><span class="o">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+<span class="p">.</span><span class="nc">moving-element</span> <span class="p">{</span>
+  <span class="k">transform</span><span class="p">:</span> <span class="nb">translateZ</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </li>
@@ -367,6 +367,9 @@ window.addEventListener<span class="o">(</span><span class="s1">&#39;scroll&#39;
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -375,7 +378,7 @@ window.addEventListener<span class="o">(</span><span class="s1">&#39;scroll&#39;
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

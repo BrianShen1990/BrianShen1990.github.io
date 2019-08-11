@@ -119,7 +119,7 @@
         └─ Each pages
     └─ index.jsx <span class="o">(</span>Main entry/主进入点<span class="o">)</span>
 </pre></div>
-<div class="tip">
+<div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>Problems of Absolute path: 相对路径问题</p>
 <p>Ref: <a class="reference external" href="https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/">https://fdp.io/blog/2018/01/18/setting-up-absolute-paths-in-create-react-app/</a></p>
@@ -180,7 +180,7 @@ All we have to do is declare, declare. And the scope is in the components itself
                     &lt;BoostNavLink
                         <span class="nv">className</span><span class="o">={</span>classnames<span class="o">({</span> active: this.state.activeTab <span class="o">===</span> <span class="s1">&#39;2&#39;</span> <span class="o">})}</span>
                         <span class="nv">onClick</span><span class="o">={()</span> <span class="o">=</span>&gt; <span class="o">{</span> this.toggleTab<span class="o">(</span><span class="s1">&#39;2&#39;</span><span class="o">)</span><span class="p">;</span> <span class="o">}}</span>&gt;
-                        Tab 2
+                        Tab <span class="m">2</span>
                     &lt;/BoostNavLink&gt;
                 &lt;/NavItem&gt;
             &lt;/Nav&gt;
@@ -347,17 +347,17 @@ global.fetch <span class="o">=</span> require<span class="o">(</span><span class
 import <span class="o">{</span>  Row, Card <span class="o">}</span> from <span class="s1">&#39;reactstrap&#39;</span><span class="p">;</span>
 import Adapter from <span class="s1">&#39;enzyme-adapter-react-16&#39;</span><span class="p">;</span>
 configure<span class="o">({</span> adapter: new Adapter<span class="o">()</span> <span class="o">})</span><span class="p">;</span>
-//jest.setTimeout<span class="o">(</span>10000<span class="o">)</span><span class="p">;</span>
+//jest.setTimeout<span class="o">(</span><span class="m">10000</span><span class="o">)</span><span class="p">;</span>
 
 describe<span class="o">(</span><span class="s1">&#39;&lt;SubAV /&gt;&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
     it<span class="o">(</span><span class="s1">&#39;renders 1 &lt;Row /&gt; components&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
         const <span class="nv">wrapper</span> <span class="o">=</span> shallow<span class="o">(</span>&lt;SubAV /&gt;<span class="o">)</span><span class="p">;</span>
-        expect<span class="o">(</span>wrapper.find<span class="o">(</span>Row<span class="o">))</span>.to.have.lengthOf<span class="o">(</span>1<span class="o">)</span><span class="p">;</span>
+        expect<span class="o">(</span>wrapper.find<span class="o">(</span>Row<span class="o">))</span>.to.have.lengthOf<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
     <span class="o">})</span><span class="p">;</span>
 
     it<span class="o">(</span><span class="s1">&#39;renders 4 &lt;Card /&gt; components&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
         const <span class="nv">wrapper</span> <span class="o">=</span> shallow<span class="o">(</span>&lt;SubAV /&gt;<span class="o">)</span><span class="p">;</span>
-        expect<span class="o">(</span>wrapper.find<span class="o">(</span>Card<span class="o">))</span>.to.have.lengthOf<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+        expect<span class="o">(</span>wrapper.find<span class="o">(</span>Card<span class="o">))</span>.to.have.lengthOf<span class="o">(</span><span class="m">4</span><span class="o">)</span><span class="p">;</span>
     <span class="o">})</span><span class="p">;</span>
 
     it<span class="o">(</span><span class="s1">&#39;calls componentDidMount&#39;</span>, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
@@ -375,14 +375,14 @@ describe<span class="o">(</span><span class="s1">&#39;&lt;SampleRest /&gt;&#39;<
         sinon.spy<span class="o">(</span>SampleRest.prototype, <span class="s1">&#39;componentDidMount&#39;</span><span class="o">)</span><span class="p">;</span>
         fetch.mockResponseOnce<span class="o">(</span>JSON.stringify<span class="o">([</span><span class="s2">&quot;Fred&quot;</span>, <span class="s2">&quot;Fay&quot;</span><span class="o">]))</span>
         const <span class="nv">wrapper</span> <span class="o">=</span> mount<span class="o">(</span>&lt;SampleRest /&gt;<span class="o">)</span><span class="p">;</span>
-        expect<span class="o">(</span>SampleRest.prototype.componentDidMount<span class="o">)</span>.to.have.property<span class="o">(</span><span class="s1">&#39;callCount&#39;</span>, 1<span class="o">)</span><span class="p">;</span>
+        expect<span class="o">(</span>SampleRest.prototype.componentDidMount<span class="o">)</span>.to.have.property<span class="o">(</span><span class="s1">&#39;callCount&#39;</span>, <span class="m">1</span><span class="o">)</span><span class="p">;</span>
         setTimeout<span class="o">(()=</span>&gt;<span class="o">{</span>
             console.log<span class="o">(</span><span class="s2">&quot;haha&quot;</span><span class="o">)</span><span class="p">;</span>
             console.log<span class="o">(</span>wrapper.text<span class="o">())</span><span class="p">;</span>
             wrapper.update<span class="o">()</span><span class="p">;</span>
             expect<span class="o">(</span>wrapper.contains<span class="o">(</span>&lt;span&gt;Fay&lt;br /&gt;&lt;/span&gt;<span class="o">))</span>.to.equal<span class="o">(</span><span class="nb">true</span><span class="o">)</span><span class="p">;</span>
             <span class="k">done</span><span class="o">()</span><span class="p">;</span>
-        <span class="o">}</span>, 100<span class="o">)</span>
+        <span class="o">}</span>, <span class="m">100</span><span class="o">)</span>
     <span class="o">})</span><span class="p">;</span>
 <span class="o">})</span><span class="p">;</span>
 </pre></div>
@@ -398,7 +398,7 @@ describe<span class="o">(</span><span class="s1">&#39;&lt;SampleRest /&gt;&#39;<
 Test Suites: <span class="m">1</span> passed, <span class="m">1</span> total
 Tests:       <span class="m">4</span> passed, <span class="m">4</span> total
 Snapshots:   <span class="m">0</span> total
-Time:        1.881s, estimated 2s
+Time:        <span class="m">1</span>.881s, estimated 2s
 Ran all <span class="nb">test</span> suites related to changed files.
 </pre></div>
 </div>
@@ -516,16 +516,14 @@ registerServiceWorker<span class="o">()</span><span class="p">;</span>
 </li>
 <li><p class="first">Route Matching / 路由匹配</p>
 <blockquote>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt>You can include a &lt;Route&gt; anywhere that you want to render content based on the location.</dt>
-<dd><p class="first last">It will often make sense to list a number of possible &lt;Route&gt;s next to each other.
-路由匹配将 URL 和对应的 组件相关联。</p>
-</dd>
+<dd>It will often make sense to list a number of possible &lt;Route&gt;s next to each other.
+路由匹配将 URL 和对应的 组件相关联。</dd>
 </dl>
 </li>
-<li><p class="first">The &lt;Switch&gt; component is used to group &lt;Route&gt;s together.</p>
-</li>
+<li>The &lt;Switch&gt; component is used to group &lt;Route&gt;s together.</li>
 </ul>
 <div class="highlight"><pre><span></span>&lt;Route <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/about&#39;</span> <span class="nv">component</span><span class="o">={</span>About<span class="o">}</span>/&gt; // renders &lt;About/&gt;
 &lt;Route <span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/contact&#39;</span> <span class="nv">component</span><span class="o">={</span>Contact<span class="o">}</span>/&gt; // renders null
@@ -553,18 +551,16 @@ You should not use the component prop with an inline function to pass in-scope v
 </li>
 <li><p class="first">Navigation / 导航</p>
 <blockquote>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt>React Router provides a &lt;Link&gt; component to create links in your application.</dt>
-<dd><p class="first last">Wherever you render a &lt;Link&gt;, an anchor (&lt;a&gt;) will be rendered in your application’s HTML.
-Route 是确定什么样的URL 渲染怎样的组件， 而 Link 和 NavLink 则是 UI 上怎么显示这些锚点 并且相关联。</p>
-</dd>
+<dd>Wherever you render a &lt;Link&gt;, an anchor (&lt;a&gt;) will be rendered in your application’s HTML.
+Route 是确定什么样的URL 渲染怎样的组件， 而 Link 和 NavLink 则是 UI 上怎么显示这些锚点 并且相关联。</dd>
 </dl>
 </li>
-<li><p class="first">The &lt;NavLink&gt; is a special type of &lt;Link&gt; that can style itself as “active” when its to prop matches the current location.</p>
-</li>
+<li>The &lt;NavLink&gt; is a special type of &lt;Link&gt; that can style itself as “active” when its to prop matches the current location.</li>
 </ul>
-<div class="warning">
+<div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <div class="last line-block">
 <div class="line">NavLink can cause conflict with reactstrap NavLink, when imported, please add alias to escape.</div>
@@ -784,6 +780,9 @@ serve -s build
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -792,7 +791,7 @@ serve -s build
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

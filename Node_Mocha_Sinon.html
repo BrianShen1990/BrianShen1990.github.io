@@ -106,7 +106,7 @@ Works with any unit testing framework.</p>
 <h3>2.1. <a class="toc-backref" href="#id6">Function without calling functions from other modules</a></h3>
 <div class="highlight"><pre><span></span><span class="c1">// index.js</span>
 <span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restEmpty</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restEmpty</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
 <p>Test Case:</p>
@@ -126,14 +126,14 @@ Works with any unit testing framework.</p>
 <h3>2.2. <a class="toc-backref" href="#id7">Calling sync function from other modules</a></h3>
 <div class="highlight"><pre><span></span><span class="c1">// index.js</span>
 <span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetDBInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetDBInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span>  <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbInfo</span><span class="p">();</span>
   <span class="c1">// send info</span>
   <span class="c1">// console.log(res);</span>
 <span class="p">}</span>
 
 <span class="c1">// ModuleB.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">{};</span>
 <span class="p">}</span>
 </pre></div>
@@ -161,22 +161,22 @@ Works with any unit testing framework.</p>
 <h3>2.3. <a class="toc-backref" href="#id8">Calling promise from other modules</a></h3>
 <div class="highlight"><pre><span></span><span class="c1">// index.js</span>
 <span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetUsers</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbGetUser</span><span class="p">(</span><span class="nx">name</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetUsers</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbGetUser</span><span class="p">(</span><span class="nx">name</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="c1">// send success</span>
     <span class="c1">// console.log(res);</span>
     <span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
   <span class="p">});</span>
 <span class="p">}</span>
 
 <span class="c1">// ModuleB.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbGetUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbGetUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="c1">// do something</span>
     <span class="nx">resolve</span><span class="p">();</span>
-  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
   <span class="p">})</span>
 <span class="p">}</span>
@@ -184,8 +184,8 @@ Works with any unit testing framework.</p>
 <p>Test Case:</p>
 <div class="highlight"><pre><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#dbOp.restGetUsers() promise&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">send</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
-    <span class="nx">error</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+    <span class="nx">send</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{},</span>
+    <span class="nx">error</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{}</span>
   <span class="p">};</span>
   <span class="kr">const</span> <span class="nx">RetValue</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;test&#39;</span><span class="p">}];</span>
   <span class="kd">let</span> <span class="nx">dbGetUser</span><span class="p">;</span>
@@ -205,7 +205,7 @@ Works with any unit testing framework.</p>
   <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should return value&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">resolves</span><span class="p">(</span><span class="nx">RetValue</span><span class="p">);</span>
     <span class="nx">send</span><span class="p">.</span><span class="nx">returns</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
-    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsers</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsers</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
       <span class="nx">assert</span><span class="p">(</span><span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
       <span class="nx">assert</span><span class="p">(</span><span class="nx">send</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
       <span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">error</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
@@ -216,14 +216,14 @@ Works with any unit testing framework.</p>
       <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">sendArg</span><span class="p">,</span> <span class="nx">RetValue</span><span class="p">);</span>
 
       <span class="nx">done</span><span class="p">();</span>
-    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
       <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
   <span class="p">});</span>
   <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should reject&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">rejects</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">);</span>
     <span class="nx">error</span><span class="p">.</span><span class="nx">returns</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
-    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsers</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="p">.</span><span class="nx">restGetUsers</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
       <span class="nx">assert</span><span class="p">(</span><span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
       <span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">send</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
       <span class="nx">assert</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">);</span>
@@ -231,7 +231,7 @@ Works with any unit testing framework.</p>
       <span class="kr">const</span> <span class="nx">dbArg</span> <span class="o">=</span> <span class="nx">dbGetUser</span><span class="p">.</span><span class="nx">getCall</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
       <span class="nx">assert</span><span class="p">(</span><span class="nx">dbArg</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
       <span class="nx">done</span><span class="p">();</span>
-    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
       <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
   <span class="p">});</span>
@@ -242,8 +242,8 @@ Works with any unit testing framework.</p>
 <h3>2.4. <a class="toc-backref" href="#id9">Calling callbacks from other modules</a></h3>
 <div class="highlight"><pre><span></span><span class="c1">// index.js</span>
 <span class="kr">const</span> <span class="nx">ModuleB</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./moduleB&#39;</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetUsersCB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbGetUserCB</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">restGetUsersCB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">ModuleB</span><span class="p">.</span><span class="nx">dbGetUserCB</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="c1">// send success</span>
     <span class="c1">// console.log(res);</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
@@ -255,7 +255,7 @@ Works with any unit testing framework.</p>
 <span class="p">}</span>
 
 <span class="c1">// moduleB.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbGetUserCB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">dbGetUserCB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// do something</span>
   <span class="nx">cb</span><span class="p">({});</span>
 <span class="p">}</span>
@@ -263,8 +263,8 @@ Works with any unit testing framework.</p>
 <p>Test Case:</p>
 <div class="highlight"><pre><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#dbOp.restGetUsersCB() callback&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">send</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
-    <span class="nx">error</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+    <span class="nx">send</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{},</span>
+    <span class="nx">error</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{}</span>
   <span class="p">};</span>
   <span class="kr">const</span> <span class="nx">RetValue</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;test&#39;</span><span class="p">}];</span>
   <span class="kd">let</span> <span class="nx">dbGetUserCB</span><span class="p">;</span>
@@ -399,6 +399,9 @@ Works with any unit testing framework.</p>
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -407,7 +410,7 @@ Works with any unit testing framework.</p>
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>

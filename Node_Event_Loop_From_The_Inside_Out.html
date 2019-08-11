@@ -172,7 +172,7 @@ epoll_wait(..., int timeout, ...)</p>
 <li><p class="first">Not pollable: file system</p>
 <p>Everything in fs.* uses uv thread poll (unless they are sync).
 The blocking call is made by a thread, and when it completes, readiness is signaled back to the event loop using either an eventfd or a self pipe.</p>
-<div class="tip">
+<div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">self-pipe:
 A pipe, where one end is written to by a thread or a signal handler, and the other end is polled in the loop. Traditional way to &quot;wake up&quot; a polling loop when the event to wait for is not directly representable as a file descriptor.</p>
@@ -326,7 +326,7 @@ epoll_wait(..., int timeout, ...)</p>
 <li><p class="first">不可轮询： 文件系统</p>
 <p>所有的 fs.* 相关的，都会使用 uv 进程池（除非调用是同步的）。
 这些阻塞调用是由单独一个进程调用的，当动作完成时，可读信号会被发送给循环，通过 eventfd 或者 self pipe。</p>
-<div class="tip">
+<div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">self pipe :
 一种管道，一端是由一个进程 或者 信号处理写入，另一端是循环读取。
@@ -436,6 +436,9 @@ epoll_wait(..., int timeout, ...)</p>
         <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>7</span>
       </li>
       <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
         <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
       </li>
   </ol>
@@ -444,7 +447,7 @@ epoll_wait(..., int timeout, ...)</p>
   <h2 class="_breif">Tags</h2>
   <ol>
       <li>
-        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>11</span>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
       </li>
       <li>
         <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>10</span>
