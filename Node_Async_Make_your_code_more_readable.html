@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Node Async - Make your code more readable</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Node_Async_Make_your_code_more_readable.html" rel="bookmark"
+          title="Permalink to Node Async - Make your code more readable">Node Async - Make your code more readable
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Mon 19 August 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Web</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/node.html">Node</a> 
+          <a href="https://brianshen1990.github.io/tag/async.html">async</a> 
+          <a href="https://brianshen1990.github.io/tag/promise.html">promise</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="node-async-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#intro" id="id1">Intro</a></li>
+<li><a class="reference internal" href="#how-to-use-promises-in-async" id="id2">How to use promises in async</a></li>
+<li><a class="reference internal" href="#how-to-handle-errors-in-async" id="id3">How to handle errors in async</a></li>
+<li><a class="reference internal" href="#async-series" id="id4">Async, series</a></li>
+<li><a class="reference internal" href="#make-async-synchronous" id="id5">Make async synchronous</a></li>
+<li><a class="reference internal" href="#async-in-iteration" id="id6">Async in iteration</a><ul>
+<li><a class="reference internal" href="#async-cannot-be-resided-inside-map-foreach" id="id7">async cannot be resided inside <code>map</code> , <code>forEach</code></a></li>
+<li><a class="reference internal" href="#async-in-for-each" id="id8">async in for each</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference" id="id9">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="intro">
+<h2>1. <a class="toc-backref" href="#id1">Intro</a></h2>
+<p>I love promises because promises make node magic and advanced and the most important, promise will keep me aware that: you are writing asynchronous code. Sometimes, beginners and even professionals forget this point and then they will spend miserable amount of time debugging.</p>
+<p>However, we write code to make works done and to make others understood, especially when others are responsible for maintenance.</p>
+<p>Actually, for most people, JavaScript is quite easy to understand without promises. So why don't make it easy. Use less promise and use more async.</p>
+</div>
+<div class="section" id="how-to-use-promises-in-async">
+<h2>2. <a class="toc-backref" href="#id2">How to use promises in async</a></h2>
+<p>Just use <code>await</code> for a promise in an <code>async</code> function. And it will wait for the promise to finish until it goes on.</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">promisesFunc</span>  <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`resolved </span><span class="si">${</span><span class="nx">output</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">asyncCall</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="s2">&quot;call from async&quot;</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+  <span class="c1">// expected output: &#39;resolved&#39;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== begin&quot;</span><span class="p">)</span>
+<span class="nx">asyncCall</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== end&quot;</span><span class="p">)</span>
+
+<span class="c1">// === begin</span>
+<span class="c1">// === end</span>
+<span class="c1">// resolved call from async</span>
+</pre></div>
+</div>
+<div class="section" id="how-to-handle-errors-in-async">
+<h2>3. <a class="toc-backref" href="#id3">How to handle errors in async</a></h2>
+<p>The ordinary <code>try..catch..</code> .</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">promisesErrorFunc</span> <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">reject</span><span class="p">(</span><span class="sb">`reject </span><span class="si">${</span><span class="nx">output</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">asyncCall</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesErrorFunc</span><span class="p">(</span><span class="s2">&quot;call from async&quot;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== begin&quot;</span><span class="p">)</span>
+<span class="nx">asyncCall</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== end&quot;</span><span class="p">)</span>
+<span class="c1">// === begin</span>
+<span class="c1">// === end</span>
+<span class="c1">// reject call from async</span>
+</pre></div>
+<p>However, it will only handle traditional promise rejects. If we don't handle properly within promise, then the outside <code>try..catch..</code> also cannot do anything.</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">promisesErrorFunc</span> <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">notExistVar</span><span class="p">.</span><span class="nx">attrSome</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+      <span class="nx">reject</span><span class="p">(</span><span class="sb">`reject </span><span class="si">${</span><span class="nx">output</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">asyncCall</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesErrorFunc</span><span class="p">(</span><span class="s2">&quot;call from async&quot;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;falls async error&quot;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== begin&quot;</span><span class="p">)</span>
+<span class="nx">asyncCall</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== end&quot;</span><span class="p">)</span>
+
+<span class="c1">// === begin</span>
+<span class="c1">// === end</span>
+<span class="c1">// /Users/houweishen/Code/Brian/tset/Node/async/test.js:11</span>
+<span class="c1">//       notExistVar.attrSome = 9;</span>
+<span class="c1">//       ^</span>
+<span class="c1">//</span>
+<span class="c1">// ReferenceError: notExistVar is not defined</span>
+<span class="c1">//     at Timeout._onTimeout (/Users/houweishen/Code/Brian/tset/Node/async/test.js:11:7)</span>
+<span class="c1">//   at listOnTimeout (internal/timers.js:531:17)</span>
+<span class="c1">//   at processTimers (internal/timers.js:475:7)</span>
+</pre></div>
+<p>And, to avoid such kind of crash:</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">promisesErrorSafeFunc</span> <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">notExistVar</span><span class="p">.</span><span class="nx">attrSome</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="sb">`reject </span><span class="si">${</span><span class="nx">output</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;falls inside here&quot;</span><span class="p">);</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">asyncCall</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesErrorSafeFunc</span><span class="p">(</span><span class="s2">&quot;call from async&quot;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;falls async error&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== begin&quot;</span><span class="p">)</span>
+<span class="nx">asyncCall</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== end&quot;</span><span class="p">)</span>
+
+<span class="c1">// === begin</span>
+<span class="c1">// === end</span>
+<span class="c1">// falls inside here</span>
+<span class="c1">// falls async error</span>
+</pre></div>
+</div>
+<div class="section" id="async-series">
+<h2>4. <a class="toc-backref" href="#id4">Async, series</a></h2>
+<p>Async, as its own name, make everything seems async in syntax.</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">promisesFunc</span>  <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`resolved </span><span class="si">${</span><span class="nx">output</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">asyncCallSeries</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">result1</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="s2">&quot;call from async 01&quot;</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result1</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">result2</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="s2">&quot;call from async 02&quot;</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result2</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== begin&quot;</span><span class="p">)</span>
+<span class="nx">asyncCallSeries</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== end&quot;</span><span class="p">)</span>
+
+<span class="c1">// === begin</span>
+<span class="c1">// === end</span>
+<span class="c1">// resolved call from async 01</span>
+<span class="c1">// resolved call from async 02</span>
+</pre></div>
+</div>
+<div class="section" id="make-async-synchronous">
+<h2>5. <a class="toc-backref" href="#id5">Make async synchronous</a></h2>
+<p>We have to rely on the power of promises.</p>
+<div class="highlight"><pre><span></span>const <span class="nv">promisesFunc</span>  <span class="o">=</span> <span class="o">(</span>output<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  <span class="k">return</span> new Promise<span class="o">(</span><span class="nv">resolve</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    setTimeout<span class="o">(</span> <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+      resolve<span class="o">(</span><span class="sb">`</span>resolved <span class="si">${</span><span class="nv">output</span><span class="si">}</span><span class="sb">`</span><span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>, <span class="m">1000</span><span class="o">)</span><span class="p">;</span>
+  <span class="o">})</span><span class="p">;</span>
+<span class="o">}</span>
+
+const <span class="nv">asyncCallAsync</span> <span class="o">=</span> async <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  const <span class="nv">result</span> <span class="o">=</span> await Promise.all<span class="o">([</span>promisesFunc<span class="o">(</span><span class="s2">&quot;01&quot;</span><span class="o">)</span>, promisesFunc<span class="o">(</span><span class="s2">&quot;02&quot;</span><span class="o">)])</span><span class="p">;</span>
+  console.log<span class="o">(</span>result<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+console.log<span class="o">(</span><span class="s2">&quot;=== begin&quot;</span><span class="o">)</span>
+asyncCallAsync<span class="o">()</span><span class="p">;</span>
+console.log<span class="o">(</span><span class="s2">&quot;=== end&quot;</span><span class="o">)</span>
+
+// <span class="o">===</span> begin
+// <span class="o">===</span> end
+// <span class="o">[</span> <span class="s1">&#39;resolved 01&#39;</span>, <span class="s1">&#39;resolved 02&#39;</span> <span class="o">]</span>
+</pre></div>
+</div>
+<div class="section" id="async-in-iteration">
+<h2>6. <a class="toc-backref" href="#id6">Async in iteration</a></h2>
+<div class="section" id="async-cannot-be-resided-inside-map-foreach">
+<h3>6.1. <a class="toc-backref" href="#id7">async cannot be resided inside <code>map</code> , <code>forEach</code></a></h3>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">promisesFunc</span>  <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`resolved </span><span class="si">${</span><span class="nx">output</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">asyncMapFunc</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== begin&quot;</span><span class="p">)</span>
+<span class="nx">asyncMapFunc</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== end&quot;</span><span class="p">)</span>
+<span class="c1">// /Users/houweishen/Code/Brian/tset/Node/async/test.js:53</span>
+<span class="c1">//   const res = await promisesFunc(index);</span>
+<span class="c1">//               ^^^^^</span>
+<span class="c1">//</span>
+<span class="c1">// SyntaxError: await is only valid in async function</span>
+</pre></div>
+</div>
+<div class="section" id="async-in-for-each">
+<h3>6.2. <a class="toc-backref" href="#id8">async in for each</a></h3>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">promisesFunc</span>  <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`resolved </span><span class="si">${</span><span class="nx">output</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">asyncMapFunc</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span> <span class="nx">async</span><span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="sb">`MAP </span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">asyncForEachFunc</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span> <span class="nx">async</span><span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="sb">`ForEach </span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">asyncForInFunc</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">index</span> <span class="k">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="sb">`ForIn </span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">asyncForOfFunc</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">item</span> <span class="k">of</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promisesFunc</span><span class="p">(</span><span class="sb">`ForOf </span><span class="si">${</span><span class="nx">item</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== begin&quot;</span><span class="p">)</span>
+<span class="nx">asyncForInFunc</span><span class="p">();</span>
+<span class="nx">asyncForOfFunc</span><span class="p">();</span>
+<span class="nx">asyncMapFunc</span><span class="p">();</span>
+<span class="nx">asyncForEachFunc</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;=== end&quot;</span><span class="p">)</span>
+
+<span class="c1">// === begin</span>
+<span class="c1">// === end</span>
+<span class="c1">// resolved ForIn 0</span>
+<span class="c1">// resolved ForOf 1</span>
+<span class="c1">// resolved MAP 0</span>
+<span class="c1">// resolved MAP 1</span>
+<span class="c1">// resolved MAP 2</span>
+<span class="c1">// resolved ForEach 0</span>
+<span class="c1">// resolved ForEach 1</span>
+<span class="c1">// resolved ForEach 2</span>
+<span class="c1">// resolved ForIn 1</span>
+<span class="c1">// resolved ForOf 2</span>
+<span class="c1">// resolved ForIn 2</span>
+<span class="c1">// resolved ForOf 3</span>
+</pre></div>
+<p>So async iterations in <code>map</code> , <code>forEach</code> are async, and <code>for..in..</code> , <code>for..of..</code> are sync.</p>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>7. <a class="toc-backref" href="#id9">Reference</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10201420?sc=iThelpR">https://ithelp.ithome.com.tw/articles/10201420?sc=iThelpR</a></li>
+<li><a class="reference external" href="http://objcer.com/2017/10/12/async-await-with-forEach/">http://objcer.com/2017/10/12/async-await-with-forEach/</a></li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Node_Async_Make_your_code_more_readable.html';
+        var disqus_url = 'https://brianshen1990.github.io/Node_Async_Make_your_code_more_readable.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>8</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>12</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>12</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/https.html">Https </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
