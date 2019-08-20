@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Web Units</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Web_Units.html" rel="bookmark"
+          title="Permalink to Web Units">Web Units
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Tue 20 August 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Web</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/ui.html">UI</a> 
+          <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
+          <a href="https://brianshen1990.github.io/tag/units.html">Units</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#intro" id="id1">Intro</a></li>
+<li><a class="reference internal" href="#absolute" id="id2">Absolute</a></li>
+<li><a class="reference internal" href="#relative" id="id3">Relative</a><ul>
+<li><a class="reference internal" href="#examples" id="id4">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="intro">
+<span id="web-units-rst"></span><h2>1. <a class="toc-backref" href="#id1">Intro</a></h2>
+<p>Here is the thing. I received a sketch design from HIE: some text and other elements inside a circle (Just for simple and dor example).</p>
+<div class="figure">
+<img alt="" src="/images/web/Web_Units_01.png" />
+</div>
+<p>The circle is given as a background and should change size with fixed ratio of height and width according to the webpage height. OK. this is not that easy, because usually we keep fixed ratio according to the width. I will talk in another blog.</p>
+<p>But the problem is, how to make the content inside the circle change as the size of the background circle changes.</p>
+<p>For example, when the radius of the circle is 250, the font-size should be 16px, but when it changes  to 200, 14px is much better.</p>
+<p>So I do a little research on the font-size.</p>
+<p>There are two types of length units: absolute and relative.</p>
+</div>
+<div class="section" id="absolute">
+<h2>2. <a class="toc-backref" href="#id2">Absolute</a></h2>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cm</td>
+<td>centimeters</td>
+</tr>
+<tr><td>mm</td>
+<td>millimeters</td>
+</tr>
+<tr><td>in</td>
+<td>inches (1in = 96px = 2.54cm)</td>
+</tr>
+<tr><td>px</td>
+<td>pixels (1px = 1/96th of 1in)</td>
+</tr>
+<tr><td>pt</td>
+<td>points (1pt = 1/72 of 1in)</td>
+</tr>
+<tr><td>pc</td>
+<td>picas (1pc = 12 pt)</td>
+</tr>
+</tbody>
+</table>
+<p>So whether to put <code>px</code> in absolute or relative is a little tricky, because <code>px</code> is relative to the viewing device. For low-dpi devices, 1px is one device pixel (dot) of the display. For printers and high resolution screens 1px implies multiple device pixels.</p>
+</div>
+<div class="section" id="relative">
+<h2>3. <a class="toc-backref" href="#id3">Relative</a></h2>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>em</td>
+<td>Relative to the font-size of the element (2em means 2 times the size of the current font)</td>
+</tr>
+<tr><td>ex</td>
+<td>Relative to the x-height of the current font (rarely used)</td>
+</tr>
+<tr><td>ch</td>
+<td>Relative to width of the &quot;0&quot; (zero)</td>
+</tr>
+<tr><td>rem</td>
+<td>Relative to font-size of the root element</td>
+</tr>
+<tr><td>vw</td>
+<td>Relative to 1% of the width of the viewport*</td>
+</tr>
+<tr><td>vh</td>
+<td>Relative to 1% of the height of the viewport*</td>
+</tr>
+<tr><td>vmin</td>
+<td>Relative to 1% of viewport's* smaller dimension</td>
+</tr>
+<tr><td>vmax</td>
+<td>Relative to 1% of viewport's* larger dimension</td>
+</tr>
+<tr><td>%</td>
+<td>Relative to the parent element</td>
+</tr>
+</tbody>
+</table>
+<p><code>rem</code> is obviously better than <code>em</code> and <code>%</code> since <code>em</code> depends on each parent element and each has their own reference, as <code>rem</code> have only one reference : the root element. But they all need something as reference. If the reference element's size is fixed, actually, the whole size if fixed.</p>
+<p><code>vw</code> and <code>vh</code> is a little tricky since use can change their web browser's size all the time, make the appearance totally uncontrollable.</p>
+<p>But in this case, maybe <code>vw</code> is the best choice. However, at last I didn't take this solution because circle is only a apart of the whole screen, If an user resize his screen to a small size, it just can't give teh idea shots. But, <code>vw</code> is very magic, especially make everything to zoom in or out in a ratio.</p>
+<p>Let's get some examples to understand easily.</p>
+<div class="section" id="examples">
+<h3>3.1. <a class="toc-backref" href="#id4">Examples</a></h3>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="p">.</span><span class="nc">rectangle</span> <span class="p">{</span>
+      <span class="k">background-color</span><span class="p">:</span> <span class="kc">green</span><span class="p">;</span>
+      <span class="k">max-width</span><span class="p">:</span> <span class="mi">700</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">padding-top</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">./cir.png</span><span class="p">);</span>
+      <span class="k">background-size</span><span class="p">:</span> <span class="kc">contain</span><span class="p">;</span>
+      <span class="k">background-repeat</span><span class="p">:</span> <span class="kc">no-repeat</span><span class="p">;</span>
+      <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nc">rectangle_inner_vw</span><span class="p">{</span>
+      <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">top</span><span class="p">:</span> <span class="mi">30</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+      <span class="k">font-size</span><span class="p">:</span> <span class="mi">10</span><span class="kt">vw</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nc">rectangle_inner_em</span><span class="p">{</span>
+      <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">top</span><span class="p">:</span> <span class="mi">60</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+      <span class="k">font-size</span><span class="p">:</span> <span class="mi">2</span><span class="kt">em</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;rectangle&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;rectangle_inner_vw&quot;</span><span class="p">&gt;</span>
+      some VW text
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;rectangle_inner_em&quot;</span><span class="p">&gt;</span>
+      some em text
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/web/Web_Units_02.gif" />
+</div>
+<p>With <code>vw</code> , as the visual width scales, the font-size also becomes bigger. But with <code>em</code> , we cannot do that.</p>
+<p>Just visit this link:</p>
+<p><a class="reference external" href="/images/web/Units/index.html">Sample</a></p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.w3schools.com/cssref/css_units.asp">https://www.w3schools.com/cssref/css_units.asp</a></li>
+<li><a class="reference external" href="https://www.w3.org/Style/Examples/007/units.en.html">https://www.w3.org/Style/Examples/007/units.en.html</a></li>
+</ul>
+</div>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Web_Units.html';
+        var disqus_url = 'https://brianshen1990.github.io/Web_Units.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>9</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>13</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>12</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/https.html">Https </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
