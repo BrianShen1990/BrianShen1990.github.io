@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Docker Quick Reference</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Docker_Quick_Reference.html" rel="bookmark"
+          title="Permalink to Docker Quick Reference">Docker Quick Reference
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Tue 10 September 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Docker</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/linux.html">Linux</a> 
+          <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7</a> 
+          <a href="https://brianshen1990.github.io/tag/docker.html">Docker</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="id1"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#docker-concepts" id="id2">Docker concepts</a></li>
+<li><a class="reference internal" href="#containers-and-virtual-machines" id="id3">Containers and virtual machines</a></li>
+<li><a class="reference internal" href="#commands-run-and-debug" id="id4">Commands - Run and Debug</a></li>
+<li><a class="reference internal" href="#commands-image" id="id5">Commands - Image</a></li>
+<li><a class="reference internal" href="#commands-container" id="id6">Commands - Container</a></li>
+<li><a class="reference internal" href="#commands-volumes" id="id7">Commands - Volumes</a></li>
+<li><a class="reference internal" href="#commands-network" id="id8">Commands - Network</a></li>
+<li><a class="reference internal" href="#commands-format" id="id9">Commands - Format</a></li>
+<li><a class="reference internal" href="#commands-tags-save-and-export" id="id10">Commands Tags, Save and Export</a></li>
+<li><a class="reference internal" href="#commands-others" id="id11">Commands Others</a></li>
+<li><a class="reference internal" href="#reference" id="id12">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="docker-concepts">
+<h2>1. <a class="toc-backref" href="#id2">Docker concepts</a></h2>
+<p>Docker is a platform for developers and sysadmins to <strong>develop</strong>, <strong>deploy</strong>, and <strong>run</strong> applications with containers. The use of Linux containers to deploy applications is called <strong>containerization</strong>.</p>
+</div>
+<div class="section" id="containers-and-virtual-machines">
+<h2>2. <a class="toc-backref" href="#id3">Containers and virtual machines</a></h2>
+<p>A container runs natively on Linux and shares the kernel of the host machine with other containers. It runs a discrete process, taking no more memory than any other executable, making it lightweight.</p>
+<p>By contrast, a virtual machine (VM) runs a full-blown “guest” operating system with virtual access to host resources through a hypervisor. In general, VMs provide an environment with more resources than most applications need.</p>
+</div>
+<div class="section" id="commands-run-and-debug">
+<h2>3. <a class="toc-backref" href="#id4">Commands - Run and Debug</a></h2>
+<ul class="simple">
+<li><code>docker run -d -v redis-vol:/data redis:alpine -p</code> run containers</li>
+<li><code>docker run -d -v redis-vol:/data redis</code></li>
+<li><code>docker run --entrypoint /bin/bash -it nodeais:2.4.4</code></li>
+<li><code>docker run -it -v /root:/root nodeais:2.4.3 bash</code></li>
+<li><code>docker exec -i 92a1 curl 127.0.0.1:9200</code> <strong>debug</strong> go into shell without interrupt the main container, recommendation</li>
+<li><code>docker exec -it 92a1 bash</code></li>
+<li><code>docker attach 69d1</code> attach will stop main process and return control here</li>
+<li><code>docker logs --tail=100 -f mongodb</code> to get debug logs</li>
+</ul>
+</div>
+<div class="section" id="commands-image">
+<h2>4. <a class="toc-backref" href="#id5">Commands - Image</a></h2>
+<ul class="simple">
+<li><code>docker pull library/elasticsearch:5.6</code> to pull es</li>
+<li><code>docker pull java:openjdk-8-jdk</code> to pull java</li>
+<li><code>docker images</code> list images</li>
+<li><code>docker image ls</code></li>
+<li><code>docker image ls mongo --format &quot;{{.ID}}&quot;</code></li>
+<li><code>docker image rm *id*</code></li>
+<li><code>docker build -t plugins-scripts:v23 .</code> build image</li>
+</ul>
+</div>
+<div class="section" id="commands-container">
+<h2>5. <a class="toc-backref" href="#id6">Commands - Container</a></h2>
+<ul class="simple">
+<li><code>docker container ls</code></li>
+<li><code>docker container ls -a</code> to include stooped ones</li>
+<li><code>docker container rm *id*</code></li>
+<li><code>docker container prune</code> remove all stopped containers</li>
+<li><code>docker ps</code> is a short cut for <code>docker container ls</code></li>
+</ul>
+</div>
+<div class="section" id="commands-volumes">
+<h2>6. <a class="toc-backref" href="#id7">Commands - Volumes</a></h2>
+<ul class="simple">
+<li><code>docker volume ls</code></li>
+<li><code>docker volume create redis-vol</code></li>
+<li><code>docker run -d --name devtest --mount source=myvol2,target=/app nginx:latest</code></li>
+<li><code>docker run -d --name devtest -v myvol2:/app nginx:latest</code></li>
+<li><code>docker volume inspect my-vol</code></li>
+<li><code>docker volume rm my-vol</code></li>
+<li><code>docker run -d --name=nginxtest --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly nginx:latest</code> for read only</li>
+<li><code>docker run -d --name=nginxtest -v nginx-vol:/usr/share/nginx/html:ro nginx:latest</code> for read only</li>
+<li><code>docker volume prune</code>  delete all unused</li>
+</ul>
+</div>
+<div class="section" id="commands-network">
+<h2>7. <a class="toc-backref" href="#id8">Commands - Network</a></h2>
+<ul class="simple">
+<li><code>docker network create my-net</code> bridge</li>
+<li><code>docker network create --driver=bridge --subnet=172.28.0.0/16 --ip-range=172.28.5.0/24 --gateway=172.28.5.254 br0</code></li>
+<li><code>docker network create -d macvlan --subnet=172.16.86.0/24 --gateway=172.16.86.1 -o parent=eth0 pub_net</code> macvlan</li>
+<li><code>docker network rm my-net</code> Remove network</li>
+<li><code>docker create --name my-nginx --network my-net --publish 8080:80 nginx:latest</code> Connect by starting</li>
+<li><code>docker network connect my-net my-nginx</code> Connect while started</li>
+<li><code>docker network disconnect my-net my-nginx</code> Disconnect</li>
+<li><code>docker create --name my-nginx --network host --publish 8080:80 nginx:latest</code></li>
+<li><code>docker network prune</code> all unused networks are removed</li>
+</ul>
+</div>
+<div class="section" id="commands-format">
+<h2>8. <a class="toc-backref" href="#id9">Commands - Format</a></h2>
+<ul>
+<li><p class="first"><code>println</code> print each line <code>docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container</code></p>
+</li>
+<li><p class="first"><code>docker inspect -f '{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}'</code> get IP</p>
+<ul class="simple">
+<li><code>upper</code> : <code>docker inspect --format &quot;{{upper .Name}}&quot; container</code></li>
+<li><code>title</code> : <code>docker inspect --format &quot;{{title .Name}}&quot; container</code></li>
+<li><code>split</code> : <code>docker inspect --format '{{split .Image &quot;:&quot;}}'</code></li>
+<li><code>lower</code> : <code>docker inspect --format &quot;{{lower .Name}}&quot; container</code></li>
+<li><code>json</code> : <code>docker inspect --format '{{json .Mounts}}' container</code></li>
+<li><code>join</code> : <code>docker inspect --format '{{join .Args &quot; , &quot;}}' container</code></li>
+</ul>
+</li>
+<li><p class="first">Sample:</p>
+<div class="highlight"><pre><span></span>docker inspect 7cb9995533cb <span class="p">|</span> grep <span class="s2">&quot;IPAddress&quot;</span>
+
+.Service.ID Service ID
+.Service.Name       Service name
+.Service.Labels     Service labels
+.Node.ID    Node ID
+.Node.Hostname      Node Hostname
+.Task.ID    Task ID
+.Task.Name  Task name
+.Task.Slot  Task slot
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="section" id="commands-tags-save-and-export">
+<h2>9. <a class="toc-backref" href="#id10">Commands Tags, Save and Export</a></h2>
+<p>(Seems modern docker can remember the tag)</p>
+<ul class="simple">
+<li><code>docker image save b5435fede523 -o ./plugins-scrcips.2.3.0.180428.tar</code></li>
+<li><code>docker image load -i ./plugins-scrcips.2.3.0.180428.tar</code></li>
+<li><code>docker image tag b5435fede523 plugins-scripts:2.3.0</code></li>
+<li><code>docker image rmi plugins-scripts:2.3.0</code></li>
+</ul>
+</div>
+<div class="section" id="commands-others">
+<h2>10. <a class="toc-backref" href="#id11">Commands Others</a></h2>
+<ul class="simple">
+<li><code>docker system prune</code> remove all images, containers, and networks.</li>
+<li><code>docker run --rm -it --security-opt apparmor=docker-default hello-world</code> security policy</li>
+<li><code>docker run  -v /root:/root -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix  -it node:6.14.0 /bin/bash</code>  Display (For LibreOffice/Chrome/FF)</li>
+<li><code>LABEL &quot;com.example.vendor&quot;=&quot;ACME Incorporated&quot;</code> to add labels</li>
+<li><code>bin/registry garbage-collect [--dry-run] /path/to/config.yml</code> garbage collection</li>
+</ul>
+</div>
+<div class="section" id="reference">
+<h2>11. <a class="toc-backref" href="#id12">Reference</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.docker.com/get-started/">https://docs.docker.com/get-started/</a></li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Docker_Quick_Reference.html';
+        var disqus_url = 'https://brianshen1990.github.io/Docker_Quick_Reference.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>8</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/docker.html">Docker </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>13</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>12</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>6</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>4</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/https.html">Https </a><span>2</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
