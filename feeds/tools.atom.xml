@@ -1,5 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Tools</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/tools.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2019-03-05T00:00:00+08:00</updated><entry><title>TCP and TLS Handshaking</title><link href="https://brianshen1990.github.io/TCP_and_TLS_Handshaking.html" rel="alternate"></link><published>2019-03-05T00:00:00+08:00</published><updated>2019-03-05T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-03-05:/TCP_and_TLS_Handshaking.html</id><summary type="html">&lt;p class="first last"&gt;TCP and TLS Handshaking&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KNOWN - Tools</title><link href="https://brianshen1990.github.io/" rel="alternate"></link><link href="https://brianshen1990.github.io/feeds/tools.atom.xml" rel="self"></link><id>https://brianshen1990.github.io/</id><updated>2019-10-08T00:00:00+08:00</updated><entry><title>Sed and Find</title><link href="https://brianshen1990.github.io/Tools_Sed_Find.html" rel="alternate"></link><published>2019-10-08T00:00:00+08:00</published><updated>2019-10-08T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-10-08:/Tools_Sed_Find.html</id><summary type="html">&lt;p class="first last"&gt;Tools Sed and Find&lt;/p&gt;
+</summary><content type="html">&lt;p id="tools-sed-find-rst"&gt;Sed and Find are both tiny but wonderful tools.&lt;/p&gt;
+&lt;div class="section" id="sed"&gt;
+&lt;h2&gt;1. Sed&lt;/h2&gt;
+&lt;p&gt;Give sample using this file &lt;code&gt;sample.txt&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;content:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Line1 hello
+Line2
+Line3
+Line4
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;sed -i&lt;/code&gt; means taking modification back to the file.&lt;/p&gt;
+&lt;div class="section" id="find-and-append"&gt;
+&lt;h3&gt;1.1. Find and Append&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sed 'N;/Line2/a\Line2.1' sample.txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Line1 hello
+Line2
+Line2.1
+Line3
+Line4
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="append-at-the-end"&gt;
+&lt;h3&gt;1.2. Append at the end&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sed '$a\LastLine' sample.txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Line1 hello
+Line2
+Line3
+Line4
+LastLine
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="search-and-delete"&gt;
+&lt;h3&gt;1.3. Search and Delete&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sed '/Line2/'d sample.txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Line1 hello
+Line3
+Line4
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="delete-line"&gt;
+&lt;h3&gt;1.4. Delete line&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sed '3d' sample.txt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;delete line 3&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Line1 hello
+Line2
+Line4
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="replace"&gt;
+&lt;h3&gt;1.5. Replace&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sed 's/Line/line/g' sample.txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;line1 hello
+line2
+line3
+line4
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="insert"&gt;
+&lt;h3&gt;1.6. Insert&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sed '2iLine2.1' sample.txt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Inserts at line 2 &lt;code&gt;Line2.1&lt;/code&gt; .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Line1 hello
+Line2.1
+Line2
+Line3
+Line4
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="find"&gt;
+&lt;h2&gt;2. Find&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls -al
+total &lt;span class="m"&gt;1860416&lt;/span&gt;
+dr-xr-x---.  &lt;span class="m"&gt;5&lt;/span&gt; root    root         &lt;span class="m"&gt;4096&lt;/span&gt; Oct &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;:33 .
+dr-xr-xr-x. &lt;span class="m"&gt;18&lt;/span&gt; root    root         &lt;span class="m"&gt;4096&lt;/span&gt; Aug  &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;07&lt;/span&gt;:48 ..
+-rw-------.  &lt;span class="m"&gt;1&lt;/span&gt; root    root         &lt;span class="m"&gt;1549&lt;/span&gt; Jul &lt;span class="m"&gt;21&lt;/span&gt;  &lt;span class="m"&gt;2018&lt;/span&gt; anaconda-ks.cfg
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; root    root        &lt;span class="m"&gt;69856&lt;/span&gt; Aug &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:35 kkk.txt
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; root    root           &lt;span class="m"&gt;31&lt;/span&gt; Oct &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;:33 sample.txt
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; root    root         &lt;span class="m"&gt;1120&lt;/span&gt; Sep &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;12&lt;/span&gt;:05 tda.sh
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; tcpdump tcpdump     &lt;span class="m"&gt;18997&lt;/span&gt; Sep &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;12&lt;/span&gt;:31 test5.pcap
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; tcpdump tcpdump     &lt;span class="m"&gt;18222&lt;/span&gt; Sep &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;12&lt;/span&gt;:33 test6.pcap
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; tcpdump tcpdump    &lt;span class="m"&gt;969225&lt;/span&gt; Sep &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;12&lt;/span&gt;:50 test7.pcap
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; tcpdump tcpdump     &lt;span class="m"&gt;29300&lt;/span&gt; Sep &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;12&lt;/span&gt;:55 test8.pcap
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; tcpdump tcpdump     &lt;span class="m"&gt;21058&lt;/span&gt; Sep &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;13&lt;/span&gt;:31 test9.pcap
+-rw-r--r--.  &lt;span class="m"&gt;1&lt;/span&gt; root    root           &lt;span class="m"&gt;48&lt;/span&gt; Aug &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;:51 tst.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="file"&gt;
+&lt;h3&gt;2.1. File&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.
+&lt;span class="p"&gt;|&lt;/span&gt;-- nest
+&lt;span class="p"&gt;|&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt;-- ss.txt
+&lt;span class="p"&gt;|&lt;/span&gt;-- sample.txt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;find ./ -name ss.txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./nest/ss.txt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;find ./ -type f -size +1M&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="content"&gt;
+&lt;h3&gt;2.2. Content&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;grep -R &amp;quot;Line&amp;quot; ./&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./nest/ss.txt:Line1 hello
+./nest/ss.txt:Line2
+./nest/ss.txt:Line3
+./nest/ss.txt:Line4
+./sample.txt:Line1 hello
+./sample.txt:Line2
+./sample.txt:Line3
+./sample.txt:Line4
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;OR:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find ./ -type f -exec cat {} + | grep Line2&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Line2
+Line2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="CentOS6"></category><category term="CentOS7"></category></entry><entry><title>TCP and TLS Handshaking</title><link href="https://brianshen1990.github.io/TCP_and_TLS_Handshaking.html" rel="alternate"></link><published>2019-03-05T00:00:00+08:00</published><updated>2019-03-05T00:00:00+08:00</updated><author><name>Brian Shen</name></author><id>tag:brianshen1990.github.io,2019-03-05:/TCP_and_TLS_Handshaking.html</id><summary type="html">&lt;p class="first last"&gt;TCP and TLS Handshaking&lt;/p&gt;
 </summary><content type="html">&lt;!-- TCP_and_TLS_Handshaking: --&gt;
 &lt;div class="contents topic" id="contents"&gt;
 &lt;p class="topic-title first"&gt;Contents&lt;/p&gt;
