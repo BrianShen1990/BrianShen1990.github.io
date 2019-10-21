@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Ratio Window Solutions</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Ratio Window Solutions.html" rel="bookmark"
+          title="Permalink to Ratio Window Solutions">Ratio Window Solutions
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Thu 10 October 2019</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Web</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/css.html">CSS</a> 
+          <a href="https://brianshen1990.github.io/tag/web.html">Web</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="section" id="intro">
+<h2>1. Intro</h2>
+<p>About keeping UI elements in a fixed ratio, there are many solutions. Most of them are related to how to keep height in a fixed ratio with width.</p>
+<p>Well, that's is not that hard. What's really hard is that how to keep width in fixed ratio with height.</p>
+<p>Why this requirement occurs? Nowadays, more companies need to display a page on their large screen in order to show off  before their monitors. If we want our UI presentations to show their best, we need to take the full screen. But screen size varies. That means the best way is to take all the available height, and then scale the width as modern screens' width-to-height ratio is increasing.</p>
+<p>OK, let's simplify the question, keep the page in a ratio of 4:3.</p>
+</div>
+<div class="section" id="according-to-width">
+<h2>2. 4:3 According to width</h2>
+<div class="section" id="magic-padding-top">
+<h3>2.1. Magic <code>padding-top</code></h3>
+<div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    body <span class="o">{</span>
+      width: <span class="m">100</span>%<span class="p">;</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+    <span class="o">}</span>
+    .rectangle <span class="o">{</span>
+      width: <span class="m">50</span>%<span class="p">;</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+    <span class="o">}</span>
+    .per43 <span class="o">{</span>
+      padding-top: <span class="m">75</span>%<span class="p">;</span>
+      background-color: orange<span class="p">;</span>
+    <span class="o">}</span>
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span>&gt;
+    &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;per43&quot;</span>&gt;
+      some VW text
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/Web/Web_RatioWindow_01.png" />
+</div>
+<p>Everything seems perfect, but if we look careful, we would notice that the real height, is higher than 75%, it includes a extra text height.</p>
+<p>OK, problems happen. If we need to keep perfectly accurate ratio, we should put all things in absolute position.</p>
+<p>Let's change our code:</p>
+<div class="highlight"><pre><span></span>.text <span class="o">{</span>
+  position: absolute<span class="p">;</span>
+  top: <span class="m">10</span>%<span class="p">;</span>
+  left: <span class="m">10</span>%<span class="p">;</span>
+<span class="o">}</span>
+&lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;per43&quot;</span>&gt;
+  &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;text&quot;</span>&gt;some VW text &lt;/div&gt;
+&lt;/div&gt;
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/Web/Web_RatioWindow_02.png" />
+</div>
+</div>
+<div class="section" id="vm">
+<h3>2.2. VM</h3>
+<p>Visual Width. That's is the width compared with browser's width.</p>
+<div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    body <span class="o">{</span>
+      width: <span class="m">100</span>%<span class="p">;</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+    <span class="o">}</span>
+    .per43 <span class="o">{</span>
+      width: 50vw<span class="p">;</span>
+      height: <span class="m">37</span>.5vw<span class="p">;</span>
+      background-color: orange<span class="p">;</span>
+    <span class="o">}</span>
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;per43&quot;</span>&gt;
+    &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;text&quot;</span>&gt;some VW text &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/Web/Web_RatioWindow_03.png" />
+</div>
+<p>Perfect! But this scenario has limitations:</p>
+<p>Width can only be referenced to browser's width.</p>
+</div>
+</div>
+<div class="section" id="according-to-height">
+<h2>3. 4:3 According to height</h2>
+<p>The previous two samples are both to keep a ratio according to width. But what about height?</p>
+<p>Using an image.</p>
+<div class="figure">
+<img alt="" src="/images/Web/Web_RatioWindow_05.png" />
+</div>
+<div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    html, body <span class="o">{</span>
+      width: <span class="m">100</span>%<span class="p">;</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+      margin: 0px<span class="p">;</span>
+      min-height: 300px<span class="p">;</span>
+    <span class="o">}</span>
+    .per43 <span class="o">{</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+      background-color: green<span class="p">;</span>
+      text-align: center<span class="p">;</span>
+    <span class="o">}</span>
+    .per43 &gt; img <span class="o">{</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+    <span class="o">}</span>
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;per43&quot;</span>&gt;
+    &lt;img <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;./K43.png&quot;</span> /&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/Web/Web_RatioWindow_04.gif" />
+</div>
+<p>OK, that's amazing, right?</p>
+<p>However, it would be very painful if we want to add some content.</p>
+<div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    html, body, .outer<span class="o">{</span>
+      width: <span class="m">100</span>%<span class="p">;</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+      margin: 0px<span class="p">;</span>
+      min-height: 300px<span class="p">;</span>
+      text-align: center<span class="p">;</span>
+    <span class="o">}</span>
+    .outer <span class="o">{</span>
+      background-color: red<span class="p">;</span>
+    <span class="o">}</span>
+    .per43 <span class="o">{</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+      background-color: green<span class="p">;</span>
+      text-align: center<span class="p">;</span>
+      margin: <span class="m">0</span> auto<span class="p">;</span>
+      display: inline-block<span class="p">;</span>
+    <span class="o">}</span>
+    .per43 &gt; img <span class="o">{</span>
+      height: <span class="m">100</span>%<span class="p">;</span>
+    <span class="o">}</span>
+    .innerContent <span class="o">{</span>
+      position: absolute<span class="p">;</span>
+      top: <span class="m">0</span><span class="p">;</span>
+      bottom: <span class="m">0</span><span class="p">;</span>
+      left: <span class="m">0</span><span class="p">;</span>
+      right: <span class="m">0</span><span class="p">;</span>
+    <span class="o">}</span>
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span>&gt;
+    &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;per43&quot;</span>&gt;
+      &lt;img <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;./K43.png&quot;</span> /&gt;
+      &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;innerContent&quot;</span>&gt;
+        &lt;div&gt;
+          hhhh
+        &lt;/div&gt;
+        &lt;div&gt;
+          hhhh2
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+<div class="figure">
+<img alt="" src="/images/Web/Web_RatioWindow_06.gif" />
+</div>
+<p>Now we can fill whatever we want with relative position.</p>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Ratio Window Solutions.html';
+        var disqus_url = 'https://brianshen1990.github.io/Ratio Window Solutions.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>10</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>10</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>8</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/docker.html">Docker </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>14</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>12</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/css.html">CSS </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
