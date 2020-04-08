@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Async Syntax Comparison between Python and Nodejs</title>
+  <link rel="icon" href="/images/logo/logo.png" >
+  <link rel="stylesheet" href="https://brianshen1990.github.io/theme/css/main.css" />
+</head>
+
+<body class="home">
+  <header class="_header">
+    <h1>
+      <a href="https://brianshen1990.github.io/">
+        KNOWN
+      </a>
+      <a href="https://github.com/brianshen1990" class="_github">
+        GitHub
+      </a>
+    </h1>
+  </header>
+  <div class="_content">
+    <div class="_left">
+<section>
+  <article>
+    <h1 class="_article_header">
+      <a href="https://brianshen1990.github.io/Async_Syntax_Comparison_between_Python_and_Nodejs.html" rel="bookmark"
+          title="Permalink to Async Syntax Comparison between Python and Nodejs">Async Syntax Comparison between Python and Nodejs
+      </a>
+    </h1>
+
+    <div class="_article rst-content">
+<div class="_articleInfo">
+  <table>
+    <tr>
+      <td>Published:</td>
+      <td>Wed 08 April 2020</td>
+    </tr>
+
+
+    <tr>
+      <td>By:</td>
+      <td>
+          <a class="url fn" href="https://brianshen1990.github.io/author/brian-shen.html"></a>Brian Shen</a>
+      </td>
+    </tr>
+
+  <tr>
+    <td>Category:</td>
+    <td>Python</td>
+  </tr>
+
+    <tr>
+      <td>Tags:</td>
+      <td>
+          <a href="https://brianshen1990.github.io/tag/python.html">Python</a> 
+          <a href="https://brianshen1990.github.io/tag/nodejs.html">Nodejs</a> 
+          <a href="https://brianshen1990.github.io/tag/async.html">Async</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>      <div class="contents topic" id="contents">
+<span id="async-syntax-comparison-between-python-and-nodejs-rst"></span><p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#python-asyncio-basic" id="id1">Python asyncio Basic</a></li>
+<li><a class="reference internal" href="#python-sample" id="id2">Python Sample</a></li>
+<li><a class="reference internal" href="#nodejs-sample" id="id3">Nodejs Sample</a><ul>
+<li><a class="reference internal" href="#reference" id="id4">Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="python-asyncio-basic">
+<h2>1. <a class="toc-backref" href="#id1">Python asyncio Basic</a></h2>
+<ul class="simple">
+<li>run -&gt; execute coroutine</li>
+<li>create_task</li>
+<li>sleep</li>
+<li>gather -&gt; Run all awaitable objects</li>
+<li>shield -&gt; make awaitable objects cancallable</li>
+<li>wait_for -&gt; wait for an awaitable  within a timeout</li>
+<li>wait -&gt; don't throw timeout exception, but will return the Future object</li>
+<li>run_coroutine_threadsafe -&gt; Submit a coroutine to the given event loop</li>
+<li>current_tasks</li>
+<li>all_tasks</li>
+<li>iscoroutine</li>
+<li>iscoroutinefunction</li>
+</ul>
+</div>
+<div class="section" id="python-sample">
+<h2>2. <a class="toc-backref" href="#id2">Python Sample</a></h2>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1">#### Basic</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">helloWorld</span><span class="p">():</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="c1"># around 2 seconds</span>
+<span class="n">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+
+<span class="c1"># asyncio.run(helloWorld())</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">say_after</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">what</span><span class="p">):</span>
+<span class="n">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">what</span><span class="p">)</span>
+
+<span class="c1">#### Async Series</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">async_series</span><span class="p">():</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;started at {time.strftime(&#39;</span><span class="si">%X</span><span class="s2">&#39;)}&quot;</span><span class="p">)</span>
+
+<span class="n">await</span> <span class="n">say_after</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="n">await</span> <span class="n">say_after</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+<span class="c1"># around 3 seconds</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;finished at {time.strftime(&#39;</span><span class="si">%X</span><span class="s2">&#39;)}&quot;</span><span class="p">)</span>
+
+<span class="c1"># asyncio.run(async_series())</span>
+
+
+<span class="c1">#### Async Parallel</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">async_parallel</span><span class="p">():</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;started at {time.strftime(&#39;</span><span class="si">%X</span><span class="s2">&#39;)}&quot;</span><span class="p">)</span>
+
+<span class="n">task1</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span> <span class="n">say_after</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">task2</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span> <span class="n">say_after</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="c1"># around 2 seconds</span>
+<span class="n">await</span> <span class="n">task1</span>
+<span class="n">await</span> <span class="n">task2</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;finished at {time.strftime(&#39;</span><span class="si">%X</span><span class="s2">&#39;)}&quot;</span><span class="p">)</span>
+
+<span class="c1"># asyncio.run(async_parallel())</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">async_parallel2</span><span class="p">():</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;started at {time.strftime(&#39;</span><span class="si">%X</span><span class="s2">&#39;)}&quot;</span><span class="p">)</span>
+
+<span class="n">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span> <span class="n">say_after</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span>
+    <span class="n">say_after</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="c1"># around 2 seconds</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;finished at {time.strftime(&#39;</span><span class="si">%X</span><span class="s2">&#39;)}&quot;</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">async_parallel2</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="section" id="nodejs-sample">
+<h2>3. <a class="toc-backref" href="#id3">Nodejs Sample</a></h2>
+<div class="highlight"><pre><span></span><span class="c1">///// Basic</span>
+
+<span class="kr">const</span> <span class="nx">helloWorld</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="c1">// around 2 seconds</span>
+<span class="nx">await</span> <span class="p">(</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">r</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span> <span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// helloWorld().then( () =&gt; { console.log(&#39;Done&#39;) })</span>
+
+<span class="kr">const</span> <span class="nx">say_after</span> <span class="o">=</span>  <span class="nx">async</span> <span class="p">(</span><span class="nx">delay</span><span class="p">,</span> <span class="nx">what</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">await</span> <span class="p">(</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">r</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">delay</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span> <span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">what</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">///////  Async Series</span>
+
+<span class="kr">const</span> <span class="nx">async_series</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`started at </span><span class="si">${</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">toString</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="c1">// around 3 seconds</span>
+<span class="nx">await</span> <span class="nx">say_after</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="nx">await</span> <span class="nx">say_after</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`finished at </span><span class="si">${</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">toString</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// async_series().then( () =&gt; { console.log(&#39;&#39;) })</span>
+
+<span class="c1">////////// Async Parallel</span>
+
+<span class="kr">const</span> <span class="nx">async_parallel</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`started at </span><span class="si">${</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">toString</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="c1">// around 2 seconds</span>
+<span class="nx">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span>
+    <span class="p">[</span> <span class="nx">say_after</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="nx">say_after</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span> <span class="p">]</span>
+<span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`finished at </span><span class="si">${</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">toString</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">async_parallel</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">})</span>
+</pre></div>
+<div class="section" id="reference">
+<h3>3.1. <a class="toc-backref" href="#id4">Reference</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.python.org/3/library/asyncio-task.html">https://docs.python.org/3/library/asyncio-task.html</a></li>
+</ul>
+</div>
+</div>
+
+    </div><!-- /.entry-content -->
+
+    
+    <div class="comments">
+      <br />
+      <br />
+      <hr />
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'brianshen1990';
+        var disqus_identifier = 'Async_Syntax_Comparison_between_Python_and_Nodejs.html';
+        var disqus_url = 'https://brianshen1990.github.io/Async_Syntax_Comparison_between_Python_and_Nodejs.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//brianshen1990.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+    </div>
+    <div class="_right">
+<div> 
+<div class="_sideAboutme">
+    <h2 class="_breif">About the blog</h2>
+    <p>Some notes at work and life to share</p>
+    <div>
+        <img src="/images/logo/logo.svg"">
+        <p>Brian Shen</p>
+    </div>
+  </div><div class="_sideCategories _sideBar">
+  <h2 class="_breif">Categories</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/category/tools.html">Tools </a><span>10</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/web.html">Web </a><span>10</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/node.html">Node </a><span>8</span>
+      </li>
+      <li class="active">
+        <a href="https://brianshen1990.github.io/category/python.html">Python </a><span>2</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/docker.html">Docker </a><span>1</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/category/linux.html">Linux </a><span>1</span>
+      </li>
+  </ol>
+
+</div><div class="_sideTags _sideBar">
+  <h2 class="_breif">Tags</h2>
+  <ol>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web.html">Web </a><span>14</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/node.html">Node </a><span>12</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/security.html">Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/web-security.html">Web Security </a><span>9</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/linux.html">Linux </a><span>7</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/centos7.html">CentOS7 </a><span>5</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/css.html">CSS </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/react.html">React </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/reflux.html">Reflux </a><span>3</span>
+      </li>
+      <li>
+        <a href="https://brianshen1990.github.io/tag/store.html">Store </a><span>3</span>
+      </li>
+  </ol>
+
+</div></div>
+    </div>
+  </div>
+  <footer class="_footer">
+    <div>
+      <p>Powered by <a href="http://getpelican.com/">Pelican</a></p>
+    </div>
+  </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107750695-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
